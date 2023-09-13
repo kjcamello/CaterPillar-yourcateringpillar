@@ -1,7 +1,8 @@
+<app-search></app-search>
 <ul>
     <li *ngFor="let caterings of catering">
-        <a routerLink="/caterings/{{caterings.id}}"></a>
-        <img [src]="caterings.imageUrl" [alt]="caterings.name"/>
+        <a routerLink="/caterings/{{caterings.id}}">
+            <img [src]="caterings.imageUrl" [alt]="caterings.name"/>
         <div class="content">
             {{caterings.name}}
         </div>
@@ -9,7 +10,27 @@
             ❤
         </span>
         <div class="stars">
-
+            <app-star-rating [stars]="caterings.stars"></app-star-rating>
         </div>
+        <div>
+            <div class="catering_service-item-footer">
+                <div class="origins">
+                    <span *ngFor="let origin of caterings.origins">
+                        {{origin}}
+                    </span>
+                </div>
+    
+                <div class="location">
+                    <span>📍</span>
+                    {{caterings.location}}
+                </div>
+            </div>
+            <div class="cateringPacks">
+                <span *ngFor="let cateringPacks of caterings.cateringPacks">
+                    {{cateringPacks}}
+                </span>
+            </div>
+        </div>
+        </a>
     </li>
 </ul>

@@ -1,6 +1,14 @@
 <header>
    <div class="container">
-      <a routerLink="/" class="logo">CaterPillar</a>
+      <a routerLink="/" class="logo">
+         <img src="assets/caterpillar logo with shadow and lied.png">
+      </a>
+      <div>
+         <input #s type="text" placeholder="Search Catering Pillar" 
+         (keyup.enter)="search(s.value)" 
+         [value]="searchTerm"/>
+         <button (click)="search(s.value)">Search</button>
+     </div>  
       <nav>
          <ul>
             <li>

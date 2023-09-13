@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  selector: 'app-search',
+  templateUrl: './search.component.html',
+  styleUrls: ['./search.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class SearchComponent implements OnInit {
 
   searchTerm = '';
   constructor(activatedRoute:ActivatedRoute, private router:Router){
@@ -24,4 +24,5 @@ export class HeaderComponent implements OnInit {
     if(term)
     this.router.navigateByUrl('/search/' + term)
   }
+
 }

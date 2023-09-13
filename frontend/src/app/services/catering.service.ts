@@ -12,4 +12,8 @@ export class CateringService {
   getAll():Catering[]{
     return sample_catering;
   }
+
+  getAllCateringbySearchTerm(searchTerm:string){
+    return this.getAll().filter(Catering => Catering.name.toLowerCase().includes(searchTerm.toLowerCase()))
+  }
 }

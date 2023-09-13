@@ -3,7 +3,8 @@ header{
     background-color: rgba(255, 116, 0, 0.3);
     padding: 0;
     border-bottom: 1px solid #9a0000;
-    
+    /* height: 100px; */
+    /* width: 100px; */
 }
 
 a{
@@ -20,6 +21,13 @@ a:hover{
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
+}
+
+.logo img{
+    height: 50px;
+    padding-left: 250px;/* width: 100%; */
+    padding-right: 0;
+    margin-right: 0;
 }
 
 a.logo{
@@ -64,6 +72,43 @@ a span{
 .menu a{
     width: 100%;
     min-width: 8rem;
+}
+
+div{
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+}
+
+input{
+    border-radius: 10rem 0 0 10 rem;
+    border: none;
+    height: 3rem;
+    width: 20rem;
+    background-color: #f1f1f1;
+    padding: 1.2rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+    outline: none;
+}
+
+div button{
+    color: grey;
+    height: 3rem;
+    width: 5rem;
+    font-size: 1rem;
+    border-radius: 0 10rem 10rem 0;
+    border: none;
+    background-color: red;
+    color: white;
+    opacity: 0.8;
+    outline: none;
+}
+
+div button:hover{
+    opacity: 1;
+    cursor: pointer;
 }
 
 
