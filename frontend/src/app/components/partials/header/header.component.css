@@ -25,14 +25,15 @@ a:hover{
 
 .logo img{
     height: 50px;
-    padding-left: 250px;/* width: 100%; */
+    /* padding-left: 250px;width: 100%; */
     padding-right: 0;
     margin-right: 0;
 }
 
-a.logo{
-    font-weight: bold;
-    padding: 1rem;
+a.logo:hover{
+    /* font-weight: bold; */
+    /* padding: 1rem; */
+    background: none;
 }
 
 ul{
