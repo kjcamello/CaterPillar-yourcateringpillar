@@ -1,0 +1,15 @@
+<ul>
+    <li *ngFor="let caterings of catering">
+        <a routerLink="/caterings/{{caterings.id}}"></a>
+        <img [src]="caterings.imageUrl" [alt]="caterings.name"/>
+        <div class="content">
+            {{caterings.name}}
+        </div>
+        <span class="favorite {{caterings.favorite?'':'not'}}">
+            ❤
+        </span>
+        <div class="stars">
+
+        </div>
+    </li>
+</ul>

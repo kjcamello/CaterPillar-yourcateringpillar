@@ -1,1 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Langar&display=swap");
+
+*{
+    box-sizing: border-box;
+}
+
+html{ /*Setting default size in the entire code*/
+    font-size: 16px;
+}
+
+html, /* Setting default font to entire code and buttons*/
+button{
+    font-family: "Langar";
+}
+
+body{
+    margin: 0;  /*No margins in everything*/
+}
+
+a{
+    text-decoration: none; /*Underline removed*/
+}
