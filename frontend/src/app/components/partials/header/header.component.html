@@ -3,13 +3,13 @@
       <a routerLink="/" class="logo">
          <img src="assets/caterpillar logo with shadow and lied.png">
       </a>
-      <div>
+      <div class="searchBar">
          <input #s type="text" placeholder="Search Catering Pillar" 
          (keyup.enter)="search(s.value)" 
          [value]="searchTerm"/>
          <button (click)="search(s.value)">Search</button>
      </div>  
-      <nav>
+      <nav class="sections">
          <ul>
             <li>
                <a routerLink="/home">Home</a>
