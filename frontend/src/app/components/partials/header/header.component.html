@@ -1,16 +1,7 @@
 <header>
-   <div class="container">
-      <a routerLink="/" class="logo">
-         <img src="assets/caterpillar logo with shadow and lied.png">
-      </a>
-      <div class="searchBar">
-         <input #s type="text" placeholder="Search Catering Pillar" 
-         (keyup.enter)="search(s.value)" 
-         [value]="searchTerm"/>
-         <button (click)="search(s.value)">Search</button>
-     </div>  
-      <nav class="sections">
-         <ul>
+   <div>
+      <nav>
+         <ul class="ul1">
             <li>
                <a routerLink="/home">Home</a>
             </li>
@@ -35,5 +26,26 @@
             </li>
          </ul>
       </nav>
+   </div>
+   <div class="container">
+      <a routerLink="/" class="logo">
+         <img src="assets/caterpillar logo with shadow.png">
+      </a>
+      <div class="searchBar">
+         <input #s type="text" placeholder="Search Catering Pillar" 
+         (keyup.enter)="search(s.value)" 
+         [value]="searchTerm"/>
+         <button (click)="search(s.value)">
+            <img src="assets/Search Icon.png">
+         </button>
+     </div>
+     <div class="CaterPillarCart-container">
+         <a routerLink="/" class="CaterPillarCart">
+            <img src="assets/CaterPillar Cart.png">
+         </a>
+         <div class="CaterPillar-menu">
+
+         </div>
+     </div>
    </div >
 </header>

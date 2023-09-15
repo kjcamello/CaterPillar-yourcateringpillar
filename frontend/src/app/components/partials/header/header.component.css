@@ -18,16 +18,35 @@ a:hover{
 }
 
 .container{
-    margin: 0 auto;
     display: flex;
-    justify-content: space-between;
+    margin: auto;
+    /* justify-content: space-around; */
+    /* align-items: center; */
+    justify-content: center;
+    align-items: center;
+    min-width: inherit;
+    flex-wrap: wrap;
+}
+
+.sections{
+    display: flex;
+    /* justify-content: space-between; */
+}
+
+
+.logo{  
+    display: flex;
+    padding-bottom: 20px;
+    /* margin-left: 50px; */
+    
+    /* align-items: center; */
 }
 
 .logo img{
-    height: 50px;
+    height: 85px;
     /* padding-left: 250px;width: 100%; */
-    padding-right: 0;
-    margin-right: 0;
+    /* padding-left: 50px; */
+    /* margin-left: 50px; */
 }
 
 a.logo:hover{
@@ -36,15 +55,39 @@ a.logo:hover{
     background: none;
 }
 
-ul{
+.CaterPillarCart img{
+    height: 50px;
+    /* padding-left: 250px;
+    width: 100%; */
+    /* padding-left: 50px; */
+    /* margin-left: 50px; */
+}
+
+a.CaterPillarCart:hover {
+    background: none;
+    /* padding-left: 250px;
+    width: 100%; */
+    /* padding-left: 50px; */
+    /* margin-left: 50px; */
+}
+
+.ul1{
     display: flex;
     list-style-type: none;
+    padding: 0;
+    margin: 0;
     /* margin: 0; */
+    /* padding-inline-start: 0; */
+    /* justify-content: space-between; */
+    /* align-items: center; */
 }
 
 ul a{
+    /* display: flex; */
     padding: 1rem;
     display: inline-block;
+    /* justify-content: space-between; */
+    /* margin-right: 50px; */
 }
 
 a span{
@@ -76,39 +119,76 @@ a span{
 }
 
 .searchBar{
-    /* display: flex; */
+    display: flex;
+    margin: 10px;
     /* justify-content: center; */
-    margin-top: 1rem;
+    /* margin-top: 1rem; */
     /* margin-bottom: 1.5rem; */
     
 }
 
-input{
-    border-radius: 10rem 0 0 10 rem;
-    border: none;
+.searchBar input{
+    border-radius: 50px 0 0 50px;
+    border: 1px solid #9a0000;
     height: 3rem;
-    width: 20rem;
-    background-color: #f1f1f1;
+    width: 500px;
+    background-color: white;
     padding: 1.2rem;
     font-size: 1.1rem;
     font-weight: 500;
-    outline: none;
+    outline: 50px;
+    display: flex;
 }
 
-div button{
+.searchBar button{
     color: grey;
     height: 3rem;
     width: 5rem;
-    font-size: 1rem;
-    border-radius: 0 10rem 10rem 0;
-    border: none;
-    background-color: red;
+    /* font-size: 1rem; */
+    border-radius: 0 50px 50px 0;
+    border: 1px solid #9a0000;
+    background-color: #ff7402;
     color: white;
     opacity: 0.8;
     outline: none;
+    /* display: flex; */
+    /* align-items: center; */
+    /* justify-content: center; */
+    /* padding: 0; */
 }
 
-div button:hover{
+.searchBar button:hover{
     opacity: 1;
     cursor: pointer;
 }
+
+.searchBar img{
+    /* align-items: center; */
+    height: 15px;
+    width: 15px;
+    margin: 5px 6px 0px 0px;
+    /* color: #9a0000; */
+}
+
+.CaterPillarCart-container{
+    position: relative;
+}
+
+.CaterPillarCart-menu{
+    position: absolute;
+    z-index: 1;
+    background: whitesmoke;
+    display: none;
+}
+
+.CaterPillarCart-container:hover .CaterPillarCart-menu{
+    display: block;
+    height: 100px;
+    width: 100px;
+}
+
+.CaterPillarCart-menu a{
+    width: 100%;
+    min-width: 8rem;
+}
+
