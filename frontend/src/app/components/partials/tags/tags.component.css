@@ -1,0 +1,12 @@
+div{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+div a{
+    background-color: transparent;
+    color: #9a0000;
+    padding: 0.3rem 1rem;
+    margin: 0.2rem 0.15rem;
+    font-size: 9px;
+}

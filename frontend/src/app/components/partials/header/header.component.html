@@ -1,3 +1,4 @@
+
 <header class="CaterPillar-top CaterPillar-top--sticky">
    <div class="navbar-wrapper container-wrapper">
       <nav class="container1 navbar">
@@ -31,14 +32,17 @@
       <a routerLink="/" class="logo">
          <img src="assets/caterpillar logo with shadow.png">
       </a>
-      <div class="searchBar">
-         <input #s type="text" placeholder="Search Catering Pillar" 
-         (keyup.enter)="search(s.value)" 
-         [value]="searchTerm"/>
-         <button (click)="search(s.value)">
-            <img src="assets/Search Icon.png">
-         </button>
-     </div>
+      <div class="tags_searchBar">
+         <div class="searchBar">
+            <input #s type="text" placeholder="Search Catering Pillar" 
+            (keyup.enter)="search(s.value)" 
+            [value]="searchTerm"/>
+            <button (click)="search(s.value)">
+               <img src="assets/Search Icon.png">
+            </button>
+        </div>
+        <app-tags></app-tags>
+      </div>
      <div class="CaterPillarCart-container">
          <a routerLink="/" class="CaterPillarCart">
             <img src="">

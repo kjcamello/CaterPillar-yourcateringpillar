@@ -270,6 +270,11 @@ a span{
     /* color: #9a0000; */
 }
 
+.tags_searchBar{
+    display: inline-block;
+    flex-wrap: wrap;
+}
+
 /* Dropdown Button */
 .CaterPillarCart {
     background-color: transparent;

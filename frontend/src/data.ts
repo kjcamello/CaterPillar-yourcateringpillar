@@ -1,4 +1,5 @@
 import { Catering } from "./app/shared/models/Catering";
+import { Tag } from "./app/shared/models/Tag";
 
 export const sample_catering: Catering[] = [
     {
@@ -56,4 +57,17 @@ export const sample_catering: Catering[] = [
     origins: ['Tisa branch amigos'],
     cateringPacks: ['25 Packs', '50 Packs', '100 Packs'],
     },
+]
+
+export const sample_tags:Tag[] =[
+    {name: 'All', count: 6},
+    {name: 'Naga', count: 5},
+    {name: 'Catering', count: 3},
+    {name: 'Tisa Catering', count: 2},
+    {name: 'Sonnet', count: 1},
+    {name: 'Athena', count: 6},
+    {name: 'Gorordo', count: 3},
+    {name: 'RedCarpet', count: 6},
+    {name: 'Talamban', count: 2},
+    {name: 'Ma Lina Punta', count: 1},
 ]
