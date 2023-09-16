@@ -7,11 +7,119 @@ header{
     /* width: 100px; */
 }
 
-a{
-    color: #9a0000;
+div{
+    display: block;
 }
 
-a:hover{
+.CaterPillar-top--sticky{
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    /* transform: translateZ(0); */
+    /* z-index: 100; */
+}
+
+.CaterPillar-top--sticky .navbar-wrapper .container-wrapper{
+    min-width: inherit;
+}
+
+.CaterPillar-top--sticky .navbar .container1{
+    width: inherit;
+    max-width: 1200px
+}
+
+.container-wrapper{
+    min-width: 1200px;
+}
+
+.container1{
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.navbar-wrapper{
+    height: 2.125rem;
+    z-index: 400;
+    background: transparent;
+    position: relative;
+
+}
+
+.navbar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flex{
+    display: flex;
+}
+
+.centre{
+    display: flex;
+    align-items: center;
+}
+
+.ca23t25r{
+    color: #9a0000;
+    text-decoration: none;
+    font-size: 10px;
+    font-weight: 300;
+    padding: 0.25rem;
+    position: relative;
+    overflow: visible;
+    outline: 0;
+}
+
+.ca34t36r{
+    color: #9a0000;
+    text-decoration: none;
+    font-size: 10px;
+    font-weight: 300;
+    padding: 0.25rem;
+    position: relative;
+    overflow: visible;
+    outline: 0;
+}
+
+.ca34t36r:not(:first-child) {
+    margin-left: 0.9rem;
+}
+
+.ca34t36r:not(:first-child):after {
+    content: "";
+    height: 1rem;
+    width: 0;
+    border-left: 1px solid #9a0000;
+    border-right: 1px solid #9a0000;
+    position: absolute;
+    left: -6px;
+    top: calc(50% - 7px);
+}
+
+.navbar_spacer{
+    flex: 0.67;
+}
+
+.ul1{
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    align-items: center;
+    /* margin: 0; */
+    /* padding-inline-start: 0; */
+    /* justify-content: space-between; */
+    /* align-items: center; */
+}
+
+.ul1 a{
+    color: #9a0000;
+    font-size: 10px;
+}
+
+.ul1 a:hover{
     background: #9a0000;
     color: white;
     cursor: pointer;
@@ -19,7 +127,8 @@ a:hover{
 
 .container{
     display: flex;
-    margin: auto;
+    margin-right: auto;
+    margin-left: auto;
     /* justify-content: space-around; */
     /* align-items: center; */
     justify-content: center;
@@ -71,16 +180,7 @@ a.CaterPillarCart:hover {
     /* margin-left: 50px; */
 }
 
-.ul1{
-    display: flex;
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    /* margin: 0; */
-    /* padding-inline-start: 0; */
-    /* justify-content: space-between; */
-    /* align-items: center; */
-}
+
 
 ul a{
     /* display: flex; */
