@@ -1,0 +1,35 @@
+<div class="wrapper">
+    <div class="logo">
+      <img src="assets/caterpillar logo with shadow.png" alt="">
+    </div>
+    <div class="info">
+      <div class="form-field d-flex align-items-center">
+        <span class="far fa-user"></span>
+        <input type="text" name="userName" id="userName" [(ngModel)]="userName" placeholder="Username">
+      </div>
+      <div class="form-field d-flex align-items-center">
+        <span class="email"></span>
+        <input type="email" name="email" id="email" [(ngModel)]="email" placeholder="Email">
+      </div>
+      <div class="form-field d-flex align-items-center">
+        <span class="pass"></span>
+        <input type="password" name="password" id="pwd" [(ngModel)]="pwd" placeholder="Password">
+      </div>
+      <div class="form-field d-flex align-items-center">
+        <span class="confirmpass"></span>
+        <input type="password" name="confirmpassword" id="conpwd" [(ngModel)]="conpwd" placeholder="Confirm Password">
+      </div>
+      <div class="form-field d-flex align-items-center">
+        <span class="phone">+63</span>
+        <input type="number" name="phone" id="phone" [(ngModel)]="phone" placeholder="Phone Number">
+      </div>
+      <div class="form-field d-flex align-items-center">
+        <span class="Address"></span>
+        <input type="text" name="address" id="address" [(ngModel)]="address" placeholder="Address">
+      </div>
+      <button type="submit" class="signupbtn"  (click)="signup()">Create Account</button>
+      <div class="terms">
+        <input type="checkbox" name="terms" id="terms" [(ngModel)]="terms">
+        <label for="terms">I Agree to the <a href="#">Terms and Conditions</a></label>
+  </div>
+  
