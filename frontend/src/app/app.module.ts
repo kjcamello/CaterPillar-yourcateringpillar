@@ -1,9 +1,17 @@
 import { NgModule } from '@angular/core';
 import { bootstrapApplication, BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
+import { FormsModule }   from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+
+// Firebase services + environment module
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { environment } from '../environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,6 +27,12 @@ import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
 import { getDatabase } from "firebase/database";
+
+import { DashboardComponent } from './components/pages/dashboard/dashboard.component';
+import { SignInComponent } from './components/pages/sign-in/sign-in.component';
+import { CatererSignUpComponent } from './components/pages/caterer-sign-up/caterer-sign-up.component';
+import { PasswordRecoveryComponent } from './components/pages/password-recovery/password-recovery.component';
+import { EmailVerificationComponent } from './components/pages/email-verification/email-verification.component';
 
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -53,14 +67,25 @@ const database = getDatabase(app);
     SearchComponent,
     TagsComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    DashboardComponent,
+    SignInComponent,
+    CatererSignUpComponent,
+    PasswordRecoveryComponent,
+    EmailVerificationComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    ToastrModule.forRoot(),
     FormsModule,
-    ToastrModule.forRoot()
+
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
+    AngularFireStorageModule,
+    AngularFireDatabaseModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
