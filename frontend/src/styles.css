@@ -1,23 +1,23 @@
-/* You can add global styles to this file, and also import other style files */
-@import url("https://fonts.googleapis.com/css2?family=Langar&display=swap");
-
-*{
+* {
     box-sizing: border-box;
-}
-
-html{ /*Setting default size in the entire code*/
+  }
+  
+  html {
     font-size: 12px;
-}
-
-html, /* Setting default font to entire code and buttons*/
-button{
-    font-family: "Langar";
-}
-
-body{
-    margin: 0;  /*No margins in everything*/
-}
-
-a{
-    text-decoration: none; /*Underline removed*/
-}
+  }
+  
+  body {
+    margin: 0;
+    font-family: 'Langar', sans-serif; /* Apply the custom Langar font */
+  }
+  
+  a {
+    text-decoration: none;
+  }
+  
+  /* Define the @font-face rule for Langar font */
+  @font-face {
+    font-family: 'Langar';
+    src: url('./assets/Font/Langar-Regular.ttf') format('truetype');
+  }
+  

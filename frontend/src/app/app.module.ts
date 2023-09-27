@@ -33,6 +33,7 @@ import { SignInComponent } from './components/pages/sign-in/sign-in.component';
 import { CatererSignUpComponent } from './components/pages/caterer-sign-up/caterer-sign-up.component';
 import { PasswordRecoveryComponent } from './components/pages/password-recovery/password-recovery.component';
 import { EmailVerificationComponent } from './components/pages/email-verification/email-verification.component';
+import { UserVerificationComponent } from './components/pages/email-verification/user-verification.component';
 
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -72,7 +73,8 @@ const database = getDatabase(app);
     SignInComponent,
     CatererSignUpComponent,
     PasswordRecoveryComponent,
-    EmailVerificationComponent
+    EmailVerificationComponent,
+    UserVerificationComponent
   ],
   imports: [
     BrowserModule,

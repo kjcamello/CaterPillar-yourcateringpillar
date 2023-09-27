@@ -3,60 +3,60 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
-body {
+  }
+  
+  body {
     font-family: 'Poppins', sans-serif;
     background-color: #fd0000;
-}
-
-/* Wrapper for Signup Form */
-.wrapper {
+  }
+  
+  /* Wrapper for Signup Form */
+  .wrapper {
     max-width: 800px;
     margin: 80px auto;
     background-color: #e4a582;
     border-radius: 15px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
     padding: 30px;
-    text-align: center; /* Center align the content within the wrapper */
-}
-
-.wrapper .logo img {
+    text-align: center;
+  }
+  
+  .wrapper .logo img {
     width: 400px;
     display: block;
     margin: 0 auto; /* Center align the image */
     margin-bottom: 20px;
-}
-
-.wrapper .info {
+  }
+  
+  .wrapper .info {
     text-align: center;
-}
-
-.wrapper .form-field {
+  }
+  
+  .wrapper .form-field {
     position: relative;
     margin-bottom: 20px;
-}
-
-/* Hide the number input spinner for WebKit-based browsers */
-.wrapper .form-field input[type="number"]::-webkit-inner-spin-button,
-.wrapper .form-field input[type="number"]::-webkit-outer-spin-button {
+  }
+  
+  /* Hide the number input spinner for WebKit-based browsers */
+  .wrapper .form-field input[type="number"]::-webkit-inner-spin-button,
+  .wrapper .form-field input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     appearance: none;
     margin: 0; /* You can adjust the margin as needed */
-}
-
-.wrapper .form-field.d-flex {
+  }
+  
+  .wrapper .form-field.d-flex {
     display: flex;
     align-items: center;
-}
-
-.wrapper .form-field .phone {
+  }
+  
+  .wrapper .form-field .phone {
     background-color: #f2f2f2;
     padding: 10px;
     margin-right: 5px; /* Add spacing between the prefix and input */
-}
-
-.wrapper .form-field input {
+  }
+  
+  .wrapper .form-field input.userform {
     width: 100%;
     padding: 10px;
     font-size: 1.2rem;
@@ -65,17 +65,17 @@ body {
     background-color: #f2f2f2;
     color: #333;
     outline: none;
-}
-
-.wrapper .form-field .fa {
+  }
+  
+  .wrapper .form-field .fa {
     position: absolute;
     left: 10px;
     top: 50%;
     transform: translateY(-50%);
     color: #555;
-}
-
-.wrapper .signupbtn {
+  }
+  
+  .wrapper .signupbtn {
     width: 100%;
     padding: 10px;
     background-color: #f4d403;
@@ -85,38 +85,32 @@ body {
     border-radius: 20px;
     cursor: pointer;
     transition: background-color 0.3s;
-}
-
-.wrapper .signupbtn:hover {
+  }
+  
+  .wrapper .signupbtn:hover {
     background-color: #fc0808;
-}
-
-/* Correct placement for checkbox and text */
-.info .terms input[type="checkbox"] {
-   vertical-align: middle;
+  }
+  
+  /* Correct placement for checkbox and text */
+  .wrapper .info .terms input[type="checkbox"] {
+    vertical-align: middle;
     margin-right: 10px;
     margin-left: 0; /* Remove the margin-left */
-
-}
-
-.info .terms  {
+  }
+  
+ .wrapper .info .terms {
     align-items: center;
     color: #000000;
-    margin-top: 10px; 
-/* Add spacing between checkbox and text */
-}
-
-.info .terms a {
+    margin-top: 10px; /* Add spacing between checkbox and text */
+  }
+  
+  .wrapper .info .terms a {
     text-decoration: none;
     color: #089efc;
     margin-left: 5px; /* Add spacing between checkbox and text */
-}
-
-.wrapper .info .terms a:hover {
-    color: #f90707;
-}
-.wrapper .error-message {
-    color: red;
-    font-size: 14px; /* You can adjust the font size as needed */
-    margin-top: 5px; /* Add some space between the input field and error message */
   }
+  
+  .wrapper .info .terms a:hover {
+    color: #f90707;
+  }
+  
