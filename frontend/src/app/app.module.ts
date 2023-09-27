@@ -32,7 +32,8 @@ import { SignInComponent } from './components/pages/sign-in/sign-in.component';
 import { CatererSignUpComponent } from './components/pages/caterer-sign-up/caterer-sign-up.component';
 import { PasswordRecoveryComponent } from './components/pages/password-recovery/password-recovery.component';
 import { EmailVerificationComponent } from './components/pages/email-verification/email-verification.component';
-
+import { ForgotPasswordComponent } from './components/pages/forgotpassword/forgotpassword.component';
+import { RouterModule } from '@angular/router';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -67,6 +68,7 @@ const database = getDatabase(app);
     TagsComponent,
     LoginComponent,
     SignupComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     BrowserModule,

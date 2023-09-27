@@ -11,6 +11,7 @@ import { SignupComponent } from './components/pages/signup/signup.component';
 import { UserVerificationComponent } from './components/pages/email-verification/user-verification.component';
 
 import { AuthGuard } from './guard/auth.guard';
+import { ForgotPasswordComponent } from './components/pages/forgotpassword/forgotpassword.component';
 
 const routes: Routes = [
   { path:'', component:HomeComponent },
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: 'forgot-password', component: PasswordRecoveryComponent },
   { path: 'verify-email-address', component: EmailVerificationComponent },
   {path: 'user-verification', component: UserVerificationComponent},
+  {path: 'forgotpassword', component: ForgotPasswordComponent}
 ];
 
 @NgModule({
