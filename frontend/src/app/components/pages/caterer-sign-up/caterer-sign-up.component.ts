@@ -8,7 +8,13 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class CatererSignUpComponent implements OnInit{
   constructor(
-    public authService: AuthService
+    public authService: AuthService,
+
   ) { }
+  
+  onSignUpCaterer(userEmail: any, userPwd: any, businessName: any, contactNumber: any, businessAddress: any) {
+    this.authService.SignUpCaterer(userEmail.value, userPwd.value, businessName.value, contactNumber.value, businessAddress.value);
+}
+  
   ngOnInit() { }
 }

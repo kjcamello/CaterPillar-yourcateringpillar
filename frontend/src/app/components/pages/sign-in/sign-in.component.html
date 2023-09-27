@@ -26,7 +26,7 @@
             type="button"
             class="btn btnPrimary"
             value="Log in"
-            (click)="authService.SignIn(userName.value, userPassword.value)"
+            (click)="onSignIn(userName, userPassword)"
           />
         </div>
         <div class="formGroup">
