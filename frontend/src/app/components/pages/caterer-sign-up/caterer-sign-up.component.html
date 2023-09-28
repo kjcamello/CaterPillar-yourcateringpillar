@@ -1,76 +1,75 @@
-<div class="displayTable">
-  <div class="displayTableCell">
-    <div class="authBlock">
-      <h3>Caterer Sign Up</h3>
-
-      <div class="formGroup">
-        <input
-          type="text"
-          class="formControl"
-          placeholder="Business Name"
-          #businessName
-          required
-        />
+<div class="WPage">
+  <nav>
+    <app-signup-header></app-signup-header>
+  </nav>
+  <div class="CSU_Panel CSUP_Size">
+    <div class="CSU_Spanel CSU_Spanel1 CSU_Spanel2 ">
+      <div class="CSU_Spanel_Title">
+        <div class="CSU_Spanel_Title1">
+          <div class="CSU_Spanel_Title2">
+            <a routerLink="/" class="logo">
+              <img src="assets/caterpillar logo with shadow and lied.png" alt="Logo">
+           </a>
+            Sign Up as Caterer
+          </div>
+        </div>
       </div>
+      <div class="CSU_Credentials">
+        <div class="CSU_email_panel">
+          <div class="CSU_email">
+            <input 
+              type="email"
+              class="CSU_email_input"
+              placeholder="Email Address"
+              #catererEmail
+              required
+            />
+          </div>
+        </div>
+        
+        <div>
+          <div class="CSU_password_panel">
+            <div class="CSU_password">
+              <input
+                type="password"
+                class="CSU_password_input"
+                placeholder="Password"
+                #catererPwd
+                required
+              />
+            </div>
+          </div>
+        </div>
+        
+        <div class="btnCSU">
+          <button 
+          class="btnCatererSignUp bCSU bCSU1 bCSU2 bCSU3 bCSU4" 
+          (click)="onSignUpCaterer(catererEmail, catererPwd)">
+          Sign Up
+        </button>
+        </div>
+        
+        <div class="terms_conditions">
+          <div class="terms_conditions1">
+            <span class="terms_conditions2">
+              By signing up, you agree to CaterPillar 
+              <a class="TC Terms" href="">Terms of Service</a> 
+              &
+              <a class="TC Conditions" href="">Privacy Policy</a> 
+              </span>
+          </div>
+        </div>
 
-      <div class="formGroup">
-        <input
-          type="email"
-          class="formControl"
-          placeholder="Email Address"
-          #userEmail
-          required
-        />
-      </div>
-
-      <div class="formGroup">
-        <input
-          type="password"
-          class="formControl"
-          placeholder="Password"
-          #userPwd
-          required
-        />
-      </div>
-
-      <div class="formGroup">
-        <input
-          type="text"
-          class="formControl"
-          placeholder="Contact Number"
-          #contactNumber
-          required
-        />
-      </div>
-
-      <div class="formGroup">
-        <textarea
-          type="text"
-          class="formControl"
-          placeholder="Business Address"
-          #businessAddress
-          required
-        ></textarea>
-      </div>
-
-      <div class="formGroup">
-        <input
-          type="button"
-          class="btn btnPrimary"
-          value="Sign Up"
-          (click)="onSignUpCaterer(userEmail, userPwd, businessName, contactNumber, businessAddress)"
-        />
-      </div>
-
-      <div class="formGroup">
-        <span class="or"><span class="orInner">Or</span></span>
-      </div>
-
-      <div class="redirectToLogin">
-          <span
-            >Already have an account?
-            <span class="redirect" routerLink="/sign-in">Log In</span></span
-          >
+        <div class="lower-login">
+          <div class="lowerLogin">
+              <span class="spanlogin">
+              Already have an account?
+              </span>
+              <a class="redirectLogin" routerLink="/sign-in">Log In</a>
+              
+          </div>
+        </div>
+        
       </div>
     </div>
   </div>

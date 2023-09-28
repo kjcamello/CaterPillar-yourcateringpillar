@@ -1,0 +1,256 @@
+
+.WPage{
+    background-color: #fff;
+    min-width: 1200px;
+    min-height: 100vh;
+    background-color: rgb(237, 231, 225, 0.5);
+}
+
+.CSUP_Size{
+    height: 600px;
+    justify-content: flex-end;
+    
+}
+
+.CSU_Panel{
+    margin: 0 auto;
+    min-height: 600px;
+    width: 1040px;
+    align-items: flex-start;
+    display: flex;
+    margin-top: 50px;
+}
+
+.CSU_Spanel{
+    /* display: flex; */
+    height: 400px;
+    
+    /* justify-content: center; */
+    /* text-align: center; */
+    /* align-items: center; */
+    /* padding: 50px; */
+}
+
+.CSU_Spanel1{
+    background-color: #fff;
+    box-sizing: border-box;
+    box-shadow: 0 3px 10px 0 rgba(0,0,0,.14);
+    border-radius: 10px;
+    overflow: hidden;
+    width: 500px;
+}
+
+.CSU_Spanel2{
+    width: 400px;
+    background-color: rgb(172, 0, 0, 0.9);
+}
+
+h3{
+    /* text-align: top; */
+    padding-bottom: 50px;
+}
+
+input{
+    line-height: normal;
+}
+
+.CSU_Spanel_Title{
+    box-sizing: border-box;
+    min-height: 40px;
+    /* justify-content: space-between; */
+    display: flex;
+    align-items: center;
+    /* align-items: center; */
+}
+
+.CSU_Spanel_Title1{
+    width: 100%;
+    padding: 20px 0px 0px 0px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+a{
+    justify-content: center;
+}
+
+.CSU_Spanel_Title2{
+    /* max-width: 8.5rem; */
+    
+    /* color: rgb(255, 192, 192); */
+    color: rgb(255, 240, 22);
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 500;
+    padding: 0.25rem;
+    position: relative;
+    overflow: visible;
+    outline: 0;
+}
+
+.CSU_Credentials{
+    padding: 15px;
+    overflow: hidden;
+
+}
+
+.CSU_email_panel{
+    margin-bottom: 10px;
+}
+
+.CSU_email{
+    box-sizing: border-box;
+    width: 100%;
+    /* height: 5rem; */
+    overflow: hidden;
+    /* border: 1px solid rgba(0,0,0,.14); */
+    border-radius: 2px;
+    box-shadow: inset 0 2px 0 rgba(0,0,0,.02);
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.CSU_email_input{
+    padding: 1rem;
+    outline: none;
+    border: none;
+    flex: 0.8;
+    flex-shrink: 0;
+    filter: none;
+    border-radius: 5px;
+    font-size: 1.3rem;
+}
+
+.CSU_password_panel{
+    margin-bottom: 15px;
+}   
+
+.CSU_password{
+    box-sizing: border-box;
+    width: 100%;
+    /* height: 5rem; */
+    overflow: hidden;
+    border-radius: 2px;
+    box-shadow: inset 0 2px 0 rgba(0,0,0,.02);
+    align-items: center;
+    display: flex;
+    justify-content: center;
+
+}
+
+.CSU_password_input{
+    padding: 1rem;
+    outline: none;
+    border: none;
+    flex: 0.8;
+    flex-shrink: 0;
+    filter: none;
+    border-radius: 5px;
+    font-size: 1.3rem;
+}
+
+.btnCatererSignUp{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.bCSU{
+    outline: none;
+    padding: 0 0.625rem;
+    border: 0;
+    background: none;
+    border-radius: 5px;
+    flex: 0.8;
+    font-size: 1.2rem;
+    /* height: 100px; */
+    /* padding: 1rem; */
+}
+
+.bCSU:hover{
+    opacity: 0.75;
+}
+
+.bCSU1{
+    width: 100%;
+}
+
+.bCSU2{
+    text-transform: uppercase;
+}
+
+.bCSU3{
+    justify-content: center;
+    height: 3.3rem;
+    width: 243.39px;
+}
+
+.bCSU4{
+    color: rgba(0, 0, 0, 0.993);
+    background-color: rgb(255 192 192 / 68%);
+    box-shadow: -1px 1px 2px rgba(8, 3, 3, 0.548);
+}
+
+.btnCSU{
+    display: flex;
+    justify-content: center;
+    padding-bottom: 10px;
+}
+
+.logo{  
+    display: flex;
+    /* padding-bottom: 20px; */
+    /* margin-left: 50px; */
+    
+    /* align-items: center; */
+}
+
+.logo img{
+    height: 80px;
+    filter: drop-shadow(-5px -5px 30px pink);
+    padding-bottom: 2px;
+    /* padding-left: 250px;width: 100%; */
+    /* padding-left: 50px; */
+    /* margin-left: 50px; */
+}
+
+.lower-login{
+    text-align: center;
+}
+
+.lowerlogin{
+    padding: 7px;
+}
+.spanlogin{
+    color: white;
+}
+
+.terms_conditions1{
+    padding: 0 1.56rem;
+    text-align: center;
+    padding-bottom: 10px;
+    color:white;
+}
+
+a{
+    cursor: pointer;
+    user-select: none;
+    text-decoration: none;
+    color: rgb(255, 240, 22);
+}
+
+a:hover{
+    opacity: 0.5;
+}
+
+.redirectLogin{
+    cursor: pointer;
+    user-select: none;
+    text-decoration: none;
+    /* color: rgb(255, 240, 22); */
+}
+/* .CSU_Credentials .btnCatererSignUp{
+    justify-content: center;
+} */
