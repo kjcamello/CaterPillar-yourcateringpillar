@@ -34,6 +34,7 @@ import { PasswordRecoveryComponent } from './components/pages/password-recovery/
 import { EmailVerificationComponent } from './components/pages/email-verification/email-verification.component';
 import { ForgotPasswordComponent } from './components/pages/forgotpassword/forgotpassword.component';
 import { RouterModule } from '@angular/router';
+import { VerifyComponent } from './components/pages/verify/verify.component';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -68,7 +69,8 @@ const database = getDatabase(app);
     TagsComponent,
     LoginComponent,
     SignupComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    VerifyComponent
   ],
   imports: [
     BrowserModule,
