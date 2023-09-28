@@ -1,35 +1,74 @@
 <div class="wrapper">
-    <div class="logo">
-      <img src="assets/caterpillar logo with shadow.png" alt="">
-    </div>
-    <div class="info">
-      <div class="form-field d-flex align-items-center">
-        <span class="far fa-user"></span>
-        <input type="text" name="userName" id="userName" [(ngModel)]="userName" placeholder="Username">
-      </div>
-      <div class="form-field d-flex align-items-center">
-        <span class="email"></span>
-        <input type="email" name="email" id="email" [(ngModel)]="email" placeholder="Email">
-      </div>
-      <div class="form-field d-flex align-items-center">
-        <span class="pass"></span>
-        <input type="password" name="password" id="pwd" [(ngModel)]="pwd" placeholder="Password">
-      </div>
-      <div class="form-field d-flex align-items-center">
-        <span class="confirmpass"></span>
-        <input type="password" name="confirmpassword" id="conpwd" [(ngModel)]="conpwd" placeholder="Confirm Password">
-      </div>
-      <div class="form-field d-flex align-items-center">
-        <span class="phone">+63</span>
-        <input type="number" name="phone" id="phone" [(ngModel)]="phone" placeholder="Phone Number">
-      </div>
-      <div class="form-field d-flex align-items-center">
-        <span class="Address"></span>
-        <input type="text" name="address" id="address" [(ngModel)]="address" placeholder="Address">
-      </div>
-      <button type="submit" class="signupbtn"  (click)="signup()">Create Account</button>
-      <div class="terms">
-        <input type="checkbox" name="terms" id="terms" [(ngModel)]="terms">
-        <label for="terms">I Agree to the <a href="#">Terms and Conditions</a></label>
+  <div class="logo">
+    <img src="assets/caterpillar logo with shadow.png" alt="">
   </div>
-  
+  <div class="info">
+    <div class="form-field d-flex align-items-center">
+      <input 
+      type="text" 
+      class="userform" 
+      #userName 
+      placeholder="Username"
+      required autocomplete>
+    </div>
+    <div class="form-field d-flex align-items-center">
+      <input 
+      type="email" 
+      class="userform" 
+      #email
+      placeholder="Email"
+      required autocomplete>
+    </div>
+    <div class="form-field d-flex align-items-center">
+      <input 
+      type="password" 
+      class="userform"
+      #pwd
+      placeholder="Password"
+      required autocomplete>
+    </div>
+    <div class="form-field d-flex align-items-center">
+      <input 
+      type="password" 
+      class="userform"
+      #conpwd
+      placeholder="Confirm Password"
+      required autocomplete>
+    </div>
+    <div class="form-field d-flex align-items-center">
+      <input
+      type="number" 
+      class="userform"
+      name="phone" 
+      #phone
+      placeholder="Phone Number"
+      autocomplete required>
+    </div>
+    <div class="form-field d-flex align-items-center">
+      <input 
+      type="text" 
+      class="userform"
+      name="address" 
+      #address
+      placeholder="Address"
+      required autocomplete>
+    </div>
+    <div class="form-field d-flex align-items-center">
+      <input 
+      type="button"
+      class="signupbtn" 
+      value="Create Account"
+      (click)="userauthservice.signup(userName.value, email.value, pwd.value, conpwd.value, phone.value, address.value,terms.value)"
+      >
+    </div>
+    
+    <div class="terms">
+      <input 
+      type="checkbox" 
+      name="terms" 
+      placeholder="terms"
+      #terms>
+      <label for="terms">I Agree to the <a href="#">Terms and Conditions</a></label>
+    </div>
+  </div>
+</div>

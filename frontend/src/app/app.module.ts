@@ -27,7 +27,6 @@ import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
 import { getDatabase } from "firebase/database";
-
 import { DashboardComponent } from './components/pages/dashboard/dashboard.component';
 import { SignInComponent } from './components/pages/sign-in/sign-in.component';
 import { CatererSignUpComponent } from './components/pages/caterer-sign-up/caterer-sign-up.component';
