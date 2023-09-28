@@ -84,7 +84,7 @@ div{
     color: #9a0000;
     text-decoration: none;
     font-size: 11px;
-    font-weight: 600;
+    font-weight: 500;
     padding: 0.25rem;
     position: relative;
     overflow: visible;
@@ -125,7 +125,7 @@ div{
 .ul1 a{
     color: #9a0000;
     font-size: 11px;
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .ul1 a:hover{
