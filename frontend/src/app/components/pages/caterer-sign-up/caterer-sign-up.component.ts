@@ -12,8 +12,10 @@ export class CatererSignUpComponent implements OnInit{
 
   ) { }
   
-  onSignUpCaterer(userEmail: any, userPwd: any, businessName: any, contactNumber: any, businessAddress: any) {
-    this.authService.SignUpCaterer(userEmail.value, userPwd.value, businessName.value, contactNumber.value, businessAddress.value);
+  onSignUpCaterer(userEmail: any, userPwd: any) {
+    // , businessName: any, contactNumber: any, businessAddress: any
+    this.authService.SignUpCaterer(userEmail.value, userPwd.value);
+    // , businessName.value, contactNumber.value, businessAddress.value
 }
   
   ngOnInit() { }

@@ -75,14 +75,16 @@ export class AuthService {
         window.alert(error.message);
       });
   }
-  SignUpCaterer(email: string, password: string, businessName: string, contactNumber: string, businessAddress: string) {
+  SignUpCaterer(email: string, password: string) {
+    // , businessName: string, contactNumber: string, businessAddress: string
     return this.afAuth
       .createUserWithEmailAndPassword(email, password)
       .then((result) => {
         /* Call the SendVerificaitonMail() function when new user sign 
         up and returns promise */
         this.SendVerificationMail();
-        this.SetUserDataCaterer(result.user, businessName, contactNumber, businessAddress);
+        this.SetUserDataCaterer(result.user);
+        // , businessName, contactNumber, businessAddress
       })
       .catch((error) => {
         window.alert(error.message);
@@ -114,42 +116,9 @@ export class AuthService {
   /* Setting up user data when sign in with username/password, 
   sign up with username/password and sign in with social auth  
   provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
-  SetUserData(user: any, businessName?: string, contactNumber?: string, businessAddress?: string) {
-    const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
-    let userData: User = {
-      uid: user.uid,
-      email: user.email,
-      displayName: user.displayName,
-      photoURL: user.photoURL,
-      emailVerified: user.emailVerified
-    };
-
-
-    if (businessName) {
-      userData.businessName = businessName;
-    }
-
-    if (contactNumber) {
-      userData.contactNumber = contactNumber;
-    }
-
-    if (businessAddress) {
-      userData.businessAddress = businessAddress;
-    }
-
-    // Saving to Firestore
-    userRef.set(userData, { merge: true })
-    .then(() => console.log("Saved to Firestore"))
-    .catch(error => console.error("Error saving to Firestore:", error));
-
-    // Saving to Realtime Database
-    this.db.object(`users/${user.uid}`).set(userData)
-    .then(() => console.log("Saved to Realtime Database"))
-    .catch(error => console.error("Error saving to Realtime Database:", error));
-
-  }
-  SetUserDataCaterer(caterer: any, businessName?: string, contactNumber?: string, businessAddress?: string) {
-    const catererRef: AngularFirestoreDocument<any> = this.afs.doc(`caterer/${caterer.catererUid}`);
+  SetUserDataCaterer(caterer: any) {
+    // , businessName?: string, contactNumber?: string, businessAddress?: string
+    const catererRef: AngularFirestoreDocument<any> = this.afs.doc(`caterer/${caterer.uid}`);
     let catererData: Caterer = {
       catererUid: caterer.uid,
       catererEmail: caterer.email,
@@ -159,17 +128,17 @@ export class AuthService {
     };
 
 
-    if (businessName) {
-      catererData.catererBusinessName = businessName;
-    }
+    // if (businessName) {
+    //   catererData.catererBusinessName = businessName;
+    // }
 
-    if (contactNumber) {
-      catererData.catererContactNumber = contactNumber;
-    }
+    // if (contactNumber) {
+    //   catererData.catererContactNumber = contactNumber;
+    // }
 
-    if (businessAddress) {
-      catererData.catererBusinessAddress = businessAddress;
-    }
+    // if (businessAddress) {
+    //   catererData.catererBusinessAddress = businessAddress;
+    // }
 
     // Saving to Firestore
     catererRef.set(catererData, { merge: true })
@@ -177,9 +146,9 @@ export class AuthService {
     .catch(error => console.error("Error saving to Firestore:", error));
 
     // Saving to Realtime Database
-    this.db.object(`caterer/${caterer.uid}`).set(catererData)
-    .then(() => console.log("Saved to Realtime Database"))
-    .catch(error => console.error("Error saving to Realtime Database:", error));
+    // this.db.object(`caterer/${caterer.uid}`).set(catererData)
+    // .then(() => console.log("Saved to Realtime Database"))
+    // .catch(error => console.error("Error saving to Realtime Database:", error));
 
   }
   // Sign out
