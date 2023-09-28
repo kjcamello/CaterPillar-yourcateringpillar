@@ -3,6 +3,7 @@ import { bootstrapApplication, BrowserModule } from '@angular/platform-browser';
 import { ToastrModule } from 'ngx-toastr';
 import { FormsModule }   from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CommonModule } from '@angular/common';
 
 
 // Firebase services + environment module
@@ -81,7 +82,7 @@ const database = getDatabase(app);
     AppRoutingModule,
     ToastrModule.forRoot(),
     FormsModule,
-
+    CommonModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,

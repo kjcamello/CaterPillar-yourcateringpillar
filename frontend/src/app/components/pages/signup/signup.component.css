@@ -14,27 +14,37 @@
   .wrapper {
     max-width: 800px;
     margin: 80px auto;
-    background-color: #e4a582;
+    background-color: #f6f86d;
     border-radius: 15px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
     padding: 30px;
     text-align: center;
   }
+  .wrapper .title {
+    font-size: 2.0rem;
+    text-align: center;
+    margin: 10px ;
+    color: #f40303;
+    font-weight: bold;
+  
+  }
   
   .wrapper .logo img {
-    width: 400px;
+    width: 200px;
     display: block;
     margin: 0 auto; /* Center align the image */
     margin-bottom: 20px;
+    filter: drop-shadow(-5px 5px 5px #000000);
   }
   
   .wrapper .info {
     text-align: center;
   }
   
-  .wrapper .form-field {
+  .wrapper .form-field input {
     position: relative;
     margin-bottom: 20px;
+    box-shadow: 0px 0px 10px rgb(230, 119, 119);
   }
   
   /* Hide the number input spinner for WebKit-based browsers */
@@ -78,7 +88,7 @@
   .wrapper .signupbtn {
     width: 100%;
     padding: 10px;
-    background-color: #f4d403;
+    background-color: #fd0000;
     color: #fff;
     font-size: 1.2rem;
     border: none;
@@ -88,7 +98,7 @@
   }
   
   .wrapper .signupbtn:hover {
-    background-color: #fc0808;
+    background-color: #0ae8dd;
   }
   
   /* Correct placement for checkbox and text */
