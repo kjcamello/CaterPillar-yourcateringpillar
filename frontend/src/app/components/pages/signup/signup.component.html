@@ -1,7 +1,8 @@
 <div class="wrapper">
-  <div class="logo">
-    <img src="assets/caterpillar logo with shadow.png" alt="">
+  <div class="logo" routerLink="/">
+    <img src="assets/caterpillar logo with shadow and lied.png" alt="logo">
   </div>
+  <div class="title">USER REGISTRATION</div>
   <div class="info">
     <div class="form-field d-flex align-items-center">
       <input 
@@ -9,7 +10,8 @@
       class="userform" 
       #userName 
       placeholder="Username"
-      required autocomplete>
+      required 
+      autocomplete="on">
     </div>
     <div class="form-field d-flex align-items-center">
       <input 
@@ -17,7 +19,8 @@
       class="userform" 
       #email
       placeholder="Email"
-      required autocomplete>
+      required 
+      autocomplete="on">
     </div>
     <div class="form-field d-flex align-items-center">
       <input 
@@ -25,7 +28,8 @@
       class="userform"
       #pwd
       placeholder="Password"
-      required autocomplete>
+      required
+      autocomplete="on">
     </div>
     <div class="form-field d-flex align-items-center">
       <input 
@@ -33,7 +37,8 @@
       class="userform"
       #conpwd
       placeholder="Confirm Password"
-      required autocomplete>
+      required
+      autocomplete="on">
     </div>
     <div class="form-field d-flex align-items-center">
       <input
@@ -42,7 +47,8 @@
       name="phone" 
       #phone
       placeholder="Phone Number"
-      autocomplete required>
+      autocomplete="on" 
+      required>
     </div>
     <div class="form-field d-flex align-items-center">
       <input 
@@ -51,24 +57,21 @@
       name="address" 
       #address
       placeholder="Address"
-      required autocomplete>
+      required 
+      autocomplete="on">
     </div>
     <div class="form-field d-flex align-items-center">
       <input 
       type="button"
       class="signupbtn" 
       value="Create Account"
-      (click)="userauthservice.signup(userName.value, email.value, pwd.value, conpwd.value, phone.value, address.value,terms.value)"
+      (click)="userauthservice.signup(userName.value, email.value, pwd.value, conpwd.value, phone.value, address.value)"
       >
     </div>
     
     <div class="terms">
-      <input 
-      type="checkbox" 
-      name="terms" 
-      placeholder="terms"
-      #terms>
-      <label for="terms">I Agree to the <a href="#">Terms and Conditions</a></label>
+       By creating an account, I Agree to Caterpillar's <a routerLink="/terms">Terms and Conditions</a>
+       and <a href="/privacy-policy">Privacy Policy</a>
     </div>
   </div>
 </div>

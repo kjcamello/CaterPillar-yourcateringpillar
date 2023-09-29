@@ -1,0 +1,104 @@
+/* Reset some default browser styles */
+body, h1, h2, h3, p {
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Page styles */
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+    color: #333;
+    line-height: 1.6;
+  }
+  
+  header {
+    background-color: #ff1900;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+  }
+  
+  header .logo img {
+    width: 400px; /* Adjust the logo width as needed */
+    height: auto;
+  }
+  
+  header h1 {
+    font-size: 24px;
+    margin-top: 10px;
+  }
+  
+  main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+  }
+  
+  main h2 {
+    font-size: 20px;
+    margin-top: 20px;
+  }
+  
+  main h3 {
+    font-size: 18px;
+    margin-top: 10px;
+  }
+  
+  main p {
+    margin-top: 10px;
+  }
+  
+  footer {
+    margin-top: 30px;
+    padding: 20px 0;
+    background-color: #ff1900;
+    color: white;
+    text-align: center;
+  }
+  
+  footer a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  /* Add more styles as needed */
+  
+  /* Style for the "Terms" heading */
+  #terms-heading {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  /* Style for the numbered list items */
+  ol {
+    margin-left: 20px;
+    margin-bottom: 20px;
+  }
+  
+  ol li {
+    list-style-type: decimal;
+    margin-bottom: 10px;
+  }
+  
+  /* Style for links within the content */
+  a {
+    color: #007BFF;
+    text-decoration: underline;
+  }
+  
+  
+  /* Style for code blocks or preformatted text */
+  pre {
+    background-color: #f5f5f5;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: auto;
+  }
+  

@@ -3,6 +3,7 @@ import { bootstrapApplication, BrowserModule } from '@angular/platform-browser';
 import { ToastrModule } from 'ngx-toastr';
 import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CommonModule } from '@angular/common';
 
 
 // Firebase services + environment module
@@ -32,10 +33,11 @@ import { SignInComponent } from './components/pages/sign-in/sign-in.component';
 import { CatererSignUpComponent } from './components/pages/caterer-sign-up/caterer-sign-up.component';
 import { PasswordRecoveryComponent } from './components/pages/password-recovery/password-recovery.component';
 import { EmailVerificationComponent } from './components/pages/email-verification/email-verification.component';
+import { ForgotPasswordComponent } from './components/pages/forgotpassword/forgotpassword.component';
+import { RouterModule } from '@angular/router';
+import { VerifyComponent } from './components/pages/verify/verify.component';
+import { UserVerificationComponent } from './components/pages/email-verification/user-verification.component';
 import { SignupHeaderComponent } from './components/partials/signup-header/signup-header.component';
-import { ShowHidePasswordComponent } from './components/partials/show-hide-password/show-hide-password.component';
-import { IonicModule } from '@ionic/angular';
-import { CateringinformationComponent } from './components/pages/cateringinformation/cateringinformation.component';
 
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -71,31 +73,32 @@ const database = getDatabase(app);
     TagsComponent,
     LoginComponent,
     SignupComponent,
+    ForgotPasswordComponent,
+    VerifyComponent,
     DashboardComponent,
     SignInComponent,
     CatererSignUpComponent,
     PasswordRecoveryComponent,
     EmailVerificationComponent,
-    SignupHeaderComponent,
-    ShowHidePasswordComponent,
-    CateringinformationComponent,
-    
+    SignupHeaderComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-bottom-left',
+      preventDuplicates: true,
+      progressBar: true
+    }),
     FormsModule,
-    ReactiveFormsModule,
 
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
     AngularFireStorageModule,
     AngularFireDatabaseModule,
-    
-    IonicModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

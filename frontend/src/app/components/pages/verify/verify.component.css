@@ -65,13 +65,8 @@
   }
   
   .redirect {
-    color: #089efc;
+    color: yellow;
     cursor: pointer;
-    text-decoration: underline;
-  }
-  .redirect a:hover{
-    color: #fcfc08;
-    cursor: pointer;
-    text-decoration: underline;
+    text-decoration: none;
   }
   
