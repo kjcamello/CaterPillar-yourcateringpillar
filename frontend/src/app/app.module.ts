@@ -91,7 +91,12 @@ const database = getDatabase(app);
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-bottom-left',
+      preventDuplicates: true,
+      progressBar: true
+    }),
     FormsModule,
     CommonModule,
     AngularFireModule.initializeApp(environment.firebase),

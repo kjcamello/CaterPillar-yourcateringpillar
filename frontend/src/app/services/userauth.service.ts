@@ -4,6 +4,7 @@ import { Customer} from 'src/app/shared/models/customer';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore, AngularFirestoreDocument, } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,8 @@ export class UserAuthService {
     public afs: AngularFirestore, // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
     public router: Router,
-    public ngZone: NgZone, // NgZone service to remove outside scope warning
+    public ngZone: NgZone, 
+    private toastr: ToastrService// NgZone service to remove outside scope warning
   ) {
     /* Saving user data in localstorage when 
     logged in and setting up null when logged out */
@@ -48,6 +50,10 @@ export class UserAuthService {
     if (password !== conpwd) {
       window.alert('Password does not match');
       return Promise.reject('Passwords do not match');
+    }
+    if (!this.isStrongPassword(password)) {
+      window.alert('Password must contain at least one uppercase letter, one lowercase letter, and one special symbol.');
+      return Promise.reject('Password strength requirement not met');
     }
   
     if (!this.validateEmail(email)) {
@@ -145,6 +151,10 @@ export class UserAuthService {
       localStorage.removeItem('customers');
       this.router.navigate(['login']);
     });
+  }
+  isStrongPassword(password: string) {
+    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\W)/;
+    return passwordPattern.test(password);
   }
  
 }
