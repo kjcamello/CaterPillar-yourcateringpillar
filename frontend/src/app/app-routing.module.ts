@@ -13,6 +13,7 @@ import { TermsComponent } from './components/pages/terms-privacy/terms.component
 import { PrivacyComponent } from './components/pages/terms-privacy/privacy.component';
 import { AuthGuard } from './guard/auth.guard';
 import { ForgotPasswordComponent } from './components/pages/forgotpassword/forgotpassword.component';
+import { CateringinformationComponent } from './components/pages/cateringinformation/cateringinformation.component';
 import { VerifyComponent } from './components/pages/verify/verify.component';
 import { VerificationCatererComponent } from './components/pages/verification-caterer/verification-caterer.component';
 
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/sign-in', pathMatch: 'full' },
   { path: 'sign-in', component: SignInComponent },
   { path: 'register-caterer', component: CatererSignUpComponent },
+  { path: 'catering-information', component: CateringinformationComponent},
   { path: 'dashboard', component: DashboardComponent },
   { path: 'forgot-password', component: PasswordRecoveryComponent },
   { path: 'verify-email-address', component: EmailVerificationComponent },

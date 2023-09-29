@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { bootstrapApplication, BrowserModule } from '@angular/platform-browser';
 import { ToastrModule } from 'ngx-toastr';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 
@@ -39,8 +39,7 @@ import { VerifyComponent } from './components/pages/verify/verify.component';
 import { VerificationCatererComponent } from './components/pages/verification-caterer/verification-caterer.component';
 import { UserVerificationComponent } from './components/pages/email-verification/user-verification.component';
 import { SignupHeaderComponent } from './components/partials/signup-header/signup-header.component';
-import { TermsComponent } from './components/pages/terms-privacy/terms.component';
-import { PrivacyComponent } from './components/pages/terms-privacy/privacy.component';
+import { CateringinformationComponent } from './components/pages/cateringinformation/cateringinformation.component';
 
 
 
@@ -87,11 +86,10 @@ const database = getDatabase(app);
     VerificationCatererComponent,
     EmailVerificationComponent,
     SignupHeaderComponent,
-    UserVerificationComponent,
-    TermsComponent,
-    PrivacyComponent
+    CateringinformationComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
@@ -102,13 +100,12 @@ const database = getDatabase(app);
       progressBar: true
     }),
     FormsModule,
-    CommonModule,
+
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
     AngularFireStorageModule,
     AngularFireDatabaseModule,
-    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
