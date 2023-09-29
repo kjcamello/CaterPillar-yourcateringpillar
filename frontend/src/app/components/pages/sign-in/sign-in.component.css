@@ -1,0 +1,115 @@
+  .authPage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #ffd1b375;
+  }
+  
+  
+  /* Authentication Block */
+  .displayTable {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+  }
+  
+  .authBlock {
+      background-color: rgb(172, 0, 0);
+      width: 90%;
+      max-width: 400px;
+      padding: 20px 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+      position: relative;
+      z-index: 2;
+  }
+  
+  .logo-container {
+      text-align: center;
+      margin-bottom: 20px;
+      filter: drop-shadow(-5px -5px 25px pink);
+  }
+  
+  .inner-logo {
+      height: 80px;
+      margin-bottom: 10px;
+  }
+  
+  .stepsTitle {
+      color: rgb(255, 240, 22);
+      font-size: 20px;
+      margin-bottom: 20px;
+  }
+  
+  .authForm div {
+      margin-bottom: 15px;
+  }
+  
+  input[type="email"], input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      margin-top: 5px;
+      font-size: 16px;
+      outline: none;
+  }
+  
+  
+
+  button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      background-color: #FFD2B3;
+      border: none;
+      border-radius: 5px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      margin-bottom: 15px;
+  }
+  
+  button:hover {
+      background-color: #FFB089;
+  }
+  
+  /* Agreement Text */
+  .authBlock > p {
+      font-size: 12px;
+      color: #fff;
+      text-align: center;
+      margin-top: 20px;
+  }
+  
+  .authBlock > p > a {
+      color: #FFD2B3;
+      text-decoration: underline;
+      cursor: pointer;
+  }
+  
+.terms-text{
+    text-align: center;
+}
+
+.login-text{
+    text-align: center;
+}
+
+.ColorT{
+    color: white;
+}
+
+.ColorT a{
+    color: rgb(255, 240, 22);
+
+}
+
+.ColorT a:hover{
+    opacity: 0.8;
+    cursor: pointer;
+}
+  
+  

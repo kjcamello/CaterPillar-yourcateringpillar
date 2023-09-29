@@ -1,50 +1,30 @@
-<div class="displayTable">
+<app-signup-header></app-signup-header>
+<div class="authPage">
+
+  <div class="displayTable">
     <div class="displayTableCell">
       <div class="authBlock">
-        <h3>Sign In</h3>
-        <div class="formGroup">
-          <input
-            type="text"
-            class="formControl"
-            placeholder="Username"
-            #userName
-            required
-          />
+        <div class="logo-container">
+          <img src="assets/caterpillar logo with shadow and lied.png" alt="Logo" class="inner-logo">
+          <h2 class="stepsTitle">Sign Up as Caterer</h2>
         </div>
-        <div class="formGroup">
-          <input
-            type="password"
-            class="formControl"
-            placeholder="Password"
-            #userPassword
-            required
-          />
+        <div class="authForm">
+          <div>
+            <input type="email" id="email" placeholder="Email Address" [(ngModel)]="catererBInfo.catererEmail">
+          </div>
+          <div>
+            <input type="password" id="password" placeholder="Password" [(ngModel)]="catererBInfo.catererPwd">
+          </div>
+        
+          <button (click)="onSignInCaterer()">SIGN IN</button>
+          <p class="ColorT terms-text">By signing in, you agree to CaterPillar 
+            <a href="/terms">Terms of Service</a>
+            &
+            <a href="/privacy-policy">Privacy Policy</a>
+          </p>
+          <p class="ColorT login-text">Want to share your service? <a href="register-caterer"> Sign up as Caterer</a></p>
         </div>
-        <!-- Calling SignIn Api from AuthService -->
-        <div class="formGroup">
-          <input
-            type="button"
-            class="btn btnPrimary"
-            value="Log in"
-            (click)="onSignIn(userName, userPassword)"
-          />
-        </div>
-        <div class="formGroup">
-          <span class="or"><span class="orInner">Or</span></span>
-        </div>
-        <div class="forgotPassword">
-          <span routerLink="/forgot-password">Forgot Password?</span>
-        </div>
-      </div>
-      <div class="redirectToLogin">
-        <span
-          >Don't have an account?<span
-            class="redirect"
-            routerLink="/register-caterer"
-          >
-            Sign Up</span
-          ></span
-        >
       </div>
     </div>
   </div>
+</div>

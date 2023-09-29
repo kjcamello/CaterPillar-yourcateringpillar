@@ -1,10 +1,24 @@
-<app-signup-header>
-    
-</app-signup-header>
+<header class="CaterPillar-top CaterPillar-top--sticky">
+    <div class="container">
+       <a routerLink="/" class="logo">
+          <img src="assets/caterpillar logo with shadow.png" alt="Logo">
+          
+       </a>
+       
+       <!-- <div class="Logo_CSUDivider"></div> -->
+       
+    </div >
+    <!-- <div class="CSU_Title">
+        <a routerLink="/register-caterer" class="catererSignUp"></a>
+        
+    </div> -->
+    <!-- Sign Up as Caterer -->
+ </header>
+
 <div class="displayTable">
     <div class="displayTableCell">
         <div class="authBlock">
-            <div class="container">
+            <div class="container1">
                 <a class="logo">
                     <img src="assets/caterpillar logo with shadow and lied.png" alt="Logo">
                 </a>
@@ -16,42 +30,55 @@
 
             <div *ngIf="currentStep === 1" class="form-step">
                 <div class="stepsTitle">Catering Information</div>
-                <div>
-                    Name of the Catering:
-                    <input type="text" placeholder="" [(ngModel)]="cateringInfo.name" required>
+                <div class="CIcat">
+                    <!-- Name of the Catering: -->
+                    <div class="CIsec">Name of the Catering</div>
+                    <input type="text" placeholder="Name of the Catering" [(ngModel)]="cateringInfo.cateringName" required>
                 </div>
-                <div>
-                    Address:
-                    <input type="text" placeholder="" [(ngModel)]="cateringInfo.address "required>
+                <div class="CIcat">
+                    <!-- Address: -->
+                    <div class="CIsec">Address</div>
+                    <input type="text" placeholder="Address" [(ngModel)]="cateringInfo.cateringAddress "required>
                 </div>
-                <div>
-                    Email:
-                    <input type="text" placeholder="" [(ngModel)]="cateringInfo.email"required>
+                <div class="CIcat">
+                    <!-- Email: -->
+                    <div class="CIsec">Email</div>
+                    <input type="text" placeholder="Email" [(ngModel)]="cateringInfo.cateringEmail" readonly required value="{{catererEmailDefault}}">
                 </div>
-                <div>
-                    Contact Number:
-                    <input type="text" placeholder="" [(ngModel)]="cateringInfo.contactNumber" required>
+                <div class="CIcat">
+                    <!-- Contact Number: -->
+                    <div class="CIsec">Contact Number</div>
+                    <input type="text" placeholder="Contact Number" [(ngModel)]="cateringInfo.cateringContactNumber" required>
                 </div>
             </div>
 
             <div *ngIf="currentStep === 2" class="form-step">
                 <div class="stepsTitle">Caterers Information</div>
-                <div>
-                    Registered Name:
-                    <input type="text" placeholder="" [(ngModel)]="catererInfo.registeredName" required>
+                <div class="CIcat">
+                    <!-- Registered Name: -->
+                    <div class="CIsec">Caterer Owner</div>
+                    <input type="text" placeholder="Registered Owner Name" [(ngModel)]="catererInfo.catererRegisteredName" required>
                 </div>
-                <div>
-                    Registered Address:
-                    <input type="text" placeholder="" [(ngModel)]="catererInfo.registeredAddress" required>
+                <div class="CIcat">
+                    <!-- Registered Address: -->
+                    <div class="CIsec">Caterer Address</div>
+                    <input type="text" placeholder="Caterer Registered Address" [(ngModel)]="catererInfo.catererRegisteredAddress" required>
                 </div>
-                <div>
-                    Do you have a Taxpayer Identification Number(TIN)?
-                    <label>
-                        <input type="radio" name="tinOption" [(ngModel)]="catererInfo.hasTIN" value="Yes"> Yes
-                    </label>
-                    <label>
-                        <input type="radio" name="tinOption" [(ngModel)]="catererInfo.hasTIN" value="No"> No
-                    </label>
+                <div class="CIcat">
+                    
+                    <div class="CIsec">Do you have a Taxpayer Identification Number(TIN)?</div>
+                    <div class="radioOPfix">
+                        <label class="radioOP">
+                            <input type="radio" name="tinOption" [(ngModel)]="catererInfo.hasTIN" value="Yes"> Yes
+                        </label>
+                        <label class="radioOP">
+                            <input type="radio" name="tinOption" [(ngModel)]="catererInfo.hasTIN" value="No"> No
+                        </label>
+                    </div>
+                </div>
+                <div class="CIcat" *ngIf="catererInfo.hasTIN === 'Yes'">
+                    <label for="tinFileUpload" class="CIcat">Upload TIN proof:</label>
+                    <input class="TFUpload CIsec" type="file" id="tinFileUpload" (change)="onTINFileChange($event)" [(ngModel)]="catererInfo.tinFileURL">
                 </div>
             </div>
             <button (click)="goToPreviousStep()" *ngIf="currentStep > 1" class="back-button">Back</button>

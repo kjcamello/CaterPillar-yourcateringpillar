@@ -25,6 +25,7 @@
               type="email"
               class="CSU_email_input"
               placeholder="Email Address"
+              [(ngModel)]="catererBInfo.catererEmail"
               #catererEmail
               required
             />
@@ -49,6 +50,7 @@
                 class="CSU_password_input"
                 placeholder="New Password"
                 #catererPwd
+                [(ngModel)]="catererBInfo.catererPwd"
                 required
               />
               <i 
@@ -65,21 +67,13 @@
 
         <div>
           <div class="CSU_cpassword_panel">
-            <!-- <div class="CSU_cpassword">
-              <input
-                type="password"
-                class="CSU_cpassword_input"
-                placeholder="Confirm New Password"
-                #catererPwd
-                required
-              />
-            </div> -->
             <div class="CSU_cpassword">
               <input
                 [type]="confirmPasswordVisible ? 'text' : 'password'"
                 class="CSU_cpassword_input"
                 placeholder="Confirm New Password"
                 #catererConfirmPwd
+                [(ngModel)]="catererBInfo.catererCPassword"
                 required
               />
               <i 
@@ -96,7 +90,7 @@
           <button 
           
             class="btnCatererSignUp bCSU bCSU1 bCSU2 bCSU3 bCSU4" 
-            (click)="onSignUpCaterer(catererEmail, catererPwd, catererConfirmPwd)">
+            (click)="onSignUpCaterer()">
           Sign Up
         </button>
         </div>
@@ -105,9 +99,9 @@
           <div class="terms_conditions1">
             <span class="terms_conditions2">
               By signing up, you agree to CaterPillar 
-              <a class="TC Terms" href="">Terms of Service</a> 
+              <a class="TC Terms" href="/terms">Terms of Service</a> 
               &
-              <a class="TC Conditions" href="">Privacy Policy</a> 
+              <a class="TC Conditions" href="/privacy-policy">Privacy Policy</a> 
               </span>
           </div>
         </div>

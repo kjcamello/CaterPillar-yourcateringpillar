@@ -97,6 +97,18 @@ div{
     margin-left: auto;
     /* justify-content: space-around; */
     /* align-items: center; */
+    justify-content: flex-start;
+    align-items: center;
+    min-width: inherit;
+    flex-wrap: wrap;
+}
+
+.container1{
+    display: flex;
+    margin-right: auto;
+    margin-left: auto;
+    /* justify-content: space-around; */
+    /* align-items: center; */
     justify-content: center;
     align-items: center;
     min-width: inherit;
@@ -119,6 +131,8 @@ div{
 
 .logo img{
     height: 70px;
+    /* max-height: 300px; */
+    filter: drop-shadow(-5px -5px 20px pink);
     /* padding-left: 250px;width: 100%; */
     /* padding-left: 50px; */
     /* margin-left: 50px; */
@@ -144,29 +158,11 @@ ul a{
     text-align: center;
 }
   
-
-/* Keeping header styles as they were */
-
-.CaterPillar-top {
-    background-color: #fff;
-    padding: 10px 0;
-    position: sticky;
-    top: 0;
-    z-index: 10;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-    display: flex;
-    align-items: center;
-}
 /* Adjusted header styles */
 
 .CaterPillar-top {
     background-color: #FFD2B3;
-    padding: 10px 0;
+    /* padding: 10px 0; */
     position: sticky;
     top: 0;
     z-index: 10;
@@ -178,24 +174,21 @@ ul a{
     padding: 0 20px;
     display: flex;
     align-items: center;
-}
-
-.logo img {
-    max-height: 300px;
-    filter: drop-shadow(-5px -5px 20px pink);
 }
 
 /* Styling for the rest of the form */
 
 .displayTable {
     display: flex;
-    align-items: center;
+    /* align-items: center; */
     justify-content: center;
-    height: 100vh;
+    /* height: 100vh; */
+    margin-top: 45px;
 }
 
 .displayTableCell {
-    width: 500px;
+    width: 1200px;
+    /* height: 500px; */
     background-color: #fff;
     box-shadow: 0 3px 10px 0 rgba(0, 0, 0, .14);
     border-radius: 10px;
@@ -206,8 +199,9 @@ ul a{
     padding: 20px;
     background-color: rgb(172, 0, 0, 0.9);
     color: #fff; /* Set text color to white */
-    border-radius: 10px;
+    border-radius: 20px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    height: 500px;
 }
 
 .tabs {
@@ -230,24 +224,62 @@ ul a{
 
 .form-step {
     color: white;
-    padding: 5px 20px 30px
+    padding: 5px 20px 30px;
+    /* display: flex; */
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    align-items: center;
+}
+
+.CIcat{
+    font-size: 12px;
 }
 
 .form-step > div {
     margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.radioOPfix{
+    display: flex;
+    justify-content: center;
+    /* padding: 10px; */
+}
+
+.radioOP{
+    display: flex;
+    justify-content: center;
+    padding: 10px;
 }
 
 input{
-    background-color: whitesmoke;
+    /* background-color: rgba(245, 245, 245, 0.829); */
+    
 }
 
-input[type="text"], input[type="email"], input[type="password"] {
-    width: 100%;
+.TFUpload{
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 1rem;
-    
+    /* flex: 0.8; */
+    width: 400px;
+}
+
+input[type="text"], input[type="email"], input[type="password"] {
+    /* width: 100%; */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    /* flex: 0.8; */
+    width: 400px;
+}
+
+.CIsec{
+    display: flex;
 }
 
 input[type="radio"] {
@@ -263,11 +295,12 @@ input[type="radio"] {
     margin: 10px 0;
     color: #fff;
     position: absolute;  /* Use absolute positioning */
-    bottom: 2px;    
+    bottom: 2px;
+    margin-top: 90px;    
 }
 
 .next-button, .submit-button {
-    background-color: rgb(216, 149, 149);
+    background-color: #3d3939;
     right: 20px; 
 }
 
@@ -278,6 +311,7 @@ input[type="radio"] {
 
 .next-button:hover, .submit-button:hover {
     opacity: 0.8;
+    background-color: #bbb;
 }
 
 .back-button:hover {
