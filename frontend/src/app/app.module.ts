@@ -86,7 +86,8 @@ const database = getDatabase(app);
     VerificationCatererComponent,
     EmailVerificationComponent,
     SignupHeaderComponent,
-    CateringinformationComponent
+    CateringinformationComponent,
+    UserVerificationComponent
   ],
   imports: [
     CommonModule,

@@ -134,7 +134,6 @@ export class UserAuthService {
       uid: customer.uid,
       userName: userName, // Use the userName parameter passed to the method
       email: customer.email,
-      IsVerified: customer.emailVerified,
       address: address,
       phone: phone,
     };
@@ -154,5 +153,5 @@ export class UserAuthService {
     const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\W)/;
     return passwordPattern.test(password);
   }
- 
+
 }
