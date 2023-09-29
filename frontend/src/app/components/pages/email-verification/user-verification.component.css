@@ -69,4 +69,9 @@
     cursor: pointer;
     text-decoration: underline;
   }
+  .redirect a:hover{
+    color: #fcfc08;
+    cursor: pointer;
+    text-decoration: underline;
+  }
   

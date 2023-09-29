@@ -36,6 +36,7 @@ import { EmailVerificationComponent } from './components/pages/email-verificatio
 import { ForgotPasswordComponent } from './components/pages/forgotpassword/forgotpassword.component';
 import { RouterModule } from '@angular/router';
 import { VerifyComponent } from './components/pages/verify/verify.component';
+import { UserVerificationComponent } from './components/pages/email-verification/user-verification.component';
 import { SignupHeaderComponent } from './components/partials/signup-header/signup-header.component';
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -78,7 +79,8 @@ const database = getDatabase(app);
     CatererSignUpComponent,
     PasswordRecoveryComponent,
     EmailVerificationComponent,
-    SignupHeaderComponent
+    SignupHeaderComponent,
+    UserVerificationComponent
   ],
   imports: [
     BrowserModule,
@@ -92,6 +94,7 @@ const database = getDatabase(app);
     AngularFirestoreModule,
     AngularFireStorageModule,
     AngularFireDatabaseModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

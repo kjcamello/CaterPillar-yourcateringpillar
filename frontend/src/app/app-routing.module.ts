@@ -20,7 +20,6 @@ const routes: Routes = [
   { path:'tag/:tag', component:HomeComponent },
   { path:'login',component:LoginComponent },
   { path:'signup',component:SignupComponent },
-
   { path: '', redirectTo: '/sign-in', pathMatch: 'full' },
   { path: 'sign-in', component: SignInComponent },
   { path: 'register-caterer', component: CatererSignUpComponent },
