@@ -1,0 +1,61 @@
+/* Reset some default styles for better formatting */
+body, h1, h2, ul, p {
+    margin: 0;
+    padding: 0;
+}
+
+/* Style the header */
+header {
+    background-color: #ff1900;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+header .logo img {
+    width: 400px; /* Adjust the logo width as needed */
+    height: auto;
+  }
+
+/* Style each section */
+section {
+    padding: 20px;
+    margin: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: white;
+}
+
+/* Style section headings */
+h2 {
+    color: #000000;
+}
+
+/* Style lists inside sections */
+ul {
+    margin-left: 20px;
+}
+
+/* Style footer */
+footer {
+    background-color: #ff1900;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Style links in footer */
+footer a {
+    color: white;
+    text-decoration: underline;
+}
+
+/* Style links in sections */
+a {
+    color: #007BFF;
+    text-decoration: underline;
+}
+
+/* Style links on hover */
+a:hover {
+    text-decoration: none;
+}

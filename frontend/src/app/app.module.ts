@@ -38,6 +38,9 @@ import { RouterModule } from '@angular/router';
 import { VerifyComponent } from './components/pages/verify/verify.component';
 import { UserVerificationComponent } from './components/pages/email-verification/user-verification.component';
 import { SignupHeaderComponent } from './components/partials/signup-header/signup-header.component';
+import { TermsComponent } from './components/pages/terms-privacy/terms.component';
+import { PrivacyComponent } from './components/pages/terms-privacy/privacy.component';
+
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -80,7 +83,9 @@ const database = getDatabase(app);
     PasswordRecoveryComponent,
     EmailVerificationComponent,
     SignupHeaderComponent,
-    UserVerificationComponent
+    UserVerificationComponent,
+    TermsComponent,
+    PrivacyComponent
   ],
   imports: [
     BrowserModule,

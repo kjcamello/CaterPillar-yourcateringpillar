@@ -15,7 +15,7 @@
     padding: 40px 30px 30px 30px;
     text-align: center;
     align-items: center;
-    background-color: #e4a582;
+    background-color: #f6f86d;
     border-radius: 15px;
     box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #fff;
 }
@@ -24,6 +24,7 @@
     width: 100%;
     padding-bottom: 20px;
     margin: auto;
+    filter: drop-shadow(-5px 5px 5px #000000);
 }
 
 .logo img {
@@ -67,7 +68,7 @@
     box-shadow: none;
     width: 100%;
     height: 40px;
-    background-color: #f4d403;
+    background-color: #fd0000;
     color: #fff;
     border-radius: 25px;
     box-shadow: 3px 3px 3px #b1b1b1,
@@ -78,7 +79,7 @@
 }
 
 .wrapper .btn:hover {
-    background-color: #fc0808;
+    background-color: #0ae8dd;
 }
 
 .wrapper a {
