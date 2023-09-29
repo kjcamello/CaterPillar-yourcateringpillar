@@ -101,7 +101,7 @@ const database = getDatabase(app);
       progressBar: true
     }),
     FormsModule,
-
+    RouterModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
