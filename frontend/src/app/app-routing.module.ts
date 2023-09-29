@@ -15,6 +15,7 @@ import { AuthGuard } from './guard/auth.guard';
 import { ForgotPasswordComponent } from './components/pages/forgotpassword/forgotpassword.component';
 import { CateringinformationComponent } from './components/pages/cateringinformation/cateringinformation.component';
 import { VerifyComponent } from './components/pages/verify/verify.component';
+import { VerificationCatererComponent } from './components/pages/verification-caterer/verification-caterer.component';
 
 const routes: Routes = [
   { path:'', component:HomeComponent },
@@ -31,6 +32,9 @@ const routes: Routes = [
   { path: 'verify-email-address', component: EmailVerificationComponent },
   {path: 'user-verification', component: UserVerificationComponent},
   {path: 'forgotpassword', component: ForgotPasswordComponent},
+  {path: 'verify', component: VerifyComponent},
+  {path: 'password-recovery', component: PasswordRecoveryComponent},
+  {path: 'verification-caterer', component: VerificationCatererComponent},
   {path: 'verify', component: VerifyComponent},
   {path: 'terms', component: TermsComponent},
   {path: 'privacy-policy', component: PrivacyComponent}

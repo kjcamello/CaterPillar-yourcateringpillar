@@ -118,8 +118,6 @@ export class UserAuthService {
       });
   }
   
-  
-  
   // Returns true when user is looged in and email is verified
   get isLoggedIn(): boolean {
     const customer = JSON.parse(localStorage.getItem('customers')!);
