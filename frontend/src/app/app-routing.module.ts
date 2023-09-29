@@ -9,7 +9,8 @@ import { PasswordRecoveryComponent } from './components/pages/password-recovery/
 import { SignInComponent } from './components/pages/sign-in/sign-in.component';
 import { SignupComponent } from './components/pages/signup/signup.component';
 import { UserVerificationComponent } from './components/pages/email-verification/user-verification.component';
-
+import { TermsComponent } from './components/pages/terms-privacy/terms.component';
+import { PrivacyComponent } from './components/pages/terms-privacy/privacy.component';
 import { AuthGuard } from './guard/auth.guard';
 import { ForgotPasswordComponent } from './components/pages/forgotpassword/forgotpassword.component';
 import { VerifyComponent } from './components/pages/verify/verify.component';
@@ -21,7 +22,6 @@ const routes: Routes = [
   { path:'tag/:tag', component:HomeComponent },
   { path:'login',component:LoginComponent },
   { path:'signup',component:SignupComponent },
-
   { path: '', redirectTo: '/sign-in', pathMatch: 'full' },
   { path: 'sign-in', component: SignInComponent },
   { path: 'register-caterer', component: CatererSignUpComponent },
@@ -32,8 +32,10 @@ const routes: Routes = [
   {path: 'forgotpassword', component: ForgotPasswordComponent},
   {path: 'verify', component: VerifyComponent},
   {path: 'password-recovery', component: PasswordRecoveryComponent},
-  {path: 'verification-caterer', component: VerificationCatererComponent}
- 
+  {path: 'verification-caterer', component: VerificationCatererComponent},
+  {path: 'verify', component: VerifyComponent},
+  {path: 'terms', component: TermsComponent},
+  {path: 'privacy-policy', component: PrivacyComponent}
 ];
 
 @NgModule({
