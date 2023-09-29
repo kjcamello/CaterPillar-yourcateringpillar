@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 // import * as catererDataService from 'src/app/services/caterer-data.service;
-import { CatererDataService } from 'src/app/services/caterer-data.service';
+// import { CatererDataService } from 'src/app/services/caterer-data.service';
 
 @Component({
   selector: 'app-cateringinformation',

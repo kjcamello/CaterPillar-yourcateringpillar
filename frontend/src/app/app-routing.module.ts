@@ -13,6 +13,8 @@ import { TermsComponent } from './components/pages/terms-privacy/terms.component
 import { PrivacyComponent } from './components/pages/terms-privacy/privacy.component';
 import { AuthGuard } from './guard/auth.guard';
 import { ForgotPasswordComponent } from './components/pages/forgotpassword/forgotpassword.component';
+import { CateringinformationComponent } from './components/pages/cateringinformation/cateringinformation.component';
+import { VerifyComponent } from './components/pages/verify/verify.component';
 
 const routes: Routes = [
   { path:'', component:HomeComponent },

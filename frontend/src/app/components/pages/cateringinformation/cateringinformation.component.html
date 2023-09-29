@@ -1,8 +1,6 @@
 <app-signup-header>
     
 </app-signup-header>
-
-
 <div class="displayTable">
     <div class="displayTableCell">
         <div class="authBlock">
@@ -12,8 +10,8 @@
                 </a>
             </div>
             <div class="tabs">
-                <div [ngClass]="{'tab': true, 'active': currentStep === 1}"></div>
-                <div [ngClass]="{'tab': true, 'active': currentStep === 2}"></div>
+                <div [ngClass] ="{'tab': true, 'active': currentStep === 1}"></div>
+                <div [ngClass] ="{'tab': true, 'active': currentStep === 2}"></div>
             </div>
 
             <div *ngIf="currentStep === 1" class="form-step">
