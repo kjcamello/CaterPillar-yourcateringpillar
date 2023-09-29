@@ -48,7 +48,6 @@
   .btn.btnPrimary {
     background-color: #f4d403;
     color: #fff;
-    margin-top: 35px;
     padding: 10px 20px;
     border: none;
     border-radius: 20px;
@@ -66,19 +65,8 @@
   }
   
   .redirect {
-    color: #f4d403;
+    color: yellow;
     cursor: pointer;
     text-decoration: none;
-  }
-  
-  .displayTable .form-field input.useremail {
-    width: 100%;
-    padding: 10px;
-    font-size: 1.2rem;
-    border: none;
-    border-radius: 20px;
-    background-color: #f2f2f2;
-    color: #333;
-    outline: none;
   }
   

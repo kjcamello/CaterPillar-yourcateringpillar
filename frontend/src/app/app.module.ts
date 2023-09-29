@@ -32,14 +32,10 @@ import { SignInComponent } from './components/pages/sign-in/sign-in.component';
 import { CatererSignUpComponent } from './components/pages/caterer-sign-up/caterer-sign-up.component';
 import { PasswordRecoveryComponent } from './components/pages/password-recovery/password-recovery.component';
 import { EmailVerificationComponent } from './components/pages/email-verification/email-verification.component';
-<<<<<<< HEAD
 import { ForgotPasswordComponent } from './components/pages/forgotpassword/forgotpassword.component';
 import { RouterModule } from '@angular/router';
 import { VerifyComponent } from './components/pages/verify/verify.component';
-=======
-import { SignupHeaderComponent } from './components/partials/signup-header/signup-header.component';
-
->>>>>>> 14f53e265e27fcf9267286817afb93c50e7b0d9d
+import { VerificationCatererComponent } from './components/pages/verification-caterer/verification-caterer.component';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -74,17 +70,10 @@ const database = getDatabase(app);
     TagsComponent,
     LoginComponent,
     SignupComponent,
-<<<<<<< HEAD
     ForgotPasswordComponent,
-    VerifyComponent
-=======
-    DashboardComponent,
-    SignInComponent,
-    CatererSignUpComponent,
     PasswordRecoveryComponent,
-    EmailVerificationComponent,
-    SignupHeaderComponent
->>>>>>> 14f53e265e27fcf9267286817afb93c50e7b0d9d
+    VerifyComponent,
+    VerificationCatererComponent
   ],
   imports: [
     BrowserModule,

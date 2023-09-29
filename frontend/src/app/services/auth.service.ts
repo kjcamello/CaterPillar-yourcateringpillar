@@ -103,10 +103,25 @@ export class AuthService {
     return this.afAuth
       .sendPasswordResetEmail(passwordResetEmail)
       .then(() => {
-        window.alert('Password reset email sent, check your inbox.');
+        // Email sent successfully, no need for an alert here
       })
       .catch((error) => {
-        window.alert(error);
+        // Handle specific Firebase error codes
+        switch (error.code) {
+          case 'auth/user-not-found':
+            window.alert('User not found. Please check your email address.');
+            break;
+          case 'auth/invalid-email':
+            window.alert('Invalid email address. Please provide a valid email.');
+            break;
+          default:
+            window.alert('An error occurred while sending the password reset email.');
+            break;
+        }
+        throw error; // Rethrow the error to maintain the rejection of the promise
+      })
+      .finally(() => {
+        window.alert('Password reset email sent, check your inbox.');
       });
   }
   get CatererisLoggedIn(): boolean {
