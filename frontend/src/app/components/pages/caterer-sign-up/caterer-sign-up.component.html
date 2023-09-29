@@ -1,3 +1,7 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+
+
+
 <div class="WPage">
   <nav>
     <app-signup-header></app-signup-header>
@@ -7,7 +11,7 @@
       <div class="CSU_Spanel_Title">
         <div class="CSU_Spanel_Title1">
           <div class="CSU_Spanel_Title2">
-            <a routerLink="/" class="logo">
+            <a class="logo">
               <img src="assets/caterpillar logo with shadow and lied.png" alt="Logo">
            </a>
             Sign Up as Caterer
@@ -29,22 +33,70 @@
         
         <div>
           <div class="CSU_password_panel">
-            <div class="CSU_password">
+            <!-- <div class="CSU_password">
               <input
                 type="password"
                 class="CSU_password_input"
-                placeholder="Password"
+                placeholder="New Password"
                 #catererPwd
                 required
               />
+              <i class="far fa-eye" id="togglePassword" style="margin-left: -30px; cursor: pointer;"></i>
+            </div> -->
+            <div class="CSU_password">
+              <input
+                [type]="passwordVisible ? 'text' : 'password'"
+                class="CSU_password_input"
+                placeholder="New Password"
+                #catererPwd
+                required
+              />
+              <i 
+                [class]="passwordVisible ? 'far fa-eye-slash' : 'far fa-eye'" 
+                id="togglePassword" 
+                style="cursor: pointer;"
+                (click)="togglePasswordVisibility()"
+              ></i>
+            </div>
+          </div>
+        </div>
+        
+        
+
+        <div>
+          <div class="CSU_cpassword_panel">
+            <!-- <div class="CSU_cpassword">
+              <input
+                type="password"
+                class="CSU_cpassword_input"
+                placeholder="Confirm New Password"
+                #catererPwd
+                required
+              />
+            </div> -->
+            <div class="CSU_cpassword">
+              <input
+                [type]="confirmPasswordVisible ? 'text' : 'password'"
+                class="CSU_cpassword_input"
+                placeholder="Confirm New Password"
+                #catererConfirmPwd
+                required
+              />
+              <i 
+                [class]="confirmPasswordVisible ? 'far fa-eye-slash' : 'far fa-eye'" 
+                id="toggleConfirmPassword" 
+                style=" cursor: pointer;"
+                (click)="toggleConfirmPasswordVisibility()"
+              ></i>
             </div>
           </div>
         </div>
         
         <div class="btnCSU">
           <button 
-          class="btnCatererSignUp bCSU bCSU1 bCSU2 bCSU3 bCSU4" 
-          (click)="onSignUpCaterer(catererEmail, catererPwd)">
+          
+            class="btnCatererSignUp bCSU bCSU1 bCSU2 bCSU3 bCSU4" 
+            (click)="onSignUpCaterer(catererEmail, catererPwd, catererConfirmPwd)">
           Sign Up
         </button>
         </div>

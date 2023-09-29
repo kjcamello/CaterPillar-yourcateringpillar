@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { bootstrapApplication, BrowserModule } from '@angular/platform-browser';
 import { ToastrModule } from 'ngx-toastr';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
@@ -33,6 +33,9 @@ import { CatererSignUpComponent } from './components/pages/caterer-sign-up/cater
 import { PasswordRecoveryComponent } from './components/pages/password-recovery/password-recovery.component';
 import { EmailVerificationComponent } from './components/pages/email-verification/email-verification.component';
 import { SignupHeaderComponent } from './components/partials/signup-header/signup-header.component';
+import { ShowHidePasswordComponent } from './components/partials/show-hide-password/show-hide-password.component';
+import { IonicModule } from '@ionic/angular';
+import { CateringinformationComponent } from './components/pages/cateringinformation/cateringinformation.component';
 
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -73,7 +76,10 @@ const database = getDatabase(app);
     CatererSignUpComponent,
     PasswordRecoveryComponent,
     EmailVerificationComponent,
-    SignupHeaderComponent
+    SignupHeaderComponent,
+    ShowHidePasswordComponent,
+    CateringinformationComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -81,12 +87,15 @@ const database = getDatabase(app);
     AppRoutingModule,
     ToastrModule.forRoot(),
     FormsModule,
+    ReactiveFormsModule,
 
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
     AngularFireStorageModule,
     AngularFireDatabaseModule,
+    
+    IonicModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

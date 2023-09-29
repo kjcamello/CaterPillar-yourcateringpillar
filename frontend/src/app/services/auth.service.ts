@@ -77,13 +77,17 @@ export class AuthService {
   }
   SignUpCaterer(email: string, password: string) {
     // , businessName: string, contactNumber: string, businessAddress: string
+    // cpassword: string
+
     return this.afAuth
       .createUserWithEmailAndPassword(email, password)
       .then((result) => {
         /* Call the SendVerificaitonMail() function when new user sign 
         up and returns promise */
+        
         this.SendVerificationMail();
-        this.SetUserDataCaterer(result.user);
+        this.CateringInformation();
+        this.SetUserDataCaterer(result.user); 
         // , businessName, contactNumber, businessAddress
       })
       .catch((error) => {
@@ -91,11 +95,31 @@ export class AuthService {
       });
   }
   // Send email verfificaiton when new user sign up
+  CateringInformation(){
+    return this.afAuth.currentUser
+      // .then((u: any) => u.sendEmailVerification())
+      .then(() => {
+        this.router.navigate(['catering-information']);
+      });
+      // .then(() => {
+      //   alert('Email verification has been sent to your email address. Please check your inbox.');
+      // })
+      // .catch((error) => {
+      //   alert('Error sending email verification: ' + error.message);
+      // });
+  }
+
   SendVerificationMail() {
     return this.afAuth.currentUser
       .then((u: any) => u.sendEmailVerification())
+      // .then(() => {
+      //   this.router.navigate(['verify-email-address']);
+      // });
       .then(() => {
-        this.router.navigate(['verify-email-address']);
+        alert('Email verification has been sent to your email address. Please check your inbox.');
+      })
+      .catch((error) => {
+        alert('Error sending email verification: ' + error.message);
       });
   }
   // Reset Forggot password
@@ -159,5 +183,18 @@ export class AuthService {
     });
   }
 
+  saveCateringData(catererUid: string, cateringInfo: any, catererInfo: any): Promise<void> {
+    const catererRef: AngularFirestoreDocument<any> = this.afs.doc(`catererInfo/${catererUid}`);
+    const combinedData = {
+      cateringInfo,
+      catererInfo
+    };
+
+    return catererRef.set(combinedData, { merge: true });
+  }
+
+  getCatererUid(): string | null {
+    return this.catererData ? this.catererData.uid : null;
+}
   
 }

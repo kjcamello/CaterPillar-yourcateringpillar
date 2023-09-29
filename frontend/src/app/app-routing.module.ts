@@ -12,6 +12,7 @@ import { UserVerificationComponent } from './components/pages/email-verification
 
 import { AuthGuard } from './guard/auth.guard';
 import { ForgotPasswordComponent } from './components/pages/forgotpassword/forgotpassword.component';
+import { CateringinformationComponent } from './components/pages/cateringinformation/cateringinformation.component';
 
 const routes: Routes = [
   { path:'', component:HomeComponent },
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/sign-in', pathMatch: 'full' },
   { path: 'sign-in', component: SignInComponent },
   { path: 'register-caterer', component: CatererSignUpComponent },
+  { path: 'catering-information', component: CateringinformationComponent},
   { path: 'dashboard', component: DashboardComponent },
   { path: 'forgot-password', component: PasswordRecoveryComponent },
   { path: 'verify-email-address', component: EmailVerificationComponent },

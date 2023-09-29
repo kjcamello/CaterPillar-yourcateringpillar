@@ -1,0 +1,64 @@
+<app-signup-header>
+    
+</app-signup-header>
+
+
+<div class="displayTable">
+    <div class="displayTableCell">
+        <div class="authBlock">
+            <div class="container">
+                <a class="logo">
+                    <img src="assets/caterpillar logo with shadow and lied.png" alt="Logo">
+                </a>
+            </div>
+            <div class="tabs">
+                <div [ngClass]="{'tab': true, 'active': currentStep === 1}"></div>
+                <div [ngClass]="{'tab': true, 'active': currentStep === 2}"></div>
+            </div>
+
+            <div *ngIf="currentStep === 1" class="form-step">
+                <div class="stepsTitle">Catering Information</div>
+                <div>
+                    Name of the Catering:
+                    <input type="text" placeholder="" [(ngModel)]="cateringInfo.name" required>
+                </div>
+                <div>
+                    Address:
+                    <input type="text" placeholder="" [(ngModel)]="cateringInfo.address "required>
+                </div>
+                <div>
+                    Email:
+                    <input type="text" placeholder="" [(ngModel)]="cateringInfo.email"required>
+                </div>
+                <div>
+                    Contact Number:
+                    <input type="text" placeholder="" [(ngModel)]="cateringInfo.contactNumber" required>
+                </div>
+            </div>
+
+            <div *ngIf="currentStep === 2" class="form-step">
+                <div class="stepsTitle">Caterers Information</div>
+                <div>
+                    Registered Name:
+                    <input type="text" placeholder="" [(ngModel)]="catererInfo.registeredName" required>
+                </div>
+                <div>
+                    Registered Address:
+                    <input type="text" placeholder="" [(ngModel)]="catererInfo.registeredAddress" required>
+                </div>
+                <div>
+                    Do you have a Taxpayer Identification Number(TIN)?
+                    <label>
+                        <input type="radio" name="tinOption" [(ngModel)]="catererInfo.hasTIN" value="Yes"> Yes
+                    </label>
+                    <label>
+                        <input type="radio" name="tinOption" [(ngModel)]="catererInfo.hasTIN" value="No"> No
+                    </label>
+                </div>
+            </div>
+            <button (click)="goToPreviousStep()" *ngIf="currentStep > 1" class="back-button">Back</button>
+            <button (click)="goToNextStep()" *ngIf="currentStep !== 2" class="next-button">Next</button>
+            <button (click)="saveInformation()" *ngIf="currentStep === 2" class="submit-button">Submit</button>
+        </div>
+    </div>
+</div>
