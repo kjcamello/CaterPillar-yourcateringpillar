@@ -134,24 +134,32 @@ Login(email: string, password: string) {
       if (result.user) {
         if (result.user.emailVerified) {
           // User is logged in and email is verified
-          this.afAuth.authState.subscribe((customer) => {
-            if (customer) {
-              this.router.navigate(['/']);
-            }
-          });
+          this.router.navigate(['/']);
         } else {
           // User is logged in but email is not verified
           window.alert('Please verify your email address before logging in.');
         }
-      } else {
-        // User with this email does not exist
-        window.alert('User with this email does not exist.');
-      }
+      } 
     })
     .catch((error) => {
-      window.alert("An error has occured while logging in. User with this email might not exist.");
+      console.error('Login error:', error);
+
+      if (error.code === 'auth/invalid-login-credentials') {
+        // User with this email does not exist
+        window.alert('Incorrect email or password');
+      } else if (error.code === 'auth/invalid-email') {
+        // Invalid email format
+        window.alert('Invalid email address. Please provide a valid email.');
+      } 
+      else if (error.code === 'auth/too-many-requests') {
+        // Invalid email format
+        window.alert('Invalid email address. Please provide a valid email.');}
+      else
+        window.alert(error)
     });
 }
+
+
 
 
 
