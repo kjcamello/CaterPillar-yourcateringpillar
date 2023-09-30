@@ -153,17 +153,13 @@ Login(email: string, password: string) {
       } 
       else if (error.code === 'auth/too-many-requests') {
         // Invalid email format
-        window.alert('Invalid email address. Please provide a valid email.');}
+        window.alert('Account Disabled Temporarily. Too many Login attempts has been made.');}
       else
         window.alert(error)
     });
 }
 
 
-
-
-
-  
   
   // Returns true when user is looged in and email is verified
   get isLoggedIn(): boolean {
