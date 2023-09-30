@@ -92,31 +92,43 @@ export class UserAuthService {
       });
   }
   // Reset Forggot password
-  ForgotPassword(passwordResetEmail: string) {
-    return this.afAuth
-      .sendPasswordResetEmail(passwordResetEmail)
+  ForgotPassword(email: string) {
+    if (!email || email.trim() ==='') {
+        window.alert('Email address is required.');
+        return Promise.reject('Email address is required');
+    }
+  else{
+
+      // Send a password reset email
+      return this.afAuth
+      .sendPasswordResetEmail(email)
       .then(() => {
-        // Email sent successfully, no need for an alert here
+          // Email sent successfully, no need for an alert here
+          window.alert('Password reset email sent, check your inbox.');
+          this.router.navigate(['login']);
       })
       .catch((error) => {
-        // Handle specific Firebase error codes
-        switch (error.code) {
-          case 'auth/user-not-found':
-            window.alert('User not found. Please check your email address.');
-            break;
-          case 'auth/invalid-email':
-            window.alert('Invalid email address. Please provide a valid email.');
-            break;
-          default:
-            window.alert('An error occurred while sending the password reset email.');
-            break;
-        }
-        throw error; // Rethrow the error to maintain the rejection of the promise
-      })
-      .finally(() => {
-        window.alert('Password reset email sent, check your inbox.');
+          if (error.code === 'auth/user-not-found') {
+              // User with this email does not exist
+              window.alert('User with this email does not exist.');
+          } else {
+              // Handle other errors
+              console.error('Error sending password reset email:', error);
+              window.alert('An error occurred while sending the password reset email. User might not be registered yet.');
+          }
+          throw error; // Rethrow the error to maintain the rejection of the promise
       });
-  }
+    }
+  
+}
+
+  
+  
+  
+  
+  
+  
+  
   
   // Returns true when user is looged in and email is verified
   get isLoggedIn(): boolean {
