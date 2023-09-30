@@ -1,11 +1,27 @@
-<app-signup-header></app-signup-header>
-
+<header>
+    <header class="CaterPillar-top CaterPillar-top--sticky">
+        <div class="container">
+           <a  class="logo">
+              <img src="assets/caterpillar logo with shadow.png" alt="Logo">
+              
+           </a>
+           
+           <!-- <div class="Logo_CSUDivider"></div> -->
+           
+        </div >
+        <!-- <div class="CSU_Title">
+            <a routerLink="/register-caterer" class="catererSignUp"></a>
+            
+        </div> -->
+        <!-- Sign Up as Caterer -->
+     </header>
+    </header>
 <div class="dashboard">
   <h1>Welcome, {{ caterer?.catererBasicInfo.catererDisplayName }}</h1>
 
   <div class="info-container">
       <section *ngIf="caterer" class="caterer-info">
-          <h2>Your Details</h2>
+          <h2>Caterer Profile</h2>
           <div><strong>Name:</strong> {{ caterer.catererBasicInfo.catererDisplayName }}</div>
           <div><strong>Email:</strong> {{ caterer.catererBasicInfo.catererEmail }}</div>
           <div><strong>Email Verification:</strong> {{ caterer.catererBasicInfo.catererEmailVerified }}</div>
