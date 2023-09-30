@@ -122,12 +122,39 @@ export class UserAuthService {
   
 }
 
-  
-  
-  
-  
-  
-  
+Login(email: string, password: string) {
+  if (!email || !password) {
+    window.alert('Both email and password are required.');
+    return Promise.reject('Both email and password are required');
+  }
+
+  return this.afAuth
+    .signInWithEmailAndPassword(email, password)
+    .then((result) => {
+      if (result.user) {
+        if (result.user.emailVerified) {
+          // User is logged in and email is verified
+          this.afAuth.authState.subscribe((customer) => {
+            if (customer) {
+              this.router.navigate(['/']);
+            }
+          });
+        } else {
+          // User is logged in but email is not verified
+          window.alert('Please verify your email address before logging in.');
+        }
+      } else {
+        // User with this email does not exist
+        window.alert('User with this email does not exist.');
+      }
+    })
+    .catch((error) => {
+      window.alert("An error has occured while logging in. User with this email might not exist.");
+    });
+}
+
+
+
   
   
   // Returns true when user is looged in and email is verified

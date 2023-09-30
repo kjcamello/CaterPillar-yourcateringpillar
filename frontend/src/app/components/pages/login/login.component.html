@@ -1,17 +1,18 @@
 <div class="wrapper">
-    <div class="logo">
+    <div class="logo" routerLink="/">
         <img src="assets/caterpillar logo with shadow.png" alt="">
     </div>
     <form class="p-3 mt-3">
         <div class="form-field d-flex align-items-center">
             <span class="far fa-user"></span>
-            <input type="text" name="userName" id="userName" placeholder="Username">
+            <input type="text" name="userName" #email placeholder="Email" required autocomplete="on">
         </div>
         <div class="form-field d-flex align-items-center">
             <span class="fas fa-key"></span>
-            <input type="password" name="password" id="pwd" placeholder="Password">
+            <input type="password" name="password" #pwd placeholder="Password"  required autocomplete="on">
         </div>
-        <button type="submit" class="btn mt-3">Login</button>
+        <button type="submit" (click)="userauthservice.Login(email.value,pwd.value)"
+        class="btn mt-3">Login</button>
     </form>
     <div class="signup">
         <a routerLink="/signup">Create an Account</a>
