@@ -40,6 +40,8 @@ import { VerificationCatererComponent } from './components/pages/verification-ca
 import { UserVerificationComponent } from './components/pages/email-verification/user-verification.component';
 import { SignupHeaderComponent } from './components/partials/signup-header/signup-header.component';
 import { CateringinformationComponent } from './components/pages/cateringinformation/cateringinformation.component';
+import { TermsComponent } from './components/pages/terms-privacy/terms.component';
+import { PrivacyComponent } from './components/pages/terms-privacy/privacy.component';
 
 
 
@@ -87,7 +89,9 @@ const database = getDatabase(app);
     EmailVerificationComponent,
     SignupHeaderComponent,
     CateringinformationComponent,
-    UserVerificationComponent
+    UserVerificationComponent,
+    TermsComponent,
+    PrivacyComponent
   ],
   imports: [
     CommonModule,
