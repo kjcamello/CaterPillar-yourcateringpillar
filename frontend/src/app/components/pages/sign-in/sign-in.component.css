@@ -99,11 +99,13 @@
 }
 
 .ColorT{
+    
     color: white;
 }
 
 .ColorT a{
-    color: rgb(255, 240, 22);
+    
+    color: #fff016;
 
 }
 
@@ -111,5 +113,6 @@
     opacity: 0.8;
     cursor: pointer;
 }
+
   
   
