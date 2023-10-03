@@ -57,12 +57,34 @@ export class CateringinformationComponent implements OnInit{
     this.currentStep -= 1;
   }
 
-  goToNextStep() {
-    this.currentStep += 1;
+  goToNextStep(): void {
+    const phoneNumberPattern = /^(09|\+639)\d{9}$/;
+    if (this.currentStep === 1) {
+      if (!this.cateringInfo.cateringName || !this.cateringInfo.cateringAddress || !this.cateringInfo.cateringContactNumber) {
+        alert('Please fill all the fields in Catering Information.');
+        return;
+      }
+      if (!phoneNumberPattern.test(this.cateringInfo.cateringContactNumber)) {
+        alert('Please enter a valid contact number format.');
+        return;
+      }
+      this.currentStep++; // Proceed to next step
+    }
   }
 
   async saveInformation() {
     const caterer = await this.afAuth.currentUser;
+
+    if (!this.catererInfo.catererRegisteredName || !this.catererInfo.catererRegisteredAddress || !this.catererInfo.hasTIN) {
+      alert('Please fill all the fields in Caterers Information.');
+      return;
+    }
+    
+    if (this.catererInfo.hasTIN === 'Yes' && !this.catererInfo.tinFileURL) {
+      alert('Please upload the TIN proof.');
+      return;
+    }
+
     if (caterer) {
         const catererUid = caterer.uid; 
         const catererRef = this.firestore.collection('caterers').doc(catererUid);
