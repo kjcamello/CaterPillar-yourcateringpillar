@@ -40,7 +40,30 @@ export class CatererSignUpComponent implements OnInit{
     this.confirmPasswordVisible = !this.confirmPasswordVisible;
   }
   onSignUpCaterer(): void {
+    if (!this.catererBInfo.catererEmail || !this.catererBInfo.catererPwd || !this.catererBInfo.catererCPassword) {
+      alert('Please fill all the fields.');
+      return;
+    }
+    
+    const emailPattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/; 
+    if (!emailPattern.test(this.catererBInfo.catererEmail)) {
+      alert('Invalid email format.');
+      return;
+    }
+
+    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/; 
+    if (!passwordPattern.test(this.catererBInfo.catererPwd)) {
+      alert('Password must be at least 8 characters and contain at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character.');
+      return;
+    }
+
     if (this.catererBInfo.catererPwd !== this.catererBInfo.catererCPassword) {
+      alert('Password and Confirm Password do not match.');
+      return;
+    }
+
+    if (this.catererBInfo.catererPwd !== this.catererBInfo.catererCPassword) {
+      alert('Passwords do not match');
       console.error('Passwords do not match');
       return;
     }
@@ -99,6 +122,32 @@ export class CatererSignUpComponent implements OnInit{
     email = this.catererBInfo.catererEmail;
     
     return email;
+  }
+
+  errorValidation() {
+    if (this.catererBInfo.catererEmail.value === '' || this.catererBInfo.catererPwd.value === '' ||this.catererBInfo.catererCPassword.value === '') {
+      alert('Please fill all the fields.');
+      return;
+    }
+    
+    const emailPattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/; 
+    if (!emailPattern.test(this.catererBInfo.catererEmail)) {
+      alert('Invalid email format.');
+      return;
+    }
+
+    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/; 
+    if (!passwordPattern.test(this.catererBInfo.catererPwd)) {
+      alert('Password must contain at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character.');
+      return;
+    }
+
+    if (this.catererBInfo.catererPwd !== this.catererBInfo.catererCPassword) {
+      alert('Password and Confirm Password do not match.');
+      return;
+    }
+
+    // If all validations pass, proceed with the signup process.
   }
   
 }
