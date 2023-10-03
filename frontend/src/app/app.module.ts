@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { bootstrapApplication, BrowserModule } from '@angular/platform-browser';
 import { ToastrModule } from 'ngx-toastr';
-import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
+import { FormsModule}   from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
-
+import { ReactiveFormsModule } from '@angular/forms';
 
 // Firebase services + environment module
 import { AngularFireModule } from '@angular/fire/compat';
@@ -42,7 +42,8 @@ import { SignupHeaderComponent } from './components/partials/signup-header/signu
 import { CateringinformationComponent } from './components/pages/cateringinformation/cateringinformation.component';
 import { TermsComponent } from './components/pages/terms-privacy/terms.component';
 import { PrivacyComponent } from './components/pages/terms-privacy/privacy.component';
-
+import { ChangeUserPasswordComponent } from './components/pages/change-user-password/change-user-password.component';
+import { ChangeCatererPasswordComponent } from './components/pages/change-caterer-password/change-caterer-password.component';
 
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -91,7 +92,9 @@ const database = getDatabase(app);
     CateringinformationComponent,
     UserVerificationComponent,
     TermsComponent,
-    PrivacyComponent
+    PrivacyComponent,
+    ChangeUserPasswordComponent,
+    ChangeCatererPasswordComponent
   ],
   imports: [
     CommonModule,
@@ -105,12 +108,13 @@ const database = getDatabase(app);
       progressBar: true
     }),
     FormsModule,
+    ReactiveFormsModule,
     RouterModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
     AngularFireStorageModule,
-    AngularFireDatabaseModule,
+    AngularFireDatabaseModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -17,6 +17,9 @@ import { CateringinformationComponent } from './components/pages/cateringinforma
 import { VerifyComponent } from './components/pages/verify/verify.component';
 import { VerificationCatererComponent } from './components/pages/verification-caterer/verification-caterer.component';
 
+import { ChangeUserPasswordComponent } from './components/pages/change-user-password/change-user-password.component';
+import { ChangeCatererPasswordComponent } from './components/pages/change-caterer-password/change-caterer-password.component';
+
 const routes: Routes = [
   { path:'', component:HomeComponent },
   { path:'search/:searchTerm', component:HomeComponent },
@@ -37,7 +40,9 @@ const routes: Routes = [
   {path: 'verification-caterer', component: VerificationCatererComponent},
   {path: 'verify', component: VerifyComponent},
   {path: 'terms', component: TermsComponent},
-  {path: 'privacy-policy', component: PrivacyComponent}
+  {path: 'privacy-policy', component: PrivacyComponent},
+  {path: 'change-user-password', component: ChangeUserPasswordComponent},
+  {path: 'change-caterer-password', component: ChangeCatererPasswordComponent}
 ];
 
 @NgModule({

@@ -92,43 +92,90 @@ export class UserAuthService {
       });
   }
   // Reset Forggot password
-  ForgotPassword(email: string) {
-    if (!email || email.trim() ==='') {
-        window.alert('Email address is required.');
-        return Promise.reject('Email address is required');
-    }
-  else{
-
-      // Send a password reset email
-      return this.afAuth
-      .sendPasswordResetEmail(email)
-      .then(() => {
-          // Email sent successfully, no need for an alert here
-          window.alert('Password reset email sent, check your inbox.');
-          this.router.navigate(['login']);
+ ForgotPassword(email: string) {
+  if (!email || email.trim() === '') {
+    window.alert('Email address is required.');
+    return Promise.reject('Email address is required');
+  } else {
+    // Check if the user with the provided email exists in Firestore
+    return this.afs
+      .collection('customers', (ref) => ref.where('email', '==', email).limit(1))
+      .get()
+      .toPromise()
+      .then((querySnapshot) => {
+        if (querySnapshot.empty) {
+          // User with this email does not exist
+          return window.alert('User with this email does not exist.');
+        } else {
+          // Send a password reset email
+          return this.afAuth
+            .sendPasswordResetEmail(email)
+            .then(() => {
+              // Email sent successfully, no need for an alert here
+              window.alert('Password reset email sent, check your inbox.');
+              this.router.navigate(['login']);
+            })
+            .catch((error) => {
+              if (error.code === 'auth/invalid-email') {
+                window.alert('Invalid email format.');
+              } else {
+                // Handle other errors
+                console.error('Error sending password reset email:', error);
+                window.alert('An error occurred while sending the password reset email.');
+              }
+              throw error; // Rethrow the error to maintain the rejection of the promise
+            });
+        }
       })
       .catch((error) => {
-          if (error.code === 'auth/user-not-found') {
-              // User with this email does not exist
-              window.alert('User with this email does not exist.');
-          } else {
-              // Handle other errors
-              console.error('Error sending password reset email:', error);
-              window.alert('An error occurred while sending the password reset email. User might not be registered yet.');
-          }
-          throw error; // Rethrow the error to maintain the rejection of the promise
+        // Handle Firestore query error
+        console.error('Error checking email existence in Firestore:', error);
+        window.alert('An error occurred while checking email existence.');
+        throw error;
       });
-    }
-  
+  }
 }
 
   
-  
-  
-  
-  
-  
-  
+
+Login(email: string, password: string) {
+  if (!email || !password) {
+    window.alert('Both email and password are required.');
+    return Promise.reject('Both email and password are required');
+  }
+
+  return this.afAuth
+    .signInWithEmailAndPassword(email, password)
+    .then((result) => {
+      if (result.user) {
+        if (result.user.emailVerified) {
+          // User is logged in and email is verified
+          this.router.navigate(['/']);
+        } else {
+          // User is logged in but email is not verified
+          window.alert('Please verify your email address before logging in.');
+        }
+      } 
+    })
+    .catch((error) => {
+      console.error('Login error:', error);
+
+      if (error.code === 'auth/invalid-login-credentials') {
+        // User with this email does not exist
+        window.alert('Incorrect email or password');
+      } else if (error.code === 'auth/invalid-email') {
+        // Invalid email format
+        window.alert('Invalid email address. Please provide a valid email.');
+      } 
+      else if (error.code === 'auth/too-many-requests') {
+        // Invalid email format
+        window.alert('Account Disabled Temporarily. Too many Login attempts has been made.');}
+      else
+        window.alert(error)
+    });
+}
+
+
   
   // Returns true when user is looged in and email is verified
   get isLoggedIn(): boolean {

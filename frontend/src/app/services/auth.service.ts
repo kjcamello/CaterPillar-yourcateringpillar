@@ -75,16 +75,48 @@ export class AuthService {
       .catch(error => alert('Error sending email verification: ' + error.message));
   }
 
-  // Reset password
-  ForgotPassword(passwordResetEmail: string) {
-    return this.afAuth
-      .sendPasswordResetEmail(passwordResetEmail)
-      .then(() => {
-        window.alert('Password reset email sent, check your inbox.');
-      })
-      .catch((error) => {
-        window.alert(error);
-      });
+  ForgotPassword(email: string) {
+    if (!email || email.trim() === '') {
+      window.alert('Email address is required.');
+      return Promise.reject('Email address is required');
+    } else {
+      // Check if the user with the provided email exists in Firestore
+      return this.afs
+        .collection('caterers', (ref) => ref.where('email', '==', email).limit(1))
+        .get()
+        .toPromise()
+        .then((querySnapshot) => {
+          if (querySnapshot.empty) {
+            // User with this email does not exist
+            return window.alert('User with this email does not exist.');
+          } else {
+            // Send a password reset email
+            return this.afAuth
+              .sendPasswordResetEmail(email)
+              .then(() => {
+                // Email sent successfully, no need for an alert here
+                window.alert('Password reset email sent, check your inbox.');
+                this.router.navigate(['login']);
+              })
+              .catch((error) => {
+                if (error.code === 'auth/invalid-email') {
+                  window.alert('Invalid email format.');
+                } else {
+                  // Handle other errors
+                  console.error('Error sending password reset email:', error);
+                  window.alert('An error occurred while sending the password reset email.');
+                }
+                throw error; // Rethrow the error to maintain the rejection of the promise
+              });
+          }
+        })
+        .catch((error) => {
+          // Handle Firestore query error
+          console.error('Error checking email existence in Firestore:', error);
+          window.alert('An error occurred while checking email existence.');
+          throw error;
+        });
+    }
   }
 
   // Check if Caterer is logged in
