@@ -12,7 +12,15 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      height: 100%;
+      /* height: 100vh; */
+  }
+
+  .displayTableCell{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    /* margin-top: 50px; */
   }
   
   .authBlock {
