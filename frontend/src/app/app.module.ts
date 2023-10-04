@@ -44,6 +44,8 @@ import { TermsComponent } from './components/pages/terms-privacy/terms.component
 import { PrivacyComponent } from './components/pages/terms-privacy/privacy.component';
 import { ChangeUserPasswordComponent } from './components/pages/change-user-password/change-user-password.component';
 import { ChangeCatererPasswordComponent } from './components/pages/change-caterer-password/change-caterer-password.component';
+import { DashboardUserComponent } from './components/pages/dashboard-user/dashboard-user.component';
+import { HeaderUserComponent } from './components/partials/header-user/header-user.component';
 
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -94,7 +96,9 @@ const database = getDatabase(app);
     TermsComponent,
     PrivacyComponent,
     ChangeUserPasswordComponent,
-    ChangeCatererPasswordComponent
+    ChangeCatererPasswordComponent,
+    DashboardUserComponent,
+    HeaderUserComponent
   ],
   imports: [
     CommonModule,

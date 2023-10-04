@@ -5,6 +5,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore, AngularFirestoreDocument, } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { EmailAuthProvider } from 'firebase/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -91,7 +92,7 @@ export class UserAuthService {
         this.router.navigate(['user-verification']);
       });
   }
-  // Reset Forggot password
+  // Reset Forgot password
  ForgotPassword(email: string) {
   if (!email || email.trim() === '') {
     window.alert('Email address is required.');
@@ -136,7 +137,43 @@ export class UserAuthService {
   }
 }
 
-  
+  // Change user password
+  async reauthenticateUser(email: string, oldPassword: string): Promise<void> {
+    try {
+      const user = this.afAuth.currentUser;
+      
+      if (!user) {
+        throw new Error('No authenticated user found.');
+      }
+
+      // Reauthenticate the user with their old password
+      const credential = EmailAuthProvider.credential(
+        email,
+        oldPassword
+      );
+
+      await (await user).reauthenticateWithCredential(credential);
+    } catch (error) {
+      console.error('Error reauthenticating user:', error);
+      throw error;
+    }
+  }
+
+  async changePassword(newPassword: string): Promise<void> {
+    try {
+      const user = this.afAuth.currentUser;
+
+      if (!user) {
+        throw new Error('No authenticated user found.');
+      }
+
+      // Update the user's password with the new password
+      await (await user).updatePassword(newPassword);
+    } catch (error) {
+      console.error('Error changing password:', error);
+      throw error;
+    }
+  }
 
 Login(email: string, password: string) {
   if (!email || !password) {
@@ -150,7 +187,7 @@ Login(email: string, password: string) {
       if (result.user) {
         if (result.user.emailVerified) {
           // User is logged in and email is verified
-          this.router.navigate(['/']);
+          this.router.navigate(['/dashboard-user']);
         } else {
           // User is logged in but email is not verified
           window.alert('Please verify your email address before logging in.');

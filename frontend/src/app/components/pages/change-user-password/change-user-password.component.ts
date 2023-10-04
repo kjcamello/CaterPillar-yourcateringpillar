@@ -1,6 +1,122 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { UserAuthService } from 'src/app/services/userauth.service';
+import { FormsModule,FormControl, Validators,NgForm, ReactiveFormsModule, FormGroupDirective } from '@angular/forms';
+
+@Component({
+  selector: 'app-change-user-password',
+  templateUrl: './change-user-password.component.html',
+  styleUrls: ['./change-user-password.component.css'],
+})
+export class ChangeUserPasswordComponent {
+  oldPassword: string = '';
+  newPassword: string = '';
+  confirmPassword: string = '';
+  email: string | null = null; // Initialize email as null
+  passwordRegex: RegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{6,}$/; // Password regex
+
+  constructor(
+    private userAuthService: UserAuthService,
+    private afAuth: AngularFireAuth
+  ) {
+    // Subscribe to the auth state changes to get the user's email
+    this.afAuth.authState.subscribe((user) => {
+      if (user) {
+        this.email = user.email;
+      }
+    });
+  }
+
+  async changePassword() {
+    try {
+      // Check if the new password and confirm password match
+      if (this.newPassword !== this.confirmPassword) {
+        window.alert('New password and confirm password do not match.');
+        return;
+      }
+
+      // Check if the new password meets complexity requirements
+      if (!this.passwordRegex.test(this.newPassword)) {
+        window.alert(
+          'New password must be at least 6 characters and contain 1 lowercase, 1 uppercase, and 1 special symbol.'
+        );
+        return;
+      }
+
+      if (!this.email) {
+        window.alert('Email address not available.');
+        return;
+      }
+
+      // Reauthenticate the user with their old password
+      await this.userAuthService.reauthenticateUser(this.email, this.oldPassword);
+
+      // Change the user's password to the new password
+      await this.userAuthService.changePassword(this.newPassword);
+
+      window.alert('Password updated successfully.');
+      
+    } catch (error) {
+      console.error('Error changing password:', error);
+      window.alert('Invalid old password.');
+    }
+  }
+}
+
+
+/*import { Component } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { UserAuthService } from 'src/app/services/userauth.service';
+
+@Component({
+  selector: 'app-change-user-password',
+  templateUrl: './change-user-password.component.html',
+  styleUrls: ['./change-user-password.component.css'],
+})
+export class ChangeUserPasswordComponent {
+  oldPassword: string = '';
+  newPassword: string = '';
+  confirmPassword: string = '';
+
+  constructor(
+    private userAuthService: UserAuthService,
+    private afAuth: AngularFireAuth
+  ) {}
+
+  async changePassword() {
+    try {
+      // Check if the new password and confirm password match
+      if (this.newPassword !== this.confirmPassword) {
+        window.alert('New password and confirm password do not match.');
+        return;
+      }
+
+      // Assuming you have the 'email' value available in your component
+      const email = 'ninopatricklopez@gmail.com'; // Replace with the actual email value
+
+      // Reauthenticate the user with their old password
+      await this.userAuthService.reauthenticateUser(email, this.oldPassword);
+
+      // Change the user's password to the new password
+      await this.userAuthService.changePassword(this.newPassword);
+
+      window.alert('Password updated successfully.');
+    } catch (error) {
+      console.error('Error changing password:', error);
+      window.alert('An error occurred while changing the password.');
+    }
+  }
+}
+*/
+
+
+/*import { Component, OnInit } from '@angular/core';
+import { UserAuthService } from 'src/app/services/userauth.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { ToastrService } from 'ngx-toastr';
+import { FormsModule,FormControl, Validators,NgForm, ReactiveFormsModule, FormGroupDirective } from '@angular/forms';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { Router } from '@angular/router';
 
@@ -9,6 +125,15 @@ import { Router } from '@angular/router';
   templateUrl: './change-user-password.component.html',
   styleUrls: ['./change-user-password.component.css']
 })
+
+export class ChangeUserPasswordComponent implements OnInit{
+  email : string = ' ';
+  constructor (
+    public userAuthService: UserAuthService
+    ) { }
+
+  ngOnInit(){}
+
 export class ChangeUserPasswordComponent {
   oldPassword = '';
   newPassword = '';
@@ -69,5 +194,4 @@ export class ChangeUserPasswordComponent {
         this.confirmPasswordType = this.confirmPasswordType === 'password' ? 'text' : 'password';
         break;
     }
-  }
-}
+}*/

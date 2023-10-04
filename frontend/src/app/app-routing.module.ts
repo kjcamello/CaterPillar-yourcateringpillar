@@ -20,6 +20,11 @@ import { VerificationCatererComponent } from './components/pages/verification-ca
 import { ChangeUserPasswordComponent } from './components/pages/change-user-password/change-user-password.component';
 import { ChangeCatererPasswordComponent } from './components/pages/change-caterer-password/change-caterer-password.component';
 
+import { DashboardUserComponent } from './components/pages/dashboard-user/dashboard-user.component';
+
+import { HeaderComponent } from './components/partials/header/header.component';
+import { HeaderUserComponent } from './components/partials/header-user/header-user.component';
+
 const routes: Routes = [
   { path:'', component:HomeComponent },
   { path:'search/:searchTerm', component:HomeComponent },
@@ -33,16 +38,20 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'forgot-password', component: PasswordRecoveryComponent },
   { path: 'verify-email-address', component: EmailVerificationComponent },
-  {path: 'user-verification', component: UserVerificationComponent},
-  {path: 'forgotpassword', component: ForgotPasswordComponent},
-  {path: 'verify', component: VerifyComponent},
-  {path: 'password-recovery', component: PasswordRecoveryComponent},
-  {path: 'verification-caterer', component: VerificationCatererComponent},
-  {path: 'verify', component: VerifyComponent},
-  {path: 'terms', component: TermsComponent},
-  {path: 'privacy-policy', component: PrivacyComponent},
-  {path: 'change-user-password', component: ChangeUserPasswordComponent},
-  {path: 'change-caterer-password', component: ChangeCatererPasswordComponent}
+  { path: 'user-verification', component: UserVerificationComponent},
+  { path: 'forgotpassword', component: ForgotPasswordComponent},
+  { path: 'verify', component: VerifyComponent},
+  { path: 'password-recovery', component: PasswordRecoveryComponent},
+  { path: 'verification-caterer', component: VerificationCatererComponent},
+  { path: 'verify', component: VerifyComponent},
+  { path: 'terms', component: TermsComponent},
+  { path: 'privacy-policy', component: PrivacyComponent},
+  { path: 'change-user-password', component: ChangeUserPasswordComponent},
+  { path: 'change-caterer-password', component: ChangeCatererPasswordComponent},
+  { path: 'dashboard-user', component: DashboardUserComponent },
+  
+  { path: 'header', component: HeaderComponent },
+  { path: 'header-user', component: HeaderUserComponent },
 ];
 
 @NgModule({

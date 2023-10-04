@@ -5,11 +5,11 @@ import { Catering } from 'src/app/shared/models/Catering';
 import { FormsModule,FormControl, Validators,NgForm, ReactiveFormsModule, FormGroupDirective } from '@angular/forms';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: 'app-dashboard-user',
+  templateUrl: './dashboard-user.component.html',
+  styleUrls: ['./dashboard-user.component.css']
 })
-export class HomeComponent implements OnInit {
+export class DashboardUserComponent implements OnInit {
 
   catering:Catering[] = [];
   constructor(private cateringservice:CateringService, activatedRoute:ActivatedRoute){

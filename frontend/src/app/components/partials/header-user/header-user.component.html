@@ -1,0 +1,55 @@
+
+<header class="CaterPillar-top CaterPillar-top--sticky">
+    <div class="navbar-wrapper container-wrapper">
+       <nav class="container1 navbar">
+          <div class="flex centre ca12t14r">
+             <a routerLink="/sign-in" class="ca23t25r ca34t36r">Caterer Centre</a>
+             <a routerLink="/register-caterer" class="flex ca23t25r ca34t36r">Start Catering</a>
+          </div>
+          <div class="navbar_spacer"></div>
+          <ul class="ul1">
+             <li>
+                <a routerLink="/home">Home</a>
+             </li>
+             <li>
+                <a routerLink="/about">About</a>
+             </li>
+             <li>
+                <a routerLink="/contact">Contact</a>
+             </li>
+          </ul>
+       </nav>
+    </div>
+    <div class="container">
+       <a routerLink="/" class="logo">
+          <img src="assets/caterpillar logo with shadow.png" alt="Logo">
+       </a>
+       <div class="tags_searchBar">
+          <div class="searchBar">
+             <input #s type="text" placeholder="Search Catering Pillar" 
+             (keyup.enter)="search(s.value)" 
+             [value]="searchTerm"/>
+             <button (click)="search(s.value)">
+                <img src="assets/Search Icon.png" alt="Search">
+             </button>
+         </div>
+         <!-- <app-tags></app-tags> -->
+       </div>
+      <div class="CaterPillarCart-container">
+       
+          <div class="CaterPillar-menu">
+          
+          </div>
+      </div>
+      <div class="dropdown">
+       <a routerLink="/CaterPillarCart" class="CaterPillarCart">
+          <img src="assets/CaterPillar Cart.png" alt="Cart">
+       </a>
+       <div class="dropdown-content">
+        <a _ngcontent-ng-c1652595639="" routerlink="/user-profile" ng-reflect-router-link="/user-profile" href="/user-profile">My Profile</a>
+          <a _ngcontent-ng-c1652595639="" routerlink="/change-user-password" ng-reflect-router-link="/change-user-password" href="/change-user-password">Change Password</a>
+          <a _ngcontent-ng-c1652595639="" routerlink="/" ng-reflect-router-link="/" href="/">Log Out</a>
+       </div>
+     </div>
+    </div>
+ </header>
