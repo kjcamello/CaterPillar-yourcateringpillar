@@ -1,5 +1,8 @@
+// header-user.component.ts
+
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-header-user',
@@ -7,21 +10,26 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./header-user.component.css']
 })
 export class HeaderUserComponent implements OnInit {
-
   searchTerm = '';
-  constructor(activatedRoute:ActivatedRoute, private router:Router){
-    activatedRoute.params.subscribe((params) =>{
-      if(params.searchTerm) this.searchTerm = params.searchTerm;
+  loggedInUsername: string | null;
 
-    }); 
-    }
+  constructor(
+    activatedRoute: ActivatedRoute,
+    private router: Router,
+    private authService: AuthService
+  ) {
+    activatedRoute.params.subscribe((params) => {
+      if (params.searchTerm) this.searchTerm = params.searchTerm;
+    });
 
-  ngOnInit(): void {
-      
+    // Fetch the logged-in user's username
+    this.loggedInUsername = authService.getLoggedInUsername();
   }
 
-  search(term:string):void{
-    if(term)
-    this.router.navigateByUrl('/search/' + term)
+  ngOnInit(): void {
+  }
+
+  search(term: string): void {
+    if (term) this.router.navigateByUrl('/search/' + term);
   }
 }

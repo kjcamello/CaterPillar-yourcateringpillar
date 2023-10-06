@@ -20,9 +20,9 @@ export class ChangeCatererPasswordComponent {
     private afAuth: AngularFireAuth
   ) {
     // Subscribe to the auth state changes to get the user's email
-    this.afAuth.authState.subscribe((user) => {
-      if (user) {
-        this.email = user.email;
+    this.afAuth.authState.subscribe((caterer) => {
+      if (caterer) {
+        this.email = caterer.email;
       }
     });
   }

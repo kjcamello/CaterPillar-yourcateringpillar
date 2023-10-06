@@ -1,10 +1,27 @@
 <header>
     <header class="CaterPillar-top CaterPillar-top--sticky">
         <div class="container">
+            <div class="navbar_spacer"></div>
+          <ul class="ul1">
+             <li>
+                <a routerLink="/package-menu">Create Package Menu</a>
+             </li>
+             <li>
+                <a routerLink="/DIY-package">Create DIY Package</a>
+             </li>
+          </ul>
            <a  class="logo">
               <img src="assets/caterpillar logo with shadow.png" alt="Logo">
               
            </a>
+           <div class="dropdown">
+            <a routerLink="/CaterPillarCart" class="CaterPillarCart">
+               <img src="assets/CaterPillar Cart.png" alt="Cart">
+            </a>
+            <div class="dropdown-content">
+               <a _ngcontent-ng-c1652595639="" routerlink="/change-caterer-password" ng-reflect-router-link="/change-caterer-password" href="/change-caterer-password">Change Password (Temporary Location)</a>
+            </div>
+          </div> 
            
            <!-- <div class="Logo_CSUDivider"></div> -->
            
@@ -51,15 +68,6 @@
     
     </div>
   </div>
-  
-  <div class="dropdown">
-    <a routerLink="/CaterPillarCart" class="CaterPillarCart">
-       <img src="assets/CaterPillar Cart.png" alt="Cart">
-    </a>
-    <div class="dropdown-content">
-       <a _ngcontent-ng-c1652595639="" routerlink="/change-caterer-password" ng-reflect-router-link="/change-caterer-password" href="/change-caterer-password">Change Password</a>
-    </div>
-  </div> 
 
   <div class="logout-container">
       <button (click)="logout()">Logout</button>

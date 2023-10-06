@@ -44,6 +44,11 @@ export class AuthService {
       .catch(error => window.alert(error.message));
   }
 
+  getLoggedInUsername(): string | null {
+    const user = JSON.parse(localStorage.getItem('caterer') || '{}');
+    return user ? user.email : null;
+  }
+
   // SignUp Caterer with email and password and save extra data
   SignUpCaterer(catererData: any, email: string, password: string) {
     return this.afAuth.createUserWithEmailAndPassword(email, password)
@@ -156,13 +161,13 @@ export class AuthService {
     return this.afAuth.signInWithEmailAndPassword(email, password)
       .then(result => {
         console.log('User logged in successfully');
-        this.router.navigate(['/dashboard']);  // Navigate to user's dashboard or some other page
+        this.router.navigate(['/dashboard-user']);  // Navigate to user's dashboard or some other page
       })
       .catch(error => {
         console.error('Error during sign-in:', error);
         alert('Login failed: ' + error.message);
       });
   }
-  
-  
 }
+
+
