@@ -46,6 +46,7 @@ import { ChangeUserPasswordComponent } from './components/pages/change-user-pass
 import { ChangeCatererPasswordComponent } from './components/pages/change-caterer-password/change-caterer-password.component';
 import { DashboardUserComponent } from './components/pages/dashboard-user/dashboard-user.component';
 import { HeaderUserComponent } from './components/partials/header-user/header-user.component';
+import { PackageMenuComponent } from './components/pages/package-menu/package-menu.component';
 
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -98,7 +99,8 @@ const database = getDatabase(app);
     ChangeUserPasswordComponent,
     ChangeCatererPasswordComponent,
     DashboardUserComponent,
-    HeaderUserComponent
+    HeaderUserComponent,
+    PackageMenuComponent
   ],
   imports: [
     CommonModule,

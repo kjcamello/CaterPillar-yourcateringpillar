@@ -16,6 +16,7 @@ import { ForgotPasswordComponent } from './components/pages/forgotpassword/forgo
 import { CateringinformationComponent } from './components/pages/cateringinformation/cateringinformation.component';
 import { VerifyComponent } from './components/pages/verify/verify.component';
 import { VerificationCatererComponent } from './components/pages/verification-caterer/verification-caterer.component';
+// import { PackageMenuComponent } from/
 
 import { ChangeUserPasswordComponent } from './components/pages/change-user-password/change-user-password.component';
 import { ChangeCatererPasswordComponent } from './components/pages/change-caterer-password/change-caterer-password.component';
@@ -24,6 +25,7 @@ import { DashboardUserComponent } from './components/pages/dashboard-user/dashbo
 
 import { HeaderComponent } from './components/partials/header/header.component';
 import { HeaderUserComponent } from './components/partials/header-user/header-user.component';
+import { PackageMenuComponent } from './components/pages/package-menu/package-menu.component';
 
 const routes: Routes = [
   { path:'', component:HomeComponent },
@@ -49,6 +51,7 @@ const routes: Routes = [
   { path: 'change-user-password', component: ChangeUserPasswordComponent},
   { path: 'change-caterer-password', component: ChangeCatererPasswordComponent},
   { path: 'dashboard-user', component: DashboardUserComponent },
+  { path: 'package-menu', component: PackageMenuComponent},
   
   { path: 'header', component: HeaderComponent },
   { path: 'header-user', component: HeaderUserComponent },
