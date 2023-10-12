@@ -26,6 +26,10 @@ import { DashboardUserComponent } from './components/pages/dashboard-user/dashbo
 import { HeaderComponent } from './components/partials/header/header.component';
 import { HeaderUserComponent } from './components/partials/header-user/header-user.component';
 import { PackageMenuComponent } from './components/pages/package-menu/package-menu.component';
+import { SuperadminComponent } from './components/pages/superadmin/superadmin.component';
+import { LoginSuperadminComponent } from './components/pages/superadmin/login-superadmin.component';
+import { AdminAuthService } from './services/adminauth.service';
+import { AdminForgotPasswordComponent } from './components/pages/superadmin/forgotpass.component';
 
 const routes: Routes = [
   { path:'', component:HomeComponent },
@@ -55,6 +59,9 @@ const routes: Routes = [
   
   { path: 'header', component: HeaderComponent },
   { path: 'header-user', component: HeaderUserComponent },
+  { path: 'superadmin', component: SuperadminComponent},
+  { path: 'login-superadmin', component: LoginSuperadminComponent},
+  { path: 'admin-forgotpass', component: AdminForgotPasswordComponent},
 ];
 
 @NgModule({

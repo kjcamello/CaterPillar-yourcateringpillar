@@ -1,0 +1,11 @@
+<div class="login-container">
+    <a routerLink="/">
+      <img src="assets/caterpillar logo with shadow and lied.png" alt="Logo" />
+    </a>
+    <h2>Forgot Password</h2>
+    <form (ngSubmit)="adminauthservice.forgotPassword(email.value)">
+      <input type="email" id="email" #email required autocomplete="on" placeholder="Email" />
+      <button type="submit">Reset Password</button>
+    </form>
+  </div>
+  

@@ -1,0 +1,53 @@
+.login-container {
+    width: 100%;
+    max-width: 400px;
+    margin: 50px auto 0;
+    padding: 20px;
+    background-color: #FF0000; /* Red background color */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+  }
+  
+  .login-container img {
+    max-width: 100%;
+    height: auto;
+    cursor: pointer;
+  }
+  
+  h2 {
+    color: #FFD700; /* Gold/Yellow color for the header */
+    font-size: 24px;
+    margin-top: 20px;
+  }
+  
+  form {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  input[type="email"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  button[type="submit"] {
+    background-color: #FFD700; /* Gold/Yellow background color for buttons */
+    color: #FF0000; /* Red text color for buttons */
+    padding: 10px;
+    border: none;
+    margin: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #FFA500; /* Darker gold on hover */
+  }
+  

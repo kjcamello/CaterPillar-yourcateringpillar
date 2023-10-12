@@ -102,6 +102,7 @@ export class AuthService {
                 // Email sent successfully, no need for an alert here
                 window.alert('Password reset email sent, check your inbox.');
                 this.router.navigate(['login']);
+                this.completeAppFlow();
               })
               .catch((error) => {
                 if (error.code === 'auth/invalid-email') {
@@ -161,13 +162,26 @@ export class AuthService {
     return this.afAuth.signInWithEmailAndPassword(email, password)
       .then(result => {
         console.log('User logged in successfully');
-        this.router.navigate(['/dashboard-user']);  // Navigate to user's dashboard or some other page
+        this.router.navigate(['/dashboard-user']);  
+        this.completeAppFlow();// Navigate to user's dashboard or some other page
       })
       .catch(error => {
         console.error('Error during sign-in:', error);
         alert('Login failed: ' + error.message);
       });
   }
+
+    // Simulated property to track if the user has followed the app flow
+    private hasFollowedFlow: boolean = false;
+
+    hasFollowedAppFlow(): boolean {
+      return this.hasFollowedFlow;
+    }
+  
+    // Set this property when the user completes a specific action or flow in your app
+    completeAppFlow() {
+      this.hasFollowedFlow = true;
+    }
 }
 
 

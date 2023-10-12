@@ -1,0 +1,16 @@
+<div class="login-container">
+  <a routerLink="/"> <!-- Make the logo clickable to return to the homepage -->
+    <img src="assets/caterpillar logo with shadow and lied.png" alt="Logo">
+  </a>
+  <h2>Admin Login</h2>
+  <form (ngSubmit)="adminauthservice.login(email.value, password.value)">
+    <input type="email" id="email" #email required autocomplete="on" placeholder="Email">
+    <input type="password" id="password" #password required autocomplete="on" placeholder="Password">
+    <button type="submit">Login</button>
+  </form>
+  <div class="forgot-password">
+    <a href="/admin-forgotpass">Forgot Password?</a>
+  </div>
+</div>
+
+  
