@@ -1,2 +1,76 @@
-<app-signup-header></app-signup-header>
 
+<div class="container-fluid g-0">
+
+    <!-- HEADER -->
+    <app-signup-header></app-signup-header>
+
+    <!-- MAIN CONTENT -->
+    <main>
+        <!-- Toolbar to add and search employee -->
+        <div class="toolbar">
+            <div class="add-packageMenu">
+                <button type="button" class="button">
+                    <span class="button__text">Add Item</span>
+                    <span class="button__icon"><svg xmlns="http://www.w3.org/2000/svg" 
+                        width="24" 
+                        viewBox="0 0 24 24" 
+                        stroke-width="2" 
+                        stroke-linejoin="round" 
+                        stroke-linecap="round" 
+                        stroke="currentColor" 
+                        height="24" 
+                        fill="none" 
+                        class="svg"><line y2="19" y1="5" x2="12" x1="12"></line><line y2="12" y1="12" x2="19" x1="5"></line></svg></span>
+                  </button>
+            </div>
+
+            <div class="search-packageMenu">
+                <div class="inputBox_container">
+                    <svg class="search_icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" alt="search icon">
+                      <path d="M46.599 46.599a4.498 4.498 0 0 1-6.363 0l-7.941-7.941C29.028 40.749 25.167 42 21 42 9.402 42 0 32.598 0 21S9.402 0 21 0s21 9.402 21 21c0 4.167-1.251 8.028-3.342 11.295l7.941 7.941a4.498 4.498 0 0 1 0 6.363zM21 6C12.717 6 6 12.714 6 21s6.717 15 15 15c8.286 0 15-6.714 15-15S29.286 6 21 6z">
+                      </path>
+                    </svg>
+                    <input class="inputBox" id="inputBox" type="text" placeholder="Search For Products">
+                  </div>
+            </div>
+        </div>
+
+        <!-- Display Package Menu -->
+        <div class="packageMenu">
+            
+            <div class="row mt-5">
+                <div class="col text-center">
+                    <span class="text-secondary fs-2 fw-bold fst-italic">There are no Packages Added!</span>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+</div>
+
+<!-- MODAL -->
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Launch demo modal
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
