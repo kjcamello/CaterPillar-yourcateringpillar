@@ -70,7 +70,7 @@ export class UserAuthService {
           // Call the SendVerificationMail() function when a new user signs up and returns a promise
           this.SendVerificationMail();
           // Set user data in Firestore
-          this.SetUserData(result.user, userName, address, phone);
+          this.SetUserData(result.user, userName, address, phone,"Normal");
         }
       })
       .catch((error) => {
@@ -222,7 +222,7 @@ Login(email: string, password: string) {
   /* Setting up user data when sign in with username/password, 
   sign up with username/password and sign in with social auth  
   provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
-  SetUserData(customer: any, userName: string, address:string, phone:bigint) {
+  SetUserData(customer: any, userName: string, address:string, phone:bigint, status:string) {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(
       `customers/${customer.uid}`
     );
@@ -232,6 +232,7 @@ Login(email: string, password: string) {
       email: customer.email,
       address: address,
       phone: phone,
+      status: status,
     };
     return userRef.set(userData, {
       merge: true,

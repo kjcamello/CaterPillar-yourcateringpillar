@@ -4,5 +4,6 @@ export interface Customer{
     email: string;
     address?:string;
     phone?: bigint;
+    status: string;
    
 }

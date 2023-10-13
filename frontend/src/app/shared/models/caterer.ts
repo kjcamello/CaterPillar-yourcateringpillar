@@ -4,5 +4,6 @@ export interface Caterer {
     catererEmail: string;
     catererEmailVerified: boolean;
     catererPhotoURL?: string;
+    status: string;
 }
 
