@@ -54,6 +54,7 @@ export class AdminAuthService {
 
    // "Forgot Password" function
    forgotPassword(email: string): void {
+    
     this.afAuth
       .sendPasswordResetEmail(email)
       .then(() => {
@@ -65,7 +66,7 @@ export class AdminAuthService {
       .catch((error) => {
         // Handle password reset errors and display window alert
         this.ngZone.run(() => {
-          window.alert('Password reset error: ' + error.message);
+          window.alert('User with this email does not exist.');
         });
       });
   }
