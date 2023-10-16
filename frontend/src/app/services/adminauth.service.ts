@@ -69,7 +69,7 @@ export class AdminAuthService {
           window.alert('Please input a valid email address to proceed.');
         });
       })
-        
+      
   }
 }
 
