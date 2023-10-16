@@ -1,9 +1,15 @@
 import { Injectable, NgZone } from '@angular/core';
 import { Caterer } from 'src/app/shared/models/caterer';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
+import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
+
+import { FoodItem } from 'src/app/shared/models/food-item'; //Lopez
+import { Observable } from 'rxjs'; //Lopez
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+
+
 
 
 @Injectable({
@@ -14,6 +20,10 @@ export class AuthService {
 
   private emailSource = new BehaviorSubject<string>('default@email.com');
   currentEmail = this.emailSource.asObservable();
+
+  //private foodItems: FoodItem[] = [];
+
+  private foodItemsCollection: AngularFirestoreCollection<FoodItem>; //lopez sprint 2
 
   constructor(
     private afs: AngularFirestore,
@@ -30,6 +40,8 @@ export class AuthService {
         localStorage.removeItem('caterer');
       }
     });
+
+    this.foodItemsCollection = afs.collection<FoodItem>('foodItems'); //lopez sprint 2
   }
   setEmail(email: string) {
     this.emailSource.next(email);
@@ -182,6 +194,70 @@ export class AuthService {
     completeAppFlow() {
       this.hasFollowedFlow = true;
     }
+
+//Lopez's sprint 2 codes
+
+/*getFoodItems() {
+  return this.afs.collection('foodItems').valueChanges() as Observable<FoodItem[]>;
+}*/
+
+/*addFoodItem(foodItem: FoodItem) {
+  this.foodItems.push(foodItem);
+}*/
+
+/*getFoodItems(): FoodItem[] {
+  return this.foodItems;
+}*/
+
+//food item service
+getFoodItems(): Observable<FoodItem[]> {
+  return this.foodItemsCollection.valueChanges();
+}
+
+saveFoodItem(foodItem: FoodItem): Promise<void> {
+  const id = this.afs.createId();
+  const foodItemWithID = { ...foodItem, id };
+  
+  return this.foodItemsCollection
+    .doc(id)
+    .set(foodItemWithID)
+    .then(() => {
+      console.log('Food item saved successfully:', id, foodItemWithID);
+    })
+    .catch((error) => {
+      console.error('Error saving food item:', error);
+      throw new Error('Error saving food item');
+    });
+}  
+
+//image upload service
+uploadImage(file: File): Promise<string> {
+  return new Promise<string>((resolve, reject) => {
+    // Implement image upload logic here, e.g., using a cloud storage service
+    // Resolve with the URL of the uploaded image upon success
+    // Reject with an error message if the upload fails
+  });
+}
+
+isImageFileValid(file: File): boolean {
+  // Check if the file type is valid (e.g., .jpg, .png)
+  const allowedTypes = ['image/jpeg', 'image/png'];
+  return allowedTypes.includes(file.type);
+}
+
+//validation service
+validateFields(foodItem: any): string | null {
+  if (!foodItem.food_name || !foodItem.food_description || !foodItem.minimum_pax || !foodItem.pax_price) {
+    return 'Please fill in all fields.';
+  }
+
+  if (foodItem.minimum_pax <= 5) {
+    return 'Minimum Pax value must be greater than 5.';
+  }
+
+  return null;
+}
+
 }
 
 

@@ -50,6 +50,13 @@ import { PackageMenuComponent } from './components/pages/package-menu/package-me
 import { SuperadminComponent } from './components/pages/superadmin/superadmin.component';
 import { LoginSuperadminComponent } from './components/pages/superadmin/login-superadmin.component';
 import { AdminForgotPasswordComponent } from './components/pages/superadmin/forgotpass.component';
+import { DiyPackageComponent } from './components/pages/catering/diy-package/diy-package.component';
+import { FoodItemComponent } from './components/pages/catering/food-item/food-item.component';
+
+import { HttpClientModule } from '@angular/common/http';
+import { TempCatererProfComponent } from './components/pages/temp-caterer-prof/temp-caterer-prof.component';
+import { UserDiySelectionComponent } from './components/pages/user-selection/user-diy-selection/user-diy-selection.component';
+import { UserPackageSelectionComponent } from './components/pages/user-selection/user-package-selection/user-package-selection.component';
 
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -106,7 +113,12 @@ const database = getDatabase(app);
     PackageMenuComponent,
     SuperadminComponent,
     LoginSuperadminComponent,
-    AdminForgotPasswordComponent
+    AdminForgotPasswordComponent,
+    DiyPackageComponent,
+    FoodItemComponent,
+    TempCatererProfComponent,
+    UserDiySelectionComponent,
+    UserPackageSelectionComponent
 
   ],
   imports: [
@@ -127,7 +139,8 @@ const database = getDatabase(app);
     AngularFireAuthModule,
     AngularFirestoreModule,
     AngularFireStorageModule,
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule, 
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

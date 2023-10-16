@@ -1,0 +1,233 @@
+ul {
+    display: flex;
+    flex-wrap: wrap;
+    list-style-type: none;
+    justify-content: space-between; /* Add this to display 3 boxes per row */
+    padding: 0;
+    gap: 20px; /* Adjust the gap as needed between containers */
+  }
+  
+  li {
+    height: 25rem;
+    width: calc(33.33% - 20px); /* Adjust the width as needed with a gap */
+    border: 1px solid rgb(161, 23, 23);
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    color: #9a0000;
+    position: relative;
+    background-position: top center; /* Position the background image at the top center */
+    background-repeat: no-repeat;
+    background-size: cover; /* Ensure the image covers the container */
+  }
+  
+  .price-tag {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 5px;
+    font-size: 14px;
+    border-radius: 5px;
+  }
+
+  .min-pax {
+    position: absolute;
+    bottom: 10px; /* Adjust the distance from the bottom as needed */
+    right: 10px; /* Adjust the distance from the right as needed */
+    background-color: rgba(0, 0, 0, 0.7); /* Add background color for better visibility */
+    color: white; /* Set the text color */
+    padding: 5px; /* Add some padding for spacing */
+    border-radius: 5px; /* Add rounded corners */
+  }
+  
+
+
+  
+  li:hover {
+    opacity: 0.7;
+    cursor: pointer;
+  }
+  
+  li a img {
+    display: none; /* Hide the actual image */
+  }
+
+  .custom-image {
+    object-fit: cover; /* Ensure the image covers the container */
+    width: 100%; /* Take full width of the container */
+    height: 160px; /* Adjust the height as needed */
+    background-position: top center 10px; /* Position the background image slightly lower (adjust the 10px value as needed) */
+    background-repeat: no-repeat;
+    display: block; /* Display the image */
+  }
+
+  /* Add a background color to highlight the container when checked */
+.highlighted-container {
+    background-color: rgba(255, 255, 0, 0.2); /* Transparent yellow background */
+  }
+  
+  
+  
+  
+  
+  .diy-header {
+    text-align: center;
+  }
+  
+  .food-items-header {
+    text-align: center;
+  }
+  
+/* Hide the checkbox input and set the cursor style for the container */
+.hidden-checkbox {
+    position: absolute;
+    opacity: 0;
+  }
+  
+  .food-item {
+    cursor: pointer; /* Change the cursor style to indicate clickability */
+  }
+  
+  /* Add a background color to highlight the container when checked */
+  .highlighted-container {
+    background-color: rgba(255, 255, 0); /* Transparent yellow background */
+  }
+  
+ /* .disabled {
+  opacity: 0.5;  Or any other styling to indicate a disabled state 
+  pointer-events: none;  Prevent interactions with the disabled element 
+} */
+
+/* CSS */
+.disabled-input {
+    cursor: not-allowed;
+    background-color: lightgray;
+  }
+  
+
+  /* Styles for the opaque background */
+.ereceipt-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black */
+    z-index: 2; /* Ensure it's above other elements */
+  }
+  
+  /* Styles for the e-receipt content */
+  .ereceipt-content {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    z-index: 3; /* Ensure it's above the opaque background */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Optional: Add a shadow for the form */
+    border-radius: 5px;
+    max-width: 80%;
+  }
+  
+  /* Center align text in the e-receipt */
+  .ereceipt-content h3,
+  .ereceipt-content ul {
+    text-align: center;
+  }
+  
+/* Styles for the "Review Order" button */
+.review-order-button {
+    position: fixed; /* Fixed position to keep it at the bottom-right */
+    bottom: 20px; /* Adjust as needed for vertical positioning */
+    right: 20px; /* Adjust as needed for horizontal positioning */
+    z-index: 4;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  
+  /* Style the e-receipt form elements as needed */
+/* Style the e-receipt items and their details */
+.receipt-items {
+    margin-top: 20px;
+  }
+  
+  .receipt-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  
+  .item-details {
+    flex: 1;
+  }
+  
+  .food-name {
+    font-weight: bold;
+  }
+  
+  /* Style the grand total */
+  .total-section {
+    margin-top: 20px;
+    text-align: right;
+  }
+  
+  .grand-total {
+    font-weight: bold;
+    font-size: 18px;
+  }
+  
+
+  /* Style the e-receipt table */
+.receipt-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: none;
+    margin-top: 10px;
+  }
+  
+  .receipt-table th {
+    background-color: white;
+    font-weight: bold;
+    text-align: left;
+    padding: 10px;
+    border: none;
+  }
+  
+  .receipt-table td {
+    padding: 10px;
+    border: none;
+  }
+  
+  /* Right-align the total price values in the table */
+  .receipt-table .right-align {
+    text-align: right;
+  }
+  
+  /* Style the grand total section */
+  .total-section {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: right;
+  }
+  
+  .grand-total-label {
+    font-weight: bold;
+    font-size: 18px;
+  }
+  
+  .grand-total-value {
+    font-weight: bold;
+    font-size: 18px;
+  }
+  

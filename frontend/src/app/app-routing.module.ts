@@ -31,6 +31,12 @@ import { LoginSuperadminComponent } from './components/pages/superadmin/login-su
 import { AdminAuthService } from './services/adminauth.service';
 import { AdminForgotPasswordComponent } from './components/pages/superadmin/forgotpass.component';
 
+import { DiyPackageComponent } from './components/pages/catering/diy-package/diy-package.component';
+import { TempCatererProfComponent } from './components/pages/temp-caterer-prof/temp-caterer-prof.component'; //temporary
+
+import { UserPackageSelectionComponent } from './components/pages/user-selection/user-package-selection/user-package-selection.component';
+import { UserDiySelectionComponent } from './components/pages/user-selection/user-diy-selection/user-diy-selection.component'; //temporary
+
 const routes: Routes = [
   { path:'', component:HomeComponent },
   { path:'search/:searchTerm', component:HomeComponent },
@@ -62,6 +68,17 @@ const routes: Routes = [
   { path: 'superadmin', component: SuperadminComponent},
   { path: 'login-superadmin', component: LoginSuperadminComponent},
   { path: 'admin-forgotpass', component: AdminForgotPasswordComponent},
+
+  { path: 'diy-package', component: DiyPackageComponent},
+
+  { path: 'dashboard-user', component: DashboardUserComponent },
+  { path: 'caterer-profile/:catererId', component: TempCatererProfComponent }, //temporary profile ra ni for the meantime (Lopez)
+  { path: 'caterer-profile/:catererId/diy-package/:packageId', component: DiyPackageComponent },
+
+  { path: 'user-package-selection', component: UserPackageSelectionComponent },
+  { path: 'user-diy-selection', component: UserDiySelectionComponent }
+
+    // ...other routes
 ];
 
 @NgModule({
