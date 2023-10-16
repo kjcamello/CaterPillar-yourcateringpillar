@@ -1,38 +1,48 @@
 <app-header-user></app-header-user>
 <app-search></app-search>
 
-<ul>
-    <li *ngFor="let caterings of catering">
-        <a routerLink="/caterings/{{caterings.id}}">
-            <img [src]="caterings.imageUrl" alt="caterings.name"/>
-        <div class="content">
-            {{caterings.name}}
-        </div>
-        <span class="favorite {{caterings.favorite?'':'not'}}">
-            ❤
-        </span>
-        <div class="stars">
-            <app-star-rating [stars]="caterings.stars"></app-star-rating>
-        </div>
-        <div>
-            <div class="catering_service-item-footer">
-                <div class="origins">
-                    <span *ngFor="let origin of caterings.origins">
-                        {{origin}}
-                    </span>
-                </div>
-    
-                <div class="location">
-                    <span>📍</span>
-                    {{caterings.location}}
-                </div>
-            </div>
-            <div class="cateringPacks">
-                <span *ngFor="let cateringPacks of caterings.cateringPacks">
-                    {{cateringPacks}}
-                </span>
-            </div>
-        </div>
-        </a>
+<section *ngIf="foodItems && foodItems.length > 0" class="food-items-list">
+  <h2>Food Items</h2>
+  <ul>
+    <li *ngFor="let foodItem of foodItems">
+      {{ foodItem.food_name }} - {{ foodItem.pax_price }}
+      <!-- Add more fields as needed -->
     </li>
+  </ul>
+</section>
+
+<ul>
+  <li *ngFor="let caterings of catering">
+    <a routerLink="/caterings/{{caterings.id}}">
+      <img [src]="caterings.imageUrl" alt="caterings.name" />
+      <div class="content">
+        {{caterings.name}}
+      </div>
+      <span class="favorite {{caterings.favorite ? '' : 'not'}}">
+        ❤
+      </span>
+      <div class="stars">
+        <app-star-rating [stars]="caterings.stars"></app-star-rating>
+      </div>
+      <div>
+        <div class="catering_service-item-footer">
+          <div class="origins">
+            <span *ngFor="let origin of caterings.origins">
+              {{origin}}
+            </span>
+          </div>
+
+          <div class="location">
+            <span>📍</span>
+            {{caterings.location}}
+          </div>
+        </div>
+        <div class="cateringPacks">
+          <span *ngFor="let cateringPacks of caterings.cateringPacks">
+            {{cateringPacks}}
+          </span>
+        </div>
+      </div>
+    </a>
+  </li>
 </ul>

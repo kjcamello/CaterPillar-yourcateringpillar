@@ -1,0 +1,12 @@
+<div class="diy-package">
+    <h1>Create DIY Package</h1>
+    <button (click)="toggleFoodItemForm()">Add Food Item</button>
+
+    <app-food-item *ngFor="let foodItem of foodItems" [foodItem]="foodItem" (saveFood)="saveFoodItem($event)"></app-food-item>
+
+    <div *ngIf="showFoodItemForm">
+        <app-food-item [foodItem]="newFoodItem" (saveFood)="saveFoodItem($event)"></app-food-item>
+    </div>
+
+    <!-- Other content for DIY package -->
+</div>

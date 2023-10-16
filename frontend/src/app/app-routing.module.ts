@@ -31,6 +31,8 @@ import { LoginSuperadminComponent } from './components/pages/superadmin/login-su
 import { AdminAuthService } from './services/adminauth.service';
 import { AdminForgotPasswordComponent } from './components/pages/superadmin/forgotpass.component';
 
+import { DiyPackageComponent } from './components/pages/catering/diy-package/diy-package.component';
+
 const routes: Routes = [
   { path:'', component:HomeComponent },
   { path:'search/:searchTerm', component:HomeComponent },
@@ -62,6 +64,8 @@ const routes: Routes = [
   { path: 'superadmin', component: SuperadminComponent},
   { path: 'login-superadmin', component: LoginSuperadminComponent},
   { path: 'admin-forgotpass', component: AdminForgotPasswordComponent},
+
+  { path: 'diy-package', component: DiyPackageComponent}
 ];
 
 @NgModule({
