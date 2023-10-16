@@ -1,20 +1,11 @@
 <app-header-user></app-header-user>
 <app-search></app-search>
 
-<section *ngIf="foodItems && foodItems.length > 0" class="food-items-list">
-  <h2>Food Items</h2>
-  <ul>
-    <li *ngFor="let foodItem of foodItems">
-      {{ foodItem.food_name }} - {{ foodItem.pax_price }}
-      <!-- Add more fields as needed -->
-    </li>
-  </ul>
-</section>
-
+<!-- Display the catering information -->
 <ul>
   <li *ngFor="let caterings of catering">
     <a routerLink="/caterings/{{caterings.id}}">
-      <img [src]="caterings.imageUrl" alt="caterings.name" />
+      <img [src]="caterings.imageUrl" alt="{{caterings.name}}" />
       <div class="content">
         {{caterings.name}}
       </div>
@@ -45,4 +36,22 @@
       </div>
     </a>
   </li>
+</ul>
+
+<!-- Display the food items -->
+<ul>
+  <li *ngFor="let foodItem of foodItems | async">
+    <a routerLink="/temp-caterer-prof">
+      <h2>{{ foodItem.food_name }}</h2>
+      <p>{{ foodItem.food_description }}</p>
+      <p>Minimum Pax: {{ foodItem.minimum_pax }}</p>
+      <p>Pax Price: {{ foodItem.pax_price }}</p>
+      <img [src]="foodItem.food_image" alt="{{ foodItem.food_name }}" *ngIf="foodItem.food_image">View Caterer Profile
+      <div class="button-container">
+        <a routerLink="/user-package-selection" class="left-button">Fixed Package</a>
+        <a routerLink="/user-diy-selection" class="right-button">D-I-Y Package</a>
+      </div>
+    </a>
+  </li>
+
 </ul>

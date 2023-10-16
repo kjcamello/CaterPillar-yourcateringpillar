@@ -3,12 +3,10 @@ import { ActivatedRoute } from '@angular/router';
 import { CateringService } from 'src/app/services/catering.service';
 import { Catering } from 'src/app/shared/models/Catering';
 import { FoodItem } from 'src/app/shared/models/food-item';
-//import { CatererFoodItemsService } from 'src/app/services/caterer-food-items.service';
-//import { FoodItemService } from 'src/app/services/food-item.service';
-import { AuthService } from 'src/app/services/auth.service'; //user auth
-
+import { AuthService } from 'src/app/services/auth.service';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard-user',
@@ -17,16 +15,18 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 })
 export class DashboardUserComponent implements OnInit {
   catering: Catering[] = [];
-  selectedFoodItems: FoodItem[] = []; // Declare selectedFoodItems for the DIY package
-  foodItems: FoodItem[] = []; // Initialize the foodItems property
-  foodItemForm: FormGroup; // Create a form for adding food items
+  selectedFoodItems: FoodItem[] = [];
+  foodItems: Observable<FoodItem[]>; // Updated data type
+  foodItemForm: FormGroup;
+
+  caterer: any; // To store the caterer data
 
   constructor(
     private cateringservice: CateringService,
-    //private catererFoodItemsService: CatererFoodItemsService, // Inject the service for retrieving food items
-    private authService: AuthService, // Inject the food item service
+    private authService: AuthService,
     private activatedRoute: ActivatedRoute,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private firestore: AngularFirestore // Angular Firestore injection
   ) {
     this.foodItemForm = this.formBuilder.group({
       food_name: new FormControl('', Validators.required),
@@ -45,18 +45,28 @@ export class DashboardUserComponent implements OnInit {
     });
   }
 
-  //lopez sprint 2
-  fetchFoodItems() {
-    this.authService.getFoodItems().subscribe((foodItems: FoodItem[]) => {
-      this.selectedFoodItems = foodItems;
-    });
-  }//end of lopez s2
-  
   ngOnInit(): void {
-    this.fetchFoodItems(); //This line by lopez sprint 2
+    this.foodItems = this.firestore.collection<FoodItem>('foodItems').valueChanges();
+
+    // Fetch caterer data
+    this.authService.currentEmail.subscribe((email) => {
+      if (email) {
+        this.fetchCatererData(email);
+      }
+    });
   }
 
-  // Other methods, properties, and logic for your DashboardUserComponent
-
-  // Add the methods for saving food items, handling form submission, etc.
+  //lopez Sprint 2
+  fetchCatererData(email: string) {
+    // Modify this method to fetch caterer data with catering info from Firestore
+    // Fetch the caterer document based on the email (you might need a specific field)
+    this.firestore
+      .collection('caterers', (ref) => ref.where('email', '==', email))
+      .valueChanges()
+      .subscribe((catererData) => {
+        if (catererData.length > 0) {
+          this.caterer = catererData[0];
+        }
+      });
+  }
 }
