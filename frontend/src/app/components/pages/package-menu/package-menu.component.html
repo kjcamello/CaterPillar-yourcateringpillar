@@ -9,8 +9,8 @@
         <!-- Toolbar to add and search employee -->
         <div class="toolbar">
             <div class="add-packageMenu">
-                <button type="button" class="button">
-                    <span class="button__text">Add Item</span>
+                <button type="button" class="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <span class="button__text" >Add Item</span>
                     <span class="button__icon"><svg xmlns="http://www.w3.org/2000/svg" 
                         width="24" 
                         viewBox="0 0 24 24" 
@@ -30,7 +30,9 @@
                       <path d="M46.599 46.599a4.498 4.498 0 0 1-6.363 0l-7.941-7.941C29.028 40.749 25.167 42 21 42 9.402 42 0 32.598 0 21S9.402 0 21 0s21 9.402 21 21c0 4.167-1.251 8.028-3.342 11.295l7.941 7.941a4.498 4.498 0 0 1 0 6.363zM21 6C12.717 6 6 12.714 6 21s6.717 15 15 15c8.286 0 15-6.714 15-15S29.286 6 21 6z">
                       </path>
                     </svg>
-                    <input class="inputBox" id="inputBox" type="text" placeholder="Search For Products">
+                    <!-- <input class="inputBox" id="inputBox" type="text" placeholder="Search For Products"> -->
+                    <input class="inputBox" id="inputBox" type="text" placeholder="Search For Products" [(ngModel)]="searchTerm" (keyup)="onSearch()">
+
                   </div>
             </div>
         </div>
@@ -40,7 +42,7 @@
             
             <div class="row mt-5">
                 <div class="col text-center">
-                    <span class="text-secondary fs-2 fw-bold fst-italic">There are no Packages Added!</span>
+                    <span class="text-secondary fs-2 fw-bold fst-italic"></span>
                 </div>
 
             </div>
@@ -49,28 +51,88 @@
 
 </div>
 
-<!-- MODAL -->
-
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    Launch demo modal
-  </button>
-  
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Enter Package Menu Information</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
+      <div class="modal-body">
+        
+        <form [formGroup]="packageMenuForm">
+
+          <!-- Package Name -->
+          <div class="row">
+            <div class="col">
+              <h6 class="text-secondary fst-italic">Package Name</h6>
+              <input type="text" class="form-control" placeholder="Package Name" formControlName="packageName">
+            </div>
+          </div>
+
+          <!-- Number of Pax -->
+          <div class="row mt-3">
+            <div class="col">
+              <h6 class="text-secondary fst-italic">Number of Guest/Pax</h6>
+              <input type="number" class="form-control" placeholder="Number of Pax"
+                formControlName="numofPax">
+            </div>
+          </div>
+
+          <!-- Type of Event -->
+          <div class="row mt-3">
+            <div class="col">
+              <h6 class="text-secondary fst-italic">Type of Event</h6>
+              <select class="form-select" formControlName="typeEvent">
+                <option value="default" selected>Select Event Type</option>
+                <option *ngFor="let option of eventOptions; let i = index;" [value]="option">
+                  {{option | titlecase}}
+                </option>
+              </select>
+            </div>
+          </div>
+
+           <!-- Food Inclusion -->
+           <div class="row mt-3">
+            <div class="col">
+              <h6 class="text-secondary fst-italic">Food Inclusion</h6>
+              <input type="text" class="form-control" placeholder="e.g. Chicken Adobo, Pork Sinigang" formControlName="foodInclusion">
+            </div>
+          </div>
+
+        </form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" 
+                (click)="isUpdateMode ? updatePackage() : addPackage()" 
+                data-bs-dismiss="modal">
+            {{ isUpdateMode ? 'Update' : 'Insert' }}
+        </button>
+    </div>
     </div>
   </div>
+</div>
+
+<div class="row mt-5">
+  <div class="col-md-4" *ngFor="let package of filteredPackages" (mouseover)="hoverTile(package)" (mouseout)="unhoverTile(package)">
+      <div class="card mb-3" [class.hovered]="package.hovered">
+          <div class="card-header">
+              Package Information
+          </div>
+          <div class="card-body">
+              <h5 class="card-title">{{ package.packageName }}</h5>
+              <p class="card-text">Number of Guests/Pax: {{ package.numofPax }}</p>
+              <p class="card-text">Type of Event: {{ package.typeEvent }}</p>
+              <p class="card-text">Food Inclusion: {{ package.foodInclusion }}</p>
+          </div>
+          <div class="card-footer text-end">
+              <button class="btn btn-outline-primary me-2" (click)="openPackageModal(package)">Edit</button>
+              <button class="btn btn-outline-danger" (click)="deletePackage(package.id)">Delete</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+

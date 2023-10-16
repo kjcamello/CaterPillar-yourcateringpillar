@@ -16,9 +16,9 @@ import {
 })
 export class AppComponent implements OnInit {
   title = 'frontend';
-
   constructor(){}
 
+  
   ngOnInit(): void {
   }
 }
