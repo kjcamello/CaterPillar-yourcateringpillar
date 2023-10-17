@@ -1,53 +1,97 @@
-
 <div class="container-fluid g-0">
 
-    <!-- HEADER -->
-    <app-signup-header></app-signup-header>
+  <!-- HEADER -->
+  <app-signup-header></app-signup-header>
 
-    <!-- MAIN CONTENT -->
-    <main>
-        <!-- Toolbar to add and search employee -->
+  <!-- MAIN CONTENT -->
+  <main>
+
+    <div class="top-border-bg">
+      <div class="top-border">
         <div class="toolbar">
-            <div class="add-packageMenu">
-                <button type="button" class="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    <span class="button__text" >Add Item</span>
-                    <span class="button__icon"><svg xmlns="http://www.w3.org/2000/svg" 
-                        width="24" 
-                        viewBox="0 0 24 24" 
-                        stroke-width="2" 
-                        stroke-linejoin="round" 
-                        stroke-linecap="round" 
-                        stroke="currentColor" 
-                        height="24" 
-                        fill="none" 
-                        class="svg"><line y2="19" y1="5" x2="12" x1="12"></line><line y2="12" y1="12" x2="19" x1="5"></line></svg></span>
-                  </button>
+          <div class="search-packageMenu">
+            <div class="inputBox_container">
+              <svg class="search_icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" alt="search icon">
+                <path
+                  d="M46.599 46.599a4.498 4.498 0 0 1-6.363 0l-7.941-7.941C29.028 40.749 25.167 42 21 42 9.402 42 0 32.598 0 21S9.402 0 21 0s21 9.402 21 21c0 4.167-1.251 8.028-3.342 11.295l7.941 7.941a4.498 4.498 0 0 1 0 6.363zM21 6C12.717 6 6 12.714 6 21s6.717 15 15 15c8.286 0 15-6.714 15-15S29.286 6 21 6z">
+                </path>
+              </svg>
+              <input class="inputBox" id="inputBox" type="text" placeholder="Search For Products" [(ngModel)]="searchTerm"
+                (keyup)="onSearch()">
             </div>
-
-            <div class="search-packageMenu">
-                <div class="inputBox_container">
-                    <svg class="search_icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" alt="search icon">
-                      <path d="M46.599 46.599a4.498 4.498 0 0 1-6.363 0l-7.941-7.941C29.028 40.749 25.167 42 21 42 9.402 42 0 32.598 0 21S9.402 0 21 0s21 9.402 21 21c0 4.167-1.251 8.028-3.342 11.295l7.941 7.941a4.498 4.498 0 0 1 0 6.363zM21 6C12.717 6 6 12.714 6 21s6.717 15 15 15c8.286 0 15-6.714 15-15S29.286 6 21 6z">
-                      </path>
-                    </svg>
-                    <!-- <input class="inputBox" id="inputBox" type="text" placeholder="Search For Products"> -->
-                    <input class="inputBox" id="inputBox" type="text" placeholder="Search For Products" [(ngModel)]="searchTerm" (keyup)="onSearch()">
-
-                  </div>
-            </div>
+          </div>
         </div>
 
-        <!-- Display Package Menu -->
-        <div class="packageMenu">
-            
-            <div class="row mt-5">
-                <div class="col text-center">
-                    <span class="text-secondary fs-2 fw-bold fst-italic"></span>
+
+        <div class="toolbar-sorting-separator">
+          <button type="button" class="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <span class="button__text">Add New Package</span>
+            <span class="button__icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" height="24" fill="none" class="svg"><line y2="19" y1="5" x2="12" x1="12"></line><line y2="12" y1="12" x2="19" x1="5"></line></svg></span>
+          </button>
+        </div>
+        
+        <div class="sorting-controls">
+          <label>Sort By:</label>
+          <div class="separator"></div>
+          <select [(ngModel)]="sortingCriteria" (change)="onSortingCriteriaChange($event.target.value)">
+            <option class="op" value="packageName">Package Name</option>
+            <option class="op" value="numofPax">Number of Guests/Pax</option>
+            <option class="op" value="typeEvent">Type of Event</option>
+            <option class="op" value="foodInclusion">Food Inclusion</option>
+          </select>
+        
+          <label></label>
+          <select [(ngModel)]="sortingDirection" (change)="onSortingDirectionChange($event.target.value)">
+            <option class="op" value="asc">Ascending</option>
+            <option class="op" value="desc">Descending</option>
+          </select>
+        </div>
+        
+      </div>
+    </div>
+    <!-- Toolbar to add and search employee -->
+    
+    <div class="pkg-menu-pane-bg">
+      <div class="pkg-menu-pane">
+        
+        <!-- <div class="row">
+          <div class="col" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <div class="custom-card" >
+              <span class="plus-icon" >+</span>
+              <button type="button" class="button" data-bs-toggle="modal" data-bs-target="#exampleModal"></button>
+              <p>Add New Package</p>
+            </div>
+          </div>
+        </div> -->
+
+        <div class="row mt-3 grid-container" >
+          <div class="col mt-3" *ngFor="let package of filteredPackages">
+            <div class="custom-card">
+              <div class="package-image">
+                Package Image
+              </div>
+              <div class="package-info">
+                <h5>{{ package.packageName }}</h5>
+                <p>Type of Event: {{ package.typeEvent }}</p>
+                <p>Number of Guests/Pax: {{ package.numofPax }}</p>
+                <p>Food Inclusion: {{ package.foodInclusion }}</p>
+                <p>Extra Service: <!-- You might want to bind data here if available --></p>
+                <div class="card-actions">
+                  <button class="btn btn-edit" (click)="openPackageModal(package)">Edit</button>
+                  <button class="btn btn-delete" (click)="deletePackage(package.id)">Delete</button>
                 </div>
-
+              </div>
             </div>
+          </div>
         </div>
-    </main>
+        
+      </div>
+    </div>
+
+    
+
+
+  </main>
 
 </div>
 
@@ -60,11 +104,27 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        
+
         <form [formGroup]="packageMenuForm">
 
+    <!-- Image Upload -->
+    <div class="row mt-3">
+      <div class="col">
+        <h6 class="text-secondary fst-italic">Upload Image</h6>
+        <input type="file" (change)="onImageSelected($event)" accept="image/*" class="form-control-file">
+        <!-- Display the selected image in the modal -->
+        <div class="card mt-3" *ngIf="selectedImage">
+          <!-- <img [src]="selectedImageSrc" alt="Selected Image" class="card-img-top"> -->
+          <img [src]="selectedImageSrc" alt="Selected Image" class="card-img-top">
+
+          <!-- <div class="card-body">
+            <p class="card-text">Image Description or Details</p>
+          </div> -->
+        </div>
+      </div>
+    </div>
           <!-- Package Name -->
-          <div class="row">
+          <div class="row mt-3">
             <div class="col">
               <h6 class="text-secondary fst-italic">Package Name</h6>
               <input type="text" class="form-control" placeholder="Package Name" formControlName="packageName">
@@ -75,8 +135,7 @@
           <div class="row mt-3">
             <div class="col">
               <h6 class="text-secondary fst-italic">Number of Guest/Pax</h6>
-              <input type="number" class="form-control" placeholder="Number of Pax"
-                formControlName="numofPax">
+              <input type="number" class="form-control" placeholder="Number of Pax" formControlName="numofPax">
             </div>
           </div>
 
@@ -93,11 +152,12 @@
             </div>
           </div>
 
-           <!-- Food Inclusion -->
-           <div class="row mt-3">
+          <!-- Food Inclusion -->
+          <div class="row mt-3">
             <div class="col">
               <h6 class="text-secondary fst-italic">Food Inclusion</h6>
-              <input type="text" class="form-control" placeholder="e.g. Chicken Adobo, Pork Sinigang" formControlName="foodInclusion">
+              <input type="text" class="form-control" placeholder="e.g. Chicken Adobo, Pork Sinigang"
+                formControlName="foodInclusion">
             </div>
           </div>
 
@@ -105,34 +165,15 @@
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" 
-                (click)="isUpdateMode ? updatePackage() : addPackage()" 
-                data-bs-dismiss="modal">
-            {{ isUpdateMode ? 'Update' : 'Insert' }}
+        <button type="button" class="btn btn-primary"
+          (click)="isUpdateMode ? updatePackage() : addPackage()" data-bs-dismiss="modal">
+          {{ isUpdateMode ? 'Update' : 'Insert' }}
         </button>
-    </div>
+      </div>
     </div>
   </div>
 </div>
 
-<div class="row mt-5">
-  <div class="col-md-4" *ngFor="let package of filteredPackages" (mouseover)="hoverTile(package)" (mouseout)="unhoverTile(package)">
-      <div class="card mb-3" [class.hovered]="package.hovered">
-          <div class="card-header">
-              Package Information
-          </div>
-          <div class="card-body">
-              <h5 class="card-title">{{ package.packageName }}</h5>
-              <p class="card-text">Number of Guests/Pax: {{ package.numofPax }}</p>
-              <p class="card-text">Type of Event: {{ package.typeEvent }}</p>
-              <p class="card-text">Food Inclusion: {{ package.foodInclusion }}</p>
-          </div>
-          <div class="card-footer text-end">
-              <button class="btn btn-outline-primary me-2" (click)="openPackageModal(package)">Edit</button>
-              <button class="btn btn-outline-danger" (click)="deletePackage(package.id)">Delete</button>
-          </div>
-      </div>
-  </div>
-</div>
+
 
 
