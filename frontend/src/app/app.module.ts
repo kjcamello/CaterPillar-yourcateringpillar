@@ -54,6 +54,9 @@ import { DiyPackageComponent } from './components/pages/catering/diy-package/diy
 import { FoodItemComponent } from './components/pages/catering/food-item/food-item.component';
 
 import { HttpClientModule } from '@angular/common/http';
+import { TempCatererProfComponent } from './components/pages/temp-caterer-prof/temp-caterer-prof.component';
+import { UserDiySelectionComponent } from './components/pages/user-selection/user-diy-selection/user-diy-selection.component';
+import { UserPackageSelectionComponent } from './components/pages/user-selection/user-package-selection/user-package-selection.component';
 
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -112,7 +115,10 @@ const database = getDatabase(app);
     LoginSuperadminComponent,
     AdminForgotPasswordComponent,
     DiyPackageComponent,
-    FoodItemComponent
+    FoodItemComponent,
+    TempCatererProfComponent,
+    UserDiySelectionComponent,
+    UserPackageSelectionComponent
 
   ],
   imports: [

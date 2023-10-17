@@ -66,9 +66,10 @@ export class AdminAuthService {
       .catch((error) => {
         // Handle password reset errors and display window alert
         this.ngZone.run(() => {
-          window.alert('User with this email does not exist.');
+          window.alert('Please input a valid email address to proceed.');
         });
-      });
+      })
+      
   }
 }
 

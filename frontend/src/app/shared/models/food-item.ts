@@ -4,14 +4,17 @@ export class FoodItem {
   minimum_pax: number;
   pax_price: number;
   selected: boolean;
-  food_image: string; // Add the 'food_image' property
+  food_image: string;
+  selectedPax: number; // Add a selectedPax property
+  
 
   constructor() {
     this.food_name = '';
     this.food_description = '';
     this.minimum_pax = 0;
     this.pax_price = 0;
-    this.selected = false; // Initialize the 'selected' property
-    this.food_image = ''; // Initialize the 'food_image' property
+    this.selected = false;
+    this.food_image = '';
+    this.selectedPax = 0; // Initialize the selectedPax property
   }
 }
