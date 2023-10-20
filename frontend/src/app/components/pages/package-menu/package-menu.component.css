@@ -27,6 +27,25 @@
     border-radius: 1rem;
     box-shadow: 0px 0px 10px rgba(34, 34, 34, 0.5);
   }
+
+  .search-packageMenu input {
+    width: 100%;
+    height: 100%;
+    border-radius: 1rem;
+    font-size: 1.3rem;
+  }
+
+  .form-heading {
+    border-top: 1px solid black;
+  }
+  
+  .form-heading h6 {
+    text-align: center;
+    background-color: white;
+    width: 200px;
+    transform: translateY(-50%);
+  }
+
 /* Search Package Menu */
 .inputBox_container {
     display: flex;
@@ -35,7 +54,7 @@
     /* max-width: 14em; */
     /* width: fit-content; */
     /* height: fit-content; */
-    background-color: #5c6370;
+    background-color: #FFF016;
     border-radius: 0.8em;
     overflow: hidden;
     width: 500px;
@@ -45,7 +64,7 @@
   .search_icon {
     height: 1em;
     padding: 0 0.5em 0 0.8em;
-    fill: #abb2bf;
+    fill: #131416;
   }
   
   .inputBox {
@@ -59,66 +78,318 @@
   }
   
   ::placeholder {
-    color: #abb2bf;
+    color: #131416;
   }
 
-/* Add Package Menu */
-.button {
-    position: relative;
-    width: 150px;
-    height: 40px;
-    cursor: pointer;
+/* Modal */
+.modal-content {
+  background-color: #fff016; /* Background color for the modal content */
+  border-radius: 10px; /* Rounded corners for the modal */
+}
+
+.modal-header {
+  background-color: #AC0000; /* Background color for the modal header */
+  color: #fff; /* Text color for the modal header */
+  border-bottom: none; /* Remove the border at the bottom of the header */
+}
+
+.modal-title {
+  color: #fff; /* Text color for the modal title */
+}
+
+.modal-body {
+  padding: 20px; /* Add some padding to the modal body */
+}
+
+.modal-footer {
+  border-top: none; /* Remove the border at the top of the footer */
+  padding: 15px 20px; /* Add padding to the modal footer */
+}
+
+.modal-footer button {
+  background-color: #AC0000; /* Background color for buttons in the modal footer */
+  color: #fff; /* Text color for buttons in the modal footer */
+  border: none; /* Remove the button border */
+  border-radius: 5px; /* Rounded corners for buttons */
+  padding: 10px 20px; /* Add padding to buttons */
+  cursor: pointer; /* Add a pointer cursor to buttons */
+  transition: background-color 0.3s, color 0.3s; /* Add a smooth transition effect */
+}
+
+.modal-footer button:hover {
+  background-color: #fff; /* Background color on button hover */
+  color: #AC0000; /* Text color on button hover */
+}
+
+.modal-footer .btn-close {
+  color: #AC0000; /* Close button color */
+  font-size: 1.5rem; /* Close button font size */
+  position: relative;
+  top: -10px;
+}
+
+/* Adjust modal width if needed */
+.modal-dialog {
+  max-width: 500px; /* Set the maximum width for the modal */
+}
+
+/**/
+.top-border{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 0px 5px 0px;
+}
+
+.top-border-bg{
+  background-color: #AC0000;
+}
+
+.toolbar-sorting-separator{
+  display: flex;
+  width: 250px;
+  justify-content: center;
+}
+
+/**/
+
+.sorting-controls {
     display: flex;
+    /* justify-content: start; */
     align-items: center;
-    border: 1px solid #AC0000;
-    background-color: #AC0000;
-    padding: 0;
-  }
-  
-  .button, .button__icon, .button__text {
-    transition: all 0.3s;
-  }
-  
-  .button .button__text {
-    transform: translateX(30px);
-    color: #fff;
-    /* font-weight: 600; */
-    font-size: 15px;
-  }
-  
-  .button .button__icon {
-    position: absolute;
-    transform: translateX(109px);
-    height: 100%;
-    width: 39px;
-    background-color: #AC0000;
+    /* gap: 10px; */
+    padding: 15px;
+    /* border: 1px solid #ccc; */
+    border-radius: 10px;
+    background-color: #FFF016;
+    margin: 0;
+    padding: 6px;
+    box-shadow: 0px 0px 10px rgba(34, 34, 34, 0.5);
+}
+
+.separator{
+  display: flex;
+  width: 15px;
+}
+
+.sorting-controls label {
+  /* margin-right: 5px; */
+  /* margin-left: 10px; */
+  padding-left: 10px;
+  font-size: 15px;
+}
+
+.sorting-controls select {
+  padding: 3px 5px;
+  border: 1px solid #AC0000;
+  border-radius: 5px;
+  background-color: transparent;
+  /* font-size: 14px; */
+}
+
+.sorting-controls select:focus {
+  outline: none; /* removes browser default outline on focus */
+  border-color: #AC0000; /* border color on focus */
+  box-shadow: 0 0 5px rgba(172, 0, 0, 0.2);/* subtle shadow for focus effect */
+}
+
+.op{
+  /* display: flex; */
+  background-color: #FFF016;
+}
+
+
+.op:hover {
+  background-color: #AC0000; /* color when hovering over an option */
+  color: #AC0000; /* text color when hovering over an option */
+}
+/**/
+
+
+.pkg-menu-pane{
+  display: flex;
+  overflow: auto;  /* this will add scroll if content overflows */
+  padding: 20px; 
+  height: 100vh; /* for a bit of space inside the container */
+}
+
+.pkg-menu-pane{
+  background-color: #FFF016;
+}
+
+.package-tile {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.pt-effect{
+  border: 5px solid #FFD700; /* Yellow border */
+  background-color: #ffffff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.2s; 
+  height: 350px;
+}
+
+.package-tile:hover {
+  transform: scale(1.05); /* Slightly enlarges the tile when hovered */
+}
+
+.plus-icon {
+  font-size: 40px; /* Size of the + icon */
+  color: #FF0000; /* Red color for the + icon */
+  margin-bottom: 10px; /* Spacing between the + icon and the text */
+}
+
+.package-tile p {
+  font-size: 18px; /* Font size of the text */
+  color: #000; /* Black color for the text */
+}
+
+/**/
+.custom-card {
+    border: 5px solid #FFD700;
+    background-color: #ffffff;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    height: 350px;
+    width: 370px;
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-content: center;
     justify-content: center;
-  }
+    align-items: center;
+}
+
+.package-image {
+  background-color: #FFF;
+  height: 120px;  /* adjust as needed */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.package-info {
+  background-color: #AC0000;
+  padding: 15px;
+  color: #fff;
+}
+
+h5 {
+  background-color: #FFD700;
+  padding: 10px;
+  margin: 0;
+  text-align: center;
+  color: #000;
+}
+
+.card-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.btn-edit {
+  background-color: #FFD700;
+  color: #000;
+  border: none;
+}
+
+.btn-delete {
+  background-color: #FF0000;
+  color: #FFF;
+  border: none;
+}
+
+.btn-edit:hover, .btn-delete:hover {
+  opacity: 0.9;
+}
+
+.package-image, .package-info {
+  flex: 1;
+  overflow: hidden; 
+  width: 100%;
+  height: 100vh; /* hide content that exceeds the container */
+}
+
+
+
+/*Button*/
+.button {
+  position: relative;
+  width: 180px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border: 1px solid #FFF016;
+  background-color: #FFF016;
+  border-radius: 10px;
+}
+
+.button, .button__icon, .button__text {
+  transition: all 0.3s;
+}
+
+.button .button__text {
+  transform: translateX(5px);
+  color: #343a40;
+  font-size: 15px;
+  display: flex;
+  /* margin-right: 50px; */
   
-  .button .svg {
-    width: 30px;
-    stroke: #fff;
-  }
+}
+
+.button .button__icon {
+  position: absolute;
+  transform: translateX(125px);
+  height: 100%;
+  width: 46px;
+  background-color: #FFF016;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+}
+
+.button .svg {
+  width: 30px;
+  stroke: #343a40;
+  margin-left: 20px;
   
-  .button:hover {
-    background: #AC0000;
-  }
-  
-  .button:hover .button__text {
-    color: transparent;
-  }
-  
-  .button:hover .button__icon {
-    width: 148px;
-    transform: translateX(0);
-  }
-  
-  .button:active .button__icon {
-    background-color: #2e8644;
-  }
-  
-  .button:active {
-    border: 1px solid #2e8644;
-  }
+}
+
+.button:hover {
+  background: #FFF016;
+  display: flex;
+  /* justify-content: center; */
+}
+
+.button:hover .button__text {
+  color: transparent;
+}
+
+.button:hover .button__icon {
+  width: 148px;
+  transform: translateX(0);
+}
+
+.button:active .button__icon {
+  background-color: #FFF016;
+}
+
+.button:active {
+  border: 1px solid #FFF016;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  /* background-color: #2196F3; */
+  padding: 10px;
+}
+

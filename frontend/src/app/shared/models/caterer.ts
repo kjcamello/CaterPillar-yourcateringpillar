@@ -5,5 +5,7 @@ export interface Caterer {
     catererEmailVerified: boolean;
     catererPhotoURL?: string;
     status: string;
+    // Add a property for catering information
+    cateringInfo?: any;
 }
 
