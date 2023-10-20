@@ -1,6 +1,7 @@
 import { Injectable, NgZone } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -9,6 +10,7 @@ export class AdminAuthService {
   constructor(
     private afAuth: AngularFireAuth,
     private firestore: AngularFirestore,
+    private router: Router,
     private ngZone: NgZone // Inject NgZone for showing alerts outside of Angular's zone
   ) {}
 
@@ -27,8 +29,8 @@ export class AdminAuthService {
           this.afAuth
             .signInWithEmailAndPassword(email, password)
             .then(() => {
-              // Navigate to the superadmin page upon successful sign-in
-              // Add your navigation logic here.
+              console.log('User logged in successfully');
+              this.router.navigate(['superadmin']);  
             })
             .catch((error) => {
               // Handle authentication errors and display window alert

@@ -1,0 +1,40 @@
+/* Styling for Controls */
+.controls {
+    display: flex;
+    justify-content: space-between;
+    margin: 16px;
+  }
+  
+  /* Styling for Search Input and Sort Dropdown */
+  .search, .sort {
+    flex: 1;
+    margin-right: 16px;
+  }
+  
+  /* Styling for Caterers Table */
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .table th, .table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  /* Styling for Status Reason Input */
+  input {
+    width: 100%;
+    padding: 4px;
+  }
+  
+  /* Styling for Change Status Button */
+  button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 6px 12px;
+    cursor: pointer;
+  }
+  
