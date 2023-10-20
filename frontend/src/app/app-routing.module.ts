@@ -37,6 +37,8 @@ import { TempCatererProfComponent } from './components/pages/temp-caterer-prof/t
 import { UserPackageSelectionComponent } from './components/pages/user-selection/user-package-selection/user-package-selection.component';
 import { UserDiySelectionComponent } from './components/pages/user-selection/user-diy-selection/user-diy-selection.component'; //temporary
 
+import { UserProfileComponent } from './components/pages/user-profile/user-profile.component'; 
+
 const routes: Routes = [
   { path:'', component:HomeComponent },
   { path:'search/:searchTerm', component:HomeComponent },
@@ -76,8 +78,9 @@ const routes: Routes = [
   { path: 'caterer-profile/:catererId/diy-package/:packageId', component: DiyPackageComponent },
 
   { path: 'user-package-selection', component: UserPackageSelectionComponent },
-  { path: 'user-diy-selection', component: UserDiySelectionComponent }
+  { path: 'user-diy-selection', component: UserDiySelectionComponent },
 
+  { path: 'user-profile', component: UserProfileComponent }  // <-- This is the last route, so no comma after this
     // ...other routes
 ];
 
