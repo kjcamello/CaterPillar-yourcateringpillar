@@ -1,1 +1,72 @@
-<p>superadmin works!</p>
+<!-- Admin Page Buttons -->
+<div class="admin-buttons">
+    <button mat-button (click)="selectTab('caterers')" [class.active]="selectedTab === 'caterers'">Caterers</button>
+    <button mat-button (click)="selectTab('customers')" [class.active]="selectedTab === 'customers'">Customers</button>
+    <button mat-button (click)="selectTab('appeals')" [class.active]="selectedTab === 'appeals'">Appeals</button>
+  </div>
+  
+  <!-- Content Area -->
+  <div class="content">
+    <!-- Caterers Tab -->
+    <div *ngIf="selectedTab === 'caterers'">
+      <!-- Search and Sort Controls -->
+      <div class="controls">
+        <mat-form-field class="search">
+          <input matInput placeholder="Search" [(ngModel)]="searchText">
+        </mat-form-field>
+        <mat-form-field class="sort">
+          <mat-label>Sort By</mat-label>
+          <mat-select [(ngModel)]="selectedSort">
+            <mat-option value="alphabetical">Alphabetical</mat-option>
+            <mat-option value="disabled">Disabled Accounts</mat-option>
+            <mat-option value="warned">Warned Accounts</mat-option>
+            <mat-option value="ordinary">Ordinary Accounts</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+  
+      <!-- Caterers Table -->
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Caterer Display Name</th>
+            <th>Caterer Email</th>
+            <th>Status</th>
+            <th>Reason</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let caterer of caterers | filter: searchText | sortBy: selectedSort">
+            <td>{{ caterer.catererDisplayName }}</td>
+            <td>{{ caterer.catererEmail }}</td>
+            <td>
+              {{ caterer.status }}
+              <span *ngIf="caterer.status === 'Disabled' || caterer.status === 'Warning'"> - {{ caterer.reason }}</span>
+            </td>
+            <td>
+              <input
+                *ngIf="caterer.status === 'Disabled' || caterer.status === 'Warning'"
+                [(ngModel)]="caterer.reason"
+                placeholder="Reason"
+              />
+            </td>
+            <td>
+              <button (click)="changeStatus(caterer)">Change Status</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <!-- Customers Tab -->
+    <div *ngIf="selectedTab === 'customers'">
+      <!-- Content for the Customers tab here -->
+    </div>
+  
+    <!-- Appeals Tab -->
+    <div *ngIf="selectedTab === 'appeals'">
+      <!-- Content for the Appeals tab here -->
+    </div>
+  </div>
+  
