@@ -16,7 +16,7 @@
                   d="M46.599 46.599a4.498 4.498 0 0 1-6.363 0l-7.941-7.941C29.028 40.749 25.167 42 21 42 9.402 42 0 32.598 0 21S9.402 0 21 0s21 9.402 21 21c0 4.167-1.251 8.028-3.342 11.295l7.941 7.941a4.498 4.498 0 0 1 0 6.363zM21 6C12.717 6 6 12.714 6 21s6.717 15 15 15c8.286 0 15-6.714 15-15S29.286 6 21 6z">
                 </path>
               </svg>
-              <input class="inputBox" id="inputBox" type="text" placeholder="Search For Products" [(ngModel)]="searchTerm"
+              <input class="inputBox" id="inputBox" type="text" placeholder="Search For Packages" [(ngModel)]="searchTerm"
                 (keyup)="onSearch()">
             </div>
           </div>
@@ -30,7 +30,7 @@
           </button>
         </div>
         
-        <div class="sorting-controls">
+        <!-- <div class="sorting-controls">
           <label>Sort By:</label>
           <div class="separator"></div>
           <select [(ngModel)]="sortingCriteria" (change)="onSortingCriteriaChange($event.target.value)">
@@ -45,7 +45,7 @@
             <option class="op" value="asc">Ascending</option>
             <option class="op" value="desc">Descending</option>
           </select>
-        </div>
+        </div> -->
         
       </div>
     </div>
@@ -64,18 +64,29 @@
           </div>
         </div> -->
 
-        <div class="row mt-3 grid-container" >
+        <div class="row grid-container" >
           <div class="col mt-3" *ngFor="let package of filteredPackages">
             <div class="custom-card">
-              <div class="package-image">
-                Package Image
-              </div>
+              <!-- <div class="package-image">
+                <img [src]="package.packageImage" class="card-img-top">
+              </div> -->
               <div class="package-info">
                 <h5>{{ package.packageName }}</h5>
-                <p>Type of Event: {{ package.typeEvent }}</p>
-                <p>Number of Guests/Pax: {{ package.numofPax }}</p>
-                <p>Food Inclusion: {{ package.foodInclusion }}</p>
-                <p>Extra Service: <!-- You might want to bind data here if available --></p>
+                <p>Type of Event: <span class="dynamic">{{ package.typeEvent }}</span></p>
+                <p>Number of Guests/Pax: <span class="dynamic">{{ package.numofPax }}</span></p>
+                <!-- <p>Food Inclusion: <span>{{ package.foodInclusion }}</span></p> -->
+                <!-- <p><span >Food Inclusion</span></p> -->
+                <div class="ficenter">
+                  <div class="FI">Food Inclusion</div>
+                </div>
+                
+                <p>Appetizer: <span class="dynamic">{{ package.appetizerFI}}</span></p>
+                <p>Soup: <span class="dynamic">{{ package.soupFI}}</span></p>
+                <p>Salad: <span class="dynamic">{{ package.saladFI}}</span></p>
+                <p>Main Course: <span class="dynamic">{{ package.mainCourseFI}}</span></p>
+                <p>Dessert: <span class="dynamic">{{ package.dessertFI}}</span></p>
+                
+                <!-- <p>Extra Service: You might want to bind data here if available</p> -->
                 <div class="card-actions">
                   <button class="btn btn-edit" (click)="openPackageModal(package)">Edit</button>
                   <button class="btn btn-delete" (click)="deletePackage(package.id)">Delete</button>
@@ -107,59 +118,100 @@
 
         <form [formGroup]="packageMenuForm">
 
-    <!-- Image Upload -->
-    <div class="row mt-3">
-      <div class="col">
-        <h6 class="text-secondary fst-italic">Upload Image</h6>
-        <input type="file" (change)="onImageSelected($event)" accept="image/*" class="form-control-file">
-        <!-- Display the selected image in the modal -->
-        <div class="card mt-3" *ngIf="selectedImage">
-          <!-- <img [src]="selectedImageSrc" alt="Selected Image" class="card-img-top"> -->
-          <img [src]="selectedImageSrc" alt="Selected Image" class="card-img-top">
-
-          <!-- <div class="card-body">
-            <p class="card-text">Image Description or Details</p>
+          <!-- Image Upload -->
+          <!-- <div class="row mt-3">
+            <div class="col">
+                <h6 class="uploadImgTI">Upload Image</h6>
+                <label class="custom-file-upload">
+                  <input type="file" (change)="onImageSelected($event)" accept="image/*" class="form-control-file" formControlName="packageImage">
+                  Select an Image
+                </label>
+  
+                Display the selected image in the modal
+                <div class="card mt-3" *ngIf="selectedImage">
+                <img [src]="selectedImageSrc" alt="Selected Image" class="card-img-top">
+              </div>
+            </div>
           </div> -->
-        </div>
-      </div>
-    </div>
+
           <!-- Package Name -->
           <div class="row mt-3">
             <div class="col">
-              <h6 class="text-secondary fst-italic">Package Name</h6>
-              <input type="text" class="form-control" placeholder="Package Name" formControlName="packageName">
+              <div class="inputGroup">
+                <input type="text" required="" autocomplete="off" class="form-control" formControlName="packageName">
+                <label for="name">Package Name</label>
+              </div>
             </div>
           </div>
 
           <!-- Number of Pax -->
           <div class="row mt-3">
             <div class="col">
-              <h6 class="text-secondary fst-italic">Number of Guest/Pax</h6>
-              <input type="number" class="form-control" placeholder="Number of Pax" formControlName="numofPax">
+              <div class="inputGroup">
+                <input type="number" required="" autocomplete="off" class="form-control" formControlName="numofPax">
+                <label for="name">Number of Guest/Pax</label>
+              </div>
             </div>
           </div>
 
           <!-- Type of Event -->
           <div class="row mt-3">
             <div class="col">
-              <h6 class="text-secondary fst-italic">Type of Event</h6>
-              <select class="form-select" formControlName="typeEvent">
-                <option value="default" selected>Select Event Type</option>
-                <option *ngFor="let option of eventOptions; let i = index;" [value]="option">
-                  {{option | titlecase}}
-                </option>
-              </select>
+                <!-- <h6 class="typeOfEventTI">Type of Event</h6> -->
+                <div class="inputGroup">
+                    <select class="form-select" id="typeEvent" formControlName="typeEvent" required>
+                        <!-- <option value="" disabled selected>Select Event Type</option> -->
+                        <option *ngFor="let option of eventOptions; let i = index;" [value]="option">
+                            {{option | titlecase}}
+                        </option>
+                    </select>
+                    <label for="name">Select Event Type</label>
+                </div>
+            </div>
+        </div>
+        
+
+          <!-- Food Inclusion -->
+          <!-- <div class="row mt-3">
+            <div class="col">
+              <div class="inputGroup">
+                <input type="text" required="" autocomplete="off" class="form-control" formControlName="foodInclusion">
+                <label for="name">Food Inclusion</label>
+              </div>
+            </div>
+          </div> -->
+
+          <div class="row mt-3">
+            <div class="col">
+              <h6 class="typeOfEventTI">Food Inclusions</h6>
+              
+              <div class="inputGroup">
+                <input type="text" required="" autocomplete="off" class="form-control" formControlName="appetizerFI">
+                <label for="name">Appetizer</label>
+              </div>
+
+              <div class="inputGroup">
+                <input type="text" required="" autocomplete="off" class="form-control" formControlName="soupFI">
+                <label for="name">Soup</label>
+              </div>
+
+              <div class="inputGroup">
+                <input type="text" required="" autocomplete="off" class="form-control" formControlName="saladFI">
+                <label for="name">Salad</label>
+              </div>
+
+              <div class="inputGroup">
+                <input type="text" required="" autocomplete="off" class="form-control" formControlName="mainCourseFI">
+                <label for="name">Main Course</label>
+              </div>
+
+              <div class="inputGroup">
+                <input type="text" required="" autocomplete="off" class="form-control" formControlName="dessertFI">
+                <label for="name">Dessert</label>
+              </div>
             </div>
           </div>
 
-          <!-- Food Inclusion -->
-          <div class="row mt-3">
-            <div class="col">
-              <h6 class="text-secondary fst-italic">Food Inclusion</h6>
-              <input type="text" class="form-control" placeholder="e.g. Chicken Adobo, Pork Sinigang"
-                formControlName="foodInclusion">
-            </div>
-          </div>
 
         </form>
 
@@ -167,7 +219,7 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-primary"
           (click)="isUpdateMode ? updatePackage() : addPackage()" data-bs-dismiss="modal">
-          {{ isUpdateMode ? 'Update' : 'Insert' }}
+          {{ isUpdateMode ? 'Update' : 'Add' }}
         </button>
       </div>
     </div>

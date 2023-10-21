@@ -42,7 +42,11 @@ export class PackageMenuComponent implements OnInit {
       packageName: [''],
       numofPax: [''],
       typeEvent: [''],
-      foodInclusion: ['']
+      appetizerFI: [''],
+      soupFI: [''],
+      saladFI: [''],
+      mainCourseFI: [''],
+      dessertFI: ['']
     });
   }
 
@@ -118,15 +122,12 @@ addPackage() {
 
   // Once the image is uploaded, continue with adding the package to the database
   const packageData = { ...this.packageMenuForm.value }; // Create a copy of the form data
-
-  // Add the imageUrl to the packageData object if it's available
   if (this.imageDownloadUrl) {
     packageData.imageUrl = this.imageDownloadUrl;
   }
-
-  this.packageMenuService.addPackage(packageData, this.userId).then(() => {
-    // Reset the form
+  this.packageMenuService.addPackage(this.packageMenuForm.value, this.userId).then(() => {
     this.packageMenuForm.reset();
+    // this.uploadImage().reset();
   });
 }
 
@@ -222,7 +223,11 @@ addPackage() {
       packageName: packages.packageName,
       numofPax: packages.numofPax,
       typeEvent: packages.typeEvent,
-      foodInclusion: packages.foodInclusion
+      appetizerFI: packages.appetizerFI,
+      soupFI: packages.soupFI,
+      saladFI: packages.saladFI,
+      mainCourseFI: packages.mainCourseFI,
+      dessertFI: packages.dessertFI
     });
   
     // Set the selected image URL if available
@@ -244,7 +249,12 @@ addPackage() {
         pkg.packageName.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
         pkg.numofPax.toString().includes(this.searchTerm) ||
         pkg.typeEvent.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-        pkg.foodInclusion.toLowerCase().includes(this.searchTerm.toLowerCase())
+        // pkg.foodInclusion.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+        pkg.appetizerFI.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+        pkg.soupFI.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+        pkg.saladFI.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+        pkg.mainCourseFI.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+        pkg.dessertFI.toLowerCase().includes(this.searchTerm.toLowerCase())
       );
     } else {
       this.filteredPackages = this.packages;
@@ -279,4 +289,6 @@ addPackage() {
   unhoverTile(packages: any) {
     packages.hovered = false;
   }
+
+  
 }
