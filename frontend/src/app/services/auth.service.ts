@@ -256,7 +256,7 @@ validateFields(foodItem: any): string | null {
   }
 
   return null;
-}
+}//end of lopez 2 sprint
 
 }
 
