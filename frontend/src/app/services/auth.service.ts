@@ -215,20 +215,25 @@ getFoodItems(): Observable<FoodItem[]> {
 }
 
 saveFoodItem(foodItem: FoodItem): Promise<void> {
-  const id = this.afs.createId();
-  const foodItemWithID = { ...foodItem, id };
-  
-  return this.foodItemsCollection
-    .doc(id)
+  const catererUid = this.getCatererUid(); // Get the UID of the logged-in caterer
+  const foodItemId = this.afs.createId(); // Generate a unique ID for the food item
+  const foodItemWithID = { ...foodItem, catererUid, foodItemId };
+
+  return this.afs
+    .collection('caterers') // Reference the "caterers" collection
+    .doc(catererUid) // Reference the caterer's document
+    .collection('foodItems') // Reference the "foodItems" subcollection
+    .doc(foodItemId) // Reference the specific food item document
     .set(foodItemWithID)
     .then(() => {
-      console.log('Food item saved successfully:', id, foodItemWithID);
+      console.log('Food item saved successfully:', foodItemId, foodItemWithID);
     })
     .catch((error) => {
       console.error('Error saving food item:', error);
       throw new Error('Error saving food item');
     });
-}  
+}
+
 
 //image upload service
 uploadImage(file: File): Promise<string> {

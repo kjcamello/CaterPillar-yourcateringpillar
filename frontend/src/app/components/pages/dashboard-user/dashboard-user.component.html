@@ -39,14 +39,34 @@
 </ul>
 
 <!-- Display the food items -->
+<!--
 <ul>
-  <li *ngFor="let foodItem of foodItems | async">
-    <a routerLink="/temp-caterer-prof">View Caterer Profile
-      <div class="button-container">
-        <a routerLink="/user-package-selection" class="left-button">Fixed Package</a>
-        <a routerLink="/user-diy-selection" class="right-button">D-I-Y Package</a>
-      </div>
-    </a>
-  </li>
+    <li *ngFor="let foodItem of foodItems | async">
+        <div class="food-item">
+          <h2>{{foodItem.food_name}}</h2>
+          <p>{{foodItem.food_description}}</p>
+          <p>Caterer: {{caterer.catererBasicInfo.catererDisplayName || 'N/A'}}</p>
+          <div class="button-container">
+          <a routerLink="/user-package-selection" class="left-button">Fixed Package</a>
+          <a routerLink="/user-diy-selection" class="right-button">D-I-Y Package</a>
+          </div>
+        </div>
+      </li>
+</ul> -->
 
+<ul class="caterer-list">
+  <li *ngFor="let caterer of caterers | async" class="caterer-item">
+    <!-- Debugging: Display raw data as JSON -->
+    {{ caterer | json }}
+
+    <!-- Display caterer information here -->
+    {{ caterer.catererDisplayName }} <!-- Replace with actual caterer data -->
+    
+    <div class="button-container">
+      <a routerLink="/user-package-selection" class="left-button">Fixed Package</a>
+      <a [routerLink]="['/user-diy-selection', caterer.catererBasicInfo.catererUid]" class="right-button">DIY Package</a>
+
+
+    </div>
+  </li>
 </ul>
