@@ -8,22 +8,22 @@
 
 <!-- Display the food items with checkboxes and pax input -->
 <ul>
-    <li *ngFor="let foodItem of (foodItems | async)">
-      <label class="food-item" [class.highlighted-container]="foodItem.selected">
-        <!-- Hidden checkbox input -->
-        <input type="checkbox" [checked]="foodItem.selected" (change)="handleCheckboxChange(foodItem)" class="hidden-checkbox" id="checkbox-{{ foodItem.id }}">
-        <div class="price-tag">
-          ₱{{ foodItem.pax_price }}/pax
-        </div>
-        <div class="food-item-details">
-          <img [src]="foodItem.food_image" alt="{{ foodItem.food_name }}" *ngIf="foodItem.food_image" class="custom-image">
-          <h3>{{ foodItem.food_name }}</h3>
-          <p>{{ foodItem.food_description }}</p>
-        </div>
-        <div class="min-pax">
-          Min Pax: {{ foodItem.minimum_pax }}
-        </div>
-        <input
+  <li *ngFor="let foodItem of (foodItems | async)">
+    <label class="food-item" [class.highlighted-container]="foodItem.selected">
+      <!-- Hidden checkbox input -->
+      <input type="checkbox" [checked]="foodItem.selected" (change)="handleCheckboxChange(foodItem)" class="hidden-checkbox" id="checkbox-{{ foodItem.id }}">
+      <div class="price-tag">
+        ₱{{ foodItem.pax_price }}/pax
+      </div>
+      <div class="food-item-details">
+        <img [src]="foodItem.food_image" alt="{{ foodItem.food_name }}" *ngIf="foodItem.food_image" class="custom-image">
+        <h3>{{ foodItem.food_name }}</h3>
+        <p>{{ foodItem.food_description }}</p>
+      </div>
+      <div class="min-pax">
+        Min Pax: {{ foodItem.minimum_pax }}
+      </div>
+      <input
         type="number"
         [ngModel]="foodItem.selected ? foodItem.selectedPax : foodItem.minimum_pax"
         [readonly]="foodItem.selected"
@@ -31,47 +31,42 @@
         (ngModelChange)="updateTotalPrice(foodItem, $event)"
         [min]="foodItem.minimum_pax"
       >
-      
-        <div *ngIf="foodItem.selected">
-          <p>Total Price: ₱{{ foodItem.pax_price * foodItem.selectedPax }}</p>
-        </div>
-      </label>
-    </li>
-  </ul>
+      <div *ngIf="foodItem.selected">
+        <p>Total Price: ₱{{ foodItem.pax_price * foodItem.selectedPax }}</p>
+      </div>
+    </label>
+  </li>
+</ul>
 
 <!-- E-Receipt form (initially hidden) -->
 <div class="ereceipt-form" *ngIf="showEReceiptForm">
-    <div class="ereceipt-background"></div> <!-- Opaque background -->
-
-    <div class="ereceipt-content">
-        <h3>CaterPillar in Negative Logo (Black and White)</h3>
-        <!-- Table for displaying the selected food items and their details -->
-        <table class="receipt-table">
-          <thead>
-            <tr>
-              <th>Food Item</th>
-              <th>Pax</th>
-              <th class="right-align">Total Price</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let foodItem of selectedFoodItems">
-              <td>{{ foodItem.food_name }}</td>
-              <td>{{ foodItem.selectedPax }}</td>
-              <td class="right-align">₱{{ foodItem.pax_price * foodItem.selectedPax }}</td>
-            </tr>
-          </tbody>
-        </table>
-        <!-- Display the grand total in the e-receipt -->
-        <div class="total-section">
-          <div class="grand-total-label">Grand Total</div>
-          <div class="grand-total-value">₱{{ grandTotal }}</div>
-        </div>
+  <div class="ereceipt-background"></div> <!-- Opaque background -->
+  <div class="ereceipt-content">
+    <h3>CaterPillar</h3>
+    <!-- Table for displaying the selected food items and their details -->
+    <table class="receipt-table">
+      <thead>
+        <tr>
+          <th>Food Item</th>
+          <th>Pax</th>
+          <th class="right-align">Total Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let foodItem of selectedFoodItems">
+          <td>{{ foodItem.food_name }}</td>
+          <td>{{ foodItem.selectedPax }}</td>
+          <td class="right-align">₱{{ foodItem.pax_price * foodItem.selectedPax }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- Display the grand total in the e-receipt -->
+    <div class="total-section">
+      <div class="grand-total-label">Grand Total</div>
+      <div class="grand-total-value">₱{{ grandTotal }}</div>
     </div>
-      
-
+  </div>
 </div>
-
 
 <!-- Display the grand total -->
 <h3>Grand Total Price: ₱{{ grandTotal }}</h3>

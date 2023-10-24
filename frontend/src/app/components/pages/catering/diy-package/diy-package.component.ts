@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { FoodItem } from 'src/app/shared/models/food-item';
-//import { FoodItemService } from 'src/app/services/food-item.service';
 import { AuthService } from 'src/app/services/auth.service'; //user auth
 
 @Component({

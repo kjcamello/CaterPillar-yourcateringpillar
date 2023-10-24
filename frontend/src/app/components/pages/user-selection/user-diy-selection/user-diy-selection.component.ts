@@ -15,7 +15,7 @@ import { Observable } from 'rxjs';
 })
 export class UserDiySelectionComponent implements OnInit {
   catering: Catering[] = [];
-  foodItems: Observable<FoodItem[]>; // Updated data type
+  foodItems: Observable<FoodItem[]>; // Sprint 3
   foodItemForm: FormGroup;
 
   // Define a property for selected food items
@@ -26,8 +26,10 @@ export class UserDiySelectionComponent implements OnInit {
   // Add a property for the grand total
   grandTotal: number = 0;
 
-   // Property to control the display of the e-receipt form
+  // Property to control the display of the e-receipt form
   showEReceiptForm: boolean = false;
+
+  catererId: string; // To store the selected caterer's ID
 
   constructor(
     private cateringservice: CateringService,
@@ -40,6 +42,19 @@ export class UserDiySelectionComponent implements OnInit {
       food_name: new FormControl('', Validators.required),
       food_description: new FormControl('', Validators.required),
       // Add other form controls for food item properties
+    });
+    this.activatedRoute.params.subscribe((params) => {
+      // Access route parameters
+      const catererId = params['id'];
+      
+      // Do something with the catererId
+    });
+  
+    this.activatedRoute.queryParams.subscribe((queryParams) => {
+      // Access query parameters
+      const paramValue = queryParams['paramName'];
+      
+      // Do something with the query parameters
     });
 
     this.activatedRoute.params.subscribe((params) => {
@@ -54,7 +69,27 @@ export class UserDiySelectionComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.foodItems = this.firestore.collection<FoodItem>('foodItems').valueChanges();
+    // Retrieve the caterer's ID from the route parameters
+    this.activatedRoute.params.subscribe(params => {
+      const catererId = params['id'];
+
+      // Fetch the food items for the specific caterer
+      this.foodItems = this.firestore
+        .collection('caterers')
+        .doc(catererId)
+        .collection<FoodItem>('foodItems')
+        .valueChanges();
+    });
+  }
+
+
+    /*
+    // Fetch food items for the selected caterer
+    this.foodItems = this.firestore
+      .collection('caterers')
+      .doc(this.catererId)
+      .collection<FoodItem>('foodItems')
+      .valueChanges();
 
     // Fetch caterer data
     this.authService.currentEmail.subscribe((email) => {
@@ -62,7 +97,7 @@ export class UserDiySelectionComponent implements OnInit {
         this.fetchCatererData(email);
       }
     });
-  }
+  }*/
 
     // Function to toggle the display of the e-receipt form
     toggleEReceiptForm() {
@@ -135,31 +170,3 @@ updateTotalPrice(foodItem: FoodItem, newValue: number) {
 }
 
 }
-
-/*addToSelectedFoodItems(foodItem: FoodItem) {
-  if (foodItem.selectedPax >= foodItem.minimum_pax) {
-    if (!foodItem.selected) {
-      foodItem.selected = true;
-      const itemTotal = foodItem.pax_price * foodItem.selectedPax;
-      this.grandTotal += itemTotal;
-    } else {
-      // If the item is already selected, don't accumulate the total
-    }
-  } else {
-    // If the minimum pax requirement is not met, show an alert error
-    alert('Selected pax must be greater than or equal to minimum pax.');
-
-    // Set the grand total for this item to 0
-    this.grandTotal -= foodItem.pax_price * foodItem.selectedPax;
-
-    // Reset the selectedPax to the minimum pax
-    foodItem.selectedPax = foodItem.minimum_pax;
-  }
-}
-
-
-
-  
-  
-}
-*/

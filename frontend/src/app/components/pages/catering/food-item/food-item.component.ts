@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FoodItem } from 'src/app/shared/models/food-item';
 //import { FoodItemService } from 'src/app/services/food-item.service';
 import { AuthService } from 'src/app/services/auth.service'; //user auth
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Component({
   selector: 'app-food-item',
@@ -14,19 +15,24 @@ export class FoodItemComponent {
 
   errorMessage: string = null;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private afs: AngularFirestore,) {}
 
   saveFoodItem() {
     this.errorMessage = this.validateFields();
-
+    
     if (!this.errorMessage) {
+      const catererUid = this.authService.getCatererUid(); // Get the UID of the logged-in caterer
+      const foodItemId = this.afs.createId(); // Generate a unique ID for the food item
+      this.foodItem.catererUid = catererUid;
+      this.foodItem.foodItemId = foodItemId;
+    
       this.authService.saveFoodItem(this.foodItem).then(
         () => {
           this.errorMessage = null;
           this.saveFood.emit(this.foodItem);
           alert('Food item saved successfully.');
         },
-        error => {
+        (error) => {
           this.errorMessage = 'Error saving food item. Please try again.';
           alert(this.errorMessage);
         }
@@ -35,6 +41,9 @@ export class FoodItemComponent {
       alert(this.errorMessage);
     }
   }
+  
+  
+  
 
   uploadFoodImage(event: any) {
     const file = event.target.files[0];
