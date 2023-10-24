@@ -4,7 +4,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { FormsModule,FormControl, Validators,NgForm, ReactiveFormsModule, FormGroupDirective } from '@angular/forms';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-forgotpassword',
@@ -15,9 +15,15 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
   export class ForgotPasswordComponent implements OnInit{
     email : string = ' ';
     constructor (
+      private location: Location,
       public userAuthService: UserAuthService
       ) { }
 
+      goBack() {
+        this.location.back();
+      }
+
+      
     ngOnInit(){}
 
     // sendLink() {

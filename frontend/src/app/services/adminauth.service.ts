@@ -54,22 +54,36 @@ export class AdminAuthService {
 
    // "Forgot Password" function
    forgotPassword(email: string): void {
-    
-    this.afAuth
-      .sendPasswordResetEmail(email)
-      .then(() => {
-        // Password reset email sent successfully
-        this.ngZone.run(() => {
-          window.alert('Password reset email sent. Check your inbox.');
+    // Check if the email is recognized as a superadminemail
+    if (this.isSuperAdminEmail(email)) {
+      this.afAuth
+        .sendPasswordResetEmail(email)
+        .then(() => {
+          // Password reset email sent successfully
+          this.ngZone.run(() => {
+            window.alert('Password reset email sent. Check your inbox.');
+          });
+        })
+        .catch((error) => {
+          // Handle password reset errors and display window alert
+          this.ngZone.run(() => {
+            window.alert('Password reset error: ' + error.message);
+          });
         });
-      })
-      .catch((error) => {
-        // Handle password reset errors and display window alert
-        this.ngZone.run(() => {
-          window.alert('Please input a valid email address to proceed.');
-        });
-      })
-      
+    } else {
+      // Notify the user that the email is not recognized as a superadmin email
+      this.ngZone.run(() => {
+        window.alert('Invalid email for password reset. Superadmin email required.');
+      });
+    }
   }
+  
+  // Function to check if the email is recognized as a superadmin email
+  private isSuperAdminEmail(email: string): boolean {
+    const superAdminEmails = ['ninopatricknolidolopez@gmail.com'
+    , 'norbz.vergara.27@gmail.com', 'baniladjimkenn2301@gmail.com', 'kentjustine.camello@gmail.com', 'chanzyongco@gmail.com'];
+    return superAdminEmails.includes(email);
+  }
+  
 }
 
