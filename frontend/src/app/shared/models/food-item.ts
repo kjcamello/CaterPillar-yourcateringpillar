@@ -6,6 +6,8 @@ export class FoodItem {
   selected: boolean;
   food_image: string;
   selectedPax: number; // Add a selectedPax property
+  catererUid: string;
+  foodItemId: string;
   
 
   constructor() {
@@ -16,5 +18,7 @@ export class FoodItem {
     this.selected = false;
     this.food_image = '';
     this.selectedPax = 0; // Initialize the selectedPax property
+    this.catererUid = ''; // Initialize the catererUid property
+    this.foodItemId = ''; // Initialize the foodItemId property
   }
 }

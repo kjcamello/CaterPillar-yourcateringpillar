@@ -160,3 +160,27 @@ color: #414141;
 margin-top: 0.7rem;
 font-size: 1.1rem;
 }
+
+/*registered caterers*/
+/* Style the list */
+/* Style the list */
+.caterer-list {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Style each list item */
+.caterer-item {
+  margin: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgb(161, 23, 23);
+  border-radius: 1rem;
+  width: 20rem;
+  height: 22.5rem;
+  overflow: hidden;
+  color: #9a0000;
+}

@@ -78,7 +78,7 @@ const routes: Routes = [
   { path: 'caterer-profile/:catererId/diy-package/:packageId', component: DiyPackageComponent },
 
   { path: 'user-package-selection', component: UserPackageSelectionComponent },
-  { path: 'user-diy-selection', component: UserDiySelectionComponent },
+  { path: 'user-diy-selection/:id', component: UserDiySelectionComponent },
 
   { path: 'user-profile', component: UserProfileComponent }  // <-- This is the last route, so no comma after this
     // ...other routes
