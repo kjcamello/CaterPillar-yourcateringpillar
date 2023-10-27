@@ -10,10 +10,26 @@ export class UserProfileComponent {
   days: number[] = Array.from({ length: 31 }, (_, i) => i + 1); // Default to 31 days
   years: number[] = Array.from({ length: 122 }, (_, i) => new Date().getFullYear() - i); // For example, from the current year to 1900
 
+  selectedImage: File=null;
+  selectedImageSrc:  string = null;
+
   constructor(private router: Router) { }
 
   goBack() {
     this.router.navigate(['/dashboard-user']);
+  }
+  
+  onImageSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.selectedImage = file;
+    }
+
+    const reader = new FileReader();
+    reader.onload = (e: any) => {
+      this.selectedImageSrc = e.target.result;
+    };
+    reader.readAsDataURL(file);
   }
 
   populateDateDropdown() {

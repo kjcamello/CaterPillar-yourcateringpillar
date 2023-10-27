@@ -2,14 +2,15 @@ body {
     background-color: #c00000;
 }
 .user-profile {
-    font-family: 'Langar', cursive;
+    /* font-family: 'Langar', cursive;
     background-color: #ffef22;
     border-radius: 35px;
     width: 1016px;
     height: 776px;
     margin: 50px auto;
     padding: 20px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); */
+
 }
 
 .header-bar {
@@ -35,16 +36,42 @@ body {
     height: 50px;
 }
 
-.cover-photo-container,
+.cover-photo-container{
+
+
+}
 .profile-pic-container {
     position: relative;
     margin: 20px 0;
 }
 
-.cover-photo {
+.coverphoto{
+    /* width: 1280px;
+    height: 200px; */
     width: 100%;
+    height: 100%;
+    /* object-fit: cover; */
+    object-fit: contain;
+}
+
+.coverphoto img{
+    width: 100%;
+    height: 100%;
+    /* object-fit: cover; */
+    object-fit: contain;
+}
+
+.coverSize{
+    /* width: 1280px; */
     height: 200px;
-    object-fit: cover;
+    border: 1px solid #AC0000;
+    
+}
+.profilepicSize{
+    width: 200px;
+    height: 200px;
+    border: 1px solid #ffd0b1;
+    
 }
 
 .change-cover-button,
@@ -104,3 +131,28 @@ body {
     background-color: #c00000;
     color: #fff;
 }
+
+.myAcc{
+    font-size: 18px;
+    color: #AC0000;
+}
+
+.custom-file-upload {
+    /* border: 1px solid #ccc; */
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+  }
+
+  .custom-file-upload  img{
+    position: absolute;
+    right: 7px;
+    bottom: 80px;
+    height: 40px;
+    cursor: pointer;
+  }
+
+
+  input[type="file"] {
+    display: none;
+  }

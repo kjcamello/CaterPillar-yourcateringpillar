@@ -1,28 +1,48 @@
 
-<div class="user-profile">
-
-    <!-- Header Bar with Back Button and Logo -->
+<header>
     <div class="header-bar">
         <!-- Back Button with Arrow Icon -->
         <button class="back-button" (click)="goBack()">
-            <img src="assets/arrow.png" alt="Go Back" class="back-icon">
+            <img src="assets/goback.png" alt="Go Back" class="back-icon">
         </button>
         
         <!-- Caterpillar Logo -->
-        <img src="assets/caterpillarlogo.png" alt="Caterpillar Logo" class="logo">
+        <img src="assets/caterpillar logo.png" alt="Caterpillar Logo" class="logo">
+
+        <div class="myAcc"> <!-- Text "MY ACCOUNT"-->   
+            <p>MY ACCOUNT</p>
+        </div>
+       
     </div>
+</header>
+<div class="user-profile">
 
     <!-- User Cover Photo with Change Button -->
     <div class="cover-photo-container">
-        <img src="assets/user_coverphoto.jpg" alt="User Cover Photo" class="cover-photo">
-        <button class="change-cover-button">
-            <img src="assets/change_user_coverphoto.png" alt="Change Cover Photo" class="change-cover-icon">
-        </button>
+        
+
+        <div class="coverSize">
+            <div class="coverphoto" *ngIf="selectedImage">
+                <img [src]="selectedImageSrc" alt="Selected Image" class="cover_photo">
+            </div>
+        </div>
+        
+        <label class="custom-file-upload">
+            <input type="file" (change)="onImageSelected($event)" accept="image/*" >
+            <img src="assets/change_user_coverphoto.png" alt="Go Back" class="uploadCover">
+            
+        </label>
+
     </div>
 
     <!-- User Profile Picture with Change Button -->
     <div class="profile-pic-container">
-        <img src="assets/user_profilepic.jpg" alt="User Profile Image" class="profile-image">
+        
+        <div class="profilepicSize">
+            <div class="profilephoto" *ngIf="selectedImage">
+                <img [src]="selectedImageSrc" alt="Selected Image" class="profile_photo">
+            </div>
+        </div>  
         <button class="change-profile-pic-button">
             <img src="assets/user_changeprofilepic.png" alt="Change Profile Picture" class="change-profile-pic-icon">
         </button>
