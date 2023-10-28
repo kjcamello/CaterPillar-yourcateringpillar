@@ -1,4 +1,4 @@
-import { AngularFirestore, AngularFirestoreDocument, } from '@angular/fire/compat/firestore';
+/*import { AngularFirestore, AngularFirestoreDocument, } from '@angular/fire/compat/firestore';
 import { Injectable } from '@angular/core';
 import { FoodItem } from 'src/app/shared/models/food-item';
 
@@ -20,4 +20,4 @@ export class DiyPackage {
   }
 
   // You can also add methods to remove food items from the package
-}
+}*/

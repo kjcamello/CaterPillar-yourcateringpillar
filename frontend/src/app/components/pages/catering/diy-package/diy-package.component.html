@@ -10,7 +10,7 @@
                 <a routerLink="/diy-package">Create DIY Package</a>
              </li>
           </ul>
-           <a  class="logo">
+           <a routerLink="/dashboard" class="logo">
               <img src="assets/caterpillar logo with shadow and lied.png" alt="Logo">
               
            </a>
@@ -26,13 +26,51 @@
      </header>
     </header>
     
-<div class="diy-package">
-    <h1>Create DIY Package</h1>
-    <button (click)="toggleFoodItemForm()">Add Food Item</button>
-
-    <app-food-item *ngFor="let foodItem of foodItems" [foodItem]="foodItem" (saveFood)="saveFoodItem($event)"></app-food-item>
-
-    <div *ngIf="showFoodItemForm">
-        <app-food-item [foodItem]="newFoodItem" (saveFood)="saveFoodItem($event)"></app-food-item>
-    </div>
+<!-- Display the new food item form -->
+<div class="form-container">
+   <button (click)="toggleFoodItemForm()">Add Food Item</button>
+   <app-food-item *ngFor="let foodItem of foodItems" [foodItem]="foodItem" (saveFood)="saveFoodItem($event)"></app-food-item>
+   <div *ngIf="showFoodItemForm">
+     <app-food-item [foodItem]="newFoodItem" (saveFood)="saveFoodItem($event)"></app-food-item>
+   </div>
+ </div>
+ 
+ <!-- Display the saved food items on the right -->
+ <div class="saved-food-items">
+   <h2>Saved Food Items</h2>
+   <ul>
+     <li *ngFor="let item of (savedFoodItems | async)">{{ item.food_name }}</li>
+   </ul>
+ </div>
+ 
+  <!---
+  <div class="food-items-container">
+   <h1>Create DIY Package</h1>
+   <div class="content-container">
+     <div class="form-container">
+       <button (click)="toggleFoodItemForm()">Add Food Item</button>
+       <div *ngFor="let foodItem of foodItems; let i = index">
+         <app-food-item
+           [foodItem]="foodItem"
+           (saveFood)="saveFoodItem($event, i)"
+         ></app-food-item>
+       </div>
+     </div>
+   </div>
+ </div>
+--->
+<!---
+<div class="form-container">
+  <button (click)="toggleAppetizerItemForm()">Add Appetizer Item</button>
+  <app-food-item *ngFor="let appetizerItem of appetizerItems" [appetizerItem]="appetizerItem" (saveAppetizer)="saveAppetizerItem($event)"></app-food-item>
+  <div *ngIf="showAppetizerItemForm">
+    <app-food-item [appetizerItem]="newAppetizerItem" (saveAppetizer)="saveAppetizerItem($event)"></app-food-item>
+  </div>
 </div>
+
+<div class="saved-food-items">
+  <h2>Saved Appetizer Items</h2>
+  <ul>
+    <li *ngFor="let item of (savedAppetizerItems | async)">{{ item.appetizer_name }}</li>
+  </ul>
+</div>--->

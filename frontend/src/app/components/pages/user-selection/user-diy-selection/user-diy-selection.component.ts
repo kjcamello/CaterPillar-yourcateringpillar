@@ -15,7 +15,7 @@ import { Observable } from 'rxjs';
 })
 export class UserDiySelectionComponent implements OnInit {
   catering: Catering[] = [];
-  foodItems: Observable<FoodItem[]>; // Sprint 3
+  foodItems: Observable<FoodItem[]> = null; // Sprint 3
   foodItemForm: FormGroup;
 
   // Define a property for selected food items
@@ -102,7 +102,8 @@ export class UserDiySelectionComponent implements OnInit {
     // Function to toggle the display of the e-receipt form
     toggleEReceiptForm() {
       this.showEReceiptForm = !this.showEReceiptForm;
-    }
+  }
+  
 
   //lopez Sprint 2
   fetchCatererData(email: string) {

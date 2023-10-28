@@ -1,23 +1,29 @@
 <div class="food-item">
-    <h2>Food Item</h2>
-    <form (ngSubmit)="saveFoodItem()" #foodForm="ngForm">
-        <label>Food Name:</label>
-        <input type="text" [(ngModel)]="foodItem.food_name" name="food_name" required>
+  <form (ngSubmit)="saveFoodItem()" #foodForm="ngForm">
+    <!-- Display the food item details in view mode or when editing -->
+    <label>Food Name:</label>
+    <input type="text" [(ngModel)]="foodItem.food_name" name="food_name" required>
 
-        <label>Food Description:</label>
-        <textarea [(ngModel)]="foodItem.food_description" name="food_description" required></textarea>
-    
-        <label>Food Image:</label>
-        <input type="file" (change)="uploadFoodImage($event)" accept=".jpg, .png" name="food_image" required>
-    
-        <label>Minimum Pax:</label>
-        <input type="number" [(ngModel)]="foodItem.minimum_pax" name="minimum_pax" required>
-    
-        <label>Pax Price:</label>
-        <input type="number" [(ngModel)]="foodItem.pax_price" name="pax_price" required>
+    <label>Food Description:</label>
+    <textarea [(ngModel)]="foodItem.food_description" name="food_description" required></textarea>
 
-        <button type="submit">Save Food Item</button>
-        <button type="button" (click)="cancelFood()">Cancel</button>
-    </form>
-    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+    <label>Food Image:</label>
+    <input type="file" (change)="uploadFoodImage($event)" accept=".jpg, .png" name="food_image" required>
+
+    <!-- Display the uploaded image preview -->
+    <img [src]="foodItem.food_image" *ngIf="foodItem.food_image" class="uploaded-image-preview">
+
+    <label>Minimum Pax:</label>
+    <input type="number" [(ngModel)]="foodItem.minimum_pax" name="minimum_pax" required>
+
+    <label>Pax Price:</label>
+    <input type="number" [(ngModel)]="foodItem.pax_price" name="pax_price" required>
+
+    <button type="submit">Save Food Item</button>
+    <!--
+    <button type="button" (click)="toggleEditMode()">{{ isEditMode ? 'Cancel' : 'Edit' }}</button>
+
+    <button type="button" (click)="updateFoodItem()" *ngIf="isEditMode">Update Food Item</button>
+--->
+  </form>
 </div>

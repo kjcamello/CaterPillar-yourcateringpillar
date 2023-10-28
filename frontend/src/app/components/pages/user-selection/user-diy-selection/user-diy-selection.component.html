@@ -4,7 +4,9 @@
 <h3 class="food-items-header">Food Items</h3>
 
 <!-- "Review Order" button to toggle the e-receipt form (SPRINT 3) -->
-<button (click)="toggleEReceiptForm()" class="review-order-button">Review Order</button>
+<button (click)="toggleEReceiptForm()" class="review-order-button" *ngIf="selectedFoodItems.length > 0">Review Order</button>
+
+
 
 <!-- Display the food items with checkboxes and pax input -->
 <ul>
@@ -37,6 +39,12 @@
     </label>
   </li>
 </ul>
+
+<!-- Display "No items added yet" if there are no food items -->
+<div class="no-items-text" *ngIf="!(foodItems | async)?.length">
+  No items added yet.
+</div>
+
 
 <!-- E-Receipt form (initially hidden) -->
 <div class="ereceipt-form" *ngIf="showEReceiptForm">

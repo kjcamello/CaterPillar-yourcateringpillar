@@ -40,64 +40,60 @@ li {
   margin: 0.5rem;
 }
 
-.button-container {
+.caterer-card {
   display: flex;
-  justify-content: center; /* Center the buttons horizontally */
-  position: sticky; /* Set the position to sticky */
-  bottom: 0; /* Stick the buttons to the bottom */
-  background-color: #fff; /* You can change this to match your design */
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%; /* Ensure the card takes full height */
+  color: #9a0000;
+
+  /* Add additional styles for the card if needed */
+}
+
+.button-container {
+  position: absolute; /* Position the buttons absolutely within the container */
+  bottom: 0; /* Place the buttons at the bottom of the container */
+  width: 100%; /* Make the buttons stretch the full width of the container */
+
+  /* Add some spacing and background color to the buttons container */
+  padding: 0.5rem;
+  background-color: #fff;
   z-index: 1; /* Ensure the buttons are on top of other content */
 }
 
 .left-button,
 .right-button {
-  flex: 1;
   text-align: center;
-  padding: 0.5rem 1rem;
+  padding: 0.25rem 0.5rem; /* Adjust the padding as needed */
   background-color: #007BFF;
   color: #fff;
   text-decoration: none;
   border: 1px solid #007BFF;
   border-radius: 0.25rem;
-  max-width: 150px;
-  max-height: 30px;
-  line-height: 30px;
+  max-width: 100px; /* Adjust the max-width as needed */
+  height: 30px; /* Adjust the height as needed */
+  line-height: 30px; /* Adjust the line-height to match the height */
+  max-height: 25px; /* Adjust the max-width as needed */
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 0.5rem; /* Adjust horizontal margin */
+  transition: background-color 0.3s;
 }
 
 .left-button {
-  /* Your existing styles */
-  background-color: orange; /* Change button color to orange */
-  color: darkred !important; /* Change text color to dark red */
+  background-color: orange;
+  color: darkred !important;
 }
 
 .right-button {
-  /* Your existing styles */
-  background-color: darkred; /* Change button color to red */
-  color: yellow !important; /* Change text color to yellow */
+  background-color: darkred;
+  color: yellow !important;
 }
 
-
-
-/* Add media query to handle smaller screens if needed */
-@media (max-width: 768px) {
-  .left-button, .right-button {
-    max-width: 100%; /* Allow full width on smaller screens */
-    max-height: auto; /* Allow full height on smaller screens */
-    margin-top: 0; /* Reset margin-top on smaller screens */
-  }
-}
-
-
-/* Add media query to handle smaller screens if needed */
-@media (max-width: 768px) {
-  .left-button, .right-button {
-    max-width: 100%; /* Allow full width on smaller screens */
-    max-height: auto; /* Allow full height on smaller screens */
-  }
+.left-button:hover,
+.right-button:hover {
+  background-color: #0056b3;
+  transition: background-color 0.3s;
 }
 
 
@@ -161,6 +157,9 @@ margin-top: 0.7rem;
 font-size: 1.1rem;
 }
 
+
+
+
 /*registered caterers*/
 /* Style the list */
 /* Style the list */
@@ -183,4 +182,62 @@ font-size: 1.1rem;
   height: 22.5rem;
   overflow: hidden;
   color: #9a0000;
+
+  position: relative; /* Create a positioning context for the buttons */
+  border: 1px solid #ddd; /* Add a border for better visualization */
+
+  /* Adjust the container's padding and margin as needed */
+  padding: 1rem;
+  margin: 1rem;
+}
+
+
+
+
+/*dashboard*/
+
+/*Styles for the entire caterer card
+.caterer-card {
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin: 10px;
+  padding: 10px;
+}
+
+/* Styles for the caterer's image */
+.caterer-image {
+  width: 150px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+/* Styles for the caterer information */
+.caterer-info {
+  flex: 1;
+  padding: 0 10px;
+}
+
+/* Styles for the caterer's name */
+h2 {
+  font-size: 1rem;
+  color: #9a0000;
+  margin: 0;
+}
+
+/* Styles for the caterer's address */
+.caterer-address {
+  font-size: 0.9rem;
+  color: #777;
+  margin: 5px 0;
+}
+
+/* Styles for the caterer's email and contact */
+.caterer-email, .caterer-contact {
+  font-size: 0.9rem;
+  color: #333;
+  margin: 5px 0;
 }

@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 
 import { FoodItem } from 'src/app/shared/models/food-item'; //Lopez
+import { AppetizerItem } from 'src/app/shared/models/appetizer-item'; //Lopez
 import { Observable } from 'rxjs'; //Lopez
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 
@@ -24,6 +25,7 @@ export class AuthService {
   //private foodItems: FoodItem[] = [];
 
   private foodItemsCollection: AngularFirestoreCollection<FoodItem>; //lopez sprint 2
+  private appetizerItemsCollection: AngularFirestoreCollection<AppetizerItem>; //lopez sprint 2
 
   constructor(
     private afs: AngularFirestore,
@@ -42,6 +44,7 @@ export class AuthService {
     });
 
     this.foodItemsCollection = afs.collection<FoodItem>('foodItems'); //lopez sprint 2
+    this.appetizerItemsCollection = afs.collection<AppetizerItem>('appetizerItems'); //lopez sprint 3
   }
   setEmail(email: string) {
     this.emailSource.next(email);
@@ -214,16 +217,17 @@ getFoodItems(): Observable<FoodItem[]> {
   return this.foodItemsCollection.valueChanges();
 }
 
-saveFoodItem(foodItem: FoodItem): Promise<void> {
-  const catererUid = this.getCatererUid(); // Get the UID of the logged-in caterer
-  const foodItemId = this.afs.createId(); // Generate a unique ID for the food item
+saveFoodItem(foodItem: FoodItem): void {
+  const catererUid = this.getCatererUid();
+  const foodItemId = this.afs.createId();
   const foodItemWithID = { ...foodItem, catererUid, foodItemId };
 
-  return this.afs
-    .collection('caterers') // Reference the "caterers" collection
-    .doc(catererUid) // Reference the caterer's document
-    .collection('foodItems') // Reference the "foodItems" subcollection
-    .doc(foodItemId) // Reference the specific food item document
+  console.log('Saving food item:', foodItemWithID);
+  this.afs
+    .collection('caterers')
+    .doc(catererUid)
+    .collection('foodItems')
+    .doc(foodItemId)
     .set(foodItemWithID)
     .then(() => {
       console.log('Food item saved successfully:', foodItemId, foodItemWithID);
@@ -234,7 +238,22 @@ saveFoodItem(foodItem: FoodItem): Promise<void> {
     });
 }
 
+//Sprint 3
+updateFoodItem(foodItem: FoodItem): Promise<void> {
+  // Construct the path to the food item document in Firestore
+  const foodItemPath = `caterers/${foodItem.catererUid}/foodItems/${foodItem.foodItemId}`;
 
+  // Update the food item in Firestore
+  return this.afs
+    .doc(foodItemPath)
+    .update(foodItem)
+    .catch(error => {
+      console.error('Error updating food item:', error);
+      throw error;
+    });
+}
+
+/*
 //image upload service
 uploadImage(file: File): Promise<string> {
   return new Promise<string>((resolve, reject) => {
@@ -264,5 +283,49 @@ validateFields(foodItem: any): string | null {
 }//end of lopez 2 sprint
 
 }
+*/
+
+//appetizer item service
+getAppetizerItems(): Observable<AppetizerItem[]> {
+  return this.appetizerItemsCollection.valueChanges();
+}
+
+saveAppetizerItem(appetizerItem: AppetizerItem): void {
+  const catererUid = this.getCatererUid();
+  const appetizerItemId = this.afs.createId();
+  const appetizerItemWithID = { ...appetizerItem, catererUid, appetizerItemId };
+
+  console.log('Appetizer item to be saved:', appetizerItemWithID);
+
+  this.afs
+    .collection('caterers')
+    .doc(catererUid)
+    .collection('appetizerItems')
+    .doc(appetizerItemId)
+    .set(appetizerItemWithID)
+    .then(() => {
+      console.log('Appetizer item saved successfully:', appetizerItemId, appetizerItemWithID);
+    })
+.catch((error) => {
+  console.error('Error saving appetizer item:', error);
+  throw new Error('Error saving appetizer item: ' + error.message); // Log the error message
+});
+
+}
 
 
+//Sprint 3
+updateAppetizerItem(appetizerItem: AppetizerItem): Promise<void> {
+  // Construct the path to the food item document in Firestore
+  const appetizerItemPath = `caterers/${appetizerItem.catererUid}/appetizerItems/${appetizerItem.appetizerItemId}`;
+
+  // Update the food item in Firestore
+  return this.afs
+    .doc(appetizerItemPath)
+    .update(appetizerItem)
+    .catch(error => {
+      console.error('Error updating appetizer item:', error);
+      throw error;
+    });
+}
+}

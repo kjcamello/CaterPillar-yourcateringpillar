@@ -32,10 +32,12 @@ import { AdminAuthService } from './services/adminauth.service';
 import { AdminForgotPasswordComponent } from './components/pages/superadmin/forgotpass.component';
 
 import { DiyPackageComponent } from './components/pages/catering/diy-package/diy-package.component';
-import { TempCatererProfComponent } from './components/pages/temp-caterer-prof/temp-caterer-prof.component'; //temporary
+//import { TempCatererProfComponent } from './components/pages/temp-caterer-prof/temp-caterer-prof.component'; //temporary
 
 import { UserPackageSelectionComponent } from './components/pages/user-selection/user-package-selection/user-package-selection.component';
 import { UserDiySelectionComponent } from './components/pages/user-selection/user-diy-selection/user-diy-selection.component'; //temporary
+
+
 
 import { UserProfileComponent } from './components/pages/user-profile/user-profile.component'; 
 
@@ -74,8 +76,8 @@ const routes: Routes = [
   { path: 'diy-package', component: DiyPackageComponent},
 
   { path: 'dashboard-user', component: DashboardUserComponent },
-  { path: 'caterer-profile/:catererId', component: TempCatererProfComponent }, //temporary profile ra ni for the meantime (Lopez)
-  { path: 'caterer-profile/:catererId/diy-package/:packageId', component: DiyPackageComponent },
+  //{ path: 'caterer-profile/:catererId', component: TempCatererProfComponent }, //temporary profile ra ni for the meantime (Lopez)
+  //{ path: 'caterer-profile/:catererId/diy-package/:packageId', component: DiyPackageComponent },
 
   { path: 'user-package-selection', component: UserPackageSelectionComponent },
   { path: 'user-diy-selection/:id', component: UserDiySelectionComponent },
