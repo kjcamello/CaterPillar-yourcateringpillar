@@ -5,48 +5,48 @@
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
     max-width: 800px;
     margin: 40px auto;
-}
-
-h1 {
+  }
+  
+  h1 {
     font-size: 1.8rem;
     color: #444;
     text-align: center;
     margin-bottom: 20px;
-}
-
-.info-container {
+  }
+  
+  .info-container {
     display: flex;
     flex-wrap: wrap; 
     justify-content: space-between;
     margin-bottom: 30px;
-}
-
-.caterer-info, .catering-info {
+  }
+  
+  .caterer-info, .catering-info {
     background-color: rgba(255, 116, 0, 0.3); /* Using the color you provided for the header */
     padding: 15px;
     border-radius: 8px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     width: calc(50% - 10px);  /* -10px for the gap between the two sections */
-}
-
-h2 {
+  }
+  
+  h2 {
     font-size: 1.4rem;
     border-bottom: 2px solid #9a0000; /* Using the color you mentioned for catererSignUp */
     padding-bottom: 10px;
     margin-bottom: 10px;
     color: #333;
-}
-
-.caterer-info div, .catering-info div {
+  }
+  
+  .caterer-info div, .catering-info div {
     margin: 10px 0;
-}
-
-.logout-container {
+  }
+  
+  .logout-container {
     display: flex;
     justify-content: center;
-}
-
-.logout-container button {
+  }
+  
+  .logout-container button {
     background-color: #9a0000; /* Using the color you provided for the catererSignUp */
     color: #fff;
     padding: 10px 20px;
@@ -54,61 +54,61 @@ h2 {
     border-radius: 5px;
     cursor: pointer;
     transition: 0.2s all;
-}
-
-.logout-container button:hover {
+  }
+  
+  .logout-container button:hover {
     background-color: #7a0000; /* Slightly darker shade for hover */
-}
-
-header{
+  }
+  
+  header{
     position: relative;
     background-color: rgba(255, 116, 0, 0.3);
     padding: 0;
-}
-
-.CaterPillar-top--sticky{
+  }
+  
+  .CaterPillar-top--sticky{
     position: relative;
     top: 0;
     left: 0;
     right: 0;
     background-color: #FFD2B3;
     border-bottom: solid 1px rgb(182 0 0);
-}
-
-.CaterPillar-top--sticky .navbar-wrapper .container-wrapper{
+  }
+  
+  .CaterPillar-top--sticky .navbar-wrapper .container-wrapper{
     min-width: inherit;
-}
-
-.CaterPillar-top--sticky .navbar .container1{
+  }
+  
+  .CaterPillar-top--sticky .navbar .container1{
     width: inherit;
     max-width: 1200px
-}
-
-.sections{
-    display: flex;
-}
-
-.Hlogo img{
-    height: 70px;
-}
-
-a.Hlogo:hover{
-    background: none;
-}
+  }
   
-
-/* Container for both the icon and the dropdown */
-.header-container {
+  .sections{
+    display: flex;
+  }
+  
+  .Hlogo img{
+    height: 70px;
+  }
+  
+  a.Hlogo:hover{
+    background: none;
+  }
+  
+  
+  /* Container for both the icon and the dropdown */
+  .header-container {
     position: relative;
-}
-
-/* Container for both the icon and the dropdown */
-.header-container {
+  }
+  
+  /* Container for both the icon and the dropdown */
+  .header-container {
     position: relative;
-}
-
-/* Dropdown Button */
-.CaterPillarCart {
+  }
+  
+  /* Dropdown Button */
+  .CaterPillarCart {
     background-color: transparent;
     /* color: none; */
     /* padding: 16px; */
@@ -118,17 +118,17 @@ a.Hlogo:hover{
     margin: -50px 0px 0 0; /* Adjusted margin to move the icon to the right */
     float: right; /* Align the icon to the right */
     z-index: 2; /* Increase the z-index for the icon */
-}
-
-/* The container <div> - needed to position the dropdown content */
-.dropdown {
+  }
+  
+  /* The container <div> - needed to position the dropdown content */
+  .dropdown {
     position: absolute; /* Change to absolute positioning */
     right: 0;
     top: 100%; /* Adjust the top positioning */
     z-index: 1; /* Lower the z-index for the dropdown content */
-}
-
-.dropdown-content::after {
+  }
+  
+  .dropdown-content::after {
     content: " ";
     position: absolute;
     right: 15px;
@@ -137,83 +137,83 @@ a.Hlogo:hover{
     border-right: 10px solid transparent;
     border-left: 10px solid transparent;
     border-bottom: 10px solid white;
-}
-
-/* Dropdown Content (Hidden by Default) */
-.dropdown-content {
+  }
+  
+  /* Dropdown Content (Hidden by Default) */
+  .dropdown-content {
     display: none;
     background-color: white;
     height: 60px;
     width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: -1; /* Keep the z-index for the dropdown content lower */
-}
-
-/* Links inside the dropdown */
-.dropdown-content a {
+  }
+  
+  /* Links inside the dropdown */
+  .dropdown-content a {
     color: black;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
-}
-
-
-/* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: #ddd;}
+  }
   
-/* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {display: block;}
   
-/* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .CaterPillarCart {background-color: none;}
-
-.CaterPillarCart img{
+  /* Change color of dropdown links on hover */
+  .dropdown-content a:hover {background-color: #ddd;}
+  
+  /* Show the dropdown menu on hover */
+  .dropdown:hover .dropdown-content {display: block;}
+  
+  /* Change the background color of the dropdown button when the dropdown content is shown */
+  .dropdown:hover .CaterPillarCart {background-color: none;}
+  
+  .CaterPillarCart img{
     height: 50px;
-}
-
-a.CaterPillarCart:hover {
+  }
+  
+  a.CaterPillarCart:hover {
     background: none;
-}
-
-.Hlogo {
+  }
+  
+  .Hlogo {
     display: flex;
     padding-bottom: 10px;
-}
-
-.ul1 {
+  }
+  
+  .ul1 {
     display: flex;
     list-style-type: none;
     padding: 0;
     margin: 0;
     align-items: center;
     margin-left: auto; /* Move the ul to the right */
-}
-
-
-.ul1 a {
+  }
+  
+  
+  .ul1 a {
     color: #9a0000;
     font-size: 11px;
     font-weight: 500;
-}
-
-.ul1 a:hover {
+  }
+  
+  .ul1 a:hover {
     background: #9a0000;
     color: white;
     cursor: pointer;
-}
-
-/*Side Navbar*/
-.ul2{
+  }
+  
+  /*Side Navbar*/
+  .ul2{
     list-style-type: none;
     margin: 0;
     padding: 0;
-}
-
-.STcontainer{
-    display: flex;
-}
+  }
   
-.side_navbar{
+  .STcontainer{
+    display: flex;
+  }
+  
+  .side_navbar{
     position: absolute;
     top: 81px;
     bottom: 0;
@@ -224,9 +224,9 @@ a.CaterPillarCart:hover {
     overflow: hidden;
     transition: width 0.2s linear;
     box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
- }
-
-.ul2 a{
+  }
+  
+  .ul2 a{
     position: relative;
     color: white;
     font-size: 16px;
@@ -236,38 +236,38 @@ a.CaterPillarCart:hover {
     width: 300px;
     padding: 6px;
     
-}
-
-.ul2 a:hover{
+  }
+  
+  .ul2 a:hover{
     background: #FF6A00;
     cursor: pointer;
     color: #FFF016;
     text-shadow: 0px 0px 5px black;
-}
-
-.ul2 a:hover img{
+  }
+  
+  .ul2 a:hover img{
     /* background:  #AC0000; */
     filter: invert(12%) sepia(81%) saturate(10000%) hue-rotate(355deg) brightness(88%) contrast(116%) drop-shadow(0px 0px 5px white);
-}
+  }
   
-.side_navbar:hover{
+  .side_navbar:hover{
     width: 250px;
     transition: all 0.5s ease;
-}
+  }
   
-.logout{
+  .logout{
     position: absolute;
     bottom: 0;
-}
-
-.icon-size{
+  }
+  
+  .icon-size{
     height: 50px;
-}
-
-.nav-item{
+  }
+  
+  .nav-item{
     padding-left: 15px;
-}
-
-.side_navbar_separator{
+  }
+  
+  .side_navbar_separator{
     height: 210px;
-}
+  }

@@ -40,6 +40,7 @@ import { UserDiySelectionComponent } from './components/pages/user-selection/use
 
 
 import { UserProfileComponent } from './components/pages/user-profile/user-profile.component'; 
+import { AddServiceTypeComponent } from './components/pages/add-service-type/add-service-type.component';
 
 const routes: Routes = [
   { path:'', component:HomeComponent },
@@ -51,7 +52,7 @@ const routes: Routes = [
   { path: 'sign-in', component: SignInComponent },
   { path: 'register-caterer', component: CatererSignUpComponent },
   { path: 'catering-information', component: CateringinformationComponent},
-  { path: 'dashboard', component: DashboardComponent },
+  { path: 'dashboard-caterer', component: DashboardComponent },
   { path: 'forgot-password', component: PasswordRecoveryComponent },
   { path: 'verify-email-address', component: EmailVerificationComponent },
   { path: 'user-verification', component: UserVerificationComponent},
@@ -73,6 +74,7 @@ const routes: Routes = [
   { path: 'login-superadmin', component: LoginSuperadminComponent},
   { path: 'admin-forgotpass', component: AdminForgotPasswordComponent},
 
+  { path: 'add-service-type', component: AddServiceTypeComponent},
   { path: 'diy-package', component: DiyPackageComponent},
 
   { path: 'dashboard-user', component: DashboardUserComponent },

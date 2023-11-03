@@ -109,7 +109,7 @@ export class CateringinformationComponent implements OnInit{
                         }, { merge: true }).then(() => {
                           
                             console.log('Information saved successfully!');
-                            this.router.navigate(['dashboard']);
+                            this.router.navigate(['dashboard-caterer']);
                             
                         }).catch(error => {
                             console.error('Error saving information:', error);
@@ -124,7 +124,7 @@ export class CateringinformationComponent implements OnInit{
                 cateringInfo: this.cateringInfo
             }, { merge: true }).then(() => {
                 console.log('Information saved successfully!');
-                this.router.navigate(['dashboard']);
+                this.router.navigate(['dashboard-caterer']);
                 // this.router.navigate(['/some-success-route']); 
             }).catch(error => {
                 console.error('Error saving information:', error);

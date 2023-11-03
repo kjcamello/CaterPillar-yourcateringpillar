@@ -8,6 +8,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { finalize } from 'rxjs/operators';
 import { v4 as uuidv4 } from 'uuid';
+import { ShareDataService } from 'src/app/services/share-data.service';
 
 @Component({
   selector: 'app-package-menu',
@@ -19,16 +20,26 @@ export class PackageMenuComponent implements OnInit {
   packages = [];
   userId: string;
   selectedPackageIds: string[] = [];
-  sortingCriteria: string = 'packageName';
-  sortingDirection: string = 'asc';
+  
   selectedImage: File = null;
   imageDownloadUrl: string = null;
   selectedImageSrc: string = null;
   filteredPackages = [];
   searchTerm = '';
-  eventOptions = ['Graduation', 'Wedding', 'Birthday', 'Despidida', 'Christening'];
+  // eventOptions = ['Graduation', 'Wedding', 'Birthday', 'Despidida', 'Christening'];
   isUpdateMode: boolean = false;
   selectedPackageId: string;
+
+  sortingCriteria: string = 'packageName';
+  sortingDirection: string = 'asc';
+
+    // Create properties for select options
+    eventOptions: string[] = [];
+    appetizerOptions: string[] = [];
+    soupOptions: string[] = [];
+    saladOptions: string[] = [];
+    mainCourseOptions: string[] = [];
+    dessertOptions: string[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -36,7 +47,8 @@ export class PackageMenuComponent implements OnInit {
     private authService: AuthService,
     private afAuth: AngularFireAuth,
     private firestore: AngularFirestore,
-    private storage: AngularFireStorage
+    private storage: AngularFireStorage,
+    private sharedDataService: ShareDataService
   ) {
     this.packageMenuForm = fb.group({
       packageName: [''],
@@ -67,6 +79,13 @@ export class PackageMenuComponent implements OnInit {
     this.packages.forEach(packages => {
       packages.selected = false;
     });
+
+    this.eventOptions = this.sharedDataService.eventTypes;
+    this.appetizerOptions = this.sharedDataService.appetizers;
+    this.soupOptions = this.sharedDataService.soups;
+    this.saladOptions = this.sharedDataService.salads;
+    this.mainCourseOptions = this.sharedDataService.mainCourses;
+    this.dessertOptions = this.sharedDataService.desserts;
   }
 
   onImageSelected(event: any) {
@@ -154,27 +173,42 @@ addPackage() {
 
   sortPackages() {
     this.filteredPackages = [...this.packages]; // Create a copy
+  
     this.filteredPackages.sort((a, b) => {
-      const aValue = a[this.sortingCriteria].toLowerCase();
-      const bValue = b[this.sortingCriteria].toLowerCase();
-
-      if (this.sortingDirection === 'asc') {
-        return aValue.localeCompare(bValue);
+      if (this.sortingCriteria === 'numofPax') {
+        // Convert numofPax to numbers for proper numeric sorting
+        const aValue = parseFloat(a[this.sortingCriteria]);
+        const bValue = parseFloat(b[this.sortingCriteria]);
+  
+        if (this.sortingDirection === 'asc') {
+          return aValue - bValue;
+        } else {
+          return bValue - aValue;
+        }
       } else {
-        return bValue.localeCompare(aValue);
+        // For other criteria, treat them as strings
+        const aValue = a[this.sortingCriteria].toLowerCase();
+        const bValue = b[this.sortingCriteria].toLowerCase();
+  
+        if (this.sortingDirection === 'asc') {
+          return aValue.localeCompare(bValue);
+        } else {
+          return bValue.localeCompare(aValue);
+        }
       }
     });
   }
+  
 
-  onSortingCriteriaChange(criteria: string) {
-    this.sortingCriteria = criteria;
+
+  onSortingCriteriaChange() {
     this.sortPackages();
   }
 
-  onSortingDirectionChange(direction: string) {
-    this.sortingDirection = direction;
+
+  onSortingDirectionChange() {
     this.sortPackages();
-  }
+  } 
 
   updatePackage() {
     if (!this.packageMenuForm.valid) {
@@ -290,5 +324,9 @@ addPackage() {
     packages.hovered = false;
   }
 
+  logout() {
+    this.authService.SignOutCaterer();
+    // Redirect or handle post-logout logic here
+  }
   
 }

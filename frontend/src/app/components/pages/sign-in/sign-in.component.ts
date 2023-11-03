@@ -51,7 +51,7 @@ export class SignInComponent implements OnInit {
         const isCaterer = await this.checkIfUserIsCaterer(uid);
         if (isCaterer) {
             console.log('User logged in successfully');
-            return this.router.navigate(['/dashboard']);
+            return this.router.navigate(['/dashboard-caterer']);
         }
 
         const isCustomer = await this.checkIfUserIsCustomer(uid);

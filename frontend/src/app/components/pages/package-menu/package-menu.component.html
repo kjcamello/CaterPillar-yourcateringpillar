@@ -5,9 +5,38 @@
 
   <!-- MAIN CONTENT -->
   <main>
-
-    <div>
-      <div class="PKGMENU">
+    
+    <div class="side_navbar_bg">
+      <div class="side_navbar side_navbar_bg">
+        <ul class="ul2">
+          <li><a routerLink="/dashboard-caterer">
+            <img src="assets/Caterer Menu.png" alt="" class="icon-size">
+            <span class="nav-item">DashBoard</span>
+          </a></li>
+          <li><a routerLink="/add-service-type">
+            <img src="assets/Add Service Type.png" alt="" class="icon-size">
+            <span class="nav-item">Add Service Type</span>
+          </a></li>
+          <li><a href="/package-menu">
+            <img src="assets/Add Package Menu.png" alt="" class="icon-size">
+            <span class="nav-item">Add Package Menu</span>
+          </a></li>
+          <li><a routerLink="/diy-package">
+            <img src="assets/Add DIY Package.png" alt="" class="icon-size">
+            <span class="nav-item">Add DIY Package</span>
+          </a></li>
+          <li><a routerLink="/change-caterer-password">
+            <img src="assets/Caterer Settings.png" alt="" class="icon-size">
+            <span class="nav-item">Change Password</span>
+          </a></li>
+          <div class="side_navbar_separator"></div>
+          <li><a (click)="logout()">
+            <img src="assets/Caterer Logout.png" alt="" class="icon-size">
+            <span class="nav-item">Logout</span>
+          </a></li>
+        </ul>
+      </div>
+      <div class="height PKGMENU">
         <div class="top-border-bg">
           <div class="top-border">
             <div class="toolbar">
@@ -35,15 +64,19 @@
             <div class="sorting-controls">
               <label>Sort By:</label>
               <div class="separator"></div>
-              <select [(ngModel)]="sortingCriteria" (change)="onSortingCriteriaChange($event.target.value)">
+              <select [(ngModel)]="sortingCriteria" (change)="onSortingCriteriaChange()">
                 <option class="op" value="packageName">Package Name</option>
-                <option class="op" value="numofPax">Number of Guests/Pax</option>
                 <option class="op" value="typeEvent">Type of Event</option>
-                <option class="op" value="foodInclusion">Food Inclusion</option>
+                <option class="op" value="numofPax">Number of Guests/Pax</option>
+                <option class="op" value="appetizerFI">Appetizer</option>
+                <option class="op" value="soupFI">Soup</option>
+                <option class="op" value="saladFI">Salad</option>
+                <option class="op" value="mainCourseFI">Main Course</option>
+                <option class="op" value="dessertFI">Dessert</option>
               </select>
             
-              <label></label>
-              <select [(ngModel)]="sortingDirection" (change)="onSortingDirectionChange($event.target.value)">
+              <label>Sort Direction:</label>
+              <select [(ngModel)]="sortingDirection" (change)="onSortingDirectionChange()">
                 <option class="op" value="asc">Ascending</option>
                 <option class="op" value="desc">Descending</option>
               </select>
@@ -107,22 +140,6 @@
 
         <form [formGroup]="packageMenuForm">
 
-          <!-- Image Upload -->
-          <div class="row mt-3">
-            <div class="col">
-                <h6 class="uploadImgTI">Upload Image</h6>
-                <label class="custom-file-upload">
-                  <input type="file" (change)="onImageSelected($event)" accept="image/*" class="form-control-file" formControlName="packageImage">
-                  Select an Image
-                </label>
-  
-                <!-- Display the selected image in the modal -->
-                <div class="card mt-3" *ngIf="selectedImage">
-                <img [src]="selectedImageSrc" alt="Selected Image" class="card-img-top">
-              </div>
-            </div>
-          </div>
-
           <!-- Package Name -->
           <div class="row mt-3">
             <div class="col">
@@ -146,51 +163,79 @@
           <!-- Type of Event -->
           <div class="row mt-3">
             <div class="col">
-                <!-- <h6 class="typeOfEventTI">Type of Event</h6> -->
-                <div class="inputGroup">
-                    <select class="form-select" id="typeEvent" formControlName="typeEvent" required>
-                        <!-- <option value="" disabled selected>Select Event Type</option> -->
-                        <option *ngFor="let option of eventOptions; let i = index;" [value]="option">
-                            {{option | titlecase}}
-                        </option>
-                    </select>
-                    <label for="name">Select Event Type</label>
-                </div>
-            </div>
-        </div>
-        
-
-          <div class="row mt-3">
-            <div class="col">
-              <h6 class="typeOfEventTI">Food Inclusions</h6>
-              
               <div class="inputGroup">
-                <input type="text" required="" autocomplete="off" class="form-control" formControlName="appetizerFI">
-                <label for="name">Appetizer</label>
-              </div>
-
-              <div class="inputGroup">
-                <input type="text" required="" autocomplete="off" class="form-control" formControlName="soupFI">
-                <label for="name">Soup</label>
-              </div>
-
-              <div class="inputGroup">
-                <input type="text" required="" autocomplete="off" class="form-control" formControlName="saladFI">
-                <label for="name">Salad</label>
-              </div>
-
-              <div class="inputGroup">
-                <input type="text" required="" autocomplete="off" class="form-control" formControlName="mainCourseFI">
-                <label for="name">Main Course</label>
-              </div>
-
-              <div class="inputGroup">
-                <input type="text" required="" autocomplete="off" class="form-control" formControlName="dessertFI">
-                <label for="name">Dessert</label>
+                <select class="form-select" id="eventType" formControlName="eventType" required>
+                  <option value="" disabled selected>Select Event Type</option>
+                  <option *ngFor="let option of eventOptions" [value]="option">
+                    {{ option }}
+                  </option>
+                </select>
+                <label for="eventType">Select Event Type</label>
               </div>
             </div>
           </div>
 
+          <!-- Food Inclusions -->
+          <div class="row mt-3">
+            <div class="col">
+              <h6 class="typeOfEventTI">Food Inclusions</h6>
+
+              <!-- Appetizer -->
+              <div class="inputGroup">
+                <select class="form-select" id="appetizerFI" formControlName="appetizerFI" required>
+                  <option value="" disabled selected>Select Appetizer</option>
+                  <option *ngFor="let option of appetizerOptions" [value]="option">
+                    {{ option }}
+                  </option>
+                </select>
+                <label for="appetizerFI">Select Appetizer</label>
+              </div>
+
+              <!-- Soup -->
+              <div class="inputGroup">
+                <select class="form-select" id="soupFI" formControlName="soupFI" required>
+                  <option value="" disabled selected>Select Soup</option>
+                  <option *ngFor="let option of soupOptions" [value]="option">
+                    {{ option }}
+                  </option>
+                </select>
+                <label for="soupFI">Select Soup</label>
+              </div>
+
+              <!-- Salad -->
+              <div class="inputGroup">
+                <select class="form-select" id="saladFI" formControlName="saladFI" required>
+                  <option value="" disabled selected>Select Salad</option>
+                  <option *ngFor="let option of saladOptions" [value]="option">
+                    {{ option }}
+                  </option>
+                </select>
+                <label for="saladFI">Select Salad</label>
+              </div>
+
+              <!-- Main Course -->
+              <div class="inputGroup">
+                <select class="form-select" id="mainCourseFI" formControlName="mainCourseFI" required>
+                  <option value="" disabled selected>Select Main Course</option>
+                  <option *ngFor="let option of mainCourseOptions" [value]="option">
+                    {{ option }}
+                  </option>
+                </select>
+                <label for="mainCourseFI">Select Main Course</label>
+              </div>
+
+              <!-- Dessert -->
+              <div class="inputGroup">
+                <select class="form-select" id="dessertFI" formControlName="dessertFI" required>
+                  <option value="" disabled selected>Select Dessert</option>
+                  <option *ngFor="let option of dessertOptions" [value]="option">
+                    {{ option }}
+                  </option>
+                </select>
+                <label for="dessertFI">Select Dessert</label>
+              </div>
+            </div>
+          </div>
 
         </form>
 
@@ -201,11 +246,6 @@
           {{ isUpdateMode ? 'Update' : 'Add' }}
         </button>
       </div>
-
     </div>
   </div>
 </div>
-
-
-
-

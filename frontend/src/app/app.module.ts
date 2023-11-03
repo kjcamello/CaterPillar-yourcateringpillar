@@ -47,7 +47,7 @@ import { ChangeUserPasswordComponent } from './components/pages/change-user-pass
 import { ChangeCatererPasswordComponent } from './components/pages/change-caterer-password/change-caterer-password.component';
 import { DashboardUserComponent } from './components/pages/dashboard-user/dashboard-user.component';
 import { HeaderUserComponent } from './components/partials/header-user/header-user.component';
-import { PackageMenuComponent } from './components/pages/package-menu/package-menu.component';
+
 import { SuperadminComponent } from './components/pages/superadmin/superadmin.component';
 import { LoginSuperadminComponent } from './components/pages/superadmin/login-superadmin.component';
 import { AdminForgotPasswordComponent } from './components/pages/superadmin/forgotpass.component';
@@ -65,6 +65,9 @@ import { SoupItemComponent } from './components/pages/catering/soup-item/soup-it
 import { SaladItemComponent } from './components/pages/catering/salad-item/salad-item.component';
 import { DessertItemComponent } from './components/pages/catering/dessert-item/dessert-item.component';
 import { EventItemComponent } from './components/pages/catering/event-item/event-item.component';
+import { PackageMenuComponent } from './components/pages/package-menu/package-menu.component';
+import { AddServiceTypeComponent } from './components/pages/add-service-type/add-service-type.component';
+
 
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -132,7 +135,8 @@ const database = getDatabase(app);
     SoupItemComponent,
     SaladItemComponent,
     DessertItemComponent,
-    EventItemComponent
+    EventItemComponent,
+    AddServiceTypeComponent
 
   ],
   imports: [

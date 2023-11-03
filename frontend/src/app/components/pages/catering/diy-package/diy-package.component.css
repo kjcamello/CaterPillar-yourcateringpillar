@@ -365,13 +365,13 @@ ul a {
     display: inline-block;
 }
 
-a span {
+/* a span {
     background-color: #9a0000;
     color: white;
     padding: 0.1rem 0.45rem;
     border-radius: 100rem;
     font-size: 0.9rem;
-}
+} */
 
 .ul1 a {
     color: #9a0000;
@@ -403,4 +403,84 @@ a span {
   .app-food-item {
     flex: 0 0 calc(33.33% - 20px); /* Adjust the width based on your desired layout (e.g., 3 items per row) */
   }
+
+  /*Side Navbar*/
+.with_navbar{
+    /* display: flex; */
+    /* background-color: #f8f8f8; */
+    /* padding: 20px; */
+    /* border: 1px solid #ddd; */
+    /* border-radius: 5px; */
+    /* box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); */
+    margin-left: 60px;
+}
+
+.ul2{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.STcontainer{
+    display: flex;
+}
+  
+.side_navbar{
+    position: absolute;
+    top: 81px;
+    bottom: 0;
+    /* height: 100vh; */
+    left: 0;
+    background: #AC0000;
+    width: 60px;
+    overflow: hidden;
+    transition: width 0.2s linear;
+    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+ }
+
+.ul2 a{
+    position: relative;
+    color: white;
+    font-size: 16px;
+    display: flex;
+    justify-self: center;
+    align-items: center;
+    width: 300px;
+    padding: 6px;
+    
+}
+
+.ul2 a:hover{
+    background: #FF6A00;
+    cursor: pointer;
+    color: #FFF016;
+    text-shadow: 0px 0px 5px black;
+}
+
+.ul2 a:hover img{
+    /* background:  #AC0000; */
+    filter: invert(12%) sepia(81%) saturate(10000%) hue-rotate(355deg) brightness(88%) contrast(116%) drop-shadow(0px 0px 5px white);
+}
+  
+.side_navbar:hover{
+    width: 250px;
+    transition: all 0.5s ease;
+}
+  
+.logout{
+    position: absolute;
+    bottom: 0;
+}
+
+.icon-size{
+    height: 50px;
+}
+
+.nav-item{
+    padding-left: 15px;
+}
+
+.side_navbar_separator{
+    height: 210px;
+}
   

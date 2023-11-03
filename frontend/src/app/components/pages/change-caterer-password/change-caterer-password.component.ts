@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { UserAuthService } from 'src/app/services/userauth.service';
 import { FormsModule,FormControl, Validators,NgForm, ReactiveFormsModule, FormGroupDirective } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-change-caterer-password',
@@ -17,7 +18,8 @@ export class ChangeCatererPasswordComponent {
 
   constructor(
     private userAuthService: UserAuthService,
-    private afAuth: AngularFireAuth
+    private afAuth: AngularFireAuth,
+    private authService: AuthService
   ) {
     // Subscribe to the auth state changes to get the user's email
     this.afAuth.authState.subscribe((caterer) => {
@@ -60,5 +62,10 @@ export class ChangeCatererPasswordComponent {
       console.error('Error changing password:', error);
       window.alert('Invalid old password.');
     }
+  }
+
+  logout() {
+    this.authService.SignOutCaterer();
+    // Redirect or handle post-logout logic here
   }
 }

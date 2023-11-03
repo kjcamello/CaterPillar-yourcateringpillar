@@ -225,6 +225,9 @@ export class DiyPackageComponent implements OnInit {
       });
   }
 
-
+  logout() {
+    this.authService.SignOutCaterer();
+    // Redirect or handle post-logout logic here
+  }
 
 }
