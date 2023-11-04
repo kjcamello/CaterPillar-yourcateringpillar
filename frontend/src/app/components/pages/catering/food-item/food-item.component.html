@@ -1,29 +1,48 @@
-<div class="food-item">
-  <form (ngSubmit)="saveFoodItem()" #foodForm="ngForm">
-    <!-- Display the food item details in view mode or when editing -->
-    <label>Food Name:</label>
-    <input type="text" [(ngModel)]="foodItem.food_name" name="food_name" required>
 
-    <label>Food Description:</label>
-    <textarea [(ngModel)]="foodItem.food_description" name="food_description" required></textarea>
+<div class="diy-package">
+<div class="form-group">
+  <label for="category">Category</label>
+  <select class="form-control" id="category" name="category" [(ngModel)]="foodItem.category">
+    <option value="maincourse">Main Course</option>
+    <option value="appetizer">Appetizer</option>
+    <option value="soup">Soup</option>
+    <option value="salad">Salad</option>
+    <option value="dessert">Dessert</option>
+    <option value="drink">Drink</option>    
+  </select>
+</div>
 
-    <label>Food Image:</label>
-    <input type="file" (change)="uploadFoodImage($event)" accept=".jpg, .png" name="food_image" required>
+<div class="form-group">
+  <label for="food_name">Name</label>
+  <input type="text" class="form-control" id="food_name" name="food_name" [(ngModel)]="foodItem.food_name">
+</div>
 
-    <!-- Display the uploaded image preview -->
-    <img [src]="foodItem.food_image" *ngIf="foodItem.food_image" class="uploaded-image-preview">
+<div class="form-group">
+  <label for="food_description">Description</label>
+  <textarea class="form-control" id="food_description" name="food_description" [(ngModel)]="foodItem.food_description"></textarea>
+</div>
 
-    <label>Minimum Pax:</label>
-    <input type="number" [(ngModel)]="foodItem.minimum_pax" name="minimum_pax" required>
+<div class="form-group">
+  <label for="food_image">Image</label>
+  <input type="file" class="form-control" (change)="uploadFoodImage($event)" accept=".jpg, .jpeg, .png" name="food_image" required>
+</div>
 
-    <label>Pax Price:</label>
-    <input type="number" [(ngModel)]="foodItem.pax_price" name="pax_price" required>
+<!-- Add an image preview -->
+<div *ngIf="foodItem.food_image">
+  <!-- Apply the 'image-preview' class to control the image size -->
+  <img [src]="foodItem.food_image" alt="Image Preview" class="image-preview">
+</div>
 
-    <button type="submit">Save Food Item</button>
-    <!--
-    <button type="button" (click)="toggleEditMode()">{{ isEditMode ? 'Cancel' : 'Edit' }}</button>
+<!-- Minimum Pax and Pax Price fields -->
+<div class="form-group">
+  <label for="minimum_pax">Minimum Pax</label>
+  <input type="number" class="form-control" id="minimum_pax" name="minimum_pax" [(ngModel)]="foodItem.minimum_pax">
+</div>
 
-    <button type="button" (click)="updateFoodItem()" *ngIf="isEditMode">Update Food Item</button>
---->
-  </form>
+<div class="form-group">
+  <label for="pax_price">Pax Price</label>
+  <input type="number" class="form-control" id="pax_price" name="pax_price" [(ngModel)]="foodItem.pax_price">
+</div>
+
+<button (click)="saveFoodItem()">Save</button>
 </div>

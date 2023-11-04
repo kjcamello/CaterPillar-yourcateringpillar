@@ -1,0 +1,62 @@
+<div class="container">
+    <h2 class="diy-header">D-I-Y Package</h2>
+  
+    <!-- Category Selection -->
+    <div class="category-selection">
+      <label for="categorySelect">Select a Category:</label>
+      <select id="categorySelect" [(ngModel)]="selectedCategory" (change)="loadCategoryItems()">
+        <option value="Main Course">Main Course</option>
+        <option value="Appetizer">Appetizer</option>
+        <option value="Soup">Soup</option>
+        <option value="Salad">Salad</option>     
+        <option value="Dessert">Dessert</option>
+        <option value="Drink">Drink</option>
+      </select>
+    </div>
+  
+    <h3 class="food-items-header">{{ selectedCategory | titlecase }} Items</h3>
+  
+    Food Items List
+    <ul class="food-items-list">
+      <li *ngFor="let foodItem of foodItems">
+        <div class="food-item-container">
+          <div class="image-container">
+            <img [src]="foodItem.food_image" alt="{{ foodItem.food_name }}" *ngIf="foodItem.food_image" class="custom-image">
+            <div class="button-container">
+              <button class="update-button" (click)="editFoodItem(foodItem)">Update</button>
+              <button class="delete-button" (click)="deleteFoodItem(foodItem)">Delete</button>
+            </div>
+          </div>
+          <div class="text-container">
+            <h3>{{ foodItem.food_name }}</h3>
+            <p>Description: {{ foodItem.food_description }}</p>
+            <p>Minimum Pax: {{ foodItem.minimum_pax }}</p>
+            <p>Pax Price: {{ foodItem.pax_price }}/pax</p>
+             Add other food item details you want to display
+          </div>
+        </div>
+      </li>
+    </ul>
+     
+  </div>
+  
+  <!-- Display "No items added yet" if there are no food items -->
+  <div class="no-items-text" *ngIf="foodItems.length === 0">
+    No items added yet.
+  </div>
+
+   <!--
+  <div class="saved-food-item-container" *ngFor="let item of savedFoodItems">
+    <div class="food-details">
+      <h2 class="food-name">{{ item.food_name }}</h2>
+      <p class="food-description">{{ item.food_description }}</p>
+      <p class="minimum-pax">Minimum Pax: {{ item.minimum_pax }}</p>
+      <p class="pax-price">Pax Price: {{ item.pax_price }}</p>
+    </div>
+    
+    <div class="action-buttons">
+      <button class="update-button" (click)="editFoodItem(item)">Update</button>
+      <button class="delete-button" (click)="deleteFoodItem(item)">Delete</button>
+    </div>-->
+  
+  

@@ -60,13 +60,11 @@ import { UserProfileComponent } from './components/pages/user-profile/user-profi
 
 import { DiyPackageComponent } from './components/pages/catering/diy-package/diy-package.component';
 import { FoodItemComponent } from './components/pages/catering/food-item/food-item.component';
-import { AppetizerItemComponent } from './components/pages/catering/appetizer-item/appetizer-item.component';
-import { SoupItemComponent } from './components/pages/catering/soup-item/soup-item.component';
-import { SaladItemComponent } from './components/pages/catering/salad-item/salad-item.component';
-import { DessertItemComponent } from './components/pages/catering/dessert-item/dessert-item.component';
+
 import { EventItemComponent } from './components/pages/catering/event-item/event-item.component';
 import { PackageMenuComponent } from './components/pages/package-menu/package-menu.component';
 import { AddServiceTypeComponent } from './components/pages/add-service-type/add-service-type.component';
+import { ViewFoodItemComponent } from './components/pages/catering/view-food-item/view-food-item.component';
 
 
 
@@ -131,12 +129,10 @@ const database = getDatabase(app);
     UserProfileComponent,
     DiyPackageComponent,
     FoodItemComponent,   
-    AppetizerItemComponent,
-    SoupItemComponent,
-    SaladItemComponent,
-    DessertItemComponent,
+
     EventItemComponent,
-    AddServiceTypeComponent
+    AddServiceTypeComponent,
+    ViewFoodItemComponent
 
   ],
   imports: [

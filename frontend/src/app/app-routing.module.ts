@@ -32,7 +32,7 @@ import { AdminAuthService } from './services/adminauth.service';
 import { AdminForgotPasswordComponent } from './components/pages/superadmin/forgotpass.component';
 
 import { DiyPackageComponent } from './components/pages/catering/diy-package/diy-package.component';
-//import { TempCatererProfComponent } from './components/pages/temp-caterer-prof/temp-caterer-prof.component'; //temporary
+import { ViewFoodItemComponent } from './components/pages/catering/view-food-item/view-food-item.component';
 
 import { UserPackageSelectionComponent } from './components/pages/user-selection/user-package-selection/user-package-selection.component';
 import { UserDiySelectionComponent } from './components/pages/user-selection/user-diy-selection/user-diy-selection.component'; //temporary
@@ -80,6 +80,9 @@ const routes: Routes = [
   { path: 'dashboard-user', component: DashboardUserComponent },
   //{ path: 'caterer-profile/:catererId', component: TempCatererProfComponent }, //temporary profile ra ni for the meantime (Lopez)
   //{ path: 'caterer-profile/:catererId/diy-package/:packageId', component: DiyPackageComponent },
+
+  { path: 'view-food-item', component: ViewFoodItemComponent },
+
 
   { path: 'user-package-selection', component: UserPackageSelectionComponent },
   { path: 'user-diy-selection/:id', component: UserDiySelectionComponent },

@@ -1,16 +1,22 @@
+.diy-package {
+  background-color: #f8f8f8;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  max-width: 400px; /* Set the maximum width as needed */
+  position: fixed; /* Set the position to fixed */
+  top: 200px; /* Adjust the top position to add spacing below the sign-up header */
+  right: 1000px; /* Adjust the right position to position it at the right side of the viewport */
+  z-index: 1000; /* Add a high z-index to ensure it appears above other content */
+  /* You can add more margin if needed */
+}
+
 .food-item {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
-/*
-.food-item h2 {
-  font-size: 1.4rem;
-  border-bottom: 2px solid #9a0000;
-  padding-bottom: 10px;
-  margin-bottom: 10px;
-  color: #333;
-}*/
 
 .food-item label {
   font-weight: bold;
@@ -43,7 +49,6 @@
   background-color: #9a0000;
   color: #fff;
   padding: 10px 20px;
-  border: none;
   border-radius: 5px;
   cursor: pointer;
   transition: 0.2s all;
@@ -77,4 +82,62 @@
   max-width: 300px;
   height: auto;
   margin-bottom: 10px;
+}
+
+/* Add a CSS class to control the size of the image preview */
+.image-preview {
+  max-width: 250px; /* Adjust the max width to your preferred size */
+  max-height: 250px; /* Adjust the max height to your preferred size */
+}
+
+
+/* Add this to your component's CSS file (e.g., diy-package.component.css) */
+.saved-food-items {
+  background-color: #f5f5f5; /* Set the background color */
+  border-radius: 5px; /* Round the corners */
+  padding: 10px; /* Add some padding for spacing */
+  margin-top: 20px; /* Add margin to separate from other content */
+}
+
+.saved-food-items h2 {
+  font-size: 20px; /* Style the heading */
+  margin-bottom: 10px; /* Add some space below the heading */
+}
+
+.saved-food-items ul {
+  list-style: none; /* Remove list bullets */
+  padding: 0; /* Remove default padding */
+}
+
+.saved-food-items li {
+  margin: 10px 0; /* Add spacing between items */
+}
+
+.saved-food-items .food-name {
+  font-weight: bold; /* Style the food name as bold */
+}
+
+.saved-food-items .food-description {
+  color: #333; /* Style the food description with a different color */
+}
+
+.saved-food-items .minimum-pax,
+.saved-food-items .pax-price {
+  font-style: italic; /* Style minimum pax and pax price as italic */
+}
+
+.saved-food-items .pax-price {
+  color: #007bff; /* Style pax price with a different color */
+}
+
+/* You can further customize the styles to match your design */
+
+.food-item input[type="text"],
+.food-item input[type="number"],
+.food-item textarea {
+  width: 100%; /* Allow the inputs and textareas to take 100% width */
+  padding: 5px; /* Reduce padding to save space */
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 5px; /* Reduce margin bottom for compact spacing */
 }

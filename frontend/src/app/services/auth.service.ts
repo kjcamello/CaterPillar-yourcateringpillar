@@ -1,17 +1,15 @@
 import { Injectable, NgZone } from '@angular/core';
-import { Caterer } from 'src/app/shared/models/caterer';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 
 import { FoodItem } from 'src/app/shared/models/food-item'; //Lopez
-import { AppetizerItem } from 'src/app/shared/models/appetizer-item'; //Lopez
-import { Observable } from 'rxjs'; //Lopez
+//import { AppetizerItem } from 'src/app/shared/models/appetizer-item'; //Lopez
+import { Observable, of } from 'rxjs'; //Lopez
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 
-
-
+import { Caterer } from 'src/app/shared/models/caterer';
 
 @Injectable({
   providedIn: 'root'
@@ -25,30 +23,33 @@ export class AuthService {
   //private foodItems: FoodItem[] = [];
 
   private foodItemsCollection: AngularFirestoreCollection<FoodItem>; //lopez sprint 2
-  private appetizerItemsCollection: AngularFirestoreCollection<AppetizerItem>; //lopez sprint 2
+  //private appetizerItemsCollection: AngularFirestoreCollection<AppetizerItem>; //lopez sprint 2
+
 
   constructor(
     private afs: AngularFirestore,
     private afAuth: AngularFireAuth,
     private router: Router,
     private ngZone: NgZone
-  ) {
-    // Saving caterer data in local storage when logged in and setting up null when logged out
-    this.afAuth.authState.subscribe((caterer) => {
-      if (caterer) {
-        this.catererData = caterer;
-        localStorage.setItem('caterer', JSON.stringify(this.catererData));
-      } else {
-        localStorage.removeItem('caterer');
-      }
-    });
+    ) {
+      // Saving caterer data in local storage when logged in and setting up null when logged out
+      this.afAuth.authState.subscribe((caterer) => {
+        if (caterer) {
+          this.catererData = caterer;
+          localStorage.setItem('caterer', JSON.stringify(this.catererData));
+        } else {
+          localStorage.removeItem('caterer');
+        }
+      });
+  
+      this.foodItemsCollection = afs.collection<FoodItem>('foodItems'); //lopez sprint 2
+      //this.appetizerItemsCollection = afs.collection<AppetizerItem>('appetizerItems'); //lopez sprint 3
+    }
 
-    this.foodItemsCollection = afs.collection<FoodItem>('foodItems'); //lopez sprint 2
-    this.appetizerItemsCollection = afs.collection<AppetizerItem>('appetizerItems'); //lopez sprint 3
-  }
   setEmail(email: string) {
     this.emailSource.next(email);
   }
+  
   // SignIn Caterer with email and password
   SignInCaterer(email: string, password: string) {
     return this.afAuth.signInWithEmailAndPassword(email, password)
@@ -198,44 +199,26 @@ export class AuthService {
       this.hasFollowedFlow = true;
     }
 
-//Lopez's sprint 2 codes
 
-/*getFoodItems() {
-  return this.afs.collection('foodItems').valueChanges() as Observable<FoodItem[]>;
-}*/
 
-/*addFoodItem(foodItem: FoodItem) {
-  this.foodItems.push(foodItem);
-}*/
+  }
+    //sprint 3
+  // Save a food item to the Firestore subcollection
+ /* saveFoodItem(foodItem: any, subcollection: string) {
+    // Get the caterer's unique document ID or use any other identifier as needed
+    const catererUid = this.getCatererUid();
 
-/*getFoodItems(): FoodItem[] {
-  return this.foodItems;
-}*/
+    // Add the food item to the specified subcollection
+    const subcollectionRef = this.afs.collection('caterers')
+      .doc(catererUid)
+      .collection(subcollection);
 
+    return subcollectionRef.add(foodItem);
+  }*/
+/*
 //food item service
 getFoodItems(): Observable<FoodItem[]> {
   return this.foodItemsCollection.valueChanges();
-}
-
-saveFoodItem(foodItem: FoodItem): void {
-  const catererUid = this.getCatererUid();
-  const foodItemId = this.afs.createId();
-  const foodItemWithID = { ...foodItem, catererUid, foodItemId };
-
-  console.log('Saving food item:', foodItemWithID);
-  this.afs
-    .collection('caterers')
-    .doc(catererUid)
-    .collection('foodItems')
-    .doc(foodItemId)
-    .set(foodItemWithID)
-    .then(() => {
-      console.log('Food item saved successfully:', foodItemId, foodItemWithID);
-    })
-    .catch((error) => {
-      console.error('Error saving food item:', error);
-      throw new Error('Error saving food item');
-    });
 }
 
 //Sprint 3
@@ -251,81 +234,4 @@ updateFoodItem(foodItem: FoodItem): Promise<void> {
       console.error('Error updating food item:', error);
       throw error;
     });
-}
-
-/*
-//image upload service
-uploadImage(file: File): Promise<string> {
-  return new Promise<string>((resolve, reject) => {
-    // Implement image upload logic here, e.g., using a cloud storage service
-    // Resolve with the URL of the uploaded image upon success
-    // Reject with an error message if the upload fails
-  });
-}
-
-isImageFileValid(file: File): boolean {
-  // Check if the file type is valid (e.g., .jpg, .png)
-  const allowedTypes = ['image/jpeg', 'image/png'];
-  return allowedTypes.includes(file.type);
-}
-
-//validation service
-validateFields(foodItem: any): string | null {
-  if (!foodItem.food_name || !foodItem.food_description || !foodItem.minimum_pax || !foodItem.pax_price) {
-    return 'Please fill in all fields.';
-  }
-
-  if (foodItem.minimum_pax <= 5) {
-    return 'Minimum Pax value must be greater than 5.';
-  }
-
-  return null;
-}//end of lopez 2 sprint
-
-}
-*/
-
-//appetizer item service
-getAppetizerItems(): Observable<AppetizerItem[]> {
-  return this.appetizerItemsCollection.valueChanges();
-}
-
-saveAppetizerItem(appetizerItem: AppetizerItem): void {
-  const catererUid = this.getCatererUid();
-  const appetizerItemId = this.afs.createId();
-  const appetizerItemWithID = { ...appetizerItem, catererUid, appetizerItemId };
-
-  console.log('Appetizer item to be saved:', appetizerItemWithID);
-
-  this.afs
-    .collection('caterers')
-    .doc(catererUid)
-    .collection('appetizerItems')
-    .doc(appetizerItemId)
-    .set(appetizerItemWithID)
-    .then(() => {
-      console.log('Appetizer item saved successfully:', appetizerItemId, appetizerItemWithID);
-    })
-.catch((error) => {
-  console.error('Error saving appetizer item:', error);
-  throw new Error('Error saving appetizer item: ' + error.message); // Log the error message
-});
-
-}
-
-
-//Sprint 3
-updateAppetizerItem(appetizerItem: AppetizerItem): Promise<void> {
-  // Construct the path to the food item document in Firestore
-  const appetizerItemPath = `caterers/${appetizerItem.catererUid}/appetizerItems/${appetizerItem.appetizerItemId}`;
-
-  // Update the food item in Firestore
-  return this.afs
-    .doc(appetizerItemPath)
-    .update(appetizerItem)
-    .catch(error => {
-      console.error('Error updating appetizer item:', error);
-      throw error;
-    });
-}
-}
+}*/

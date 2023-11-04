@@ -1,94 +1,88 @@
-<header>
-  <header class="CaterPillar-top CaterPillar-top--sticky">
-      <div class="container">
-          <div class="navbar_spacer"></div>
-         <a  class="logo">
-            <img src="assets/caterpillar logo with shadow and lied.png" alt="Logo">
-            
-         </a>
-      </div>
-   </header>
-</header>
+<div class="header-container">
+ <!-- HEADER -->
+ <app-signup-header></app-signup-header>
 
-<div class="with_navbar">
-  <nav class="side_navbar">
-    <ul class="ul2">
-  
-      <li><a routerLink="/dashboard-caterer">
-        <img src="assets/Caterer Menu.png" alt="" class="icon-size">
-        <span class="nav-item">DashBoard</span>
-      </a></li>
-      <li><a routerLink="/add-service-type">
-        <img src="assets/Add Service Type.png" alt="" class="icon-size">
-        <span class="nav-item">Add Service Type</span>
-      </a></li>
-      <li><a routerLink="/package-menu">
-        <img src="assets/Add Package Menu.png" alt="" class="icon-size">
-        <span class="nav-item">Add Package Menu</span>
-      </a></li>
-      <li><a routerLink="/diy-package">
-        <img src="assets/Add DIY Package.png" alt="" class="icon-size">
-        <span class="nav-item">Add DIY Package</span>
-      </a></li>
-      <li><a routerLink="/change-caterer-password">
-        <img src="assets/Caterer Settings.png" alt="" class="icon-size">
-        <span class="nav-item">Change Password</span>
-      </a></li>
-      <div class="side_navbar_separator"></div>
-      <li><a (click)="logout()">
-        <img src="assets/Caterer Logout.png" alt="" class="icon-size">
-        <span class="nav-item">Logout</span>
-      </a></li>
-    </ul>
-  </nav>
-
-  <!-- Display the new food item form -->
-<div class="form-container">
-  <button (click)="toggleFoodItemForm()">Add Food Item</button>
-  <app-food-item *ngFor="let foodItem of foodItems" [foodItem]="foodItem" (saveFood)="saveFoodItem($event)"></app-food-item>
-  <div *ngIf="showFoodItemForm">
-    <app-food-item [foodItem]="newFoodItem" (saveFood)="saveFoodItem($event)"></app-food-item>
-  </div>
-</div>
-
-<!-- Display the saved food items on the right -->
-<div class="saved-food-items">
-  <h2>Saved Food Items</h2>
-  <ul>
-    <li *ngFor="let item of (savedFoodItems | async)">{{ item.food_name }}</li>
-  </ul>
-</div>
-
- <!---
- <div class="food-items-container">
-  <h1>Create DIY Package</h1>
-  <div class="content-container">
-    <div class="form-container">
-      <button (click)="toggleFoodItemForm()">Add Food Item</button>
-      <div *ngFor="let foodItem of foodItems; let i = index">
-        <app-food-item
-          [foodItem]="foodItem"
-          (saveFood)="saveFoodItem($event, i)"
-        ></app-food-item>
-      </div>
+      <nav class="side_navbar">
+        <ul class="ul2">
+      
+          <li><a routerLink="/dashboard-caterer">
+            <img src="assets/Caterer Menu.png" alt="" class="icon-size">
+            <span class="nav-item">DashBoard</span>
+          </a></li>
+          <li><a routerLink="/add-service-type">
+            <img src="assets/Add Service Type.png" alt="" class="icon-size">
+            <span class="nav-item">Add Service Type</span>
+          </a></li>
+          <li><a href="/package-menu">
+            <img src="assets/Add Package Menu.png" alt="" class="icon-size">
+            <span class="nav-item">Add Package Menu</span>
+          </a></li>
+          <li><a routerLink="/diy-package">
+            <img src="assets/Add DIY Package.png" alt="" class="icon-size">
+            <span class="nav-item">Add DIY Package</span>
+          </a></li>
+          <li><a routerLink="/change-caterer-password">
+            <img src="assets/Caterer Settings.png" alt="" class="icon-size">
+            <span class="nav-item">Change Password</span>
+          </a></li>
+          <div class="side_navbar_separator"></div>
+          <li><a (click)="logout()">
+            <img src="assets/Caterer Logout.png" alt="" class="icon-size">
+            <span class="nav-item">Logout</span>
+          </a></li>
+        </ul>
+      </nav>
     </div>
+  
+<!-- Display the new food item form -->
+<div class="form-container">
+  <button class="add-food-item-button" (click)="toggleFoodItemForm()">Add Food Item</button>
+  <app-food-item *ngFor="let foodItem of foodItems" [foodItem]="foodItem"></app-food-item>
+  <div *ngIf="showFoodItemForm">
+    <app-food-item [foodItem]="'Main Course'"></app-food-item>
   </div>
 </div>
---->
-<!---
-<div class="form-container">
- <button (click)="toggleAppetizerItemForm()">Add Appetizer Item</button>
- <app-food-item *ngFor="let appetizerItem of appetizerItems" [appetizerItem]="appetizerItem" (saveAppetizer)="saveAppetizerItem($event)"></app-food-item>
- <div *ngIf="showAppetizerItemForm">
-   <app-food-item [appetizerItem]="newAppetizerItem" (saveAppetizer)="saveAppetizerItem($event)"></app-food-item>
- </div>
-</div>
+
+
 
 <div class="saved-food-items">
- <h2>Saved Appetizer Items</h2>
- <ul>
-   <li *ngFor="let item of (savedAppetizerItems | async)">{{ item.appetizer_name }}</li>
- </ul>
-</div>--->
+<h2>Saved Food Items</h2>
+<app-view-food-item></app-view-food-item>
 </div>
-    
+
+<!--
+<div class="container">
+<h2 class="diy-header">D-I-Y Package</h2>
+
+
+<div class="category-selection">
+  <label for="categorySelect">Select a Category:</label>
+  <select id="categorySelect" [(ngModel)]="selectedCategory" (change)="loadCategoryItems()">
+    <option value="Main Course">Main Course</option>
+    <option value="Appetizer">Appetizer</option>
+    <option value="Soup">Soup</option>
+    <option value="Salad">Salad</option>     
+    <option value="Dessert">Dessert</option>
+    <option value="Drink">Drink</option>
+  </select>
+</div>
+
+<h3 class="food-items-header">{{ selectedCategory | titlecase }} Items</h3>
+
+
+<ul>
+  <li *ngFor="let foodItem of foodItems">
+    <label class="food-item">
+      <img [src]="foodItem.food_image" alt="{{ foodItem.food_name }}" *ngIf="foodItem.food_image" class="custom-image">
+      <h3>{{ foodItem.food_name }}</h3>
+      <p>{{ foodItem.food_description }}</p>
+
+    </label>
+  </li>
+</ul>
+</div>
+
+<div class="no-items-text" *ngIf="foodItems.length === 0">
+No items added yet.
+</div>
+-->

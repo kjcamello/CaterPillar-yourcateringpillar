@@ -5,11 +5,11 @@ export class FoodItem {
   pax_price: number;
   selected: boolean;
   food_image: string;
-  selectedPax: number; // Add a selectedPax property
+  selectedPax: number;
   catererUid: string;
   foodItemId: string;
   isEditing: boolean = false;
-  
+  category: string;
 
   constructor() {
     this.food_name = '';
@@ -18,8 +18,9 @@ export class FoodItem {
     this.pax_price = 0;
     this.selected = false;
     this.food_image = '';
-    this.selectedPax = 0; // Initialize the selectedPax property
-    this.catererUid = ''; // Initialize the catererUid property
-    this.foodItemId = ''; // Initialize the foodItemId property
+    this.selectedPax = 0;
+    this.catererUid = '';
+    this.foodItemId = '';
+    this.category = '';
   }
 }
