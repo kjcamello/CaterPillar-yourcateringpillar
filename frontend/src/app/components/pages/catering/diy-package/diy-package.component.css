@@ -1,17 +1,3 @@
-/* CSS for the DIY package container */
-.diy-package {
-  background-color: #f8f8f8;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-  max-width: 400px; /* Set the maximum width as needed */
-  position: fixed; /* Set the position to fixed */
-  top: 200px; /* Adjust the top position to add spacing below the sign-up header */
-  right: 1000px; /* Adjust the right position to position it at the right side of the viewport */
-  z-index: 1000; /* Add a high z-index to ensure it appears above other content */
-  /* You can add more margin if needed */
-}
 
 /* Container for content below the DIY package form */
 .content-container {
@@ -39,34 +25,29 @@
 /* Adjust the position of app-view-food-item to the left */
   /* Position app-view-food-item on the right */
   .saved-food-items {
-    flex: 1; /* Allow the container to expand and fill available space */
-    margin-left: 475px; /* Adjust the left margin to create a gap between the side navbar and the content */
-    padding: 20px; /* Add padding for spacing */
+    flex: 1;
+    padding: 20px;
+    margin-top: 50px; /* Add margin to create space below the signup-header */
+    margin-left: 380px; /* Adjust the left margin as needed */
   }
+  
 
-
-button {
+/*prio*/
+/* CSS for the "Add Food Item" button */
+.add-food-item-button {
+  position: fixed;
+  top: 85px; /* Adjust the top position as needed */
+  left: 65px; /* Adjust the left position as needed */
+  width: 302px; /* Set the width to match the .diy-package form */
   background-color: #9a0000;
   color: #fff;
-  padding: 10px 20px;
+  padding: 0px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   transition: 0.2s all;
-  z-index: 1; /* Ensure that the button appears on top of the content */
+  font-size: 20px; /* Adjust the font size to your preferred size */
 }
-  
- /*CSS for the "Add Food Item" button*/
-.add-food-item-button {
-    margin-top: 80px;
-    background-color: #9a0000;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.2s all;
-  }
 
 /*debug using user-diy-selection containers*/
 .food-items-header {
@@ -230,6 +211,19 @@ button {
     flex: 1; /* Allow the container to expand and fill available space */
   }
 
+  /* CSS for the "food_description" textarea */
+.form-group textarea {
+  resize: none; /* Prevent resizing */
+  /* Add any other styling you need */
+}
+
+/* CSS for the "food_description" textarea */
+.form-group .fixed-textarea {
+  resize: none; /* Prevent resizing */
+  /* Add any other styling you need */
+}
+
+
   /* Position app-food-item on the left
   .app-food-item {
     margin: 10px 0;
@@ -240,3 +234,25 @@ button {
     width: calc(50% - 20px);
     display: inline-block;  Display inline to position side by side
   }*/
+/*
+  button {
+    background-color: #9a0000;
+    color: #71c884;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.2s all;
+    z-index: 1;
+  }*/
+  /*
+  .save-button {
+    position: absolute;
+    bottom: 20px; 
+    left: 50%;
+    transform: translateX(-50%); 
+  }*/
+  
+  button:hover {
+    background-color: #7a0000;
+  }

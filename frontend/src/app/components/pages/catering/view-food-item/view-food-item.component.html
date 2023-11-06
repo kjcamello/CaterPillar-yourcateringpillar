@@ -22,10 +22,11 @@
         <div class="food-item-container">
           <div class="image-container">
             <img [src]="foodItem.food_image" alt="{{ foodItem.food_name }}" *ngIf="foodItem.food_image" class="custom-image">
-            <div class="button-container">
-              <button class="update-button" (click)="editFoodItem(foodItem)">Update</button>
-              <button class="delete-button" (click)="deleteFoodItem(foodItem)">Delete</button>
-            </div>
+<!-- Add the Update and Delete buttons -->
+<div class="button-container">
+  <button class="update-button" (click)="updateFoodItem(foodItem)">Update</button>
+  <button class="delete-button" (click)="deleteFoodItem(foodItem)">Delete</button>
+</div>
           </div>
           <div class="text-container">
             <h3>{{ foodItem.food_name }}</h3>

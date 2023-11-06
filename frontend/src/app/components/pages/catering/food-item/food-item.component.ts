@@ -1,12 +1,8 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FoodItem } from 'src/app/shared/models/food-item';
-import { AuthService } from 'src/app/services/auth.service';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
-import { AngularFireStorage } from '@angular/fire/compat/storage';
-
 import { FoodItemsService } from 'src/app/services/food-items.service';
-import { Observable } from 'rxjs';
-import { finalize } from 'rxjs/operators';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-food-item',
@@ -14,69 +10,163 @@ import { finalize } from 'rxjs/operators';
   styleUrls: ['./food-item.component.css']
 })
 export class FoodItemComponent {
-  private foodItemsCollection: AngularFirestoreCollection<FoodItem>;
+  foodItem: FoodItem = new FoodItem(); // Initialize the foodItem object
+  //@Input() foodItem: FoodItem = new FoodItem();
+  errorMessage: string;
+  //confirmationPrompt: boolean = false; // Declare the confirmationPrompt property
 
-  @Input() foodItem: FoodItem;
-  @Input() isEditMode: boolean;
-  @Output() saveFood: EventEmitter<FoodItem> = new EventEmitter<FoodItem>();
-  foodItems: FoodItem[] = [];
-
-  errorMessage: string = null;
-
-  editMode: boolean = false;
-  editingFoodItem: FoodItem = new FoodItem();
-
-  foodImage: string;
-  food_name: string;
-  food_description: string;
-  minimum_pax: number;
-  pax_price: number;
-  selectedCategory: string;
-
-  subcollection: string;
 
   constructor(
-    private authService: AuthService,
-    private afs: AngularFirestore,
-    private afStorage: AngularFireStorage,
-    private foodItemsService: FoodItemsService
-  ){
-    this.foodItemsCollection = afs.collection<FoodItem>('foodItems');
+    private foodItemsService: FoodItemsService,
+    private firestore: AngularFirestore,
+    private authService: AuthService
+  ) {}
 
-    this.foodItem = {
-      food_name: '',
-      food_description: '',
-      minimum_pax: 0,
-      pax_price: 0,
-      category: 'maincourse',
-      food_image: '',
-      selected: false, // Example property
-      selectedPax: 0, // Example property
-      catererUid: '', // Example property
-      foodItemId: '', // Example property
-      isEditing: false, // Example property
-      // ... other properties
-    };
-  }
-
-  getCategoryLabel(): string {
-    switch (this.foodItem.category) {
-      case 'maincourse':
-        return 'Main Course';
-      case 'appetizer':
-        return 'Appetizer';
-      case 'soup':
-        return 'Soup';
-      case 'salad':
-        return 'Salad';
-      case 'dessert':
-        return 'Dessert';
-      case 'drink':
-          return 'Drink';        
-      default:
-        return 'Food';
+  saveFoodItem() {
+    if (this.confirmationPrompt()) {
+      if (this.foodItem.category) {
+        const subcollectionName = this.getSubcollectionForCategory(this.foodItem.category);
+  
+        if (subcollectionName) {
+          const foodItemData = this.foodItemsService.toObject(this.foodItem);
+  
+          const catererUid = this.authService.getCatererUid();
+  
+          if (catererUid) {
+            const subcollectionRef = this.firestore.collection(`caterers/${catererUid}/${subcollectionName}`);
+            
+            // Generate a unique ID for the food item (foodItemId)
+            const foodItemId = this.firestore.createId();
+            // Add catererUid and foodItemId to the foodItemData
+            foodItemData.catererUid = catererUid;
+            foodItemData.foodItemId = foodItemId;
+  
+            subcollectionRef.doc(foodItemId).set(foodItemData)
+              .then(() => {
+                console.log('Food item saved successfully.');
+                alert('Food item saved successfully.');
+              })
+              .catch(error => {
+                console.error('Error saving food item:', error);
+                alert('Error saving food item: ' + error.message);
+              });
+          } else {
+            console.error('No caterer UID available. Caterer is not logged in.');
+            alert('No caterer UID available. Caterer is not logged in.');
+          }
+        } else {
+          console.error('Invalid category selected.');
+          alert('Invalid category selected.');
+        }
+      } else {
+        console.error('Category not set in foodItem.');
+        alert('Category not set in foodItem.');
+      }
     }
   }
+  
+  
+  confirmationPrompt() {
+    if (this.validateFields()) {
+      const confirm = window.confirm('Are you sure you want to add this food item to your catering service?');
+      return confirm;
+    }
+    return false;
+  }
+  
+validateFields() {
+  if (
+    this.foodItem.food_name &&
+    this.foodItem.food_description &&
+    this.foodItem.minimum_pax !== null &&
+    this.foodItem.pax_price !== null &&
+    this.foodItem.maximum_pax !== null &&
+    (this.foodItem.category !== null && this.foodItem.category !== '') &&
+    this.foodItem.minimum_pax >= 5 && // Minimum pax check
+    this.foodItem.minimum_pax <= this.foodItem.maximum_pax && // Maximum pax check
+    this.foodItem.pax_price >= 0 // Pax price is non-negative
+  ) {
+    return true;
+  } else {
+    let errorMessage = 'Please fill in all fields correctly.';
+
+    if (!this.foodItem.food_name) {
+      errorMessage = 'Please input the name of the food item.';
+    }
+
+    if (!this.foodItem.food_description) {
+      errorMessage = 'Please input the description of the food item.';
+    }
+
+    if (this.foodItem.minimum_pax < 5) {
+      errorMessage = 'Minimum pax must be greater than or equal to 5.';
+    }
+
+    if (this.foodItem.pax_price < 0) {
+      errorMessage = 'Pax price must be a non-negative number.';
+    }
+
+    if (this.foodItem.maximum_pax !== null && this.foodItem.minimum_pax > this.foodItem.maximum_pax) {
+      errorMessage = 'Maximum pax must be greater than or equal to minimum pax.';
+    }
+
+    alert(errorMessage);
+  }
+  return false;
+}
+
+
+// food-item.component.ts
+
+limitDigits(event: any, maxLength: number) {
+  const input = event.target.value.replace(/\D/g, ''); // Remove non-digit characters
+  if (input.length > maxLength) {
+    event.target.value = input.substr(0, maxLength);
+    event.preventDefault();
+  }
+}
+
+
+  
+/*
+  getSubcollectionForCategory(category: string) {
+    switch (category) {
+      case 'Main Course':
+        return 'maincourseItems';
+      case 'Appetizer':
+        return 'appetizerItems';
+      case 'Soup':
+        return 'soupItems';
+      case 'Salad':
+        return 'saladItems';
+      case 'Dessert':
+        return 'dessertItems';
+      case 'Drink':
+        return 'drinkItems';
+      default:
+        return null;
+    }
+  }*/
+
+  private getSubcollectionForCategory(category: string): string | null {
+    switch (category) {
+      case 'Main Course':
+        return 'maincourseItems';
+      case 'Appetizer':
+        return 'appetizerItems';
+      case 'Soup':
+        return 'soupItems';
+      case 'Salad':
+        return 'saladItems';
+      case 'Dessert':
+        return 'dessertItems';
+      case 'Drink':
+        return 'drinkItems';
+      default:
+        return null;
+    }
+  }
+  
 
   uploadFoodImage(event: any) {
     const files = event.target.files;
@@ -107,122 +197,6 @@ export class FoodItemComponent {
       }
     }
   }
-  
-
-// Inside FoodItemComponent
-saveFoodItem() {
-  if (this.validateFields()) {
-    const subcollection = this.getSubcollectionForCategory(this.foodItem.category); // Call the method here
-    const catererUid = this.authService.getCatererUid();
-
-    if (!catererUid) {
-      console.error('Caterer not authenticated');
-      alert('Caterer not authenticated');
-      return;
-    }
-
-    const foodItemData = this.foodItemsService.toObject(this.foodItem);
-
-    this.foodItemsService.saveFoodItem(foodItemData, subcollection, this.foodItem.category).subscribe(
-      (documentRef) => {
-        const file = this.convertDataUrlToFile(this.foodItem.food_image, 'image.jpg', 'image/jpeg');
-
-        this.foodItemsService.uploadImage(file, this.foodItem.category, documentRef.id).subscribe(
-          (downloadUrl) => {
-            this.foodItem.food_image = downloadUrl;
-            this.foodItem.foodItemId = documentRef.id;
-            console.log('Food item saved successfully.');
-          },
-          (error) => {
-            console.error('Error uploading image:', error);
-            alert('Error uploading image: ' + error);
-          }
-        );
-      },
-      (error) => {
-        console.error('Error saving food item:', error);
-        alert('Error saving food item: ' + error);
-      }
-    );
-  }
-}
 
 
-  private validateFields(): boolean {
-    console.log('food_name:', this.foodItem.food_name);
-    console.log('food_description:', this.foodItem.food_description);
-    console.log('minimum_pax:', this.foodItem.minimum_pax);
-    console.log('pax_price:', this.foodItem.pax_price);
-    console.log('category:', this.foodItem.category);
-  
-    if (
-      this.foodItem.food_name &&
-      this.foodItem.food_description &&
-      this.foodItem.minimum_pax !== null &&
-      this.foodItem.minimum_pax > 0 &&
-      this.foodItem.pax_price !== null &&
-      this.foodItem.pax_price > 0 &&
-      (this.foodItem.category !== null && this.foodItem.category !== '')
-    ) {
-      return true;
-    } else {
-      alert('Please fill in all fields correctly.');
-    }
-    return false;
-  }
-  
-
-  
-
-  convertDataUrlToFile(dataURL: string, fileName: string, fileType: string): File {
-    const byteString = atob(dataURL.split(',')[1]);
-    const arrayBuffer = new ArrayBuffer(byteString.length);
-    const int8Array = new Int8Array(arrayBuffer);
-
-    for (let i = 0; i < byteString.length; i++) {
-      int8Array[i] = byteString.charCodeAt(i);
-    }
-
-    const blob = new Blob([int8Array], { type: fileType });
-    return new File([blob], fileName, { type: fileType });
-  }
-
-  getSubcollectionForCategory(category: string): string | null {
-    switch (category) {
-      case 'maincourse':
-        return 'maincourseItems';
-      case 'appetizer':
-        return 'appetizerItems';
-      case 'soup':
-        return 'soupItems';
-      case 'salad':
-        return 'saladItems';
-      case 'dessert':
-        return 'dessertItems';
-      case 'drink':
-        return 'drinkItems';
-      default:
-        return null;
-    }
-  }
-
-  resetFormFields() {
-    this.foodItem = new FoodItem();
-    this.foodItem.foodItemId = ''; // Reset the foodItemId to an empty string
-  }
-  
-/*
-  onFileSelected(event: any, selectedCategory: string) {
-    const file: File = event.target.files[0];
-
-    this.foodItemsService.uploadImage(file, this.foodItem.category, this.foodItem.foodItemId).subscribe(
-      (downloadUrl: string) => {
-        this.foodImage = downloadUrl;
-      },
-      (error: any) => {
-        console.error('Error uploading image:', error);
-      }
-    );
-  }*/
-  
 }

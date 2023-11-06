@@ -1,16 +1,36 @@
 .diy-package {
-  background-color: #f8f8f8;
+  background-color: #f2ff00;
   padding: 20px;
   border: 1px solid #ddd;
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-  max-width: 400px; /* Set the maximum width as needed */
-  position: fixed; /* Set the position to fixed */
-  top: 200px; /* Adjust the top position to add spacing below the sign-up header */
-  right: 1000px; /* Adjust the right position to position it at the right side of the viewport */
-  z-index: 1000; /* Add a high z-index to ensure it appears above other content */
-  /* You can add more margin if needed */
+  max-width: 400px;
+  position: fixed;
+  top: 120px; /* Adjust the top position to leave space for the header */
+  left: 65px; /* Adjust the left position as needed */
+  z-index: 0; /* Use a lower z-index value to place it behind the side navbar */
 }
+
+/* CSS for the "Add Food Item" button */
+.save-food-item-button {
+  position: fixed;
+  top: 745px; /* Adjust the top position as needed */
+  left: 65px; /* Adjust the left position as needed */
+  width: 302px; /* Set the width to match the .diy-package form */
+  background-color: #1a9a00;
+  color: #fff;
+  padding: 0px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.2s all;
+  font-size: 20px; /* Adjust the font size to your preferred size */
+}
+
+button:hover {
+  background-color: #007a27;
+}
+
 
 .food-item {
   display: flex;
@@ -44,6 +64,7 @@
   height: auto;
   margin-bottom: 10px;
 }
+/*
 
 .food-item button[type="submit"] {
   background-color: #9a0000;
@@ -52,11 +73,16 @@
   border-radius: 5px;
   cursor: pointer;
   transition: 0.2s all;
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .food-item button[type="submit"]:hover {
   background-color: #7a0000;
-}
+}*/
+
 
 .error-message {
   color: red;
@@ -80,14 +106,14 @@
 
 .uploaded-image-preview {
   max-width: 300px;
-  height: auto;
+  height: 300px;
   margin-bottom: 10px;
 }
 
 /* Add a CSS class to control the size of the image preview */
 .image-preview {
-  max-width: 250px; /* Adjust the max width to your preferred size */
-  max-height: 250px; /* Adjust the max height to your preferred size */
+  max-width: 150px; /* Adjust the max width to your preferred size */
+  max-height: 150px; /* Adjust the max height to your preferred size */
 }
 
 
@@ -140,4 +166,11 @@
   border: 1px solid #ddd;
   border-radius: 5px;
   margin-bottom: 5px; /* Reduce margin bottom for compact spacing */
+}
+
+/* CSS for the fixed-size textarea */
+.fixed-textarea {
+  width: 100%; /* Adjust the width as needed */
+  height: 75px; /* Adjust the height as needed */
+  resize: none; /* Disable textarea resizing */
 }
