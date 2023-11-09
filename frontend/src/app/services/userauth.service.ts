@@ -6,6 +6,7 @@ import { AngularFirestore, AngularFirestoreDocument, } from '@angular/fire/compa
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { EmailAuthProvider } from 'firebase/auth';
+import { Observable, of, switchMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +33,20 @@ export class UserAuthService {
       }
     });
    }
+
+   getUsers(): Observable<any[]> {
+    return this.afAuth.authState.pipe(
+      switchMap((authState) => {
+        if (authState) {
+          // If the user is authenticated, get the logged-in customers from the 'customers' collection
+          return this.afs.collection<any>('customers').valueChanges();
+        } else {
+          // If the user is not authenticated, return an empty observable
+          return of([]);
+        }
+      })
+    );
+  }
   
   // Sign up with email/password
   signup(

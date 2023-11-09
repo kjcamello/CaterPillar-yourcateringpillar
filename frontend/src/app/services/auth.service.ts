@@ -162,6 +162,10 @@ export class AuthService {
     });
   }
 
+  
+
+
+
   // Save catering data in firestore
   saveCateringData(catererUid: string, cateringInfo: any, catererInfo: any): Promise<void> {
     const catererRef: AngularFirestoreDocument<any> = this.afs.doc(`catererInfo/${catererUid}`);
