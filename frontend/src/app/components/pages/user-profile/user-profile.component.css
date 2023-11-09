@@ -1,160 +1,258 @@
-body {
-    background-color: #c00000;
-}
-.user-profile {
-    /* font-family: 'Langar', cursive;
-    background-color: #ffef22;
-    border-radius: 35px;
-    width: 1016px;
-    height: 776px;
-    margin: 50px auto;
-    padding: 20px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); */
 
-}
-
-.header-bar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #ffd5b2;
-    height: 86px;
-    padding: 10px 20px;
-}
-
-.back-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-}
-
-.back-icon {
-    width: 41px;
-}
-
-.logo {
-    height: 50px;
-}
-
-.cover-photo-container{
-
-
-}
-.profile-pic-container {
-    position: absolute;
-    bottom: 20px;
-    left: 300px;
-    margin: 20px 0;
-}
-
-.coverphoto{
-    /* width: 1280px;
-    height: 200px; */
-    width: 100%;
-    height: 100%;
-    /* object-fit: cover; */
-    object-fit: contain;
-}
-
-.coverphoto img{
-    width: 100%;
-    height: 100%;
-    /* object-fit: cover; */
-    object-fit: contain;
-}
-
-.coverSize{
-    /* width: 1280px; */
-    height: 200px;
-    border: 1px solid #AC0000;
+/* Container for content below the DIY package form */
+.content-container {
+    margin-top: 300px; /* Adjust the margin to match the height of your DIY package form */
+  }
+  
+  /* Style the form container */
+  .form-container {
+    margin-left: 100px; /* Adjust the left margin to create a gap between the side navbar and the content */
+    padding: 20px; /* Add padding to separate the button from the content */
+    flex: 1; /* Allow the container to expand and fill available space */
+  }
+  
+  /*
+  .app-food-item {
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: calc(50% - 20px);
+    display: inline-block;
+  }*/
+  
+  /* Adjust the position of app-view-food-item to the left */
+    /* Position app-view-food-item on the right */
+    .saved-food-items {
+      flex: 1;
+      padding: 20px;
+      margin-top: 50px; /* Add margin to create space below the signup-header */
+      margin-left: 380px; /* Adjust the left margin as needed */
+    }
     
-}
-.profilepicSize{
-    width: 200px;
-    height: 200px;
-    border: 1px solid #ffd0b1;
-    
-}
-
-.change-cover-button,
-.change-profile-pic-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: none;
-    border: none;
-    cursor: pointer;
-}
-
-.profile-image {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    display: block;
-    margin: 0 auto;
-}
-
-.profile-details {
-    margin-top: 20px;
-}
-
-.detail-item {
-    margin-bottom: 20px;
-}
-
-.edit-icon {
-    cursor: pointer;
-    margin-left: 10px;
-}
-
-.profile-actions {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-}
-
-.edit-btn,
-.save-btn {
-    padding: 10px 20px;
+  
+  /*prio*/
+  /* CSS for the "Add Food Item" button */
+  .add-food-item-button {
+    position: fixed;
+    top: 85px; /* Adjust the top position as needed */
+    left: 65px; /* Adjust the left position as needed */
+    width: 302px; /* Set the width to match the .diy-package form */
+    background-color: #9a0000;
+    color: #fff;
+    padding: 0px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
-}
-
-.edit-btn {
-    background-color: #ff6364;
-    color: #fff;
-}
-
-.save-btn {
-    background-color: #c00000;
-    color: #fff;
-}
-
-.myAcc{
-    font-size: 18px;
-    color: #AC0000;
-}
-
-.custom-file-upload {
-    /* border: 1px solid #ccc; */
-    display: inline-block;
-    padding: 6px 12px;
-    cursor: pointer;
+    transition: 0.2s all;
+    font-size: 20px; /* Adjust the font size to your preferred size */
   }
-
-  .custom-file-upload  img{
-    position: absolute;
-    right: 7px;
-    bottom: 80px;
-    height: 40px;
-    cursor: pointer;
+  
+  /*debug using user-diy-selection containers*/
+  .food-items-header {
+      text-align: center;
+    }
+  /*
+  .food-item {
+      cursor: pointer; 
+    }*/
+  
+  .custom-image {
+      object-fit: cover; /* Ensure the image covers the container */
+      width: 100%; /* Take full width of the container */
+      height: 160px; /* Adjust the height as needed */
+      background-position: top center 10px; /* Position the background image slightly lower (adjust the 10px value as needed) */
+      background-repeat: no-repeat;
+      display: block; /* Display the image */
+    }
+  
+    /* CSS for the Signup Header */
+  .signup-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: #AC0000;
+      z-index: 2; /* Ensure it's above other content */
+      /* Add any other styles you want for your header */
+    }
+    
+  
+  
+  
+  
+    /**/
+    .ul2{
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .STcontainer{
+      display: flex;
+    }
+    
+    app-signup-header {
+      /* Define the styles for your header, e.g., background color, width, etc. */
+      width: 100%; /* Ensure it takes full width */
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: #AC0000;
+      z-index: 2; /* Ensure it's above other content */
+      transition: top 0.2s; /* Add smooth transition effect */
+    }
+  
+    .side_navbar {
+      position: fixed;
+      top: 81px; /* Adjust the top position to leave space for the header */
+      left: 0;
+      background: #AC0000;
+      width: 60px;
+      height: 100%;
+      overflow: hidden;
+      transition: width 0.2s linear;
+      box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+      z-index: 2;
+    }
+  
+    /*addition 6:54AM*/
+    .header-container {
+      display: flex;
+      flex-direction: column; /* Stack the elements vertically */
+    }
+  
+    
+    /* Adjust the width when the side navbar is expanded */
+    .side_navbar:hover {
+      width: 250px;
+      transition: all 0.5s ease;
+    }
+    
+    
+    .ul2 a{
+      position: relative;
+      color: white;
+      font-size: 16px;
+      display: flex;
+      justify-self: center;
+      align-items: center;
+      width: 300px;
+      padding: 6px;
+      
+    }
+    
+    .ul2 a:hover{
+      background: #FF6A00;
+      cursor: pointer;
+      color: #FFF016;
+      text-shadow: 0px 0px 5px black;
+    }
+    
+    .ul2 a:hover img{
+      /* background:  #AC0000; */
+      filter: invert(12%) sepia(81%) saturate(10000%) hue-rotate(355deg) brightness(88%) contrast(116%) drop-shadow(0px 0px 5px white);
+    }
+    
+    .side_navbar:hover{
+      width: 250px;
+      transition: all 0.5s ease;
+    }
+    
+    .logout{
+      position: absolute;
+      bottom: 0;
+    }
+    
+    .icon-size{
+      height: 50px;
+    }
+    
+    .nav-item{
+      padding-left: 15px;
+    }
+    
+    .side_navbar_separator{
+      height: 210px;
+    }
+  
+  
+    /*additionsls*/
+    .header-container {
+      display: flex;
+    }
+    
+    /* Style the side navbar */
+    .side_navbar {
+      position: fixed;
+      top: 81px; /* Adjust the top position to leave space for the header */
+      left: 0;
+      background: #AC0000;
+      width: 60px;
+      height: 100%;
+      overflow: hidden;
+      transition: width 0.2s linear;
+      box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+      z-index: 2;
+    }
+    
+    /* Side navbar hover effect */
+    .side_navbar:hover {
+      width: 250px;
+      transition: all 0.5s ease;
+    }
+    
+    /* Adjust margin for the food items container */
+    .form-container {
+      margin-left: 100px; /* Adjust the left margin to create a gap between the side navbar and the content */
+      padding: 20px; /* Add padding to separate the button from the content */
+      flex: 1; /* Allow the container to expand and fill available space */
+    }
+  
+    /* CSS for the "food_description" textarea */
+  .form-group textarea {
+    resize: none; /* Prevent resizing */
+    /* Add any other styling you need */
   }
-
-
-  input[type="file"] {
-    display: none;
+  
+  /* CSS for the "food_description" textarea */
+  .form-group .fixed-textarea {
+    resize: none; /* Prevent resizing */
+    /* Add any other styling you need */
   }
+  
+  
+    /* Position app-food-item on the left
+    .app-food-item {
+      margin: 10px 0;
+      padding: 10px;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      width: calc(50% - 20px);
+      display: inline-block;  Display inline to position side by side
+    }*/
+  /*
+    button {
+      background-color: #9a0000;
+      color: #71c884;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.2s all;
+      z-index: 1;
+    }*/
+    /*
+    .save-button {
+      position: absolute;
+      bottom: 20px; 
+      left: 50%;
+      transform: translateX(-50%); 
+    }*/
+    
+    button:hover {
+      background-color: #7a0000;
+    }

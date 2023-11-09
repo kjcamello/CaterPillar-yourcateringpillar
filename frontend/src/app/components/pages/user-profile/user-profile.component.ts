@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
@@ -45,4 +46,8 @@ export class UserProfileComponent {
       this.days = Array.from({ length: 31 }, (_, i) => i + 1); // Default to 31 days
     }
   }
+  // logout() {
+  //   this.Aut.SignOut();
+  //   // Redirect or handle post-logout logic here
+  // }
 }
