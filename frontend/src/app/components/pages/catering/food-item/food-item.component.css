@@ -64,24 +64,7 @@ button:hover {
   height: auto;
   margin-bottom: 10px;
 }
-/*
 
-.food-item button[type="submit"] {
-  background-color: #9a0000;
-  color: #fff;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: 0.2s all;
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.food-item button[type="submit"]:hover {
-  background-color: #7a0000;
-}*/
 
 
 .error-message {
@@ -174,3 +157,23 @@ button:hover {
   height: 75px; /* Adjust the height as needed */
   resize: none; /* Disable textarea resizing */
 }
+
+
+/*
+
+.food-item button[type="submit"] {
+  background-color: #9a0000;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.2s all;
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.food-item button[type="submit"]:hover {
+  background-color: #7a0000;
+}*/

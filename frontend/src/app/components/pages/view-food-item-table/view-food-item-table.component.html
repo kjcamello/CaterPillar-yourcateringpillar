@@ -1,0 +1,83 @@
+<div class="container">
+  
+    <!-- Category Selection -->
+    <div class="category-selection">
+      <label for="categorySelect">Select a Category:</label>
+      <select id="categorySelect" [(ngModel)]="selectedCategory" (change)="loadCategoryItems()">
+        <option value="Main Course">Main Course</option>
+        <option value="Appetizer">Appetizer</option>
+        <option value="Soup">Soup</option>
+        <option value="Salad">Salad</option>
+        <option value="Dessert">Dessert</option>
+        <option value="Drink">Drink</option>
+      </select>
+    </div>
+  
+    <h3 class="food-items-header">{{ selectedCategory | titlecase }} Items</h3>
+  
+    <!-- Food Items Table -->
+    <table class="food-items-table">
+      <thead>
+        <tr>
+          <th>Image</th>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Minimum Pax</th>
+          <th>Pax Price</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let foodItem of foodItems">
+          <td>
+            <img [src]="foodItem.food_image" alt="{{ foodItem.food_name }}" *ngIf="foodItem.food_image" class="table-image">
+          </td>
+          <td>{{ foodItem.food_name }}</td>
+          <td>{{ foodItem.food_description }}</td>
+          <td>{{ foodItem.minimum_pax }}</td>
+          <td>{{ foodItem.pax_price }}/pax</td>
+          <td>
+            <button class="update-button" (click)="editFoodItem(foodItem)">Update</button>
+            <button class="delete-button" (click)="deleteFoodItem(foodItem)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Display the form when a food item is selected for editing -->
+<!-- Display the form when a food item is selected for editing -->
+<div *ngIf="selectedFoodItem">
+  <h3>Edit Food Item</h3>
+  
+  <label for="editFoodName">Food Name:</label>
+  <input type="text" id="editFoodName" [(ngModel)]="selectedFoodItem.food_name">
+
+  <label for="editFoodDescription">Food Description:</label>
+  <textarea id="editFoodDescription" [(ngModel)]="selectedFoodItem.food_description"></textarea>
+
+  <label for="editMinimumPax">Minimum Pax:</label>
+  <input type="number" id="editMinimumPax" [(ngModel)]="selectedFoodItem.minimum_pax" min="1">
+
+  <label for="editMaximumPax">Maximum Pax:</label>
+  <input type="number" id="editMaximumPax" [(ngModel)]="selectedFoodItem.maximum_pax" min="1">
+
+  <label for="editPaxPrice">Pax Price:</label>
+  <input type="number" id="editPaxPrice" [(ngModel)]="selectedFoodItem.pax_price" min="0">
+
+  <!-- Image upload input -->
+  <label for="editFoodImage">Food Image:</label>
+  <input type="file" id="editFoodImage" (change)="uploadEditFoodImage($event)">
+
+  <!-- Display existing image -->
+  <div *ngIf="selectedFoodItem.food_image">
+    <img [src]="selectedFoodItem.food_image" alt="Existing Image" class="image-preview">
+  </div>
+
+  <!-- Add more fields as needed -->
+
+  <button (click)="updateFoodItem()">Update Changes</button>
+</div>
+
+
+  

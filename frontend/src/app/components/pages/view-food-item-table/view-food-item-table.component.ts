@@ -2,56 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AuthService } from 'src/app/services/auth.service';
 
-import { FoodItem } from 'src/app/shared/models/food-item';
-import { FoodItemsService } from 'src/app/services/food-items.service';
-
 @Component({
-  selector: 'app-view-food-item',
-  templateUrl: './view-food-item.component.html',
-  styleUrls: ['./view-food-item.component.css']
+  selector: 'app-view-food-item-table',
+  templateUrl: './view-food-item-table.component.html',
+  styleUrls: ['./view-food-item-table.component.css']
 })
-export class ViewFoodItemComponent implements OnInit {
+export class ViewFoodItemTableComponent implements OnInit {
   selectedCategory: string = 'Main Course';
   foodItems: any[] = [];
-  savedFoodItems: FoodItem[] = [];
-
-  // Define a variable to store the selected food item for editing
-  selectedFoodItem: FoodItem | null = null;
+  selectedFoodItem: any = null; // Hold the selected food item for editing
 
   constructor(
     private firestore: AngularFirestore,
     private authService: AuthService,
-    private foodItemsService: FoodItemsService
-  ) {
-    // Fetch your saved food items and assign them to savedFoodItems.
-    // You might do this in an ngOnInit() or constructor.
-  }
-/*
-  updateFoodItem(foodItem: any) {
-    // Check if the foodItem is selected for editing
-    if (this.selectedFoodItem) {
-      // Create a copy of the selectedFoodItem
-      const updatedFoodItem = { ...this.selectedFoodItem };
-
-      // Update the properties that you want to change
-      updatedFoodItem.food_name = foodItem.food_name;
-      updatedFoodItem.food_description = foodItem.food_description;
-      updatedFoodItem.minimum_pax = foodItem.minimum_pax;
-      updatedFoodItem.pax_price = foodItem.pax_price;
-
-      // Update the food item in Firestore
-      this.foodItemsService.updateFoodItem(updatedFoodItem).then(() => {
-        // Refresh the list of food items or table to reflect the updated data
-        this.loadCategoryItems();
-        this.selectedFoodItem = null; // Clear the selectedFoodItem
-        alert('Food item updated successfully!');
-      }).catch(error => {
-        console.error('There was an error updating the food item:', error);
-        alert('There was an error updating the food item. Please try again later.');
-      });
-    }
-  }
-  */
+  ) {}
 
   ngOnInit() {
     this.loadCategoryItems();
@@ -67,10 +31,11 @@ export class ViewFoodItemComponent implements OnInit {
       .collection(`${selectedCategory}Items`)
       .valueChanges()
       .subscribe((items: any[]) => {
+        console.log('Fetched items:', items);
         this.foodItems = items;
       });
   }
-
+  
   deleteFoodItem(foodItem: any): void {
     const catererUid = this.authService.getCatererUid();
     const selectedCategory = this.selectedCategory.toLowerCase();
@@ -107,21 +72,53 @@ export class ViewFoodItemComponent implements OnInit {
       console.log('Deletion cancelled by user.');
     }
   }
+  
+  editFoodItem(foodItem: any) {
+    // Set the selected food item for editing
+    this.selectedFoodItem = { ...foodItem };
+  }
 
-
-}
-
-/*
-  // Add a method to save changes when editing
-  saveEditedFoodItem() {
+  // Method to handle image changes in the edit form
+  uploadEditFoodImage(event: any) {
     if (this.selectedFoodItem) {
-      // Implement the logic to save changes to the selected food item
-      this.foodItemsService.updateFoodItem(this.selectedFoodItem.foodItemId, {
-        food_name: this.selectedFoodItem.food_name,
-        // Add other fields you want to update
-      });
-      // Once the changes are saved, clear the selectedFoodItem
-      this.selectedFoodItem = null;
+      const files = event.target.files;
+      if (files.length > 0) {
+        const selectedFile = files[0];
+
+        const reader = new FileReader();
+
+        reader.onload = (e: any) => {
+          this.selectedFoodItem.food_image = e.target.result;
+        };
+
+        reader.readAsDataURL(selectedFile);
+      }
     }
   }
-  */
+
+
+  updateFoodItem() {
+    if (this.selectedFoodItem) {
+      // Update the food item in Firestore
+      const catererUid = this.authService.getCatererUid();
+
+      if (catererUid) {
+        const selectedCategory = this.selectedCategory.toLowerCase();
+
+        this.firestore
+          .collection('caterers')
+          .doc(catererUid)
+          .collection(`${selectedCategory}Items`)
+          .doc(this.selectedFoodItem.foodItemId)
+          .update(this.selectedFoodItem)
+          .then(() => {
+            console.log('Food item updated successfully.');
+            this.selectedFoodItem = null; // Reset selectedFoodItem after update
+          })
+          .catch(error => {
+            console.error('Error updating food item:', error);
+          });
+      }
+    }
+  }
+}

@@ -4,7 +4,7 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/comp
 import { FoodItem } from 'src/app/shared/models/food-item';
 import { AuthService } from './auth.service';
 
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { take, switchMap } from 'rxjs/operators';
 
 @Injectable({
@@ -19,11 +19,16 @@ export class FoodItemsService {
   }
 
   // Modify the uploadImage method to accept the file and the selected category
-  uploadImage(file: File, selectedCategory: string, foodItemId: string): Observable<string | null> {
+  uploadImage(file: File | null, selectedCategory: string, foodItemId: string): Observable<string | null> {
+    if (!file) {
+      // Return the URL of your default image when no file is provided
+      return of('https://firebasestorage.googleapis.com/v0/b/caterpillar-hestia.appspot.com/o/_images%2Fdefault_no_image.png?alt=media');
+    }
+  
     let filePath = `${selectedCategory.toLowerCase()}_images/${foodItemId}_${new Date().getTime()}_${file.name}`;
     const fileRef = this.storage.ref(filePath);
     const task = this.storage.upload(filePath, file);
-
+  
     return task.snapshotChanges().pipe(
       take(1),
       switchMap(() => {
@@ -31,16 +36,19 @@ export class FoodItemsService {
       })
     );
   }
-
-  // Update the updateFoodItem method based on your Firestore structure
-  updateFoodItem(updatedFoodItem: any) {
-    return this.firestore.collection('foodItems').doc(updatedFoodItem.id).update(updatedFoodItem);
-  }
+  
 
   // Update the deleteFoodItem method based on your Firestore structure
-  deleteFoodItem(id: string) {
-    return this.firestore.collection('foodItems').doc(id).delete();
-  }
+  deleteFoodItem(catererUid: string, selectedCategory: string, foodItemId: string): void {
+    const docRef = this.firestore.doc(`caterers/${catererUid}/${selectedCategory}Items/${foodItemId}`);
+    
+    docRef.delete().then(() => {
+      console.log('Food item deleted successfully.');
+    }).catch(error => {
+      console.error('Error deleting food item:', error);
+    });
+  }  
+
 
   saveFoodItem(foodItem: FoodItem, subcollectionName: string) {
     // Use the AuthService to get the current logged-in caterer's UID

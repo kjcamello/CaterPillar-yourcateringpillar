@@ -33,8 +33,7 @@
         </ul>
       </nav>
 </div>
-  
-<!-- Display the new food item form -->
+
 <div class="form-container">
   <button class="add-food-item-button" (click)="toggleFoodItemForm()">Add Food Item</button>
   <app-food-item *ngFor="let foodItem of foodItems" [foodItem]="foodItem"></app-food-item>
@@ -43,12 +42,17 @@
   </div>
 </div>
 
-
-
-
+  <!--
 <div class="saved-food-items">
 <h2>Saved Food Items</h2>
 <app-view-food-item></app-view-food-item>
+</div>-->
+
+<div class="saved-food-item-table">
+  <h2 class="diy-header">D-I-Y Package</h2>
+
+  <!-- Add the selector for the ViewFoodItemTableComponent -->
+  <app-view-food-item-table></app-view-food-item-table>
 </div>
 
 <!--

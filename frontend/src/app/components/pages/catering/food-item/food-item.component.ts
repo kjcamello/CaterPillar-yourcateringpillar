@@ -115,9 +115,6 @@ validateFields() {
   return false;
 }
 
-
-// food-item.component.ts
-
 limitDigits(event: any, maxLength: number) {
   const input = event.target.value.replace(/\D/g, ''); // Remove non-digit characters
   if (input.length > maxLength) {
@@ -126,27 +123,6 @@ limitDigits(event: any, maxLength: number) {
   }
 }
 
-
-  
-/*
-  getSubcollectionForCategory(category: string) {
-    switch (category) {
-      case 'Main Course':
-        return 'maincourseItems';
-      case 'Appetizer':
-        return 'appetizerItems';
-      case 'Soup':
-        return 'soupItems';
-      case 'Salad':
-        return 'saladItems';
-      case 'Dessert':
-        return 'dessertItems';
-      case 'Drink':
-        return 'drinkItems';
-      default:
-        return null;
-    }
-  }*/
 
   private getSubcollectionForCategory(category: string): string | null {
     switch (category) {
@@ -170,14 +146,12 @@ limitDigits(event: any, maxLength: number) {
 
   uploadFoodImage(event: any) {
     const files = event.target.files;
+  
     if (files.length > 0) {
+      // Image is uploaded
       const selectedFile = files[0];
   
-      if (
-        selectedFile.type === 'image/jpeg' ||
-        selectedFile.type === 'image/jpg' ||
-        selectedFile.type === 'image/png'
-      ) {
+      if (this.isImageFile(selectedFile)) {
         this.errorMessage = ''; // Clear any previous error message
         this.foodItem.food_image = selectedFile;
   
@@ -195,8 +169,45 @@ limitDigits(event: any, maxLength: number) {
         event.target.value = '';
         this.foodItem.food_image = null;
       }
+    } else {
+      // Image is not uploaded, set the default Firebase Storage URL
+      this.foodItem.food_image = 'https://firebasestorage.googleapis.com/v0/b/caterpillar-hestia.appspot.com/o/_images%2Fdefault_no_image.png?alt=media&token=c8be7d38-a9e9-47a2-9cb8-5e6bdf3d4758';
+  
+      // Ensure the default image is displayed immediately
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.foodItem.food_image = e.target.result;
+      };
+      reader.readAsDataURL(new Blob());
     }
   }
-
-
+  
+  private isImageFile(file: File): boolean {
+    return file.type === 'image/jpeg' || file.type === 'image/jpg' || file.type === 'image/png';
+  }
+  
+  
 }
+
+
+
+  
+/*
+  getSubcollectionForCategory(category: string) {
+    switch (category) {
+      case 'Main Course':
+        return 'maincourseItems';
+      case 'Appetizer':
+        return 'appetizerItems';
+      case 'Soup':
+        return 'soupItems';
+      case 'Salad':
+        return 'saladItems';
+      case 'Dessert':
+        return 'dessertItems';
+      case 'Drink':
+        return 'drinkItems';
+      default:
+        return null;
+    }
+  }*/

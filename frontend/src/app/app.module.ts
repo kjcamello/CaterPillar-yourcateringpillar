@@ -65,7 +65,9 @@ import { EventItemComponent } from './components/pages/catering/event-item/event
 import { PackageMenuComponent } from './components/pages/package-menu/package-menu.component';
 import { AddServiceTypeComponent } from './components/pages/add-service-type/add-service-type.component';
 import { ViewFoodItemComponent } from './components/pages/catering/view-food-item/view-food-item.component';
+import { ViewFoodItemTableComponent } from './components/pages/view-food-item-table/view-food-item-table.component';
 
+import { FoodItemsService } from './services/food-items.service';
 
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -132,7 +134,8 @@ const database = getDatabase(app);
 
     EventItemComponent,
     AddServiceTypeComponent,
-    ViewFoodItemComponent
+    ViewFoodItemComponent,
+    ViewFoodItemTableComponent,
 
   ],
   imports: [

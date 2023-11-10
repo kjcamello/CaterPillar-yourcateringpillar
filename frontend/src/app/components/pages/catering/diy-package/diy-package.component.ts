@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { Catering } from 'src/app/shared/models/Catering';
 import { FoodItem } from 'src/app/shared/models/food-item';
 //import { FoodItemsService } from 'src/app/services/food-items.service';
+//import { ViewFoodItemTable } from 'src/app/components/pages/view-food-item-table';
 
 //import { AuthService } from 'src/app/services/auth.service';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
