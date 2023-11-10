@@ -3,20 +3,45 @@
   width: 100%;
   border-collapse: collapse;
   margin: 20px 0;
-  margin-left: 5.5%;
+  
 }
 
 .styled-table th, .styled-table td {
   border: 1px solid #ff0000; /* Red border */
   padding: 10px;
   text-align: left;
+  margin-left: 5%;
   
 }
 
+
+.button-container {
+  margin-left: 38%;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+button {
+  background-color: #ff3333; /* Red color */
+  color: #fff; /* White text */
+  padding: 10px 20px;
+  margin: 0 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #cc0000; /* Darker red on hover */
+}
 .text-container {
   height: 50px;
   display:flex;
   flex-direction: column;
+  align-items: center;
   max-width: 800px;
   overflow-y: auto;
   overflow-x: hidden;
@@ -54,83 +79,3 @@
   background-color: #cc0000; /* Dark red background on hover */
 }
 
-/*side bar*/
-
-.ul1 a {
-  color: #9a0000;
-  font-size: 11px;
-  font-weight: 500;
-}
-
-.ul1 a:hover {
-  background: #9a0000;
-  color: white;
-  cursor: pointer;
-}
-
-/*Side Navbar*/
-.ul2{
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-
-.STcontainer{
-  display: flex;
-  height: 25px;
-  flex-direction: row;
-}
-
-.side_navbar{
-  position: absolute;
-  top: 81px;
-  bottom: 0;
-  /* height: 100vh; */
-  left: 0;
-  background: #AC0000;
-  width: 60px;
-  overflow: hidden;
-  transition: width 0.2s linear;
-  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
-}
-
-.ul2 a{
-  position: relative;
-  color: white;
-  font-size: 16px;
-  display: flex;
-  justify-self: center;
-  align-items: center;
-  width: 300px;
-  padding: 6px;
-  
-}
-
-.ul2 a:hover{
-  background: #FF6A00;
-  cursor: pointer;
-  color: #FFF016;
-  text-shadow: 0px 0px 5px black;
-}
-
-.ul2 a:hover img{
-  /* background:  #AC0000; */
-  filter: invert(12%) sepia(81%) saturate(10000%) hue-rotate(355deg) brightness(88%) contrast(116%) drop-shadow(0px 0px 5px white);
-}
-
-.side_navbar:hover{
-  width: 250px;
-  transition: all 0.5s ease;
-}
-
-.icon-size{
-  height: 50px;
-}
-
-.nav-item{
-  padding-left: 15px;
-}
-
-.side_navbar_separator{
-  height: auto;
-}

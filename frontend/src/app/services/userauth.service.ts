@@ -12,6 +12,7 @@ import { Observable, of, switchMap } from 'rxjs';
   providedIn: 'root'
 })
 export class UserAuthService {
+  [x: string]: any;
   userData: any; // Save logged in user data
   constructor(
     public afs: AngularFirestore, // Inject Firestore service
@@ -47,6 +48,27 @@ export class UserAuthService {
       })
     );
   }
+  
+  async disableUser(uid: string): Promise<void> {
+    try {
+      // Update the user's status to 'disabled' in the 'customers' collection
+      await this.afs.collection('customers').doc(uid).update({ status: 'disabled' });
+
+      console.log(`User with ID ${uid} disabled successfully.`);
+    } catch (error) {
+      console.error(`Error disabling user with ID ${uid}:`, error);
+      throw error; // Re-throw the error to handle it in the calling code if needed
+    }
+  }
+
+  deleteUser(uid: string): Promise<void> {
+    // Delete the user from Firestore
+    return this.afs.collection('customers').doc(uid).delete();
+  }
+  
+
+
+  
   
   // Sign up with email/password
   signup(
@@ -190,42 +212,72 @@ export class UserAuthService {
     }
   }
 
-Login(email: string, password: string) {
-  if (!email || !password) {
-    window.alert('Both email and password are required.');
-    return Promise.reject('Both email and password are required');
-  }
-
-  return this.afAuth
-    .signInWithEmailAndPassword(email, password)
-    .then((result) => {
-      if (result.user) {
-        if (result.user.emailVerified) {
-          // User is logged in and email is verified
-          this.router.navigate(['/dashboard-user']);
-        } else {
-          // User is logged in but email is not verified
-          window.alert('Please verify your email address before logging in.');
+  
+  Login(email: string, password: string) {
+    if (!email || !password) {
+      window.alert('Both email and password are required.');
+      return Promise.reject('Both email and password are required');
+    }
+  
+    return this.afAuth
+      .signInWithEmailAndPassword(email, password)
+      .then((result) => {
+        if (result.user) {
+          const uid = result.user.uid;
+          // Check user status before allowing login
+          this.checkUserStatus(uid)
+            .then((status) => {
+              if (status === 'active && Normal' ) {
+                if (result.user.emailVerified) {
+                  // User is logged in and email is verified
+                  this.router.navigate(['/dashboard-user']);
+                } 
+              } else if (status === 'inactive && disabled') {
+                // User account is inactive
+                window.alert('Your account has been temporarily blocked. You may have violated one of our rules and regulations.');
+              } 
+            })
+            .catch((error) => {
+              console.error('Error checking user status:', error);
+              // Handle the error, e.g., by displaying a generic error message
+              window.alert('An error occurred while checking your account status. Please try again later.');
+            });
         }
-      } 
-    })
-    .catch((error) => {
-      console.error('Login error:', error);
+      })
+      .catch((error) => {
+        console.error('Login error:', error);
+  
+        if (error.code === 'auth/invalid-login-credentials') {
+          // User with this email does not exist
+          window.alert('Incorrect email or password');
+        } else if (error.code === 'auth/invalid-email') {
+          // Invalid email format
+          window.alert('Invalid email address. Please provide a valid email.');
+        } else if (error.code === 'auth/too-many-requests') {
+          // Too many login attempts
+          window.alert('Account Disabled Temporarily. Too many login attempts have been made.');
+        } else {
+          window.alert('An unexpected error occurred. Please try again later.');
+        }
+      });
+  }
+  
+  // Function to check user status
+  checkUserStatus(uid: string): Promise<string> {
+    return this.afs.collection('users').doc(uid).get().toPromise()
+      .then((snapshot) => {
+        const data = snapshot.data() as { status?: string }; // Explicitly type the data
+        return data?.status || 'inactive'; // Set default status to 'inactive'
+      })
+      .catch((error) => {
+        console.error('Error retrieving user status:', error);
+        return 'inactive'; // Set default status to 'inactive'
+      });
+  }
+  
 
-      if (error.code === 'auth/invalid-login-credentials') {
-        // User with this email does not exist
-        window.alert('Incorrect email or password');
-      } else if (error.code === 'auth/invalid-email') {
-        // Invalid email format
-        window.alert('Invalid email address. Please provide a valid email.');
-      } 
-      else if (error.code === 'auth/too-many-requests') {
-        // Invalid email format
-        window.alert('Account Disabled Temporarily. Too many Login attempts has been made.');}
-      else
-        window.alert(error)
-    });
-}
+  
+  
 
 
   
