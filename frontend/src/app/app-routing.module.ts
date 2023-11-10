@@ -41,6 +41,7 @@ import { UserDiySelectionComponent } from './components/pages/user-selection/use
 
 import { UserProfileComponent } from './components/pages/user-profile/user-profile.component'; 
 import { AddServiceTypeComponent } from './components/pages/add-service-type/add-service-type.component';
+import { SuperadminCustomerComponent } from './components/pages/superadmin/superadmin-customer.component';
 
 const routes: Routes = [
   { path:'', component:HomeComponent },
@@ -87,8 +88,9 @@ const routes: Routes = [
   { path: 'user-package-selection', component: UserPackageSelectionComponent },
   { path: 'user-diy-selection/:id', component: UserDiySelectionComponent },
 
-  { path: 'user-profile', component: UserProfileComponent }  // <-- This is the last route, so no comma after this
+  { path: 'user-profile', component: UserProfileComponent },  // <-- This is the last route, so no comma after this
     // ...other routes
+  {path: 'superadmin-customer', component: SuperadminCustomerComponent}
 ];
 
 @NgModule({

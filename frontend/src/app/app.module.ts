@@ -68,6 +68,7 @@ import { ViewFoodItemComponent } from './components/pages/catering/view-food-ite
 import { ViewFoodItemTableComponent } from './components/pages/view-food-item-table/view-food-item-table.component';
 
 import { FoodItemsService } from './services/food-items.service';
+import { SuperadminCustomerComponent } from './components/pages/superadmin/superadmin-customer.component';
 
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -136,6 +137,7 @@ const database = getDatabase(app);
     AddServiceTypeComponent,
     ViewFoodItemComponent,
     ViewFoodItemTableComponent,
+    SuperadminCustomerComponent,
 
   ],
   imports: [

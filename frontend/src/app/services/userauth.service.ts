@@ -6,7 +6,8 @@ import { AngularFirestore, AngularFirestoreDocument, } from '@angular/fire/compa
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { EmailAuthProvider } from 'firebase/auth';
-import { Observable, of, switchMap } from 'rxjs';
+import { Observable, of, switchMap, combineLatest } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -48,6 +49,32 @@ export class UserAuthService {
     );
   }
   
+  getCaterers(): Observable<any[]> {
+    return this.afAuth.authState.pipe(
+      switchMap((authState) => {
+        if (authState) {
+          // If the user is authenticated, get the logged-in customers from the 'caterers' collection
+          // Then, for each caterer document, get the data from the 'catererInfo' subcollection
+          return this.afs.collection<any>('caterers').snapshotChanges().pipe(
+            switchMap((caterers) => {
+              const catererObservables = caterers.map((caterer) => {
+                const catererId = caterer.payload.doc.id;
+                const catererInfoCollection = this.afs.collection<any>(`caterers/${catererId}/catererBasicInfo`);
+                return catererInfoCollection.valueChanges().pipe(
+                  map((catererInfo) => ({ ...caterer.payload.doc.data(), catererInfo })),
+                );
+              });
+              return combineLatest(catererObservables);
+            })
+          );
+        } else {
+          // If the user is not authenticated, return an empty observable
+          return of([]);
+        }
+      })
+    );
+  }
+  
   // Sign up with email/password
   signup(
     userName: string,
@@ -56,7 +83,7 @@ export class UserAuthService {
     conpwd: string,
     phone: bigint,
     address: string,
-   
+
   ) {
     if (!userName || !email || !password || !conpwd || !phone || !address) {
       window.alert('All fields are required');
@@ -85,7 +112,7 @@ export class UserAuthService {
           // Call the SendVerificationMail() function when a new user signs up and returns a promise
           this.SendVerificationMail();
           // Set user data in Firestore
-          this.SetUserData(result.user, userName, address, phone,"Normal");
+          this.SetUserData(result.user, userName, address, phone,"Active");
         }
       })
       .catch((error) => {
