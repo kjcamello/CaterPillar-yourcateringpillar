@@ -17,14 +17,17 @@
     </nav>
   </div>
 <!-- Add a class to your table to apply styles -->
+<div class="button-container">
+  <button>Caterers</button>
+  <button>Customers</button>
+</div>
 <div class="table-container">
-
   <table class="styled-table">
     <thead>
       <tr>
         <th>User ID</th>
         <th>User Name</th>
-        <th>Phone</th>
+        <th>Status</th>
         <th>Email</th>
         <th>Actions</th>
       </tr>
@@ -33,11 +36,11 @@
       <tr *ngFor="let customer of customers">
         <td>{{ customer.uid }}</td>
         <td>{{ customer.userName }}</td>
-        <td>{{ customer.phone }}</td>
+        <td>{{ customer.status }}</td>
         <td>{{ customer.email }}</td>
         <td>
-          <button (click)="deleteUser(user.userId)" class="delete-button">Delete</button>
-          <button (click)="blockUser(user.userId)" class="block-button">Block</button>
+          <button (click)="confirmUnblockUser(customer.uid)" class="delete-button">Unblock</button>
+          <button (click)="confirmDisableUser(customer.uid)" class="block-button">Block</button>
         </td>
       </tr>
     </tbody>
