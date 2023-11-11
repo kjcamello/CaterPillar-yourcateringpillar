@@ -68,7 +68,7 @@ export class FoodItemComponent {
   
   confirmationPrompt() {
     if (this.validateFields()) {
-      const confirm = window.confirm('Are you sure you want to add this food item to your catering service?');
+      const confirm = window.confirm('Are you sure you want to add this food item to your catering service? NOTE: You can still update the item, but you cannot update the category anymore.');
       return confirm;
     }
     return false;
@@ -90,16 +90,8 @@ validateFields() {
   } else {
     let errorMessage = 'Please fill in all fields correctly.';
 
-    if (!this.foodItem.food_name) {
-      errorMessage = 'Please input the name of the food item.';
-    }
-
-    if (!this.foodItem.food_description) {
-      errorMessage = 'Please input the description of the food item.';
-    }
-
     if (this.foodItem.minimum_pax < 5) {
-      errorMessage = 'Minimum pax must be greater than or equal to 5.';
+      errorMessage = 'Minimum pax must be greater than 4.';
     }
 
     if (this.foodItem.pax_price < 0) {

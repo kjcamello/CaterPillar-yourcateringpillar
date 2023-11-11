@@ -30,15 +30,6 @@
     margin-top: 50px; /* Add margin to create space below the signup-header */
     margin-left: 380px; /* Adjust the left margin as needed */
   }
-
-
-    /* Position app-view-food-item on the right */
-    .saved-food-item-table {
-      flex: 1;
-      padding: 20px;
-      margin-top: 50px; /* Add margin to create space below the signup-header */
-      margin-left: 380px; /* Adjust the left margin as needed */
-    }
   
 
 /*prio*/
@@ -48,7 +39,7 @@
   top: 85px; /* Adjust the top position as needed */
   left: 65px; /* Adjust the left position as needed */
   width: 302px; /* Set the width to match the .diy-package form */
-  background-color: #9a0000;
+  background-color: #00910f;
   color: #fff;
   padding: 0px 20px;
   border: none;
@@ -66,7 +57,7 @@
 .food-item {
     cursor: pointer; 
   }*/
-
+ 
 .custom-image {
     object-fit: cover; /* Ensure the image covers the container */
     width: 100%; /* Take full width of the container */
@@ -263,5 +254,185 @@
   }*/
   
   button:hover {
-    background-color: #7a0000;
+    background-color: #004e10;
   }
+
+
+/*food items*/
+.food-form-container {
+  margin-top: -50px;
+  margin-left: 50px;
+  padding: 20px;
+  flex: 1;
+}
+
+.saved-food-item-table {
+  flex: 1;
+  padding: 20px;
+  margin-top: 50px;
+  margin-left: 380px;
+}
+
+/*VIEW FOOD ITEM TABLE*/
+/* Style the container for the app-view-food-item-table as a form with an orange background */
+.table-form-container {
+  background-color: orange;
+  padding: 20px;
+  border-radius: 5px; /* Optional: Add rounded corners for a nicer look */
+  border: 1px solid #ddd;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Additional styling for the form, adjust as needed */
+.table-form-container h2 {
+  color: white; /* Set the text color to white or any other color that contrasts well with orange */
+  margin-bottom: 10px; /* Add some spacing below the heading */
+}
+
+/*Signup header elements*/
+header{
+  position: relative;
+  background-color: rgba(255, 116, 0, 0.3);
+  padding: 0;
+  /* border-bottom: 1px solid #9a0000; */
+  /* height: 100px; */
+  /* width: 100px; */
+}
+
+div{
+  display: block;
+}
+
+.CaterPillar-top--sticky{
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #FFD2B3;
+  border-bottom: solid 1px rgb(182 0 0);
+  /* transform: translateZ(0); */
+  /* z-index: 100; */
+}
+
+.CaterPillar-top--sticky .navbar-wrapper .container-wrapper{
+  min-width: inherit;
+}
+
+.CaterPillar-top--sticky .navbar .container1{
+  width: inherit;
+  max-width: 1200px;
+}
+
+.container-wrapper{
+  min-width: 1200px;
+}
+
+.container1{
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.navbar-wrapper{
+  height: 2.325rem;
+  z-index: 400;
+  background: transparent;
+  position: relative;
+
+}
+
+.navbar{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.flex{
+  display: flex;
+  cursor: pointer;
+}
+
+.centre{
+  display: flex;
+  align-items: center;
+}
+
+.catererSignUp{
+  color: #9a0000;
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 500;
+  padding: 0.25rem;
+  position: relative;
+  overflow: visible;
+  outline: 0;
+}
+
+.Logo_CSUDivider{
+  flex: 0.2;
+}
+
+.ul1{
+  display: flex;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  align-items: center;
+  /* margin: 0; */
+  /* padding-inline-start: 0; */
+  /* justify-content: space-between; */
+  /* align-items: center; */
+}
+
+.container{
+  display: flex;
+  margin-right: auto;
+  margin-left: auto;
+  /* justify-content: space-around; */
+  /* align-items: center; */
+  justify-content: flex-start;
+  align-items: center;
+  min-width: inherit;
+  flex-wrap: wrap;
+}
+
+.sections{
+  display: flex;
+  /* justify-content: space-between; */
+}
+
+
+.logo{  
+  display: flex;
+  padding-bottom: 10px;
+  /* margin-left: 50px; */
+  /* margin: 10px; */
+  /* align-items: center; */
+}
+
+.logo img{
+  height: 70px;
+  /* padding-left: 250px;width: 100%; */
+  /* padding-left: 50px; */
+  /* margin-left: 50px; */
+}
+
+a.logo:hover{
+  /* font-weight: bold; */
+  /* padding: 1rem; */
+  background: none;
+}
+
+
+ul a{
+  /* display: flex; */
+  padding: 1rem;
+  display: inline-block;
+  /* justify-content: space-between; */
+  /* margin-right: 50px; */
+}
+
+.CSU_Title{
+  justify-content: center;
+  text-align: center;
+}
