@@ -1,28 +1,207 @@
 /* Add or modify CSS as needed for table styling */
 .food-items-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-  }
-  
-  .food-items-table th, .food-items-table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: center;
-  }
-  
-  .food-items-table th {
-    background-color: #f2f2f2;
-  }
-  
-  .table-image {
-    max-width: 100px;
-    height: auto;
-  }
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.food-items-table th,
+.food-items-table td {
+  border: 1px solid #000; /* Set border color to black */
+  padding: 8px;
+  text-align: justify;
+}
+
+.food-items-table th {
+  background-color: #000; /* Set header background color to black */
+  color: #fff; /* Set header text color to white */
+}
+
+/* Alternating row colors */
+.food-items-table tr:nth-child(odd) {
+  background-color: yellow;
+  color: darkred;
+}
+
+.food-items-table tr:nth-child(even) {
+  background-color: darkred;
+  color: yellow;
+}
 
 
-  .image-preview {
-    max-width: 250px;
-    height: auto;
-    margin-bottom: 10px;
-  }
+.table-image {
+  max-width: 175px;
+  height: auto;
+}
+
+.image-preview {
+  max-width: 200px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+/* Additional styling for the form, adjust as needed */
+.table-form-container h2 {
+  color: white;
+  margin-bottom: 10px;
+}
+
+.icon-size{
+  height: 50px;
+}
+
+
+
+/* Add or modify CSS for button styling */
+.food-items-table .update-button,
+.food-items-table .delete-button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Add or modify CSS for button styling */
+.food-items-table .update-button,
+.food-items-table .delete-button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Add hover effect to invert the color of the image */
+.food-items-table .update-button:hover,
+.food-items-table .delete-button:hover {
+  filter: invert(100%); /* Invert the color of the image when hovered */
+}
+
+/* Add or modify CSS for the icon size */
+.icon-size {
+  width: 24px; /* Adjust the width as needed */
+  height: 24px; /* Adjust the height as needed */
+}
+
+/* Add styling for the update column */
+.food-items-table .update-column {
+  background-color: blue; /* Set the background color for the update column */
+}
+
+/* Add styling for the delete column */
+.food-items-table .delete-column {
+  background-color: red; /* Set the background color for the delete column */
+}
+
+/* Add styling for the Actions header cell */
+.food-items-table th.actions-header {
+  background-color: black; /* Set the background color for the header cell */
+  color: white; /* Set the text color for the header cell */
+}
+
+
+/* Add or modify CSS for centering and styling */
+.no-items-message {
+  text-align: center;
+  font-size: 18px; /* Adjust the font size as needed */
+  color: darkred;
+  margin-top: 20px; /* Adjust the top margin as needed */
+}
+
+
+/*EDIT FORM PORTION*/
+
+/* Add or modify CSS for positioning the edit form */
+.edit-form {
+  background-color: #6bbcff;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  position: fixed;
+  top: 120px; /* Adjust the top position to leave space for the header */
+  left: 70px; /* Adjust the left position as needed */
+  z-index: 0; /* Use a lower z-index value to place it behind the side navbar */
+}
+
+/* Add or modify other styles as needed */
+
+/*
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}*/
+
+
+.edit-form label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #333;
+  display: block; /* Add this property to make labels display as block elements */
+}
+
+.edit-form input,
+.edit-form textarea,
+.edit-form select {
+  width: 100%; /* Allow the inputs and textareas to take 100% width */
+  padding: 5px; /* Reduce padding to save space */
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 5px; /* Reduce margin bottom for compact spacing */
+}
+
+/* CSS for the fixed-size textarea */
+.fixed-textarea {
+  width: 100%; /* Adjust the width as needed */
+  height: 75px; /* Adjust the height as needed */
+  resize: none; /* Disable textarea resizing */
+}
+
+.edit-form input[type="file"] {
+  margin-bottom: 10px;
+}
+
+.edit-form button {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+/* Add styling for the heading */
+.edit-form h3 {
+  text-align: center; /* Center the text */
+  margin-bottom: 20px; /* Adjust the margin as needed */
+}
+
+
+/* Additional styling for the form, adjust as needed */
+.table-form-container h2 {
+  color: white;
+  margin-bottom: 10px;
+}
+
+.icon-size {
+  height: 30px;
+  width: 30px;
+}
+
+/*update changes button */
+.update-food-item-button {
+  position: fixed;
+  top: 745px; /* Adjust the top position as needed */
+  left: 65px; /* Adjust the left position as needed */
+  width: 302px; /* Set the width to match the .diy-package form */
+  background-color: blue;
+  color: #fff;
+  padding: 0px 5px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.2s all;
+  font-size: 20px; /* Adjust the font size to your preferred size */
+}

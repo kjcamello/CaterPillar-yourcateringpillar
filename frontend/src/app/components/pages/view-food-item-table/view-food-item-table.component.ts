@@ -8,10 +8,12 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./view-food-item-table.component.css']
 })
 export class ViewFoodItemTableComponent implements OnInit {
-  selectedCategory: string = 'Main Course';
+  selectedCategory: string = 'Food';
   foodItems: any[] = [];
   selectedFoodItem: any = null; // Hold the selected food item for editing
 
+
+  
   constructor(
     private firestore: AngularFirestore,
     private authService: AuthService,
@@ -44,7 +46,7 @@ export class ViewFoodItemTableComponent implements OnInit {
     // Remove or comment out console.log statements
   
     // Display a confirmation prompt
-    const isConfirmed = window.confirm('Are you sure you want to delete this item?');
+    const isConfirmed = window.confirm('Are you sure you want to delete this food item?');
   
     if (isConfirmed) {
       if (catererUid && selectedCategory && foodItemId) {
@@ -55,7 +57,7 @@ export class ViewFoodItemTableComponent implements OnInit {
           this.foodItems = this.foodItems.filter(item => item.foodItemId !== foodItemId);
   
           // Show a success notification or alert
-          alert('Food item deleted successfully!');
+          alert('Food item deleted successfully.');
         }).catch(error => {
           // Show a user-friendly error message
           alert('An error occurred while deleting the food item. Please try again later.');
@@ -99,26 +101,32 @@ export class ViewFoodItemTableComponent implements OnInit {
 
   updateFoodItem() {
     if (this.selectedFoodItem) {
-      // Update the food item in Firestore
-      const catererUid = this.authService.getCatererUid();
-
-      if (catererUid) {
-        const selectedCategory = this.selectedCategory.toLowerCase();
-
-        this.firestore
-          .collection('caterers')
-          .doc(catererUid)
-          .collection(`${selectedCategory}Items`)
-          .doc(this.selectedFoodItem.foodItemId)
-          .update(this.selectedFoodItem)
-          .then(() => {
-            console.log('Food item updated successfully.');
-            this.selectedFoodItem = null; // Reset selectedFoodItem after update
-          })
-          .catch(error => {
-            console.error('Error updating food item:', error);
-          });
+      // Show confirmation prompt
+      const isConfirmed = window.confirm('Are you sure you want to update food item changes?');
+  
+      if (isConfirmed) {
+        // Update the food item in Firestore
+        const catererUid = this.authService.getCatererUid();
+  
+        if (catererUid) {
+          const selectedCategory = this.selectedCategory.toLowerCase();
+  
+          this.firestore
+            .collection('caterers')
+            .doc(catererUid)
+            .collection(`${selectedCategory}Items`)
+            .doc(this.selectedFoodItem.foodItemId)
+            .update(this.selectedFoodItem)
+            .then(() => {
+              alert('Food item updated successfully.');
+              this.selectedFoodItem = null; // Reset selectedFoodItem after update
+            })
+            .catch(error => {
+              alert('Error updating food item: ' + error);
+            });
+        }
       }
     }
   }
+  
 }

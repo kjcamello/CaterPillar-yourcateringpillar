@@ -1,6 +1,14 @@
 <div class="header-container">
  <!-- HEADER -->
- <app-signup-header></app-signup-header>
+ <header>
+  <header class="CaterPillar-top CaterPillar-top--sticky">
+      <div class="container">
+         <a routerLink="/dashboard" class="logo">
+            <img src="assets/caterpillar logo with shadow and lied.png" alt="Logo">
+         </a>
+      </div >
+   </header>
+  </header>
 
       <nav class="side_navbar">
         <ul class="ul2">
@@ -34,6 +42,18 @@
       </nav>
 </div>
 
+<div class="food-form-container">
+  <div class="saved-food-item-table">
+    <h2>D-I-Y Package</h2>
+  
+    <!-- Add the selector for the ViewFoodItemTableComponent -->
+      <div class="table-form-container"> 
+    <app-view-food-item-table></app-view-food-item-table>
+      </div>
+  </div>
+</div>
+
+
 <div class="form-container">
   <button class="add-food-item-button" (click)="toggleFoodItemForm()">Add Food Item</button>
   <app-food-item *ngFor="let foodItem of foodItems" [foodItem]="foodItem"></app-food-item>
@@ -48,12 +68,7 @@
 <app-view-food-item></app-view-food-item>
 </div>-->
 
-<div class="saved-food-item-table">
-  <h2 class="diy-header">D-I-Y Package</h2>
 
-  <!-- Add the selector for the ViewFoodItemTableComponent -->
-  <app-view-food-item-table></app-view-food-item-table>
-</div>
 
 <!--
 <div class="container">

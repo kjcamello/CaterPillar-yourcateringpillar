@@ -1,5 +1,5 @@
 .diy-package {
-  background-color: #f2ff00;
+  background-color: #01f019;
   padding: 20px;
   border: 1px solid #ddd;
   border-radius: 5px;
@@ -44,7 +44,7 @@ button:hover {
   color: #333;
   display: block; /* Add this property to make labels display as block elements */
 }
-
+/*
 .food-item input[type="text"],
 .food-item input[type="number"],
 .food-item textarea {
@@ -53,7 +53,7 @@ button:hover {
   border: 1px solid #ddd;
   border-radius: 5px;
   margin-bottom: 10px;
-}
+}*/
 
 .food-item input[type="file"] {
   margin-bottom: 10px;
@@ -95,8 +95,8 @@ button:hover {
 
 /* Add a CSS class to control the size of the image preview */
 .image-preview {
-  max-width: 150px; /* Adjust the max width to your preferred size */
-  max-height: 150px; /* Adjust the max height to your preferred size */
+  max-width: 200px; /* Adjust the max width to your preferred size */
+  max-height: 200px; /* Adjust the max height to your preferred size */
 }
 
 
