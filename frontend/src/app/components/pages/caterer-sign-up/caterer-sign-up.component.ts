@@ -69,7 +69,8 @@ export class CatererSignUpComponent implements OnInit{
           catererEmailVerified: caterer.emailVerified,
           catererPhotoURL: caterer.photoURL || '', 
           catererUid: caterer.uid,
-          status: "Normal"
+          status: "Active",
+          remarks: ""
         }
       };
       return this.firestore.collection('caterers').doc(caterer.uid).set(dataToSave);

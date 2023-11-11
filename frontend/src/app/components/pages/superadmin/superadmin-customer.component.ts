@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { UserAuthService } from 'src/app/services/userauth.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ReasonDialogComponent } from 'src/app/components/pages/superadmin/reason-dialog/reason-dialog.component';
 
 export interface Caterer {
   catererDisplayName: string;
   catererEmail: string;
   status: string;
-  selectedAction: string; // Add this property
+  selectedAction: string; 
+  remarks: string;// Add this property
 }
 
 @Component({
@@ -20,7 +23,7 @@ export class SuperadminCustomerComponent implements OnInit {
 
   displayedColumns: string[] = ['status', 'catererDisplayName', 'catererEmail'];
 
-  constructor(public userauthService: UserAuthService) {}
+  constructor(public userauthService: UserAuthService, private dialog: MatDialog) {}
 
   ngOnInit() {
     this.userauthService.getCaterers().subscribe((loggedInCustomers) => {
@@ -46,9 +49,33 @@ export class SuperadminCustomerComponent implements OnInit {
     }
   }
 
-  // Function to handle dropdown change
   handleDropdownChange(caterer: Caterer): void {
-    // Implement your logic based on the selected action
-    console.log(`Selected action for ${caterer.catererDisplayName}: ${caterer.selectedAction}`);
+    const selectedAction = caterer.selectedAction;
+    const availableActions = this.getAvailableActions(caterer.status);
+
+    if (availableActions.includes(selectedAction)) {
+      // Open the reason dialog
+      const dialogRef = this.dialog.open(ReasonDialogComponent, {
+        width: '250px',
+        data: { title: 'Reason Dialog', message: 'Enter reason:' }
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          // Proceed with the entered reason
+          console.log(`Selected action for ${caterer.catererDisplayName}: ${selectedAction}`);
+          console.log(`Reason entered: ${result}`);
+
+          // Update status and remarks in caterer
+          caterer.status = selectedAction === 'Enable' ? 'Active' : selectedAction;
+          caterer.remarks = result;
+        } else {
+          console.log('Dialog closed without proceeding.');
+          // Handle cancel action
+        }
+      });
+    } else {
+      console.log(`Invalid action selected: ${selectedAction}`);
+    }
   }
 }

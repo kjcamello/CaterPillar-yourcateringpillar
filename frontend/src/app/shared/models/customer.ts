@@ -5,5 +5,6 @@ export interface Customer{
     address?:string;
     phone?: bigint;
     status: string;
+    remarks: string;
    
 }
