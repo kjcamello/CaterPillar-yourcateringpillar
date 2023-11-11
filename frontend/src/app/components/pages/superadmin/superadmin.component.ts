@@ -54,7 +54,7 @@ export class SuperadminComponent implements OnInit {
 
   getUserStatus(uid: string): Observable<string> {
     return this.afs.collection('users').doc(uid).valueChanges()
-      .pipe(map((user: any) => user.status || 'inactive'));
+      .pipe(map((user: any) => user.status || 'Inactive'));
   }
 
 
@@ -95,7 +95,7 @@ export class SuperadminComponent implements OnInit {
   async disableUserAction(uid: string): Promise<void> {
     try {
       // Update the user's status to 'disabled' in the 'customers' collection
-      await this.afs.collection('customers').doc(uid).update({ status: 'inactive' });
+      await this.afs.collection('customers').doc(uid).update({ status: 'Inactive' });
 
       console.log(`User with ID ${uid} disabled successfully.`);
     } catch (error) {
@@ -119,7 +119,7 @@ export class SuperadminComponent implements OnInit {
   async unblockUserAction(uid: string): Promise<void> {
     try {
       // Update the user's status to 'active' in the 'customers' collection
-      await this.afs.collection('customers').doc(uid).update({ status: 'active' });
+      await this.afs.collection('customers').doc(uid).update({ status: 'Active' });
   
       console.log(`User with ID ${uid} unblocked successfully.`);
     } catch (error) {

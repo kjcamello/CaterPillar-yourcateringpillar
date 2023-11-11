@@ -1,4 +1,37 @@
-/* CSS file */
+.header {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: #FFD2B3;
+  position: relative;
+}
+
+.logo {
+  text-decoration: none;
+  color: inherit;
+  max-height: 50px;
+  width: auto;
+  display: block;
+  margin-right: 20px; /* Adjust margin for spacing between logo and text */
+}
+
+.logo img {
+  max-height: 50px; /* Ensure the logo doesn't exceed its container's height */
+  width: auto;
+  display: block;
+}
+
+.header-text {
+  flex-grow: 1;
+  text-align: center;
+  font-size: 30px; /* Increase font size for a header look */
+  font-weight: bold; /* Optionally make the text bold */
+  color: #333; /* Choose a color that contrasts with the background */
+  text-transform: uppercase; /* Optionally make the text uppercase */
+  letter-spacing: 2px; /* Optionally add letter spacing for clarity */
+  margin: 0; /* Remove any default margin to ensure a clean look */
+}
+
 .styled-table {
   width: 100%;
   border-collapse: collapse;
@@ -14,15 +47,6 @@
   
 }
 
-
-.button-container {
-  margin-left: 38%;
-  margin-top: 20px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
 button {
   background-color: #ff3333; /* Red color */
   color: #fff; /* White text */
@@ -34,9 +58,7 @@ button {
   font-size: 16px;
 }
 
-button:hover {
-  background-color: #cc0000; /* Darker red on hover */
-}
+
 .text-container {
   height: 50px;
   display:flex;
@@ -77,5 +99,72 @@ button:hover {
 
 .delete-button:hover, .block-button:hover {
   background-color: #cc0000; /* Dark red background on hover */
+}
+
+ /*Side Navbar*/
+ .ul2{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.STcontainer{
+  display: flex;
+  height: 25px;
+  flex-direction: row;
+}
+
+.side_navbar{
+  position: absolute;
+  top: 81px;
+  bottom: 0;
+  /* height: 100vh; */
+  left: 0;
+  background: #AC0000;
+  width: 60px;
+  overflow: hidden;
+  transition: width 0.2s linear;
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+}
+
+.ul2 a{
+  position: relative;
+  color: white;
+  font-size: 16px;
+  display: flex;
+  justify-self: center;
+  align-items: center;
+  width: 300px;
+  padding: 6px;
+  
+}
+
+.ul2 a:hover{
+  background: #FF6A00;
+  cursor: pointer;
+  color: #FFF016;
+  text-shadow: 0px 0px 5px black;
+}
+
+.ul2 a:hover img{
+  /* background:  #AC0000; */
+  filter: invert(12%) sepia(81%) saturate(10000%) hue-rotate(355deg) brightness(88%) contrast(116%) drop-shadow(0px 0px 5px white);
+}
+
+.side_navbar:hover{
+  width: 250px;
+  transition: all 0.5s ease;
+}
+
+.icon-size{
+  height: 50px;
+}
+
+.nav-item{
+  padding-left: 15px;
+}
+
+.side_navbar_separator{
+  height: auto;
 }
 

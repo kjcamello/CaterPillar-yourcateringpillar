@@ -244,70 +244,75 @@ export class UserAuthService {
   }
 
   
-  Login(email: string, password: string) {
+  async Login(email: string, password: string): Promise<void> {
     if (!email || !password) {
       window.alert('Both email and password are required.');
       return Promise.reject('Both email and password are required');
     }
   
-    return this.afAuth
-      .signInWithEmailAndPassword(email, password)
-      .then((result) => {
-        if (result.user) {
-          const uid = result.user.uid;
-          // Check user status before allowing login
-          this.checkUserStatus(uid)
-            .then((status) => {
-              if (status === 'active && Normal' ) {
-                if (result.user.emailVerified) {
-                  // User is logged in and email is verified
-                  this.router.navigate(['/dashboard-user']);
-                } 
-              } else if (status === 'inactive && disabled') {
-                // User account is inactive
-                window.alert('Your account has been temporarily blocked. You may have violated one of our rules and regulations.');
-              } 
-            })
-            .catch((error) => {
-              console.error('Error checking user status:', error);
-              // Handle the error, e.g., by displaying a generic error message
-              window.alert('An error occurred while checking your account status. Please try again later.');
-            });
-        }
-      })
-      .catch((error) => {
-        console.error('Login error:', error);
+    try {
+      const result = await this.afAuth.signInWithEmailAndPassword(email, password);
   
-        if (error.code === 'auth/invalid-login-credentials') {
-          // User with this email does not exist
-          window.alert('Incorrect email or password');
-        } else if (error.code === 'auth/invalid-email') {
-          // Invalid email format
-          window.alert('Invalid email address. Please provide a valid email.');
-        } else if (error.code === 'auth/too-many-requests') {
-          // Too many login attempts
-          window.alert('Account Disabled Temporarily. Too many login attempts have been made.');
+      if (result.user) {
+        const uid = result.user.uid;
+        // Check user status before allowing login
+        const status = await this.checkUserStatus(uid);
+  
+        if (status === 'Active') {
+          if (result.user.emailVerified) {
+            // User is logged in, email is verified, and status is Active
+            this.router.navigate(['/dashboard-user']);
+          } else {
+            // Email is not verified
+            window.alert('Your email is not verified. Please verify your email.');
+            return; // Return here to avoid reaching the next block
+          }
+        } else if (status === 'Inactive') {
+          // User account is inactive
+          window.alert('Your account has been temporarily blocked. You may have violated one of our rules and regulations. For status appeals, you may email us at caterpillarservice@gmail.com');
+          this.afAuth.signOut();
+          return; // Return here to avoid reaching the next block
         } else {
-          window.alert('An unexpected error occurred. Please try again later.');
+          // Handle other status scenarios if needed
+          window.alert('Unexpected account status. Please contact support.');
+          return; // Return here to avoid reaching the next block
         }
-      });
+      }
+      
+      // Return here to handle the case when result.user is undefined
+      return Promise.reject('Authentication failed: User data not found.');
+    } catch (error) {
+      console.error('Login error:', error);
+  
+      if (error.code === 'auth/invalid-login-credentials') {
+        // User with this email does not exist
+        window.alert('Incorrect email or password');
+      } else if (error.code === 'auth/invalid-email') {
+        // Invalid email format
+        window.alert('Invalid email address. Please provide a valid email.');
+      } else if (error.code === 'auth/too-many-requests') {
+        // Too many login attempts
+        window.alert('Account Disabled Temporarily. Too many login attempts have been made.');
+      } else {
+        // Other authentication errors
+        window.alert('An unexpected error occurred. Please try again later.');
+      }
+  
+      // Return here to handle the case when an error occurs
+      return Promise.reject('Authentication failed: ' + error.message);
+    }
   }
   
-  // Function to check user status
-  checkUserStatus(uid: string): Promise<string> {
-    return this.afs.collection('users').doc(uid).get().toPromise()
-      .then((snapshot) => {
-        const data = snapshot.data() as { status?: string }; // Explicitly type the data
-        return data?.status || 'inactive'; // Set default status to 'inactive'
-      })
-      .catch((error) => {
-        console.error('Error retrieving user status:', error);
-        return 'inactive'; // Set default status to 'inactive'
-      });
+  async checkUserStatus(uid: string): Promise<string> {
+    try {
+      const snapshot = await this.afs.collection('customers').doc(uid).get().toPromise();
+      const data = snapshot.data() as { status?: string };
+      return data?.status || 'Inactive';
+    } catch (error) {
+      console.error('Error retrieving user status:', error);
+      return 'Inactive';
+    }
   }
-  
-
-  
   
 
 
