@@ -1,5 +1,5 @@
 <div class="header">
-    <a routerLink="/dashboard" class="logo">
+    <a routerLink="/" class="logo">
       <img src="assets/caterpillar logo with shadow and lied.png" alt="Logo">
     </a>
     <div class="header-text">Caterer List</div>
@@ -27,27 +27,47 @@
     <thead>
       <tr>
         <th>Status</th>
-        <th>Catere Name</th>
+        <th>Caterer Name</th>
         <th>Email</th>
+        <th>Remarks</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let caterer of caterers">
         <td>
             <select id="actionDropdown" [(ngModel)]="caterer.selectedAction" (change)="handleDropdownChange(caterer)" title="actionDropdown">
-              <ng-container *ngIf="getAvailableActions(caterer.catererBasicInfo.status).length > 0; else noActions">
-                <option value="" disabled selected>{{ 'Status: ' + caterer.catererBasicInfo.status }}</option>
-                <option *ngFor="let action of getAvailableActions(caterer.catererBasicInfo.status)" [value]="action">{{ action }}</option>
+              <ng-container *ngIf="getAvailableActions(caterer.status).length > 0; else noActions">
+                <option value="" disabled selected>{{ 'Status: ' + caterer.status }}</option>
+                <option *ngFor="let action of getAvailableActions(caterer.status)" [value]="action">{{ action }}</option>
               </ng-container>
               <ng-template #noActions>
                 <option disabled>No available actions</option>
               </ng-template>
             </select>
+    
+          </td>
+        <td>{{ caterer.catererBasicInfo.catererDisplayName}}</td>
+        <td>{{ caterer.catererBasicInfo.catererEmail }}</td>
+        <td>
+            <!-- Add the remarks dropdown inside the same td -->
+            <select id="remarksDropdown" [(ngModel)]="caterer.selectedRemark" (change)="handleRemarksDropdownChange(caterer)"title="remarksDropdown">
+              <option value="" disabled selected>{{caterer.remarks}}</option>
+              <ng-container *ngIf="caterer.status !== 'Active'">
+                <option value="Late deliveries/Unable to accomplish transactions">Late deliveries/Unable to accomplish transactions</option>
+                <option value="Repeated Quality complaints">Quality complaints</option>
+                <option value="Menu discrepancies">Menu discrepancies</option>
+                <option value="Communication issues">Communication issues</option>
+                <option value="Health and safety concerns">Health and safety concerns</option>
+                <option value="Fraud">Fraudulent Actions</option>
+            
+              </ng-container>
+            </select>
           </td>
           
           
-        <td>{{ caterer.catererBasicInfo.catererDisplayName}}</td>
-        <td>{{ caterer.catererBasicInfo.catererEmail }}</td>
+          
+          
+       
         
       </tr>
     </tbody>

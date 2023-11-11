@@ -1,15 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { UserAuthService } from 'src/app/services/userauth.service';
-import { MatDialog } from '@angular/material/dialog';
-import { ReasonDialogComponent } from 'src/app/components/pages/superadmin/reason-dialog/reason-dialog.component';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { ChangeDetectorRef } from '@angular/core';
+
+
 
 export interface Caterer {
+  id: string;
   catererDisplayName: string;
   catererEmail: string;
   status: string;
+  remarks: string;
   selectedAction: string; 
-  remarks: string;// Add this property
+  selectedRemark: string;// Add this property
 }
 
 @Component({
@@ -23,12 +27,13 @@ export class SuperadminCustomerComponent implements OnInit {
 
   displayedColumns: string[] = ['status', 'catererDisplayName', 'catererEmail'];
 
-  constructor(public userauthService: UserAuthService, private dialog: MatDialog) {}
+  constructor(public userauthService: UserAuthService, private afs: AngularFirestore, private changeDetectorRef: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.userauthService.getCaterers().subscribe((loggedInCustomers) => {
       this.caterers = loggedInCustomers.map(caterer => {
-        caterer.selectedAction = ''; // Initialize selectedAction
+        caterer.selectedAction = '';
+        caterer.selectedRemark = ''; // Initialize selectedAction
         return caterer;
       });
       console.log(this.caterers);
@@ -49,33 +54,102 @@ export class SuperadminCustomerComponent implements OnInit {
     }
   }
 
+  private updateFirestoreDocument(caterer: Caterer, selectedAction: string): void {
+    let newStatus: string;
+  
+    switch (selectedAction) {
+      case 'Warn':
+        newStatus = 'Warned';
+        break;
+      case 'Disable':
+        newStatus = 'Disabled';
+        break;
+      case 'Enable':
+        newStatus = 'Active';
+        break;
+      case 'Unwarn':
+        newStatus = 'Active';
+        break;
+      default:
+        console.log(`Unhandled action: ${selectedAction}`);
+        return; // Do nothing if the action is not handled
+    }
+  
+    // Check if caterer.id is defined
+    if (!caterer.id) {
+      console.error('Caterer ID is undefined. Unable to update Firestore document.');
+      return;
+    }
+  
+    // Update the Firestore document directly
+    console.log('Caterer ID:', caterer.id);
+    const catererDocRef = this.afs.collection('caterers').doc(caterer.id);
+    catererDocRef.update({ status: newStatus }).then(
+      () => {
+        console.log('Firestore document updated successfully.');
+        // Update the local caterer object
+        caterer.status = newStatus;
+        if(newStatus=='Active'){
+          catererDocRef.update({remarks: 'None'});
+        }
+        // Trigger change detection to update the UI
+        this.detectChanges();
+      },
+      error => {
+        console.error('Error updating Firestore document:', error);
+      }
+    );
+  }
+  handleRemarksDropdownChange(caterer: Caterer): void {
+    const newRemark = caterer.selectedRemark;
+  
+    // Check if caterer.id is defined
+    if (!caterer.id) {
+      console.error('Caterer ID is undefined. Unable to update Firestore document.');
+      return;
+    }
+  
+    console.log('Caterer ID:', caterer.id);
+    const catererDocRef = this.afs.collection('caterers').doc(caterer.id);
+  
+    catererDocRef.update({ remarks: newRemark }).then(
+      () => {
+        console.log('First Firestore document update (remarks) successfully.');
+  
+        // If the new remark is 'Active', update the 'status' field to 'Active' and 'remarks' to 'None'
+        if (newRemark === 'Active') {
+          return catererDocRef.update({ status: 'Active', remarks: 'None' });
+        }
+  
+        return Promise.resolve(); // Resolve the promise to continue the chain
+      }
+    ).then(
+      () => {
+        console.log('Second Firestore document update (status) successfully.');
+        // Update the local caterer object
+        caterer.remarks = newRemark;
+  
+        // Trigger change detection to update the UI
+        this.detectChanges();
+      }
+    ).catch(
+      error => {
+        console.error('Error updating Firestore document:', error);
+      }
+    );
+  }
+  
+  
+
+  private detectChanges(): void {
+    // Manually trigger change detection
+    this.changeDetectorRef.detectChanges();
+  }
+
   handleDropdownChange(caterer: Caterer): void {
     const selectedAction = caterer.selectedAction;
-    const availableActions = this.getAvailableActions(caterer.status);
-
-    if (availableActions.includes(selectedAction)) {
-      // Open the reason dialog
-      const dialogRef = this.dialog.open(ReasonDialogComponent, {
-        width: '250px',
-        data: { title: 'Reason Dialog', message: 'Enter reason:' }
-      });
-
-      dialogRef.afterClosed().subscribe(result => {
-        if (result) {
-          // Proceed with the entered reason
-          console.log(`Selected action for ${caterer.catererDisplayName}: ${selectedAction}`);
-          console.log(`Reason entered: ${result}`);
-
-          // Update status and remarks in caterer
-          caterer.status = selectedAction === 'Enable' ? 'Active' : selectedAction;
-          caterer.remarks = result;
-        } else {
-          console.log('Dialog closed without proceeding.');
-          // Handle cancel action
-        }
-      });
-    } else {
-      console.log(`Invalid action selected: ${selectedAction}`);
-    }
+    this.updateFirestoreDocument(caterer, selectedAction);
   }
+
+
 }

@@ -62,16 +62,16 @@ export class CatererSignUpComponent implements OnInit{
     })
     .then(caterer => {
       const displayName = this.getDisplayNameFromEmail(this.catererBInfo.catererEmail);
+      const catererBasicInfo = {
+        catererEmail: this.catererBInfo.catererEmail,
+        catererDisplayName: displayName,
+        catererEmailVerified: caterer.emailVerified,
+        catererPhotoURL: caterer.photoURL || '',
+      };
       const dataToSave = {
-        catererBasicInfo: {
-          catererEmail: this.catererBInfo.catererEmail,
-          catererDisplayName: displayName,
-          catererEmailVerified: caterer.emailVerified,
-          catererPhotoURL: caterer.photoURL || '', 
-          catererUid: caterer.uid,
-          status: "Active",
-          remarks: ""
-        }
+        catererBasicInfo,
+        status: "Active",
+        remarks: "None"
       };
       return this.firestore.collection('caterers').doc(caterer.uid).set(dataToSave);
     })

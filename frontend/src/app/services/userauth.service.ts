@@ -6,8 +6,10 @@ import { AngularFirestore, AngularFirestoreDocument, } from '@angular/fire/compa
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { EmailAuthProvider } from 'firebase/auth';
-import { Observable, of, switchMap, combineLatest } from 'rxjs';
+import { Observable, of, switchMap, combineLatest, from } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
+import { Caterer } from '../components/pages/superadmin/superadmin-customer.component';
 
 @Injectable({
   providedIn: 'root'
@@ -83,7 +85,7 @@ export class UserAuthService {
                 const catererId = caterer.payload.doc.id;
                 const catererInfoCollection = this.afs.collection<any>(`caterers/${catererId}/catererBasicInfo`);
                 return catererInfoCollection.valueChanges().pipe(
-                  map((catererInfo) => ({ ...caterer.payload.doc.data(), catererInfo })),
+                  map((catererInfo) => ({id:catererId, ...caterer.payload.doc.data(), catererInfo })),
                 );
               });
               return combineLatest(catererObservables);
@@ -96,6 +98,8 @@ export class UserAuthService {
       })
     );
   }
+
+
   
   // Sign up with email/password
   signup(
@@ -134,7 +138,7 @@ export class UserAuthService {
           // Call the SendVerificationMail() function when a new user signs up and returns a promise
           this.SendVerificationMail();
           // Set user data in Firestore
-          this.SetUserData(result.user, userName, address, phone,"Active");
+          this.SetUserData(result.user, userName, address, phone,"Active","");
         }
       })
       .catch((error) => {
@@ -316,7 +320,7 @@ export class UserAuthService {
   /* Setting up user data when sign in with username/password, 
   sign up with username/password and sign in with social auth  
   provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
-  SetUserData(customer: any, userName: string, address:string, phone:bigint, status:string) {
+  SetUserData(customer: any, userName: string, address:string, phone:bigint, status:string,remarks:string) {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(
       `customers/${customer.uid}`
     );
@@ -327,6 +331,7 @@ export class UserAuthService {
       address: address,
       phone: phone,
       status: status,
+      remarks: remarks
     };
     return userRef.set(userData, {
       merge: true,

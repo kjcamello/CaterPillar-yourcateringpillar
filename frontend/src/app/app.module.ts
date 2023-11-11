@@ -6,7 +6,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
-
 // Firebase services + environment module
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
@@ -69,7 +68,6 @@ import { ViewFoodItemTableComponent } from './components/pages/view-food-item-ta
 
 import { FoodItemsService } from './services/food-items.service';
 import { SuperadminCustomerComponent } from './components/pages/superadmin/superadmin-customer.component';
-
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -159,7 +157,8 @@ const database = getDatabase(app);
     AngularFirestoreModule,
     AngularFireStorageModule,
     AngularFireDatabaseModule, 
-    HttpClientModule
+    HttpClientModule,
+   
   ],
   providers: [],
   bootstrap: [AppComponent]
