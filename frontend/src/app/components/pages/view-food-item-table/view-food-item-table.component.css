@@ -2,7 +2,7 @@
 .food-items-table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 20px;
+  margin-top: -15px;
 }
 
 .food-items-table th,
@@ -112,37 +112,6 @@
 
 /*EDIT FORM PORTION*/
 
-/* Add or modify CSS for positioning the edit form */
-.edit-form {
-  background-color: #6bbcff;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-  max-width: 400px;
-  position: fixed;
-  top: 120px; /* Adjust the top position to leave space for the header */
-  left: 70px; /* Adjust the left position as needed */
-  z-index: 0; /* Use a lower z-index value to place it behind the side navbar */
-}
-
-/* Add or modify other styles as needed */
-
-/*
-.edit-form {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}*/
-
-
-.edit-form label {
-  font-weight: bold;
-  margin-bottom: 5px;
-  color: #333;
-  display: block; /* Add this property to make labels display as block elements */
-}
-
 .edit-form input,
 .edit-form textarea,
 .edit-form select {
@@ -163,14 +132,14 @@
 .edit-form input[type="file"] {
   margin-bottom: 10px;
 }
-
+/*
 .edit-form button {
   background-color: #000;
   color: #fff;
   border: none;
   padding: 10px;
   cursor: pointer;
-}
+}*/
 
 /* Add styling for the heading */
 .edit-form h3 {
@@ -178,30 +147,116 @@
   margin-bottom: 20px; /* Adjust the margin as needed */
 }
 
-
-/* Additional styling for the form, adjust as needed */
-.table-form-container h2 {
-  color: white;
-  margin-bottom: 10px;
-}
-
 .icon-size {
   height: 30px;
   width: 30px;
 }
 
+
+/*PRIORITY*/
+/*textbox alignments*/
+.image-preview-container {
+  display: flex;
+  justify-content: flex-end; /* Align content to the right */
+}
+
+.image-preview{
+  max-width: 120px;/* Adjust the max width as needed */
+  max-height: 120px; /* Adjust the max height as needed */
+  margin-left: 10px; /* Add margin to separate image preview from other content */
+  margin-top: -10px; /* Add margin to separate image preview from other content */
+}
+
+.form-group textarea {
+  height: 150px; /* Adjust the height as needed */
+}
+
+.diy-package {
+  background-color: #6bbcff;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  width: 375px;
+  height: 325px;
+  position: fixed;
+  top: 450px; /* Adjust the top position to leave space for the header */
+  left: 75px; /* Adjust the left position as needed */
+  z-index: 0; /* Use a lower z-index value to place it behind the side navbar */
+}
+
+.form-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-group {
+  flex: 1;
+  margin-right: 10px; /* Adjust margin as needed */
+}
+
+
+
+
 /*update changes button */
 .update-food-item-button {
   position: fixed;
   top: 745px; /* Adjust the top position as needed */
-  left: 65px; /* Adjust the left position as needed */
-  width: 302px; /* Set the width to match the .diy-package form */
+  left: 75px; /* Adjust the left position as needed */
+  width: 375px; /* Set the width to match the .diy-package form */
   background-color: blue;
   color: #fff;
-  padding: 0px 5px;
+  padding: 0px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   transition: 0.2s all;
   font-size: 20px; /* Adjust the font size to your preferred size */
+}
+
+.tab.selected {
+  background-color: black;
+  color: white;
+}
+
+
+/*category labels*/
+/* Add or modify CSS for category tabs */
+.category-tabs {
+  display: flex;
+  justify-content: space-around;
+  background-color: #ff7070;
+  padding: 10px;
+}
+
+.tab {
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Add transition for smooth effect */
+}
+
+.tab:hover {
+  background-color: darkred;
+  color: white;
+}
+
+/* Add this style for the selected and hovered effect */
+.category-tabs .tab.selected:hover {
+  background-color: darkred;
+  color: white;
+}
+
+.close-button {
+  position: absolute;
+  top: 3px; /* Adjust the top distance as needed */
+  right: 3px; /* Adjust the right distance as needed */
+  cursor: pointer;
+  font-size: 10px; /* Adjust the font size as needed */
+  background: blue;
+  color: white; /* Adjust the color as needed */
+}
+
+.close-button:hover {
+  color: red; /* Change to red on hover */
 }

@@ -1,0 +1,259 @@
+/*li a{
+  height: 22.5rem;
+  width: 20rem;
+  border: 1px solid rgb(161, 23, 23);
+  border-radius: 1rem;
+  margin: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  color: #9a0000;
+}
+
+li a:hover{
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+li a img{
+  object-fit: cover;
+  height: 100px;
+}
+
+.button-container {
+display: flex;
+justify-content: space-between;
+margin-top: 1rem;
+}
+
+ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  margin: 0.5rem;
+}
+
+.caterer-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  color: #9a0000;
+
+}
+
+.button-container {
+  position: absolute;
+  bottom: 0; 
+  width: 100%;
+
+  
+  padding: 0.5rem;
+  background-color: #fff;
+  z-index: 1;
+}
+
+.left-button,
+.right-button {
+  text-align: center;
+  padding: 0.25rem 0.5rem;
+  background-color: #007BFF;
+  color: #fff;
+  text-decoration: none;
+  border: 1px solid #007BFF;
+  border-radius: 0.25rem;
+  max-width: 100px;
+  height: 30px;
+  line-height: 30px;
+  max-height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s;
+}
+
+.left-button {
+  background-color: orange;
+  color: darkred !important;
+}
+
+.right-button {
+  background-color: darkred;
+  color: yellow !important;
+}
+
+.left-button:hover,
+.right-button:hover {
+  background-color: #0056b3;
+  transition: background-color 0.3s;
+}
+
+
+
+.content{
+  margin-top: 0.3rem;
+  padding: 0.5rem 1rem;
+  position: relative;
+  height: 7rem;
+}
+
+.favorite{
+  position: relative;
+  bottom: 64px;
+  left: 210px;
+  font-size: 1.2rem;
+}
+
+.favorite.not{
+  color: grey;
+}
+
+.stars{
+  margin-bottom: 0.2rem;
+}
+
+
+
+
+.origins{
+flex: 9;
+}
+
+.origins span{
+border-radius: 2rem;
+background-color: whitesmoke;
+display: inline-block;
+font-size: 0.8rem;
+color: grey;
+margin-right: 0.3rem;
+padding: 0 0.5rem;
+margin-top: 0.2rem;
+}
+
+.location{
+  font-size: 0.9rem;
+  flex: 3;
+}
+
+.cateringPacks{
+bottom: 0;
+left: 0.9rem;
+background: white;
+color: #414141;
+margin-top: 0.7rem;
+font-size: 1.1rem;
+}
+
+
+
+.caterer-list {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.caterer-item {
+  margin: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgb(161, 23, 23);
+  border-radius: 1rem;
+  width: 20rem;
+  height: 22.5rem;
+  overflow: hidden;
+  color: #9a0000;
+
+  position: relative;
+  border: 1px solid #ddd;
+
+  padding: 1rem;
+  margin: 1rem;
+}
+
+
+
+
+dashboard
+
+/*Styles for the entire caterer card
+.caterer-card {
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin: 10px;
+  padding: 10px;
+}
+
+.caterer-image {
+  width: 150px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.caterer-info {
+  flex: 1;
+  padding: 0 10px;
+}
+
+h2 {
+  font-size: 1rem;
+  color: #9a0000;
+  margin: 0;
+}
+
+.caterer-address {
+  font-size: 0.9rem;
+  color: #777;
+  margin: 5px 0;
+}
+
+.caterer-email, .caterer-contact {
+  font-size: 0.9rem;
+  color: #333;
+  margin: 5px 0;
+}*/
+
+
+
+/*TABLE ELEMENTS*/
+/* Add any additional styling as needed */
+
+.catering-list-container {
+    margin: 20px; /* Adjust margin as needed */
+  }
+  
+  .caterer-table-container {
+    margin: 20px; /* Adjust margin as needed */
+  }
+  
+  .caterer-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .caterer-table th, .caterer-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .caterer-table th {
+    background-color: #f2f2f2;
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+  }

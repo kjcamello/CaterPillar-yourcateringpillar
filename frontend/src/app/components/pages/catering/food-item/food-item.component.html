@@ -1,64 +1,58 @@
-
 <div class="diy-package">
-<!-- Category dropdown -->
-<div class="form-group">
-  <label for="category">Category</label>
-  <select class="form-control" id="category" name="category" [(ngModel)]="foodItem.category">
-    <option value="Main Course">Main Course</option>
-    <option value="Appetizer">Appetizer</option>
-    <option value="Soup">Soup</option>
-    <option value="Salad">Salad</option>
-    <option value="Dessert">Dessert</option>
-    <option value="Drink">Drink</option>
-  </select>
-  
-</div>
+  <!-- First Row -->
+  <div class="form-row">
+    <div class="form-group">
+      <label for="category">Category</label>
+      <select class="form-control" id="category" name="category" [(ngModel)]="foodItem.category">
+        <option value="Main Course">Main Course</option>
+        <option value="Appetizer">Appetizer</option>
+        <option value="Soup">Soup</option>
+        <option value="Salad">Salad</option>
+        <option value="Dessert">Dessert</option>
+        <option value="Drink">Drink</option>
+      </select>
+    </div>
+    
+    <div class="form-group">
+      <label for="food_name">Name</label><small class="text-muted"> ({{foodItem.food_name.length}}/100 chars)</small>
+      <input type="text" class="form-control" id="food_name" name="food_name" [(ngModel)]="foodItem.food_name" maxlength="100">
+    </div>
+  </div>
 
+  <!-- Second Row -->
+  <div class="form-row">
+    <div class="form-group">
+      <label for="food_description">Description</label><small class="text-muted"> ({{foodItem.food_description.length}}/1000 chars)</small>
+      <textarea class="form-control fixed-textarea" id="food_description" name="food_description" [(ngModel)]="foodItem.food_description" maxlength="1000"></textarea>
+    </div>
 
-<!-- Food Name -->
-<div class="form-group">
-  <label for="food_name">Name</label>
-  <input type="text" class="form-control" id="food_name" name="food_name" [(ngModel)]="foodItem.food_name" maxlength="100">
-  <small class="text-muted">{{foodItem.food_name.length}}/100 characters</small>
-</div>
+    <div class="form-group">
+      <label for="food_image">Image</label>
+      <input type="file" class="form-control" (change)="uploadFoodImage($event)" accept=".jpg, .jpeg, .png" name="food_image" required>
+      <div *ngIf="foodItem.food_image">
+        <img [src]="foodItem.food_image" alt="Image Preview" class="image-preview">
+      </div>
+    </div>
+  </div>
 
-<!-- Food Description -->
-<div class="form-group">
-  <label for="food_description">Description</label>
-  <textarea class="form-control fixed-textarea" id="food_description" name="food_description" [(ngModel)]="foodItem.food_description" maxlength="1000"></textarea>
-  <small class="text-muted">{{foodItem.food_description.length}}/1000 characters</small>
-</div>
+  <!-- Third Row -->
+  <div class="form-row">
+    <div class="form-group">
+      <label for="minimum_pax">Minimum Pax</label>
+      <input type="number" class="form-control" id="minimum_pax" name="minimum_pax" [(ngModel)]="foodItem.minimum_pax" (keydown)="limitDigits($event, 15)" min="5">
+    </div>
 
+    <div class="form-group">
+      <label for="maximum_pax">Maximum Pax</label>
+      <input type="number" class="form-control" id="maximum_pax" name="maximum_pax" [(ngModel)]="foodItem.maximum_pax" (keydown)="limitDigits($event, 15)" min="5">
+    </div>
 
-<!-- Minimum Pax -->
-<div class="form-group">
-  <label for="minimum_pax">Minimum Pax</label>
-  <input type="number" class="form-control" id="minimum_pax" name="minimum_pax" [(ngModel)]="foodItem.minimum_pax" (keydown)="limitDigits($event, 15)" min="5">
-</div>
+    <div class="form-group">
+      <label for="pax_price">Pax Price</label>
+      <input type="number" class="form-control" id="pax_price" name="pax_price" [(ngModel)]="foodItem.pax_price" (keydown)="limitDigits($event, 15)" min="0">
+    </div>
+  </div>
 
-<!-- Maximum Pax -->
-<div class="form-group">
-  <label for="maximum_pax">Maximum Pax</label>
-  <input type="number" class="form-control" id="maximum_pax" name="maximum_pax" [(ngModel)]="foodItem.maximum_pax" (keydown)="limitDigits($event, 15)" min="5">
-</div>
-
-<!-- Pax Price -->
-<div class="form-group">
-  <label for="pax_price">Pax Price</label>
-  <input type="number" class="form-control" id="pax_price" name="pax_price" [(ngModel)]="foodItem.pax_price" (keydown)="limitDigits($event, 15)" min="0">
-</div>
-
-<!-- File Upload -->
-<div class="form-group">
-  <label for="food_image">Image</label>
-  <input type="file" class="form-control" (change)="uploadFoodImage($event)" accept=".jpg, .jpeg, .png" name="food_image" required>
-</div>
-
-<!-- Add an image preview -->
-<div *ngIf="foodItem.food_image">
-  <!-- Apply the 'image-preview' class to control the image size -->
-  <img [src]="foodItem.food_image" alt="Image Preview" class="image-preview">
-</div>
-
-<button class="save-food-item-button" (click)="saveFoodItem()">Save</button>
+  <!-- Save Button -->
+  <button class="save-food-item-button" (click)="saveFoodItem()">Save</button>
 </div>

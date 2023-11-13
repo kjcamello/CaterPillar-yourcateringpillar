@@ -68,6 +68,9 @@ import { ViewFoodItemTableComponent } from './components/pages/view-food-item-ta
 
 import { FoodItemsService } from './services/food-items.service';
 import { SuperadminCustomerComponent } from './components/pages/superadmin/superadmin-customer.component';
+import { ViewCaterersListComponent } from './components/pages/view-caterers-list/view-caterers-list.component';
+
+//import { MatTabsModule } from '@angular/material/tabs';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -136,6 +139,7 @@ const database = getDatabase(app);
     ViewFoodItemComponent,
     ViewFoodItemTableComponent,
     SuperadminCustomerComponent,
+    ViewCaterersListComponent,
 
   ],
   imports: [
@@ -157,8 +161,7 @@ const database = getDatabase(app);
     AngularFirestoreModule,
     AngularFireStorageModule,
     AngularFireDatabaseModule, 
-    HttpClientModule,
-   
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

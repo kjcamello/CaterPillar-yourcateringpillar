@@ -1,80 +1,42 @@
 <app-header-user></app-header-user>
 <app-search></app-search>
 
-<!-- Display the catering information -->
-<ul>
-  <li *ngFor="let caterings of catering">
-    <a routerLink="/caterings/{{caterings.id}}">
-      <img [src]="caterings.imageUrl" alt="{{caterings.name}}" />
-      <div class="content">
-        {{caterings.name}}
-      </div>
-      <span class="favorite {{caterings.favorite ? '' : 'not'}}">
-        ❤
-      </span>
-      <div class="stars">
-        <app-star-rating [stars]="caterings.stars"></app-star-rating>
-      </div>
-      <div>
-        <div class="catering_service-item-footer">
-          <div class="origins">
-            <span *ngFor="let origin of caterings.origins">
-              {{origin}}
+<div class="page-container">
+  <!-- Display the catering information -->
+  <div class="catering-list-container">
+    <ul>
+      <li *ngFor="let caterings of catering">
+        <a routerLink="/caterings/{{caterings.id}}">
+          <img [src]="caterings.imageUrl" alt="{{caterings.name}}" />
+          <div class="content">
+            {{caterings.name}}
+          </div>
+          <span class="favorite {{caterings.favorite ? '' : 'not'}}">
+            ❤
+          </span>
+          <div class="stars">
+            <app-star-rating [stars]="caterings.stars"></app-star-rating>
+          </div>
+          <div class="catering-service-item-footer">
+            <div class="origins">
+              <span *ngFor="let origin of caterings.origins">
+                {{origin}}
+              </span>
+            </div>
+            <div class="location">
+              <span>📍</span>
+              {{caterings.location}}
+            </div>
+          </div>
+          <div class="cateringPacks">
+            <span *ngFor="let cateringPacks of caterings.cateringPacks">
+              {{cateringPacks}}
             </span>
           </div>
-
-          <div class="location">
-            <span>📍</span>
-            {{caterings.location}}
-          </div>
-        </div>
-        <div class="cateringPacks">
-          <span *ngFor="let cateringPacks of caterings.cateringPacks">
-            {{cateringPacks}}
-          </span>
-        </div>
-      </div>
-    </a>
-  </li>
-</ul>
-
-<!-- Display the food items -->
-<!--
-<ul>
-    <li *ngFor="let foodItem of foodItems | async">
-        <div class="food-item">
-          <h2>{{foodItem.food_name}}</h2>
-          <p>{{foodItem.food_description}}</p>
-          <p>Caterer: {{caterer.catererBasicInfo.catererDisplayName || 'N/A'}}</p>
-          <div class="button-container">
-          <a routerLink="/user-package-selection" class="left-button">Fixed Package</a>
-          <a routerLink="/user-diy-selection" class="right-button">D-I-Y Package</a>
-          </div>
-        </div>
+        </a>
       </li>
-</ul> -->
+    </ul>
+  </div>
 
-<ul class="caterer-list">
-
-  <li *ngFor="let caterer of caterers | async" class="caterer-item">
-    <!-- Debugging: Display raw data as JSON -->
-    {{ caterer | json }}
-    
-    <!--<div class="caterer-card">
-
-      <img [src]="caterer.cateringInfo.cateringPhotoURL" alt="{{caterer.cateringInfo.cateringName}}" class="caterer-image">
-
-      <div class="caterer-info">
-        <h2>{{caterer.cateringInfo.cateringName}}</h2>
-        <p class="caterer-address">{{caterer.catererInfo.catererRegisteredAddress}}</p>
-        <p class="caterer-email">{{caterer.catererBasicInfo.catererEmail}}</p>
-        <p class="caterer-contact">{{caterer.cateringInfo.cateringContactNumber}}</p>
-      </div>-->
-      <!-- Buttons -->
-      <div class="button-container">
-        <!--<a routerLink="/user-package-selection" class="left-button">Fixed Package</a>-->
-        <a [routerLink]="['/user-diy-selection', caterer.catererBasicInfo.catererUid]" class="right-button">DIY Package</a>
-      </div>
-    <!--</div>-->
-  </li>
-</ul>
+<!-- Display the caterer information in a table -->
+<app-view-caterers-list></app-view-caterers-list>

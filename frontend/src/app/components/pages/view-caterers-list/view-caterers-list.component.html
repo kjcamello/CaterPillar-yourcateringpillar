@@ -1,0 +1,28 @@
+<!-- Display the caterer information in a table -->
+<div class="caterer-table-container">
+    <table class="caterer-table">
+      <thead>
+        <tr>
+          <th>Catering Name</th>
+          <th>Registered Address</th>
+          <th>Email</th>
+          <th>Contact Number</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let caterer of caterers | async" class="caterer-item">
+          <td>{{caterer.cateringInfo.cateringName}}</td>
+          <td>{{caterer.catererInfo.catererRegisteredAddress}}</td>
+          <td>{{caterer.catererBasicInfo.catererEmail}}</td>
+          <td>{{caterer.cateringInfo.cateringContactNumber}}</td>
+          <td>
+            <div class="button-container">
+              <!--<a routerLink="/user-package-selection" class="left-button">Fixed Package</a>-->
+              <a [routerLink]="['/user-diy-selection', caterer.catererBasicInfo.catererUid]" class="right-button">DIY Package</a>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

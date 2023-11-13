@@ -206,36 +206,3 @@ export class AuthService {
 
 
   }
-    //sprint 3
-  // Save a food item to the Firestore subcollection
- /* saveFoodItem(foodItem: any, subcollection: string) {
-    // Get the caterer's unique document ID or use any other identifier as needed
-    const catererUid = this.getCatererUid();
-
-    // Add the food item to the specified subcollection
-    const subcollectionRef = this.afs.collection('caterers')
-      .doc(catererUid)
-      .collection(subcollection);
-
-    return subcollectionRef.add(foodItem);
-  }*/
-/*
-//food item service
-getFoodItems(): Observable<FoodItem[]> {
-  return this.foodItemsCollection.valueChanges();
-}
-
-//Sprint 3
-updateFoodItem(foodItem: FoodItem): Promise<void> {
-  // Construct the path to the food item document in Firestore
-  const foodItemPath = `caterers/${foodItem.catererUid}/foodItems/${foodItem.foodItemId}`;
-
-  // Update the food item in Firestore
-  return this.afs
-    .doc(foodItemPath)
-    .update(foodItem)
-    .catch(error => {
-      console.error('Error updating food item:', error);
-      throw error;
-    });
-}*/

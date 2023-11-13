@@ -1,34 +1,6 @@
-.diy-package {
-  background-color: #01f019;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-  max-width: 400px;
-  position: fixed;
-  top: 120px; /* Adjust the top position to leave space for the header */
-  left: 65px; /* Adjust the left position as needed */
-  z-index: 0; /* Use a lower z-index value to place it behind the side navbar */
-}
-
-/* CSS for the "Add Food Item" button */
-.save-food-item-button {
-  position: fixed;
-  top: 745px; /* Adjust the top position as needed */
-  left: 65px; /* Adjust the left position as needed */
-  width: 302px; /* Set the width to match the .diy-package form */
-  background-color: #1a9a00;
-  color: #fff;
-  padding: 0px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: 0.2s all;
-  font-size: 20px; /* Adjust the font size to your preferred size */
-}
 
 button:hover {
-  background-color: #007a27;
+  background-color: #004e10;
 }
 
 
@@ -44,16 +16,6 @@ button:hover {
   color: #333;
   display: block; /* Add this property to make labels display as block elements */
 }
-/*
-.food-item input[type="text"],
-.food-item input[type="number"],
-.food-item textarea {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  margin-bottom: 10px;
-}*/
 
 .food-item input[type="file"] {
   margin-bottom: 10px;
@@ -95,8 +57,8 @@ button:hover {
 
 /* Add a CSS class to control the size of the image preview */
 .image-preview {
-  max-width: 200px; /* Adjust the max width to your preferred size */
-  max-height: 200px; /* Adjust the max height to your preferred size */
+  max-width: 100px; /* Adjust the max width to your preferred size */
+  max-height: 100px; /* Adjust the max height to your preferred size */
 }
 
 
@@ -159,21 +121,58 @@ button:hover {
 }
 
 
-/*
+/*textbox alignments*/
+.image-preview-container {
+  display: flex;
+  justify-content: flex-end; /* Align content to the right */
+  margin-top: -65px; /* Adjust as needed */
+}
 
-.food-item button[type="submit"] {
-  background-color: #9a0000;
+.image-preview {
+  max-width: 120px; /* Adjust the max width as needed */
+  max-height: 120px; /* Adjust the max height as needed */
+  margin-left: 10px; /* Add margin to separate image preview from other content */
+}
+
+.form-group textarea {
+  height: 175px; /* Adjust the height as needed */
+}
+
+.diy-package {
+  background-color: #01f019;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  width: 375px;
+  height: 325px;
+  position: fixed;
+  top: 65px; /* Adjust the top position to leave space for the header */
+  left: 245px; /* Adjust the left position as needed */
+  z-index: 100; /* Use a lower z-index value to place it behind the side navbar */
+}
+
+.form-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-group {
+  flex: 1;
+  margin-right: 10px; /* Adjust margin as needed */
+}
+
+.save-food-item-button {
+  position: fixed;
+  top: 375px; /* Adjust the top position as needed */
+  left: 245px; /* Adjust the left position as needed */
+  width: 375px; /* Set the width to match the .diy-package form */
+  background-color: #1a9a00;
   color: #fff;
-  padding: 10px 20px;
+  padding: 0px 20px;
+  border: none;
   border-radius: 5px;
   cursor: pointer;
   transition: 0.2s all;
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
+  font-size: 20px; /* Adjust the font size to your preferred size */
 }
-
-.food-item button[type="submit"]:hover {
-  background-color: #7a0000;
-}*/

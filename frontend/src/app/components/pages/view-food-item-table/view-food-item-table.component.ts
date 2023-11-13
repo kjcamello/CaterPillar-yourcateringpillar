@@ -8,12 +8,15 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./view-food-item-table.component.css']
 })
 export class ViewFoodItemTableComponent implements OnInit {
-  selectedCategory: string = 'Food';
+  selectedTab: string = ''; // or selectedTab: string = null;
   foodItems: any[] = [];
   selectedFoodItem: any = null; // Hold the selected food item for editing
 
+  selectedCategory: string = 'Food';
 
-  
+  showUpdateFoodItemForm: boolean = false;
+  errorMessage: string = null;
+
   constructor(
     private firestore: AngularFirestore,
     private authService: AuthService,
@@ -25,25 +28,48 @@ export class ViewFoodItemTableComponent implements OnInit {
 
   loadCategoryItems() {
     const catererUid = this.authService.getCatererUid();
-    const selectedCategory = this.selectedCategory.toLowerCase();
-
+    const selectedCategory = this.selectedTab.toLowerCase();
+  
     this.firestore
       .collection('caterers')
       .doc(catererUid)
       .collection(`${selectedCategory}Items`)
       .valueChanges()
-      .subscribe((items: any[]) => {
-        console.log('Fetched items:', items);
-        this.foodItems = items;
-      });
+      .subscribe(
+        (items: any[]) => {
+          console.log('Fetched items:', items);
+          this.foodItems = items;
+        },
+        (error) => {
+          console.error('Error fetching items:', error);
+        }
+      );
   }
+  
+
+  // Method to switch the selected tab
+  selectTab(category: string) {
+    this.selectedTab = category;
+    this.selectedCategory = category.toLowerCase();
+    // Add a class to the selected tab
+    const tabs = document.querySelectorAll('.tab');
+    tabs.forEach(tab => {
+      tab.classList.remove('selected');
+    });
+    const selectedTab = document.querySelector(`.tab[data-category="${category}"]`);
+    if (selectedTab) {
+      selectedTab.classList.add('selected');
+    }
+
+    this.loadCategoryItems(); // Load items based on the selected tab
+  }
+  
+  
   
   deleteFoodItem(foodItem: any): void {
     const catererUid = this.authService.getCatererUid();
     const selectedCategory = this.selectedCategory.toLowerCase();
     const foodItemId = foodItem.foodItemId;
-  
-    // Remove or comment out console.log statements
   
     // Display a confirmation prompt
     const isConfirmed = window.confirm('Are you sure you want to delete this food item?');
@@ -74,11 +100,6 @@ export class ViewFoodItemTableComponent implements OnInit {
       console.log('Deletion cancelled by user.');
     }
   }
-  
-  editFoodItem(foodItem: any) {
-    // Set the selected food item for editing
-    this.selectedFoodItem = { ...foodItem };
-  }
 
   // Method to handle image changes in the edit form
   uploadEditFoodImage(event: any) {
@@ -98,19 +119,15 @@ export class ViewFoodItemTableComponent implements OnInit {
     }
   }
 
-
-  updateFoodItem() {
-    if (this.selectedFoodItem) {
-      // Show confirmation prompt
-      const isConfirmed = window.confirm('Are you sure you want to update food item changes?');
-  
-      if (isConfirmed) {
+//Update Food Item (Sprint 3)
+updateFoodItem() {
+  if (this.confirmationPrompt()) {
         // Update the food item in Firestore
         const catererUid = this.authService.getCatererUid();
-  
+
         if (catererUid) {
           const selectedCategory = this.selectedCategory.toLowerCase();
-  
+
           this.firestore
             .collection('caterers')
             .doc(catererUid)
@@ -126,7 +143,80 @@ export class ViewFoodItemTableComponent implements OnInit {
             });
         }
       }
+}
+
+  toggleUpdateFoodItemForm(foodItem: any) {
+    this.selectedFoodItem = { ...foodItem };
+  }
+
+  cancelUpdate(): void {
+    const isConfirmed = window.confirm('Are you sure you want to cancel the food item update?');
+    if (isConfirmed) {
+      // Reset the selectedFoodItem and hide the form
+      this.selectedFoodItem = null;
     }
   }
   
+  
+  confirmationPrompt() {
+    if (this.validateFields()) {
+      const confirm = window.confirm('Are you sure you want to update food item changes?');
+      return confirm;
+    }
+    return false;
+  }
+  
+  validateFields() {
+    if (
+      this.selectedFoodItem.food_name &&
+      this.selectedFoodItem.food_description &&
+      this.selectedFoodItem.minimum_pax !== null &&
+      this.selectedFoodItem.pax_price !== null &&
+      this.selectedFoodItem.maximum_pax !== null &&
+      (this.selectedFoodItem.category !== null && this.selectedFoodItem.category !== '') &&
+      this.selectedFoodItem.minimum_pax >= 5 && // Minimum pax check
+      this.selectedFoodItem.minimum_pax <= this.selectedFoodItem.maximum_pax && // Maximum pax check
+      this.selectedFoodItem.pax_price >= 0 // Pax price is non-negative
+    ) {
+      return true;
+    } else {
+      let errorMessage = 'Please fill in all fields correctly.';
+  
+      if (!this.selectedFoodItem.food_name) {
+        errorMessage = 'Please enter a valid food name.';
+      }
+  
+      if (!this.selectedFoodItem.food_description) {
+        errorMessage = 'Please enter a valid food description.';
+      }
+  
+      if (this.selectedFoodItem.minimum_pax < 5) {
+        errorMessage = 'Minimum pax must be greater than 4.';
+      }
+  
+      if (this.selectedFoodItem.pax_price < 0) {
+        errorMessage = 'Pax price must be a non-negative number.';
+      }
+  
+      if (
+        this.selectedFoodItem.maximum_pax !== null &&
+        this.selectedFoodItem.minimum_pax > this.selectedFoodItem.maximum_pax
+      ) {
+        errorMessage = 'Maximum pax must be greater than or equal to minimum pax.';
+      }
+  
+      alert(errorMessage);
+    }
+    return false;
+  }
+
+  limitDigits(event: any, maxLength: number) {
+    const input = event.target.value.replace(/\D/g, ''); // Remove non-digit characters
+    if (input.length > maxLength) {
+      event.target.value = input.substr(0, maxLength);
+      event.preventDefault();
+    }
+  }
+  
+
 }

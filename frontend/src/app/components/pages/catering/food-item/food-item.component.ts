@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef } from '@angular/core';
 import { FoodItem } from 'src/app/shared/models/food-item';
 import { FoodItemsService } from 'src/app/services/food-items.service';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
@@ -14,7 +14,7 @@ export class FoodItemComponent {
   //@Input() foodItem: FoodItem = new FoodItem();
   errorMessage: string;
   //confirmationPrompt: boolean = false; // Declare the confirmationPrompt property
-
+  //@ViewChild('fileInput') fileInput: ElementRef;
 
   constructor(
     private foodItemsService: FoodItemsService,
@@ -42,28 +42,33 @@ export class FoodItemComponent {
             foodItemData.foodItemId = foodItemId;
   
             subcollectionRef.doc(foodItemId).set(foodItemData)
-              .then(() => {
-                console.log('Food item saved successfully.');
-                alert('Food item saved successfully.');
-              })
+            .then(() => {
+              alert('Food item saved successfully.');
+              this.resetFoodItemFields(); // Call the method to reset the food item fields
+            })
               .catch(error => {
-                console.error('Error saving food item:', error);
                 alert('Error saving food item: ' + error.message);
               });
           } else {
-            console.error('No caterer UID available. Caterer is not logged in.');
             alert('No caterer UID available. Caterer is not logged in.');
           }
         } else {
-          console.error('Invalid category selected.');
           alert('Invalid category selected.');
         }
       } else {
-        console.error('Category not set in foodItem.');
         alert('Category not set in foodItem.');
       }
     }
   }
+
+  // Inside your FoodItemComponent class
+resetFoodItemFields() {
+  this.foodItem = new FoodItem(); // Reset the food item to a new instance
+  this.foodItem.food_image = 'https://firebasestorage.googleapis.com/v0/b/caterpillar-hestia.appspot.com/o/_images%2Fdefault_no_image.png?alt=media&token=c8be7d38-a9e9-47a2-9cb8-5e6bdf3d4758';
+
+    // Reset the file input field
+  //  this.fileInput.nativeElement.value = '';
+}
   
   
   confirmationPrompt() {

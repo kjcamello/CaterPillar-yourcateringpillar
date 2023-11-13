@@ -5,7 +5,7 @@
 }
 
 /* Style the form container */
-.form-container {
+.add-food-form-container {
   margin-left: 100px; /* Adjust the left margin to create a gap between the side navbar and the content */
   padding: 20px; /* Add padding to separate the button from the content */
   flex: 1; /* Allow the container to expand and fill available space */
@@ -30,24 +30,6 @@
     margin-top: 50px; /* Add margin to create space below the signup-header */
     margin-left: 380px; /* Adjust the left margin as needed */
   }
-  
-
-/*prio*/
-/* CSS for the "Add Food Item" button */
-.add-food-item-button {
-  position: fixed;
-  top: 85px; /* Adjust the top position as needed */
-  left: 65px; /* Adjust the left position as needed */
-  width: 302px; /* Set the width to match the .diy-package form */
-  background-color: #00910f;
-  color: #fff;
-  padding: 0px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: 0.2s all;
-  font-size: 20px; /* Adjust the font size to your preferred size */
-}
 
 /*debug using user-diy-selection containers*/
 .food-items-header {
@@ -67,16 +49,15 @@
     display: block; /* Display the image */
   }
 
-  /* CSS for the Signup Header */
+  /*
 .signup-header {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     background: #AC0000;
-    z-index: 2; /* Ensure it's above other content */
-    /* Add any other styles you want for your header */
-  }
+    z-index: 2;
+  }*/
   
 
 
@@ -93,17 +74,17 @@
     display: flex;
   }
   
+  /*
   app-signup-header {
-    /* Define the styles for your header, e.g., background color, width, etc. */
-    width: 100%; /* Ensure it takes full width */
+    width: 100%; 
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     background: #AC0000;
-    z-index: 2; /* Ensure it's above other content */
-    transition: top 0.2s; /* Add smooth transition effect */
-  }
+    z-index: 2; 
+    transition: top 0.2s;
+  }*/
 
   .side_navbar {
     position: fixed;
@@ -204,13 +185,6 @@
     transition: all 0.5s ease;
   }
   
-  /* Adjust margin for the food items container */
-  .form-container {
-    margin-left: 100px; /* Adjust the left margin to create a gap between the side navbar and the content */
-    padding: 20px; /* Add padding to separate the button from the content */
-    flex: 1; /* Allow the container to expand and fill available space */
-  }
-
   /* CSS for the "food_description" textarea */
 .form-group textarea {
   resize: none; /* Prevent resizing */
@@ -224,46 +198,12 @@
 }
 
 
-  /* Position app-food-item on the left
-  .app-food-item {
-    margin: 10px 0;
-    padding: 10px;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    width: calc(50% - 20px);
-    display: inline-block;  Display inline to position side by side
-  }*/
-/*
-  button {
-    background-color: #9a0000;
-    color: #71c884;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.2s all;
-    z-index: 1;
-  }*/
-  /*
-  .save-button {
-    position: absolute;
-    bottom: 20px; 
-    left: 50%;
-    transform: translateX(-50%); 
-  }*/
-  
-  button:hover {
-    background-color: #004e10;
-  }
-
-
-/*food items*/
+/*PRIORITY*/
+/*food items in table*/
 .food-form-container {
-  margin-top: -50px;
-  margin-left: 50px;
-  padding: 20px;
-  flex: 1;
+  margin-left: -325px;
+  margin-top: 400px;
+  /*flex: 1;*/
 }
 
 .saved-food-item-table {
@@ -289,16 +229,129 @@
   margin-bottom: 10px; /* Add some spacing below the heading */
 }
 
-/*Signup header elements*/
-header{
-  position: relative;
-  background-color: rgba(255, 116, 0, 0.3);
-  padding: 0;
-  /* border-bottom: 1px solid #9a0000; */
-  /* height: 100px; */
-  /* width: 100px; */
+
+
+/* Signup header elements */
+
+/* Style to add padding to the body when the header is fixed */
+body {
+  padding-top: 60px; /* Adjust the padding-top value based on your header height */
 }
 
+/* Add a class to the header when it is scrolled */
+.header-scrolled {
+  background-color: rgba(255, 116, 0, 0.9); /* Change background color on scroll */
+}
+
+/* Add a class to the body to adjust padding when the header is scrolled */
+.body-scrolled {
+  padding-top: 100px; /* Adjust the padding-top value based on your header height */
+}
+
+
+
+
+/*prio*/
+/* CSS for the "Add Food Item" button */
+.add-food-item-button {
+  position: fixed;
+  top: 40px; /* Adjust the top position as needed */
+  left: 245px; /* Adjust the left position as needed */
+  width: 375px; /* Set the width to match the .diy-package form */
+  background-color: #00910f;
+  color: #fff;
+  padding: 0px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.2s all;
+  font-size: 20px; /* Adjust the font size to your preferred size */
+  z-index: 150; /* Set a higher z-index to bring it in front of other elements */
+}
+
+.add-food-item-button:hover {
+  background-color: #004e10;
+}
+
+.add-event-button {
+  position: fixed;
+  top: 40px; /* Adjust the top position as needed */
+  left: 645px; /* Adjust the left position as needed */
+  width: 375px; /* Set the width to match the .diy-package form */
+  background-color: #590091;
+  color: #fff;
+  padding: 0px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.2s all;
+  font-size: 20px; /* Adjust the font size to your preferred size */
+  z-index: 100; /* Set a higher z-index to bring it in front of other elements */
+}
+
+.save-event-button {
+  position: fixed;
+  top: 375px; /* Adjust the top position as needed */
+  left: 645px; /* Adjust the left position as needed */
+  width: 375px; /* Set the width to match the .diy-package form */
+  background-color: #590091;
+  color: #fff;
+  padding: 0px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.2s all;
+  font-size: 20px; /* Adjust the font size to your preferred size */
+}
+
+.save-event-button:hover {
+  background-color: #3d004e;
+}
+
+.add-event-button:hover {
+  background-color: #3d004e;
+}
+
+.add-voucher-button {
+  position: fixed;
+  top: 40px; /* Adjust the top position as needed */
+  left: 1045px; /* Adjust the left position as needed */
+  width: 375px; /* Set the width to match the .diy-package form */
+  background-color: #9a9500;
+  color: #fff;
+  padding: 0px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.2s all;
+  font-size: 20px; /* Adjust the font size to your preferred size */
+  z-index: 100; /* Set a higher z-index to bring it in front of other elements */
+}
+
+.save-voucher-button {
+  position: fixed;
+  top: 375px; /* Adjust the top position as needed */
+  left: 1045px; /* Adjust the left position as needed */
+  width: 375px; /* Set the width to match the .diy-package form */
+  background-color: #9a9500;
+  color: #fff;
+  padding: 0px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.2s all;
+  font-size: 20px; /* Adjust the font size to your preferred size */
+}
+
+.save-voucher-button:hover {
+  background-color: #5a4501;
+}
+
+.add-voucher-button:hover {
+  background-color: #5a4501;
+}
+
+/*Signup header elements*/
 div{
   display: block;
 }
@@ -435,4 +488,80 @@ ul a{
 .CSU_Title{
   justify-content: center;
   text-align: center;
+}
+
+
+/* Adapted from food-item.component.css */
+
+/* Add this to your component's CSS file (e.g., event-form.component.css) */
+.event-form {
+  background-color: #e600ff; /* Set the background color */
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  width: 375px;
+  height: 200px;
+  position: fixed;
+  top: 65px; /* Adjust the top position to leave space for the header */
+  left: 645px; /* Adjust the left position as needed */
+  z-index: 100; /* Use a lower z-index value to place it behind the side navbar */
+}
+
+/* Add this to your component's CSS file (e.g., voucher-form.component.css) */
+.voucher-form {
+  background-color: #e9ed03; /* Set the background color */
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  width: 375px;
+  height: 325px;
+  position: fixed;
+  top: 65px; /* Adjust the top position to leave space for the header */
+  left: 1045px; /* Adjust the left position as needed */
+  z-index: 100; /* Use a lower z-index value to place it behind the side navbar */
+}
+
+/* Add common styles for event and voucher forms below */
+
+.form-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-group {
+  flex: 1;
+  margin-right: 10px; /* Adjust margin as needed */
+}
+
+.button-save {
+  position: fixed;
+  top: 400px; /* Adjust the top position as needed */
+  left: 75px; /* Adjust the left position as needed */
+  width: 375px; /* Set the width to match the form */
+  background-color: #1a9a00;
+  color: #fff;
+  padding: 0px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.2s all;
+  font-size: 20px; /* Adjust the font size to your preferred size */
+}
+
+/* You can further customize the styles to match your design */
+
+/*header fixed*/
+/* Add this to your global CSS or specific component's CSS */
+.CaterPillar-top {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(255, 116, 0, 0.3);
+  padding: 0;
+  border-bottom: 1px solid #9a0000;
+  z-index: 100;
+  transition: top 0.2s;
 }

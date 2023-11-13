@@ -87,6 +87,9 @@ const routes: Routes = [
 
   { path: 'user-package-selection', component: UserPackageSelectionComponent },
   { path: 'user-diy-selection/:id', component: UserDiySelectionComponent },
+  { path: 'temp-caterer-prof/:id', component: UserDiySelectionComponent },
+
+
 
   { path: 'user-profile', component: UserProfileComponent },  // <-- This is the last route, so no comma after this
     // ...other routes
