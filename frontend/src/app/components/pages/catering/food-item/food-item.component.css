@@ -144,7 +144,7 @@ button:hover {
   border: 1px solid #ddd;
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-  width: 375px;
+  width: 350px;
   height: 325px;
   position: fixed;
   top: 65px; /* Adjust the top position to leave space for the header */
@@ -166,7 +166,7 @@ button:hover {
   position: fixed;
   top: 375px; /* Adjust the top position as needed */
   left: 245px; /* Adjust the left position as needed */
-  width: 375px; /* Set the width to match the .diy-package form */
+  width: 350px; /* Set the width to match the .diy-package form */
   background-color: #1a9a00;
   color: #fff;
   padding: 0px 20px;

@@ -20,7 +20,8 @@ export class FoodItemComponent {
     private foodItemsService: FoodItemsService,
     private firestore: AngularFirestore,
     private authService: AuthService
-  ) {}
+  ) {
+  }
 
   saveFoodItem() {
     if (this.confirmationPrompt()) {

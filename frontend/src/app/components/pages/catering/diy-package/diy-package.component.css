@@ -191,18 +191,12 @@
   /* Add any other styling you need */
 }
 
-/* CSS for the "food_description" textarea */
-.form-group .fixed-textarea {
-  resize: none; /* Prevent resizing */
-  /* Add any other styling you need */
-}
-
 
 /*PRIORITY*/
 /*food items in table*/
 .food-form-container {
   margin-left: -325px;
-  margin-top: 400px;
+  margin-top: 600px;
   /*flex: 1;*/
 }
 
@@ -257,7 +251,7 @@ body {
   position: fixed;
   top: 40px; /* Adjust the top position as needed */
   left: 245px; /* Adjust the left position as needed */
-  width: 375px; /* Set the width to match the .diy-package form */
+  width: 350px; /* Set the width to match the .diy-package form */
   background-color: #00910f;
   color: #fff;
   padding: 0px 20px;
@@ -273,66 +267,12 @@ body {
   background-color: #004e10;
 }
 
-.add-event-button {
-  position: fixed;
-  top: 40px; /* Adjust the top position as needed */
-  left: 645px; /* Adjust the left position as needed */
-  width: 375px; /* Set the width to match the .diy-package form */
-  background-color: #590091;
-  color: #fff;
-  padding: 0px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: 0.2s all;
-  font-size: 20px; /* Adjust the font size to your preferred size */
-  z-index: 100; /* Set a higher z-index to bring it in front of other elements */
-}
-
-.save-event-button {
-  position: fixed;
-  top: 375px; /* Adjust the top position as needed */
-  left: 645px; /* Adjust the left position as needed */
-  width: 375px; /* Set the width to match the .diy-package form */
-  background-color: #590091;
-  color: #fff;
-  padding: 0px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: 0.2s all;
-  font-size: 20px; /* Adjust the font size to your preferred size */
-}
-
-.save-event-button:hover {
-  background-color: #3d004e;
-}
-
-.add-event-button:hover {
-  background-color: #3d004e;
-}
-
-.add-voucher-button {
-  position: fixed;
-  top: 40px; /* Adjust the top position as needed */
-  left: 1045px; /* Adjust the left position as needed */
-  width: 375px; /* Set the width to match the .diy-package form */
-  background-color: #9a9500;
-  color: #fff;
-  padding: 0px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: 0.2s all;
-  font-size: 20px; /* Adjust the font size to your preferred size */
-  z-index: 100; /* Set a higher z-index to bring it in front of other elements */
-}
-
+/*add and save voucher buttons and form*/
+.add-voucher-button,
 .save-voucher-button {
   position: fixed;
-  top: 375px; /* Adjust the top position as needed */
-  left: 1045px; /* Adjust the left position as needed */
-  width: 375px; /* Set the width to match the .diy-package form */
+  left: 1103px; /* Adjust the left position as needed */
+  width: 300px; /* Set the width to match the .diy-package form */
   background-color: #9a9500;
   color: #fff;
   padding: 0px 20px;
@@ -341,15 +281,91 @@ body {
   cursor: pointer;
   transition: 0.2s all;
   font-size: 20px; /* Adjust the font size to your preferred size */
+  z-index: 100; /* Set a higher z-index to bring it in front of other elements */
 }
 
+.add-voucher-button{
+  top: 40px;
+}
+
+.save-voucher-button{
+  top: 685px;
+}
+
+.add-voucher-button:hover,
 .save-voucher-button:hover {
   background-color: #5a4501;
 }
 
-.add-voucher-button:hover {
-  background-color: #5a4501;
+.voucher-form .form-group textarea {
+  height: 125px; /* Adjust the height as needed */
 }
+
+/* Add this style to your CSS file */
+.voucher-reqt-label {
+  margin-top: 130px; /* You can adjust the value to your preference */
+}
+
+.voucher-effect-label {
+  margin-top: 5px; /* You can adjust the value to your preference */
+}
+
+/* Add this style to your CSS file */
+.form-group {
+  margin-bottom: 15px; /* You can adjust the value to your preference */
+}
+
+.form-group div {
+  display: flex;
+  align-items: center;
+  margin-top: 5px; /* You can adjust the value to your preference */
+}
+
+.form-group label {
+  margin-right: 10px; /* You can adjust the value to your preference */
+}
+
+.form-group input[type="radio"] {
+  margin-right: 5px; /* You can adjust the value to your preference */
+}
+
+.form-group input[type="number"] {
+  margin-left: 5px; /* You can adjust the value to your preference */
+}
+
+
+
+
+/* Add this to your component's CSS file (e.g., voucher-form.component.css) */
+.voucher-form {
+  background-color: #e9ed03; /* Set the background color */
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  width: 300px;
+  height: 625px;
+  position: fixed;
+  top: 65px; /* Adjust the top position to leave space for the header */
+  left: 1103px; /* Adjust the left position as needed */
+  z-index: 100; /* Use a lower z-index value to place it behind the side navbar */
+}
+/*end of css*/
+
+/*image previews*/
+/*voucher*/
+.image-preview {
+  max-width: 120px; /* Adjust the max width as needed */
+  max-height: 120px; /* Adjust the max height as needed */
+  margin-left: 10px; /* Add margin to separate image preview from other content */
+}
+
+
+
+
+
+
+
 
 /*Signup header elements*/
 div{
@@ -500,28 +516,105 @@ ul a{
   border: 1px solid #ddd;
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-  width: 375px;
-  height: 200px;
+  width: 175px;
+  height: 325px;
   position: fixed;
   top: 65px; /* Adjust the top position to leave space for the header */
-  left: 645px; /* Adjust the left position as needed */
+  left: 606px; /* Adjust the left position as needed */
   z-index: 100; /* Use a lower z-index value to place it behind the side navbar */
 }
 
-/* Add this to your component's CSS file (e.g., voucher-form.component.css) */
-.voucher-form {
-  background-color: #e9ed03; /* Set the background color */
+.add-event-button {
+  position: fixed;
+  top: 40px; /* Adjust the top position as needed */
+  left: 606px; /* Adjust the left position as needed */
+  width: 175px; /* Set the width to match the .diy-package form */
+  background-color: #590091;
+  color: #fff;
+  padding: 0px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.2s all;
+  font-size: 20px; /* Adjust the font size to your preferred size */
+  z-index: 100; /* Set a higher z-index to bring it in front of other elements */
+}
+
+.save-event-button {
+  position: fixed;
+  top: 375px; /* Adjust the top position as needed */
+  left: 606px; /* Adjust the left position as needed */
+  width: 175px; /* Set the width to match the .diy-package form */
+  background-color: #590091;
+  color: #fff;
+  padding: 0px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.2s all;
+  font-size: 20px; /* Adjust the font size to your preferred size */
+}
+
+.event-form .form-group textarea {
+  height: 175px; /* Adjust the height as needed */
+}
+
+.add-event-button:hover,
+.save-event-button:hover {
+  background-color: #3d004e;
+}
+
+
+
+/* Add this to your component's CSS file (e.g., event-form.component.css) */
+.extraservice-form {
+  background-color: #ababab; /* Set the background color */
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-  width: 375px;
+  width: 175px;
   height: 325px;
   position: fixed;
   top: 65px; /* Adjust the top position to leave space for the header */
-  left: 1045px; /* Adjust the left position as needed */
+  left: 792px; /* Adjust the left position as needed */
   z-index: 100; /* Use a lower z-index value to place it behind the side navbar */
 }
+
+
+/*11-14-2023*/
+/*add and save voucher buttons and form*/
+.add-es-button,
+.save-es-button {
+  position: fixed;
+  left: 792px; /* Adjust the left position as needed */
+  width: 300px; /* Set the width to match the .diy-package form */
+  background-color: #474747;
+  color: #fff;
+  padding: 0px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.2s all;
+  font-size: 20px; /* Adjust the font size to your preferred size */
+  z-index: 100; /* Set a higher z-index to bring it in front of other elements */
+}
+
+.add-es-button{
+  top: 40px;
+}
+
+.save-es-button{
+  top: 685px;
+}
+
+.add-es-button:hover,
+.save-es-button:hover {
+  background-color: #222222;
+}
+
+
+/*11-14-2023*/
 
 /* Add common styles for event and voucher forms below */
 

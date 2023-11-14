@@ -65,24 +65,73 @@
   <div class="event-form">
     <!-- Event Form Fields -->
     <div class="form-group">
-      <label for="eventName">Event Name</label>
+      <label for="eventName">Name</label>
       <input type="text" class="form-control" id="eventName" name="eventName" [(ngModel)]="eventName">
     </div>
 
     <div class="form-group">
-      <label for="eventDescription">Event Description</label>
+      <label for="eventDescription">Description</label>
       <textarea class="form-control" id="eventDescription" name="eventDescription" [(ngModel)]="eventDescription"></textarea>
     </div>
 
     <!-- Additional event fields go here -->
 
     <!-- Save Event Button -->
-    <button class="save-event-button" (click)="saveEvent()">Save Event</button>
+    <button class="save-event-button" (click)="saveEventItem()">Save Event</button>
   </div>
 </div>
 
 <!-- Add Event Button -->
 <button class="add-event-button" (click)="toggleEventForm()">Add Event</button>
+
+
+<div *ngIf="showExtraServiceForm">
+  <div class="extraservice-form">
+    <!-- Event Form Fields -->
+    <div class="form-group">
+      <label for="esName">Name</label>
+      <input type="text" class="form-control" id="esName" name="esName" [(ngModel)]="esName">
+    </div>
+
+    <div class="form-group">
+      <label for="esDescription">Description</label>
+      <textarea class="form-control" id="esDescription" name="esDescription" [(ngModel)]="esDescription"></textarea>
+    </div>
+
+            <!-- Image not yet done revising -->
+    <div class="form-group">
+      <label for="esImage">Extra Service Image</label>
+      <input type="file" class="form-control" (change)="uploadVoucherImage($event)" accept=".jpg, .jpeg, .png" name="voucherImage" required>
+      <div *ngIf="esImage">
+        <img [src]="esImage" alt="Voucher Image Preview" class="image-preview">
+      </div>
+    </div>
+
+        <!-- Min -->
+    <div class="form-group">
+      <label for="esName">Name</label>
+      <input type="text" class="form-control" id="esName" name="esName" [(ngModel)]="esName">
+    </div>
+
+        <!-- Max -->
+    <div class="form-group">
+      <label for="esName">Name</label>
+      <input type="text" class="form-control" id="esName" name="esName" [(ngModel)]="esName">
+    </div>
+
+        <!-- Price -->
+    <div class="form-group">
+      <label for="esName">Name</label>
+      <input type="text" class="form-control" id="esName" name="esName" [(ngModel)]="esName">
+    </div>
+
+    <!-- Save Event Button -->
+    <button class="save-es-button" (click)="saveExtraServiceItem()">Save Extra Service</button>
+  </div>
+</div>
+
+<!-- Add Extra Service Button -->
+<button class="add-es-button" (click)="toggleExtraServiceForm()">Add Extra Service</button>
 
 
 <!-- Add Voucher Form -->
@@ -107,24 +156,70 @@
       </div>
     </div>
 
+    <label>Voucher Type</label>
     <div class="form-group">
-      <label for="voucherRequirements">Voucher Requirements</label>
-      <input type="number" class="form-control" id="voucherRequirements" name="voucherRequirements" [(ngModel)]="voucherRequirements">
+      <label>
+        <input type="radio" name="voucherType" [(ngModel)]="selectedVoucherType" value="foodItem">
+        Food Item
+      </label>
+      <label>
+        <input type="radio" name="voucherType" [(ngModel)]="selectedVoucherType" value="extraService">
+        Extra Service
+      </label>
     </div>
 
-    <div class="form-group">
-      <label for="voucherAmountDeduction">Voucher Amount Deduction</label>
-      <input type="number" class="form-control" id="voucherAmountDeduction" name="voucherAmountDeduction" [(ngModel)]="voucherAmountDeduction">
+    <div *ngIf="selectedVoucherType === 'foodItem'">
+      <!-- Fields for Food Item -->
+      <div class="form-group">
+        <label for="foodItem_itemQuantity">Food Item Item Quantity</label>
+        <input type="number" class="form-control" id="foodItem_itemQuantity" name="foodItem_itemQuantity" [(ngModel)]="foodItem_itemQuantity">
+      </div>
+
+      <div class="form-group">
+        <label for="foodItem_grandTotal">Food Item Grand Total</label>
+        <input type="number" class="form-control" id="foodItem_grandTotal" name="foodItem_grandTotal" [(ngModel)]="foodItem_grandTotal">
+      </div>
+
+      <div class="form-group">
+        <label for="foodItem_discount">Food Item Discount</label>
+        <input type="number" class="form-control" id="foodItem_discount" name="foodItem_discount" [(ngModel)]="foodItem_discount">
+      </div>
+
+      <div class="form-group">
+        <label for="foodItem_amountDeduction">Food Item Amount Deduction</label>
+        <input type="number" class="form-control" id="foodItem_amountDeduction" name="foodItem_amountDeduction" [(ngModel)]="foodItem_amountDeduction">
+      </div>
     </div>
 
-    <!-- Additional voucher fields go here -->
+    <div *ngIf="selectedVoucherType === 'extraService'">
+      <!-- Fields for Extra Service -->
+      <div class="form-group">
+        <label for="extraService_itemQuantity">Extra Service Item Quantity</label>
+        <input type="number" class="form-control" id="extraService_itemQuantity" name="extraService_itemQuantity" [(ngModel)]="extraService_itemQuantity">
+      </div>
 
-    <!-- Save Voucher Button -->
-    <button class="save-voucher-button" (click)="saveVoucher()">Save Voucher</button>
+      <div class="form-group">
+        <label for="extraService_grandTotal">Extra Service Grand Total</label>
+        <input type="number" class="form-control" id="extraService_grandTotal" name="extraService_grandTotal" [(ngModel)]="extraService_grandTotal">
+      </div>
+
+      <div class="form-group">
+        <label for="extraService_discount">Extra Service Discount</label>
+        <input type="number" class="form-control" id="extraService_discount" name="extraService_discount" [(ngModel)]="extraService_discount">
+      </div>
+
+      <div class="form-group">
+        <label for="extraService_amountDeduction">Extra Service Amount Deduction</label>
+        <input type="number" class="form-control" id="extraService_amountDeduction" name="extraService_amountDeduction" [(ngModel)]="extraService_amountDeduction">
+      </div>
+    </div>
+
+<!-- Save Voucher Button -->
+<button class="save-voucher-button" (click)="saveVoucherItem()">Save Voucher</button>
+
   </div>
 </div>
 
-    <!-- Add Voucher Button -->
-    <button class="add-voucher-button" (click)="toggleVoucherForm()">Add Voucher</button>
-    <!-- Additional DIY Package content goes here -->
-  
+<!-- Add Voucher Button -->
+<button class="add-voucher-button" (click)="toggleVoucherForm()">Add Voucher</button>
+<!-- Additional DIY Package content goes here -->
