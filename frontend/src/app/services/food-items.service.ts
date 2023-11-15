@@ -129,30 +129,27 @@ export class FoodItemsService {
       };
     }
 
-    saveExtraServiceItem(extraserviceItem: any): void {
-      // Use the AuthService to get the current logged-in caterer's UID
-      const catererUid = this.authService.getCatererUid();
-  
-      if (catererUid) {
-        // Add additional fields if needed
-        const extraserviceData = this.toEventObject(extraserviceItem);
-  
-        // Reference to the subcollection for events
-        const eventSubcollectionRef = this.firestore.collection(`caterers/${catererUid}/extraserviceItems`);
-  
-        eventSubcollectionRef.add(extraserviceData)
-          .then(() => {
-            alert('Event item saved successfully.');
-            // You can also reset the form or perform other actions here
-          })
-          .catch(error => {
-            alert('Error saving event item: ' + error);
-            // Handle the error, show a message, etc.
-          });
-      } else {
-        alert('No caterer UID available. Caterer is not logged in.');
-      }
-    }
+saveExtraServiceItem(extraserviceItem: any): void {
+  const catererUid = this.authService.getCatererUid();
+
+  if (catererUid) {
+    const extraserviceData = this.toExtraServiceObject(extraserviceItem);
+    const extraserviceSubcollectionRef = this.firestore.collection(`caterers/${catererUid}/extraserviceItems`);
+
+    extraserviceSubcollectionRef.add(extraserviceData)
+      .then(() => {
+        alert('Extra service saved successfully.');
+        // You can also reset the form or perform other actions here
+      })
+      .catch(error => {
+        alert('Error saving extra service item: ' + error);
+        // Handle the error, show a message, etc.
+      });
+  } else {
+    alert('No caterer UID available. Caterer is not logged in.');
+  }
+}
+
   
       // Convert event data to Firestore object
       private toExtraServiceObject(extraserviceItem: any): any {

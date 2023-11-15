@@ -43,11 +43,42 @@
   </nav>
 </div>
 
+<div class="es-form-container">
+  <div class="saved-es-item-table">
+    <h2>Extra Services</h2>
+    <!-- Add the selector for the ViewFoodItemTableComponent -->
+    <div class="es-table-form-container">
+    <!-- <app-view-extra-service-table></app-view-extra-service-table> -->    
+    </div>
+  </div>
+</div>
+
+<div class="voucher-form-container">
+  <div class="saved-voucher-item-table">
+    <h2>Vouchers</h2>
+    <!-- Add the selector for the ViewFoodItemTableComponent -->
+    <div class="voucher-table-form-container">
+    <!-- <app-view-voucher-table></app-view-voucher-table> -->    
+    </div>
+  </div>
+</div>
+
+<div class="event-form-container">
+  <div class="saved-event-item-table">
+    <h2>Events</h2>
+    <!-- Add the selector for the ViewFoodItemTableComponent -->
+    <div class="event-table-form-container">
+     <!-- <app-view-event-table></app-view-event-table> -->     
+    </div>
+  </div>
+</div>
+
+
 <div class="food-form-container">
   <div class="saved-food-item-table">
-    <h2>D-I-Y Package Food Items</h2>
+    <h2>Food Items</h2>
     <!-- Add the selector for the ViewFoodItemTableComponent -->
-    <div class="table-form-container">
+    <div class="food-table-form-container">
       <app-view-food-item-table></app-view-food-item-table>
     </div>
   </div>
@@ -98,31 +129,31 @@
       <textarea class="form-control" id="esDescription" name="esDescription" [(ngModel)]="esDescription"></textarea>
     </div>
 
-            <!-- Image not yet done revising -->
+    <!-- Image not yet done revising -->
     <div class="form-group">
-      <label for="esImage">Extra Service Image</label>
-      <input type="file" class="form-control" (change)="uploadVoucherImage($event)" accept=".jpg, .jpeg, .png" name="voucherImage" required>
+      <label for="esImage">Image</label>
+      <input type="file" class="form-control" (change)="uploadExtraServiceImage($event)" accept=".jpg, .jpeg, .png" name="esImage" required>
       <div *ngIf="esImage">
-        <img [src]="esImage" alt="Voucher Image Preview" class="image-preview">
+        <img [src]="esImage" alt="Extra Service Image Preview" class="es-image-preview">
       </div>
     </div>
 
         <!-- Min -->
     <div class="form-group">
-      <label for="esName">Name</label>
-      <input type="text" class="form-control" id="esName" name="esName" [(ngModel)]="esName">
+      <label for="esMinHours">Minimum Hours</label>
+      <input type="number" class="form-control" id="esMinHours" name="esMinHours" [(ngModel)]="esMinHours">
     </div>
 
         <!-- Max -->
     <div class="form-group">
-      <label for="esName">Name</label>
-      <input type="text" class="form-control" id="esName" name="esName" [(ngModel)]="esName">
+      <label for="esMaxHours">Maximum Hours</label>
+      <input type="number" class="form-control" id="esMaxHours" name="esMaxHours" [(ngModel)]="esMaxHours">
     </div>
 
         <!-- Price -->
     <div class="form-group">
-      <label for="esName">Name</label>
-      <input type="text" class="form-control" id="esName" name="esName" [(ngModel)]="esName">
+      <label for="esPrice">Price Per Hour</label>
+      <input type="number" class="form-control" id="esPrice" name="esPrice" [(ngModel)]="esPrice">
     </div>
 
     <!-- Save Event Button -->
@@ -139,24 +170,24 @@
   <div class="voucher-form">
     <!-- Voucher Form Fields -->
     <div class="form-group">
-      <label for="voucherName">Voucher Name</label>
+      <label for="voucherName">Name</label>
       <input type="text" class="form-control" id="voucherName" name="voucherName" [(ngModel)]="voucherName">
     </div>
 
     <div class="form-group">
-      <label for="voucherDescription">Voucher Description</label>
+      <label for="voucherDescription">Description</label>
       <textarea class="form-control" id="voucherDescription" name="voucherDescription" [(ngModel)]="voucherDescription"></textarea>
     </div>
 
     <div class="form-group">
-      <label for="voucherImage">Voucher Image</label>
+      <label for="voucherImage">Image</label>
       <input type="file" class="form-control" (change)="uploadVoucherImage($event)" accept=".jpg, .jpeg, .png" name="voucherImage" required>
       <div *ngIf="voucherImage">
         <img [src]="voucherImage" alt="Voucher Image Preview" class="image-preview">
       </div>
     </div>
 
-    <label>Voucher Type</label>
+    <label>Type</label>
     <div class="form-group">
       <label>
         <input type="radio" name="voucherType" [(ngModel)]="selectedVoucherType" value="foodItem">
@@ -171,22 +202,22 @@
     <div *ngIf="selectedVoucherType === 'foodItem'">
       <!-- Fields for Food Item -->
       <div class="form-group">
-        <label for="foodItem_itemQuantity">Food Item Item Quantity</label>
+        <label for="foodItem_itemQuantity">Item Quantity</label>
         <input type="number" class="form-control" id="foodItem_itemQuantity" name="foodItem_itemQuantity" [(ngModel)]="foodItem_itemQuantity">
       </div>
 
       <div class="form-group">
-        <label for="foodItem_grandTotal">Food Item Grand Total</label>
+        <label for="foodItem_grandTotal">Grand Total</label>
         <input type="number" class="form-control" id="foodItem_grandTotal" name="foodItem_grandTotal" [(ngModel)]="foodItem_grandTotal">
       </div>
 
       <div class="form-group">
-        <label for="foodItem_discount">Food Item Discount</label>
+        <label for="foodItem_discount">Discount</label>
         <input type="number" class="form-control" id="foodItem_discount" name="foodItem_discount" [(ngModel)]="foodItem_discount">
       </div>
 
       <div class="form-group">
-        <label for="foodItem_amountDeduction">Food Item Amount Deduction</label>
+        <label for="foodItem_amountDeduction">Amount Deduction</label>
         <input type="number" class="form-control" id="foodItem_amountDeduction" name="foodItem_amountDeduction" [(ngModel)]="foodItem_amountDeduction">
       </div>
     </div>
@@ -194,22 +225,22 @@
     <div *ngIf="selectedVoucherType === 'extraService'">
       <!-- Fields for Extra Service -->
       <div class="form-group">
-        <label for="extraService_itemQuantity">Extra Service Item Quantity</label>
+        <label for="extraService_itemQuantity">Item Quantity</label>
         <input type="number" class="form-control" id="extraService_itemQuantity" name="extraService_itemQuantity" [(ngModel)]="extraService_itemQuantity">
       </div>
 
       <div class="form-group">
-        <label for="extraService_grandTotal">Extra Service Grand Total</label>
+        <label for="extraService_grandTotal">Grand Total</label>
         <input type="number" class="form-control" id="extraService_grandTotal" name="extraService_grandTotal" [(ngModel)]="extraService_grandTotal">
       </div>
 
       <div class="form-group">
-        <label for="extraService_discount">Extra Service Discount</label>
+        <label for="extraService_discount">Discount</label>
         <input type="number" class="form-control" id="extraService_discount" name="extraService_discount" [(ngModel)]="extraService_discount">
       </div>
 
       <div class="form-group">
-        <label for="extraService_amountDeduction">Extra Service Amount Deduction</label>
+        <label for="extraService_amountDeduction">Amount Deduction</label>
         <input type="number" class="form-control" id="extraService_amountDeduction" name="extraService_amountDeduction" [(ngModel)]="extraService_amountDeduction">
       </div>
     </div>

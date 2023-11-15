@@ -5,13 +5,6 @@
   margin-top: -15px;
 }
 
-.food-items-table th,
-.food-items-table td {
-  border: 1px solid #000; /* Set border color to black */
-  padding: 8px;
-  text-align: justify;
-}
-
 .food-items-table th {
   background-color: #000; /* Set header background color to black */
   color: #fff; /* Set header text color to white */
@@ -40,15 +33,25 @@
   margin-bottom: 10px;
 }
 
+.food-items-table th,
+.food-items-table td {
+  border: 1px solid #000;
+  padding: 8px;
+  text-align: justify;
+  max-height: 100px; /* Set a fixed height for the cells */
+  overflow: auto; /* Enable vertical scrolling for overflowing content */
+}
+
 /* Additional styling for the form, adjust as needed */
 .table-form-container h2 {
   color: white;
   margin-bottom: 10px;
 }
 
-.icon-size{
+.icon-size {
   height: 50px;
 }
+
 
 
 

@@ -191,36 +191,11 @@
   /* Add any other styling you need */
 }
 
-
-/*PRIORITY*/
-/*food items in table*/
-.food-form-container {
-  margin-left: -325px;
-  margin-top: 600px;
-  /*flex: 1;*/
-}
-
 .saved-food-item-table {
   flex: 1;
   padding: 20px;
   margin-top: 50px;
   margin-left: 380px;
-}
-
-/*VIEW FOOD ITEM TABLE*/
-/* Style the container for the app-view-food-item-table as a form with an orange background */
-.table-form-container {
-  background-color: orange;
-  padding: 20px;
-  border-radius: 5px; /* Optional: Add rounded corners for a nicer look */
-  border: 1px solid #ddd;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-}
-
-/* Additional styling for the form, adjust as needed */
-.table-form-container h2 {
-  color: white; /* Set the text color to white or any other color that contrasts well with orange */
-  margin-bottom: 10px; /* Add some spacing below the heading */
 }
 
 
@@ -289,7 +264,7 @@ body {
 }
 
 .save-voucher-button{
-  top: 685px;
+  top: 375px;
 }
 
 .add-voucher-button:hover,
@@ -336,7 +311,7 @@ body {
 
 
 
-/* Add this to your component's CSS file (e.g., voucher-form.component.css) */
+/* Add this to your component's CSS file (e.g., diy-package.component.css) */
 .voucher-form {
   background-color: #e9ed03; /* Set the background color */
   padding: 10px;
@@ -344,26 +319,46 @@ body {
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
   width: 300px;
-  height: 625px;
+  height: 325px;
+  overflow-y: auto; /* Add this to enable vertical scrolling */
+  scrollbar-width: thin; /* For Firefox */
+  scrollbar-color: transparent transparent; /* For Firefox */
+  -ms-overflow-style: none; /* For Internet Explorer and Edge */
   position: fixed;
   top: 65px; /* Adjust the top position to leave space for the header */
   left: 1103px; /* Adjust the left position as needed */
   z-index: 100; /* Use a lower z-index value to place it behind the side navbar */
 }
+
+/*
+.voucher-form::-webkit-scrollbar {
+  width: 8px;
+}
+
+.voucher-form::-webkit-scrollbar-thumb {
+  background-color: transparent; 
+}
+
+.voucher-form::-webkit-scrollbar-track {
+  background-color: transparent;
+}*/
+
 /*end of css*/
 
 /*image previews*/
+/*extra service*/
+.es-image-preview {
+  max-width: 120px; /* Adjust the max width as needed */
+  max-height: 120px; /* Adjust the max height as needed */
+}
+
+
 /*voucher*/
 .image-preview {
   max-width: 120px; /* Adjust the max width as needed */
   max-height: 120px; /* Adjust the max height as needed */
   margin-left: 10px; /* Add margin to separate image preview from other content */
 }
-
-
-
-
-
 
 
 
@@ -573,17 +568,34 @@ ul a{
   border: 1px solid #ddd;
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-  width: 175px;
+  width: 300px;
   height: 325px;
+  overflow-y: auto; /* Add this to enable vertical scrolling */
+  scrollbar-width: thin; /* For Firefox */
+  scrollbar-color: transparent transparent; /* For Firefox */
+  -ms-overflow-style: none; /* For Internet Explorer and Edge */
   position: fixed;
   top: 65px; /* Adjust the top position to leave space for the header */
   left: 792px; /* Adjust the left position as needed */
   z-index: 100; /* Use a lower z-index value to place it behind the side navbar */
 }
 
+/*
+.extraservice-form::-webkit-scrollbar {
+  width: 8px;
+}
+
+.extraservice-form::-webkit-scrollbar-thumb {
+  background-color: transparent; 
+}
+
+.extraservice-form::-webkit-scrollbar-track {
+  background-color: transparent; 
+}*/
+
 
 /*11-14-2023*/
-/*add and save voucher buttons and form*/
+/*add and save extra service buttons and form*/
 .add-es-button,
 .save-es-button {
   position: fixed;
@@ -605,7 +617,7 @@ ul a{
 }
 
 .save-es-button{
-  top: 685px;
+  top: 375px;
 }
 
 .add-es-button:hover,
@@ -657,4 +669,62 @@ ul a{
   border-bottom: 1px solid #9a0000;
   z-index: 100;
   transition: top 0.2s;
+}
+
+
+
+/*table overflow*/
+/* Set a fixed height for the entire form container */
+/*PRIORITY*/
+/*food items in table*/
+.food-form-container {
+  margin-left: -325px;
+  margin-top: 263px;
+}
+
+.food-table-form-container {
+  max-height: 266px; /* Adjust the height as needed */
+  overflow-y: auto; /* Enable vertical scrolling for overflowing content */
+}
+
+/* Additional styling for the form, adjust as needed */
+.food-table-form-container h2 {
+  color: white;
+  margin-bottom: 10px;
+}
+
+/*VIEW FOOD ITEM TABLE*/
+/* Style the container for the app-view-food-item-table as a form with an orange background */
+.food-table-form-container {
+  background-color: orange;
+  padding: 20px;
+  border-radius: 5px; /* Optional: Add rounded corners for a nicer look */
+  border: 1px solid #ddd;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Additional styling for the form, adjust as needed */
+.food-table-form-container h2 {
+  color: white; /* Set the text color to white or any other color that contrasts well with orange */
+  margin-bottom: 10px; /* Add some spacing below the heading */
+}
+
+/* ... other styles ... */
+
+/* Extra Service header */
+.saved-es-item-table h2 {
+  margin-left: 75px;
+  margin-top: 100px; /* Adjust margin-top as needed */
+}
+
+/* Voucher header */
+.saved-voucher-item-table h2 {
+  margin-left: 600px;
+  margin-top: -30px; /* Adjust margin-top as needed */
+}
+
+/* Event header */
+.saved-event-item-table h2 {
+  margin-left: 1100px;
+  margin-top: -30px; /* Adjust margin-top as needed */
 }

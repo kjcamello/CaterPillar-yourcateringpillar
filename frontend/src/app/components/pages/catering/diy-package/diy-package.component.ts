@@ -174,10 +174,53 @@ logout() {
   // Redirect or handle post-logout logic here
 }
 
+//--------------------------------------------
+  // EXTRA SERVICE METHODS SPRINT 4
+  toggleExtraServiceForm() {
+    this.showExtraServiceForm = !this.showExtraServiceForm;
+    if (!this.showExtraServiceForm) {
+      this.resetExtraServiceForm();
+    } else {
+      this.createNewExtraServiceForm();
+    }
+  }
+
+  resetExtraServiceForm() {
+    this.esForm.reset(); // Reset the entire form
+    this.resetExtraServiceFields();
+  }
+
+  createNewExtraServiceForm() {
+    this.esForm = this.formBuilder.group({
+      esName: new FormControl('', Validators.required),
+      esDescription: new FormControl('', Validators.required),
+      esImage: new FormControl('', Validators.required),
+      esMinHours: new FormControl('', Validators.required),
+      esMaxHours: new FormControl('', Validators.required),
+      esPrice: new FormControl('', Validators.required),
+    });
+    this.resetEventFields();
+  }
+
+  resetExtraServiceFields() {
+    this.esName = ''; // If you have separate variables for these fields, reset them as well
+    this.esDescription = '';
+    // Reset other fields as needed
+    this.esName = '';
+    this.esDescription = '';
+    this.esImage = '';
+    this.esMinHours = null;
+    this.esMaxHours = null;
+    this.esPrice = null; 
+  }
+
+    //voucher image
+
+
 
 
 // Adapted from food-item.component.ts
-uploadVoucherImage(event: any) {
+uploadExtraServiceImage(event: any) {
   const files = event.target.files;
   
   if (files.length > 0) {
@@ -186,12 +229,12 @@ uploadVoucherImage(event: any) {
 
     if (this.isImageFile(selectedFile)) {
       this.errorMessage = ''; // Clear any previous error message
-      this.voucherImage = selectedFile;
+      this.esImage = selectedFile;
 
       const reader = new FileReader();
 
       reader.onload = (e: any) => {
-        this.voucherImage = e.target.result;
+        this.esImage = e.target.result;
       };
 
       reader.readAsDataURL(selectedFile);
@@ -200,24 +243,68 @@ uploadVoucherImage(event: any) {
       alert(this.errorMessage);
 
       event.target.value = '';
-      this.voucherImage = null;
+      this.esImage = null;
     }
   } else {
     // Image is not uploaded, set the default Firebase Storage URL
-    this.voucherImage = 'https://firebasestorage.googleapis.com/v0/b/caterpillar-hestia.appspot.com/o/_images%2Fdefault_no_image.png?alt=media&token=c8be7d38-a9e9-47a2-9cb8-5e6bdf3d4758';
+    this.esImage = 'https://firebasestorage.googleapis.com/v0/b/caterpillar-hestia.appspot.com/o/_images%2Fdefault_no_image.png?alt=media&token=c8be7d38-a9e9-47a2-9cb8-5e6bdf3d4758';
 
     // Ensure the default image is displayed immediately
     const reader = new FileReader();
     reader.onload = (e: any) => {
-      this.voucherImage = e.target.result;
+      this.esImage = e.target.result;
     };
     reader.readAsDataURL(new Blob());
   }
 }
 
-private isImageFile(file: File): boolean {
-  return file.type === 'image/jpeg' || file.type === 'image/jpg' || file.type === 'image/png';
+  // EVENT METHODS SPRINT 4
+  saveExtraServiceItem() {
+    if (this.extraserviceConfirmationPrompt()) {
+      if (this.validateExtraServiceFields()) {
+        this.foodItemsService.saveExtraServiceItem({
+          esName: this.esName,
+          esDescription: this.esDescription,
+          esImage: this.esImage,
+          esMinHours: this.esMinHours,
+          esMaxHours: this.esMaxHours,
+          esPrice: this.esPrice,
+        });
+        // Reset the form or perform other actions as needed
+        this.esForm.reset();
+        this.showExtraServiceForm = false;
+      }
+    }
+  }
+
+// Validate extra service form fields
+private validateExtraServiceFields(): boolean {
+  if (
+    this.esName.trim() !== '' &&
+    this.esDescription.trim() !== '' &&
+    //this.esImage.trim() !== '' &&  // Assuming esImage is a required field
+    this.esMinHours !== null &&   // Assuming esMinHours is a required field
+    this.esMaxHours !== null &&   // Assuming esMaxHours is a required field
+    this.esPrice !== null         // Assuming esPrice is a required field
+    // Add other required extra service fields as needed
+  ) {
+    return true;
+  } else {
+    alert('Please fill in all extra service fields correctly.');
+    return false;
+  }
 }
+
+
+
+  // Event confirmation prompt
+  private extraserviceConfirmationPrompt(): boolean {
+    if (this.validateExtraServiceFields()) {
+      const confirm = window.confirm('Are you sure you want to add this extra service to your catering service?');
+      return confirm;
+    }
+    return false;
+  }
 
 //--------------------------------------------
   // EVENT METHODS SPRINT 4
@@ -290,95 +377,6 @@ private validateEventFields(): boolean {
   }
 
 //--------------------------------------------
-  // EXTRA SERVICE METHODS SPRINT 4
-  toggleExtraServiceForm() {
-    this.showExtraServiceForm = !this.showExtraServiceForm;
-    if (!this.showExtraServiceForm) {
-      this.resetExtraServiceForm();
-    } else {
-      this.createNewExtraServiceForm();
-    }
-  }
-
-  resetExtraServiceForm() {
-    this.esForm.reset(); // Reset the entire form
-    this.resetExtraServiceFields();
-  }
-
-  createNewExtraServiceForm() {
-    this.esForm = this.formBuilder.group({
-      esName: new FormControl('', Validators.required),
-      esDescription: new FormControl('', Validators.required),
-      esImage: new FormControl('', Validators.required),
-      esMinHours: new FormControl('', Validators.required),
-      esMaxHours: new FormControl('', Validators.required),
-      esPrice: new FormControl('', Validators.required),
-    });
-    this.resetEventFields();
-  }
-
-  resetExtraServiceFields() {
-    this.eventName = ''; // If you have separate variables for these fields, reset them as well
-    this.eventDescription = '';
-    // Reset other fields as needed
-    this.esName = '';
-    this.esDescription = '';
-    this.esImage = '';
-    this.esMinHours = null;
-    this.esMaxHours = null;
-    this.esPrice = null; 
-  }
-
-  // EVENT METHODS SPRINT 4
-  saveExtraServiceItem() {
-    if (this.extraserviceConfirmationPrompt()) {
-      if (this.validateEventFields()) {
-        this.foodItemsService.saveExtraServiceItem({
-          esName: this.esName,
-          esDescription: this.esDescription,
-          esImage: this.esImage,
-          esMinHours: this.esMinHours,
-          esMaxHours: this.esMaxHours,
-          esPrice: this.esPrice,
-        });
-        // Reset the form or perform other actions as needed
-        this.eventForm.reset();
-        this.showEventForm = false;
-      }
-    }
-  }
-
-  // Validate event form fields
-private validateExtraServiceFields(): boolean {
-  if (
-    this.esName.trim() !== '' &&
-    this.esDescription.trim() !== ''
-    // Add other required fields as needed
-  ) {
-    return true;
-  } else {
-    alert('Please fill in all extra service fields correctly.');
-    return false;
-  }
-}
-
-  // Event confirmation prompt
-  private extraserviceConfirmationPrompt(): boolean {
-    if (this.validateExtraServiceFields()) {
-      const confirm = window.confirm('Are you sure you want to add this event to your catering service?');
-      return confirm;
-    }
-    return false;
-  }
-
-
-
-
-
-
-
-  
-//--------------------------------------------
 //VOUCHER
   // VOUCHER METHODS SPRINT 4
   toggleVoucherForm() {
@@ -433,6 +431,54 @@ createNewVoucherForm() {
   }
 
   this.resetVoucherFields();
+}
+
+  //voucher image
+
+
+
+
+// Adapted from food-item.component.ts
+uploadVoucherImage(event: any) {
+  const files = event.target.files;
+  
+  if (files.length > 0) {
+    // Image is uploaded
+    const selectedFile = files[0];
+
+    if (this.isImageFile(selectedFile)) {
+      this.errorMessage = ''; // Clear any previous error message
+      this.voucherImage = selectedFile;
+
+      const reader = new FileReader();
+
+      reader.onload = (e: any) => {
+        this.voucherImage = e.target.result;
+      };
+
+      reader.readAsDataURL(selectedFile);
+    } else {
+      this.errorMessage = 'File not uploaded. It must be a .jpg, .jpeg, or .png file.';
+      alert(this.errorMessage);
+
+      event.target.value = '';
+      this.voucherImage = null;
+    }
+  } else {
+    // Image is not uploaded, set the default Firebase Storage URL
+    this.voucherImage = 'https://firebasestorage.googleapis.com/v0/b/caterpillar-hestia.appspot.com/o/_images%2Fdefault_no_image.png?alt=media&token=c8be7d38-a9e9-47a2-9cb8-5e6bdf3d4758';
+
+    // Ensure the default image is displayed immediately
+    const reader = new FileReader();
+    reader.onload = (e: any) => {
+      this.voucherImage = e.target.result;
+    };
+    reader.readAsDataURL(new Blob());
+  }
+}
+
+private isImageFile(file: File): boolean {
+  return file.type === 'image/jpeg' || file.type === 'image/jpg' || file.type === 'image/png';
 }
 
 // Update the saveVoucherItem method to use a single property for requirements and effect
