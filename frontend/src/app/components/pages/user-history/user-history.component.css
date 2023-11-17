@@ -256,14 +256,3 @@
     button:hover {
       background-color: #7a0000;
     }
-    .cover-container {
-      margin-top: 81px;
-      margin-left: 60px;
-      overflow: hidden;
-  }
-  
-  .cover-container img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover; /* Ensure the image covers the container */
-  }

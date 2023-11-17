@@ -74,6 +74,10 @@ import { ViewEventTableComponent } from './components/pages/view-tables/view-eve
 import { ViewExtraServiceTableComponent } from './components/pages/view-tables/view-extra-service-table/view-extra-service-table.component';
 import { ViewVoucherTableComponent } from './components/pages/view-tables/view-voucher-table/view-voucher-table.component';
 import { ViewFoodTableComponent } from './components/pages/view-tables/view-food-table/view-food-table.component';
+import { UserOrdersComponent } from './components/pages/user-orders/user-orders.component';
+import { UserHistoryComponent } from './components/pages/user-history/user-history.component';
+import { UserChangepasswordComponent } from './components/pages/user-changepassword/user-changepassword.component';
+import { UserInfoComponent } from './components/pages/user-info/user-info.component';
 
 //import { MatTabsModule } from '@angular/material/tabs';
 
@@ -150,6 +154,10 @@ const database = getDatabase(app);
     ViewExtraServiceTableComponent,
     ViewVoucherTableComponent,
     ViewFoodTableComponent,
+    UserOrdersComponent,
+    UserHistoryComponent,
+    UserChangepasswordComponent,
+    UserInfoComponent,
 
   ],
   imports: [
