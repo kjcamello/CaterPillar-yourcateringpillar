@@ -1,0 +1,106 @@
+<!-- view-extra-service-table.component.html -->
+
+<div class="container">
+  <!-- Common Extra Service Items Table -->
+  <div *ngIf="extraserviceItems.length > 0; else noItems" class="common-table">
+    <table class="food-items-table">
+      <thead>
+        <tr>
+          <th>Image</th>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Minimum Hours</th>
+          <th>Maximum Hours</th>
+          <th>Pax Price</th>
+          <!-- Actions Header Cell -->
+          <th colspan="2">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let extraserviceItem of extraserviceItems">
+          <td>
+            <img [src]="extraserviceItem.food_image" alt="{{ extraserviceItem.food_name }}" *ngIf="extraserviceItem.food_image" class="table-image">
+          </td>
+          <td>{{ extraserviceItem.esName }}</td>
+          <td>{{ extraserviceItem.esDescription }}</td>
+          <td>{{ extraserviceItem.esMinHours }}</td>
+          <td>{{ extraserviceItem.esMaxHours }}</td>
+          <td>{{ extraserviceItem.esPrice }}/pax</td>
+          <!-- Update and Delete Icons Row -->
+          <td class="update-column">
+            <button class="update-button" (click)="toggleUpdateFoodItemForm(extraserviceItem)">
+              <img src="assets/arrows_update.png" alt="Update" class="icon-size">
+            </button>
+          </td>
+          <td class="delete-column">
+            <button class="delete-button" (click)="deleteExtraServiceItem(extraserviceItem)">
+              <img src="assets/trash_can_delete.png" alt="Delete" class="icon-size">
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <ng-template #noItems>
+    <p class="no-items-message">No items added yet.</p>
+  </ng-template>
+</div>
+
+
+
+  <!--- 
+  <div class="edit-form" *ngIf="selectedFoodItem">
+
+    <div class="diy-package">
+
+      <button class="close-button" (click)="cancelUpdate()">X</button>
+  
+      <div class="form-row">
+
+        <div class="form-group">
+          <label for="editFoodName">Name</label><small class="text-muted"> ({{selectedFoodItem.food_name.length}}/100 chars)</small>
+          <input type="text" class="form-control" id="editFoodName" [(ngModel)]="selectedFoodItem.food_name" maxlength="100">
+        </div>
+      </div>
+  
+      <div class="form-row">
+
+        <div class="form-group">
+          <label for="editFoodDescription">Description</label><small class="text-muted"> ({{selectedFoodItem.food_description.length}}/1000 chars)</small>
+          <textarea class="form-control fixed-textarea" id="editFoodDescription" [(ngModel)]="selectedFoodItem.food_description" maxlength="1000"></textarea>
+        </div>
+  
+
+        <div class="form-group">
+          <label for="editFoodImage">Image</label>
+          <input type="file" class="form-control" id="editFoodImage" (change)="uploadEditFoodImage($event)">
+
+          <div *ngIf="selectedFoodItem.food_image">
+            <img [src]="selectedFoodItem.food_image" alt="Existing Image" class="image-preview">
+          </div>
+        </div>
+      </div>
+  
+      <div class="form-row">
+
+        <div class="form-group">
+          <label for="editMinimumPax">Minimum Pax</label>
+          <input type="number" id="editMinimumPax" [(ngModel)]="selectedFoodItem.minimum_pax" min="1" (input)="limitDigits($event, 15)">
+        </div>
+
+        <div class="form-group">
+          <label for="editMaximumPax">Maximum Pax</label>
+          <input type="number" id="editMaximumPax" [(ngModel)]="selectedFoodItem.maximum_pax" min="1" (input)="limitDigits($event, 15)">
+        </div>
+  
+
+        <div class="form-group">
+          <label for="editPaxPrice">Pax Price</label>
+          <input type="number" id="editPaxPrice" [(ngModel)]="selectedFoodItem.pax_price" min="0" (input)="limitDigits($event, 15)">
+        </div>
+      </div>
+  
+      <button class="update-food-item-button" (click)="updateFoodItem()">Update Changes</button>
+    </div>
+  </div>
+-->

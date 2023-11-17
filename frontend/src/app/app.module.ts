@@ -70,6 +70,11 @@ import { FoodItemsService } from './services/food-items.service';
 import { SuperadminCustomerComponent } from './components/pages/superadmin/superadmin-customer.component';
 import { ViewCaterersListComponent } from './components/pages/view-caterers-list/view-caterers-list.component';
 
+import { ViewEventTableComponent } from './components/pages/view-tables/view-event-table/view-event-table.component';
+import { ViewExtraServiceTableComponent } from './components/pages/view-tables/view-extra-service-table/view-extra-service-table.component';
+import { ViewVoucherTableComponent } from './components/pages/view-tables/view-voucher-table/view-voucher-table.component';
+import { ViewFoodTableComponent } from './components/pages/view-tables/view-food-table/view-food-table.component';
+
 //import { MatTabsModule } from '@angular/material/tabs';
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -140,6 +145,11 @@ const database = getDatabase(app);
     ViewFoodItemTableComponent,
     SuperadminCustomerComponent,
     ViewCaterersListComponent,
+
+    ViewEventTableComponent,
+    ViewExtraServiceTableComponent,
+    ViewVoucherTableComponent,
+    ViewFoodTableComponent,
 
   ],
   imports: [
