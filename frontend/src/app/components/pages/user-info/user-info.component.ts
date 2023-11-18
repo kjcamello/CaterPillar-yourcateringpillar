@@ -19,6 +19,15 @@ export class UserInfoComponent {
   selectedImage: File=null;
   selectedImageSrc:  string = null;
 
+  userCredentials = {
+    username: '',
+    password: ''
+  };
+  onSubmit() {
+    // Process login here
+    console.log('User Credentials:', this.userCredentials);
+  }
+
   onCoverImageSelected(event: any) {
     const file = event.target.files[0];
     if (file) {
@@ -41,7 +50,7 @@ export class UserInfoComponent {
       reader.readAsDataURL(file);
     }
   }
-  
+
   constructor(private router: Router) { }
 
   goBack() {
