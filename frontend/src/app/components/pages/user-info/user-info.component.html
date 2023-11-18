@@ -29,14 +29,119 @@
              </a></li>   -->
            </ul>
          </nav>
-   </div>
-   <div class="cover-container">
-    <div class="cover-photo">
-        <!-- Cover Photo Content Goes Here -->
-        <img src="assets/Cover page Caterpillar.png" alt="Cover Photo" class="cover-size">
-    </div>
-    <div class="profile-picture">
-        <!-- Profile Picture Content Goes Here -->
-        <img src="assets/user-profilepic.jpg" alt="Profile Picture" class="profile-size">
-    </div>
+   
+</div>
+<div class="cover-container">
+  <img src="assets/BG.png" alt="" class="cover-size">
+      <div class="user-profile">
+      <!-- User Cover Photo with Change Button -->
+            <div class="cover-photo-container">
+            <div class="coverSize">
+                  <div class="coverphoto" *ngIf="selectedImage">
+                  <img [src]="selectedImageSrc" alt="Selected Image" class="cover_photo">
+          </div>
+      </div>
+          <label class="custom-file-upload">
+              <input type="file" (change)="onImageSelected($event)" accept="image/*" >
+              <img src="assets/change_user_coverphoto.png" alt="Go Back" class="uploadCover"> 
+          </label>
+  
+    
+
+  </div>
+
+  <!-- User Profile Picture with Change Button -->
+  <div class="profile-pic-container">
+      
+      <div class="profilepicSize">
+          <div class="profilephoto" *ngIf="selectedImage">
+              <img [src]="selectedImageSrc" alt="Selected Image" class="profile_photo">
+          </div>
+      </div>  
+      <button class="change-profile-pic-button">
+          <img src="assets/user_changeprofilepic.png" alt="Change Profile Picture" class="change-profile-pic-icon">
+      </button>
+  </div>
+
+  <!-- User Profile Details -->
+  <div class="profile-details">
+      <!-- Name -->
+      <div class="detail-item">
+          <label for="name">Name:</label>
+          <input type="text" id="name" value="John Doe">
+      </div>
+
+      <!-- Email -->
+      <div class="detail-item">
+          <label for="email">Email:</label>
+          <input type="email" id="email" value="user@example.com">
+      </div>
+
+      <!-- Phone -->
+      <div class="detail-item">
+          <label for="phone">Phone:</label>
+          <input type="tel" id="phone" value="+1234567890">
+      </div>
+
+      <!-- Address -->
+      <div class="detail-item">
+          <label for="address">Address:</label>
+          <input type="text" id="address">
+      </div>
+
+      <!-- Gender -->
+      <div class="detail-item">
+          <label>Gender:</label>
+          <input type="radio" id="male" name="gender" value="male">
+          <label for="male">Male</label>
+          
+          <input type="radio" id="female" name="gender" value="female">
+          <label for="female">Female</label>
+          
+          <input type="radio" id="others" name="gender" value="others">
+          <label for="others">Others</label>
+          
+          <input type="text" id="otherGender" placeholder="Specify your gender">
+      </div>
+
+      <!-- Date of Birth -->
+      <div class="detail-item">
+          <label>Date of Birth:</label>
+          <select id="month" (change)="populateDateDropdown()">
+              <option *ngFor="let month of months" [value]="month">{{ month }}</option>
+          </select>
+          <label for="month">Month</label>
+
+          <select id="date">
+              <option *ngFor="let day of days" [value]="day">{{ day }}</option>
+          </select>
+          <label for="date">Date</label>
+
+          <select id="year">
+              <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+          </select>
+          <label for="year">Year</label>
+      </div>
+
+      <!-- Bio Message -->
+      <div class="detail-item">
+          <label for="bio">Bio:</label>
+          <textarea id="bio"></textarea>
+          <img src="assets/button_editvalue.png" alt="Edit Bio" class="edit-icon">
+      </div>
+
+      <!-- Food Likes -->
+      <div class="detail-item">
+          <label for="foodlikes">Food Likes:</label>
+          <textarea id="foodlikes"></textarea>
+          <img src="assets/button_editvalue.png" alt="Edit Food Likes" class="edit-icon">
+      </div>
+  </div>
+
+  <!-- Profile Actions -->
+  <div class="profile-actions">
+      <button class="edit-btn"><img src="assets/button_editvalue.png" alt="Edit Icon"><span>EDIT</span></button>
+      <button class="save-btn">Save</button>
+  </div>
+</div>
 </div>
