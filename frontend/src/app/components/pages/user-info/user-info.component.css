@@ -266,6 +266,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover; /* Ensure the image covers the container */
+      height: 40px;
   }
     
   .profile-size {
@@ -311,7 +312,7 @@
   width: 100%;
   height: 100%;
   /* object-fit: cover; */
-  object-fit: contain;
+  object-fit: cover;
 }
 
 .coverSize{
@@ -320,18 +321,25 @@
   border: 1px solid #AC0000;
   
 }
-.profilepicSize{
-  width: 200px;
-  height: 200px;
+.profilepicSize {
+  width: 200px; /* Adjust as needed */
+  height: 200px; /* Adjust as needed */
   border: 1px solid #ffd0b1;
-  
+  border-radius: 50%; /* Makes the container circular */
+  overflow: hidden; /* Ensures nothing spills outside the container */
+}
+
+.profilepicSize img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures the image covers the container */
 }
 
 .change-cover-button,
 .change-profile-pic-button {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 150px;
+  right: 5px;
   background: none;
   border: none;
   cursor: pointer;

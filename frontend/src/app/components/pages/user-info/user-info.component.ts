@@ -11,9 +11,37 @@ export class UserInfoComponent {
   days: number[] = Array.from({ length: 31 }, (_, i) => i + 1); // Default to 31 days
   years: number[] = Array.from({ length: 122 }, (_, i) => new Date().getFullYear() - i); // For example, from the current year to 1900
 
+  selectedCoverImage: File = null;
+  selectedCoverImageSrc: string = null;
+  selectedProfileImage: File = null;
+  selectedProfileImageSrc: string = null;
+
   selectedImage: File=null;
   selectedImageSrc:  string = null;
 
+  onCoverImageSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.selectedCoverImage = file;
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.selectedCoverImageSrc = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+  onProfileImageSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.selectedProfileImage = file;
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.selectedProfileImageSrc = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+  
   constructor(private router: Router) { }
 
   goBack() {

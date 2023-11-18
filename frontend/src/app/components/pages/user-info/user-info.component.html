@@ -45,24 +45,20 @@
               <input type="file" (change)="onImageSelected($event)" accept="image/*" >
               <img src="assets/change_user_coverphoto.png" alt="Go Back" class="uploadCover"> 
           </label>
-  
-    
-
   </div>
 
   <!-- User Profile Picture with Change Button -->
   <div class="profile-pic-container">
-      
-      <div class="profilepicSize">
-          <div class="profilephoto" *ngIf="selectedImage">
-              <img [src]="selectedImageSrc" alt="Selected Image" class="profile_photo">
-          </div>
-      </div>  
-      <button class="change-profile-pic-button">
-          <img src="assets/user_changeprofilepic.png" alt="Change Profile Picture" class="change-profile-pic-icon">
-      </button>
-  </div>
-
+    <div class="profilepicSize">
+        <div class="profilephoto" *ngIf="selectedProfileImage">
+            <img [src]="selectedProfileImageSrc" alt="Profile Picture" class="profile_photo">
+        </div>
+    </div>  
+    <label class="change-profile-pic-button">
+        <input type="file" (change)="onProfileImageSelected($event)" accept="image/*" style="display: none;">
+        <img src="assets/change_user_coverphoto.png" alt="Change Profile Picture" class="change-profile-pic-icon">
+    </label>
+</div>
   <!-- User Profile Details -->
   <div class="profile-details">
       <!-- Name -->
@@ -143,5 +139,5 @@
       <button class="edit-btn"><img src="assets/button_editvalue.png" alt="Edit Icon"><span>EDIT</span></button>
       <button class="save-btn">Save</button>
   </div>
-</div>
-</div>
+
+
