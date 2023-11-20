@@ -1,132 +1,157 @@
+<div class="search-bar0">
+  <input type="text" placeholder="Search..." [(ngModel)]="searchText" />
+</div>
+
+<!--
+<div class="search-bar1">
+  <input type="text" placeholder="Search Min Pax..." [(ngModel)]="searchMinPax" />
+</div>
+<div class="search-bar2">
+  <input type="text" placeholder="Search Max Pax..." [(ngModel)]="searchMaxPax" />
+</div>
+<div class="search-bar3">
+  <input type="text" placeholder="Search Pax Price..." [(ngModel)]="searchPaxPrice" />
+</div>-->
+
+<div class="sorting-buttons">
+  <button (click)="sortItems('asc')">Ascending</button>
+  <button (click)="sortItems('desc')">Descending</button>
+</div>
+
+
 <div class="container">
-    <!-- Tabs for selecting the category -->
-    <div class="category-tabs">
-      <div class="tab" [ngClass]="{ 'selected': selectedCategory === 'Maincourse' }" (click)="selectTab('Maincourse')" data-category="Maincourse">Main Course</div>
-      <div class="tab" [ngClass]="{ 'selected': selectedCategory === 'Appetizer' }" (click)="selectTab('Appetizer')" data-category="Appetizer">Appetizer</div>
-      <div class="tab" [ngClass]="{ 'selected': selectedCategory === 'Soup' }" (click)="selectTab('Soup')" data-category="Soup">Soup</div>
-      <div class="tab" [ngClass]="{ 'selected': selectedCategory === 'Salad' }" (click)="selectTab('Salad')" data-category="Salad">Salad</div>
-      <div class="tab" [ngClass]="{ 'selected': selectedCategory === 'Dessert' }" (click)="selectTab('Dessert')" data-category="Dessert">Dessert</div>
-      <div class="tab" [ngClass]="{ 'selected': selectedCategory === 'Drink' }" (click)="selectTab('Drink')" data-category="Drink">Drink</div>
-    </div>
-    
-    
+  <!-- Tabs for selecting the category -->
+  <div class="category-tabs">
+    <div class="tab" [ngClass]="{ 'selected': selectedCategory === 'Maincourse' }" (click)="selectTab('Maincourse')" data-category="Maincourse">Main Course</div>
+    <div class="tab" [ngClass]="{ 'selected': selectedCategory === 'Appetizer' }" (click)="selectTab('Appetizer')" data-category="Appetizer">Appetizer</div>
+    <div class="tab" [ngClass]="{ 'selected': selectedCategory === 'Soup' }" (click)="selectTab('Soup')" data-category="Soup">Soup</div>
+    <div class="tab" [ngClass]="{ 'selected': selectedCategory === 'Salad' }" (click)="selectTab('Salad')" data-category="Salad">Salad</div>
+    <div class="tab" [ngClass]="{ 'selected': selectedCategory === 'Dessert' }" (click)="selectTab('Dessert')" data-category="Dessert">Dessert</div>
+    <div class="tab" [ngClass]="{ 'selected': selectedCategory === 'Drink' }" (click)="selectTab('Drink')" data-category="Drink">Drink</div>
+  </div>
+    <!--
+  <thead class="food-headers">
+    <tr>
+      <th class="food-label_image">Image</th>
+      <th class="food-label_name">Name</th>
+      <th class="food-label_description">Description</th>
+      <th class="food-label_min_pax">Minimum Pax</th>
+      <th class="food-label_max_pax">Maximum Pax</th>
+      <th class="food-label_pax_price">Pax Price</th>
+
+      <th colspan="2" class="food-label_actions">Actions</th>
+    </tr>
+  </thead>-->
+
   
-    <!-- Common Food Items Table -->
-    <div *ngIf="foodItems.length > 0; else noItems" class="common-table">
-    <!--  <h3 class="food-items-header">{{ selectedCategory | titlecase }} Items</h3>-->
-      <table class="food-items-table">
-        <thead>
-          <tr>
-            <th>Image</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Minimum Pax</th>
-            <th>Maximum Pax</th>
-            <th>Pax Price</th>
-            <!-- Actions Header Cell -->
-            <th colspan="2">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Common table content goes here -->
-          <tr *ngFor="let foodItem of foodItems">
+<!-- Common Food Items Table -->
+<div *ngIf="foodItems.length > 0; else noItems" class="common-table">
+  <table class="food-items-table">
+    <thead>
+      <tr>
+        <th>Image</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Minimum Pax</th>
+        <th>Maximum Pax</th>
+        <th>Pax Price</th>
+        <!-- Actions Header Cell -->
+        <th colspan="2">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!--<tr *ngFor="let foodItem of foodItems; let i = index">-->
+        <ng-container *ngFor="let foodItem of filterItems(); let i = index">
+          <tr [ngClass]="{'editing-row': i === editedRowIndex}">
             <td>
-              <img [src]="foodItem.food_image" alt="{{ foodItem.food_name }}" *ngIf="foodItem.food_image" class="table-image">
-            </td>
-            <td>{{ foodItem.food_name }}</td>
-            <td>{{ foodItem.food_description }}</td>
-            <td>{{ foodItem.minimum_pax }}</td>
-            <td>{{ foodItem.maximum_pax }}</td>          
-            <td>{{ foodItem.pax_price }}/pax</td>
-            <!-- Update and Delete Icons Row -->
-            <td class="update-column">
-              <button class="update-button" (click)="toggleUpdateFoodItemForm(foodItem)">
-                <img src="assets/arrows_update.png" alt="Update" class="icon-size">
-              </button>
-            </td>
-            <td class="delete-column">
-              <button class="delete-button" (click)="deleteFoodItem(foodItem)">
-                <img src="assets/trash_can_delete.png" alt="Delete" class="icon-size">
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <ng-template #noItems>
-      <p class="no-items-message">No items added yet.</p>
-    </ng-template>
-  </div>
-  
-  
-  <!-- Edit Form -->
-  <div class="edit-form" *ngIf="selectedFoodItem">
-    <!-- Display the form when a food item is selected for editing -->
-    <div class="diy-package">
-      <!-- Close button -->
-      <button class="close-button" (click)="cancelUpdate()">X</button>
-      
-      <div class="form-row">
-        <!-- Category dropdown -->
-        <div class="form-group">
-          <label for="editCategory">Category:</label>
-          <select class="form-control" id="editCategory" name="editCategory" [(ngModel)]="selectedFoodItem.category" [disabled]="isSelectDisabled">
-            <option value="Main Course">Main Course</option>
-            <option value="Appetizer">Appetizer</option>
-            <option value="Soup">Soup</option>
-            <option value="Salad">Salad</option>
-            <option value="Dessert">Dessert</option>
-            <option value="Drink">Drink</option>
-          </select>
-        </div>
-        
-  
-        <!-- Food Name -->
-        <div class="form-group">
-          <label for="editFoodName">Name</label><small class="text-muted"> ({{selectedFoodItem.food_name.length}}/100 chars)</small>
-          <input type="text" class="form-control" id="editFoodName" [(ngModel)]="selectedFoodItem.food_name" maxlength="100">
-        </div>
-      </div>
-  
-      <div class="form-row">
-        <!-- Food Description -->
-        <div class="form-group">
-          <label for="editFoodDescription">Description</label><small class="text-muted"> ({{selectedFoodItem.food_description.length}}/1000 chars)</small>
-          <textarea class="form-control fixed-textarea" id="editFoodDescription" [(ngModel)]="selectedFoodItem.food_description" maxlength="1000"></textarea>
-        </div>
-  
-        <!-- Image upload input -->
-        <div class="form-group">
-          <label for="editFoodImage">Image</label>
-          <input type="file" class="form-control" id="editFoodImage" (change)="uploadEditFoodImage($event)">
-                <!-- Display existing image -->
-                <div *ngIf="selectedFoodItem.food_image">
-                  <img [src]="selectedFoodItem.food_image" alt="Existing Image" class="image-preview">
+              <ng-container *ngIf="i !== editedRowIndex; else editModeImage">
+                <img [src]="foodItem.food_image" alt="Food Image" class="table-image">
+              </ng-container>
+              <ng-template #editModeImage>
+                <div class="edit-image-container">
+                  <input type="file" (change)="uploadEditFoodImage($event)" class="file-input" id="foodImageInput">
+                  <!-- Display existing or temporary image -->
+                  <div class="image-preview">
+                    <img [src]="selectedFoodItem.food_image ? selectedFoodItem.food_image : foodItem.food_image" alt="Preview Image" class="image-preview">
+                  </div>
+                  <!-- Choose File Icon -->
+                  <label class="file-input-label" for="foodImageInput">
+                    <img src="assets/upload_image_icon.png" alt="Choose File Icon" class="upload-image-icon-size">
+                  </label>
                 </div>
-        </div>
-      </div>
-  
-      <div class="form-row">
-  <!-- Minimum Pax -->
-  <div class="form-group">
-    <label for="editMinimumPax">Minimum Pax</label>
-    <input type="number" id="editMinimumPax" [(ngModel)]="selectedFoodItem.minimum_pax" min="1" (input)="limitDigits($event, 15)">
-  </div>
-  
-  <!-- Maximum Pax -->
-  <div class="form-group">
-    <label for="editMaximumPax">Maximum Pax</label>
-    <input type="number" id="editMaximumPax" [(ngModel)]="selectedFoodItem.maximum_pax" min="1" (input)="limitDigits($event, 15)">
-  </div>
-  
-  <!-- Pax Price -->
-  <div class="form-group">
-    <label for="editPaxPrice">Pax Price</label>
-    <input type="number" id="editPaxPrice" [(ngModel)]="selectedFoodItem.pax_price" min="0" (input)="limitDigits($event, 15)">
-  </div>
-  
-      </div>
-  
-      <button class="update-food-item-button" (click)="updateFoodItem()">Update Changes</button>
-    </div>
-  </div>
+              </ng-template>
+            </td>
+            <td>
+              <ng-container *ngIf="i !== editedRowIndex; else editModeName">
+                {{ foodItem.food_name }}
+              </ng-container>
+              <ng-template #editModeName>
+                <input type="text" [(ngModel)]="selectedFoodItem.food_name" class="edit-input">
+              </ng-template>
+            </td>
+            <td>
+              <ng-container *ngIf="i !== editedRowIndex; else editModeDescription">
+                {{ foodItem.food_description }}
+              </ng-container>
+              <ng-template #editModeDescription>
+                <textarea [(ngModel)]="selectedFoodItem.food_description" style="resize: none; height: 200px;"></textarea>
+              </ng-template>
+            </td>
+            <td>
+              <ng-container *ngIf="i !== editedRowIndex; else editModeMinPax">
+                {{ foodItem.minimum_pax }}
+              </ng-container>
+              <ng-template #editModeMinPax>
+                <input type="number" [(ngModel)]="selectedFoodItem.minimum_pax" min="1">
+              </ng-template>
+            </td>
+            <td>
+              <ng-container *ngIf="i !== editedRowIndex; else editModeMaxPax">
+                {{ foodItem.maximum_pax }}
+              </ng-container>
+              <ng-template #editModeMaxPax>
+                <input type="number" [(ngModel)]="selectedFoodItem.maximum_pax" min="1">
+              </ng-template>
+            </td>
+            <td>
+              <ng-container *ngIf="i !== editedRowIndex; else editModePaxPrice">
+                {{ foodItem.pax_price }}
+              </ng-container>
+              <ng-template #editModePaxPrice>
+                <input type="number" [(ngModel)]="selectedFoodItem.pax_price" min="0">
+              </ng-template>
+            </td>
+<!-- Save and Cancel Buttons -->
+<td colspan="2">
+  <!-- Edit and Save Icons Row -->
+  <ng-container *ngIf="i === editedRowIndex; else viewMode">
+    <!-- Save Button -->
+    <button class="save-button" (click)="saveRow(i)">
+      <img src="assets/save_icon.png" alt="Save" class="icon-size">
+    </button>
+    <!-- Cancel Button -->
+    <button class="cancel-button" (click)="cancelEditRow()">
+      <img src="assets/cancel_icon.png" alt="Cancel" class="icon-size">
+    </button>
+  </ng-container>
+  <!-- View Mode Icons Row -->
+  <ng-template #viewMode>
+    <!-- Edit Button -->
+    <button class="update-button" (click)="editRow(i)">
+      <img src="assets/arrows_update.png" alt="Edit" class="icon-size">
+    </button>
+    <!-- Delete Button -->
+    <button class="delete-button" (click)="deleteFoodItem(foodItem)">
+      <img src="assets/trash_can_delete.png" alt="Delete" class="icon-size">
+    </button>
+  </ng-template>
+</td>
+      </tr>
+    </ng-container>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #noItems>
+  <p class="no-items-message">No items added yet.</p>
+</ng-template>

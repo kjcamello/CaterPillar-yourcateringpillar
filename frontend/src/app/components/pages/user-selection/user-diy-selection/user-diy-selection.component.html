@@ -1,80 +1,140 @@
+<div class="header-position">
 <app-header-user></app-header-user>
+</div>
 <app-search></app-search>
-<h2 class="diy-header">D-I-Y Package</h2>
-<h3 class="food-items-header">Food Items</h3>
 
-<!-- "Review Order" button to toggle the e-receipt form (SPRINT 3) -->
-<button (click)="toggleEReceiptForm()" class="review-order-button" *ngIf="selectedFoodItems.length > 0">Review Order</button>
-
-
-
-<!-- Display the food items with checkboxes and pax input -->
-<ul>
-  <li *ngFor="let foodItem of (foodItems | async)">
-    <label class="food-item" [class.highlighted-container]="foodItem.selected">
-      <!-- Hidden checkbox input -->
-      <input type="checkbox" [checked]="foodItem.selected" (change)="handleCheckboxChange(foodItem)" class="hidden-checkbox" id="checkbox-{{ foodItem.id }}">
-      <div class="price-tag">
-        ₱{{ foodItem.pax_price }}/pax
-      </div>
-      <div class="food-item-details">
-        <img [src]="foodItem.food_image" alt="{{ foodItem.food_name }}" *ngIf="foodItem.food_image" class="custom-image">
-        <h3>{{ foodItem.food_name }}</h3>
-        <p>{{ foodItem.food_description }}</p>
-      </div>
-      <div class="min-pax">
-        Min Pax: {{ foodItem.minimum_pax }}
-      </div>
-      <input
-        type="number"
-        [ngModel]="foodItem.selected ? foodItem.selectedPax : foodItem.minimum_pax"
-        [readonly]="foodItem.selected"
-        name="selectedPax"
-        (ngModelChange)="updateTotalPrice(foodItem, $event)"
-        [min]="foodItem.minimum_pax"
-      >
-      <div *ngIf="foodItem.selected">
-        <p>Total Price: ₱{{ foodItem.pax_price * foodItem.selectedPax }}</p>
-      </div>
-    </label>
-  </li>
-</ul>
-
-<!-- Display "No items added yet" if there are no food items -->
-<div class="no-items-text" *ngIf="!(foodItems | async)?.length">
-  No items added yet.
+<!-- user-diy-selection.component.html -->
+<div class="position">
+<div class="category-tabs">
+  <div class="tab" [ngClass]="{ 'selected': selectedCategory === 'Maincourse' }" (click)="loadFoodItems('maincourseItems')">Main Course</div>
+  <div class="tab" [ngClass]="{ 'selected': selectedCategory === 'Appetizer' }" (click)="loadFoodItems('appetizerItems')">Appetizer</div>
+  <div class="tab" [ngClass]="{ 'selected': selectedCategory === 'Soup' }" (click)="loadFoodItems('soupItems')">Soup</div>
+  <div class="tab" [ngClass]="{ 'selected': selectedCategory === 'Salad' }" (click)="loadFoodItems('saladItems')">Salad</div>
+  <div class="tab" [ngClass]="{ 'selected': selectedCategory === 'Dessert' }" (click)="loadFoodItems('dessertItems')">Dessert</div>
+  <div class="tab" [ngClass]="{ 'selected': selectedCategory === 'Drink' }" (click)="loadFoodItems('drinkItems')">Drink</div>
 </div>
 
+<div class="forms-container">
+<form class="items-form">
+  <div class="items-container">
+    
+    <ul class="items-list">
+      <li class="list-item" *ngFor="let item of selectedItems | async">
+        <div>
+          <img [src]="item.food_image" alt="Food Image" class="food-image">
+        </div>
+        <div class="price-tag">
+          ₱{{ item.pax_price }}/pax
+        </div>
+        <div class="pax">
+          caters {{ item.minimum_pax }} to {{ item.maximum_pax }} pax
+        </div>
+      <div>
+        <h2>{{ item.food_name }}</h2>
+      </div>
+      <div>
+        <strong>Description:</strong>
+        <ng-container *ngIf="!item.showFullDescription && item.food_description.length > 25">
+          {{ item.food_description.slice(0, 25) }}...
+          <span class="see-more" (click)="foodtoggleDescription(item)">See more</span>
+        </ng-container>
+        <ng-container *ngIf="item.showFullDescription || item.food_description.length <= 25">
+          {{ item.food_description }}
+          <span class="see-more" *ngIf="item.showFullDescription" (click)="foodtoggleDescription(item)">See less</span>
+        </ng-container>
+      </div>
+    </li>
+  </ul>
+</div>
+</form>
 
-<!-- E-Receipt form (initially hidden) -->
-<div class="ereceipt-form" *ngIf="showEReceiptForm">
-  <div class="ereceipt-background"></div> <!-- Opaque background -->
-  <div class="ereceipt-content">
-    <h3>CaterPillar</h3>
-    <!-- Table for displaying the selected food items and their details -->
-    <table class="receipt-table">
-      <thead>
-        <tr>
-          <th>Food Item</th>
-          <th>Pax</th>
-          <th class="right-align">Total Price</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let foodItem of selectedFoodItems">
-          <td>{{ foodItem.food_name }}</td>
-          <td>{{ foodItem.selectedPax }}</td>
-          <td class="right-align">₱{{ foodItem.pax_price * foodItem.selectedPax }}</td>
-        </tr>
-      </tbody>
-    </table>
-    <!-- Display the grand total in the e-receipt -->
-    <div class="total-section">
-      <div class="grand-total-label">Grand Total</div>
-      <div class="grand-total-value">₱{{ grandTotal }}</div>
-    </div>
+<form class="extra-service-form">
+   <!-- <h2>Extra Services</h2> -->
+  <div class="extra-service-container">
+    <ul class="extra-service-list">
+      <li class="list-extra-service" *ngFor="let extraService of extraServiceItems | async">
+        <!-- Display extra service details here -->
+        <div>
+          <img [src]="extraService.esImage" alt="Event Image" class="food-image">
+        </div>
+        <div>
+          <h2>{{ extraService.esName }}</h2>
+        </div>
+        <div class="price-tag">
+          ₱{{ extraService.esPrice }}/hour
+        </div>
+        <div class="pax">
+          serves {{ extraService.esMinHours }} to {{ extraService.esMaxHours }} hours
+        </div>
+      <div>
+        <strong>Description:</strong>
+        <ng-container *ngIf="!extraService.showFullDescription && extraService.esDescription.length > 25">
+          {{ extraService.esDescription.slice(0, 25) }}...
+          <span class="see-more" (click)="estoggleDescription(extraService)">See more</span>
+        </ng-container>
+        <ng-container *ngIf="extraService.showFullDescription || extraService.esDescription.length <= 25">
+          {{ extraService.esDescription }}
+          <span class="see-more" *ngIf="extraService.showFullDescription" (click)="estoggleDescription(extraService)">See less</span>
+        </ng-container>
+      </div>
+      </li>
+    </ul>
   </div>
+</form>
+
+<form class="event-form">
+  <h2>Events</h2>
+  <div class="event-container">
+    <ul class="event-list">
+      <li class="list-event" *ngFor="let eventItem of eventItems | async">
+        <!-- Display event details here -->
+        <div>
+          <h3>{{ eventItem.eventName }}</h3>
+        </div>
+        <div>
+          <strong>Description:</strong>
+          <ng-container *ngIf="!eventItem.showFullDescription && eventItem.eventDescription.length > 25">
+            {{ eventItem.eventDescription.slice(0, 25) }}...
+            <span class="see-more" (click)="eventtoggleDescription(eventItem)">See more</span>
+          </ng-container>
+          <ng-container *ngIf="eventItem.showFullDescription || eventItem.eventDescription.length <= 25">
+            {{ eventItem.eventDescription }}
+            <span class="see-more" *ngIf="eventItem.showFullDescription" (click)="eventtoggleDescription(eventItem)">See less</span>
+          </ng-container>
+        </div>
+      </li>
+    </ul>
+  </div>
+</form>
+
+<form class="voucher-form">
+  <h2>Vouchers</h2>
+  <div class="voucher-container">
+    <ul class="voucher-list">
+      <li class="list-voucher" *ngFor="let voucherItem of voucherItems | async">
+        <!-- Display voucher details here -->
+        <div>
+          <img [src]="voucherItem.voucherImage" alt="Voucher Image" class="voucher-image" style="max-width: 100px">
+        </div>
+         <div>
+          <p>{{ voucherItem.voucherName }}</p>
+        </div>
+        <div>
+          <strong>Description:</strong>
+          <ng-container *ngIf="!voucherItem.showFullDescription && voucherItem.voucherDescription.length > 25">
+            {{ voucherItem.voucherDescription.slice(0, 25) }}...
+            <span class="see-more" (click)="vouchertoggleDescription(voucherItem)">See more</span>
+          </ng-container>
+          <ng-container *ngIf="voucherItem.showFullDescription || voucherItem.voucherDescription.length <= 25">
+            {{ voucherItem.voucherDescription }}
+            <span class="see-more" *ngIf="voucherItem.showFullDescription" (click)="vouchertoggleDescription(voucherItem)">See less</span>
+          </ng-container>
+        </div>
+      </li>
+    </ul>
+  </div>
+</form>
+
 </div>
 
-<!-- Display the grand total -->
-<h3>Grand Total Price: ₱{{ grandTotal }}</h3>
+</div>

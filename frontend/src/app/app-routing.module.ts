@@ -86,7 +86,8 @@ const routes: Routes = [
 
 
   { path: 'user-package-selection', component: UserPackageSelectionComponent },
-  { path: 'user-diy-selection/:id', component: UserDiySelectionComponent },
+  { path: 'user-diy-selection/:catererUid', component: UserDiySelectionComponent },
+  
   { path: 'temp-caterer-prof/:id', component: UserDiySelectionComponent },
 
 

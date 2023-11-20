@@ -676,6 +676,7 @@ ul a{
 .food-form-container {
   margin-left: -325px;
   margin-top: -80px;
+  width: 1125px;
 }
 
 /*VIEW FOOD ITEM TABLE*/
@@ -710,7 +711,7 @@ ul a{
 .es-form-container {
   margin-left: -325px;
   margin-top: 75px;
-  width: 940px;
+  width: 1125px;
 }
 
 /*VIEW FOOD ITEM TABLE*/
@@ -737,10 +738,9 @@ ul a{
 
 /*voucher in table*/
 .voucher-form-container {
-  margin-left: 205px;
-  margin-top: -391px;
-  width: 908px;
-  z-index:1;
+  margin-left: 390px;
+  margin-top: -80px;
+  width: 1035px;
 }
 
 /*VIEW FOOD ITEM TABLE*/
@@ -765,9 +765,9 @@ ul a{
 /*--------------------------------------*/
 /*event in table*/
 .event-form-container {
-  margin-left: 703px;
-  margin-top: -390px;
-  z-index:1;
+  margin-left: 390px;
+  margin-top: -703px;
+  width: 1035px;
 }
 
 /*VIEW FOOD ITEM TABLE*/
