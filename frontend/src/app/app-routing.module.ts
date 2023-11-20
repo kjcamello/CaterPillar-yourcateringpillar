@@ -40,6 +40,11 @@ import { UserDiySelectionComponent } from './components/pages/user-selection/use
 
 
 import { UserProfileComponent } from './components/pages/user-profile/user-profile.component'; 
+import { UserOrdersComponent } from './components/pages/user-orders/user-orders.component';
+import { UserHistoryComponent } from './components/pages/user-history/user-history.component';
+import { UserChangepasswordComponent } from './components/pages/user-changepassword/user-changepassword.component';   
+import { UserInfoComponent } from './components/pages/user-info/user-info.component';
+
 import { AddServiceTypeComponent } from './components/pages/add-service-type/add-service-type.component';
 import { SuperadminCustomerComponent } from './components/pages/superadmin/superadmin-customer.component';
 
@@ -93,7 +98,11 @@ const routes: Routes = [
 
 
   { path: 'user-profile', component: UserProfileComponent },  // <-- This is the last route, so no comma after this
-    // ...other routes
+  { path: 'user-orders', component: UserOrdersComponent },
+  { path: 'user-history', component: UserHistoryComponent },
+  { path: 'user-changepassword', component:  UserChangepasswordComponent },
+  { path: 'user-info', component:  UserInfoComponent },
+  // ...other routes
   {path: 'superadmin-customer', component: SuperadminCustomerComponent}
 ];
 
