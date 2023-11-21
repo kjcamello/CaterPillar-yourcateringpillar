@@ -295,7 +295,7 @@
   position: absolute;
   bottom: 20px;
   left: 250px;
-  top: 120px;
+  top: 170px;
   margin: 20px 0;
 }
 
@@ -324,7 +324,7 @@
 .profilepicSize {
   width: 200px; /* Adjust as needed */
   height: 200px; /* Adjust as needed */
-  border: 1px solid #ffd0b1;
+  border: 1px solid #AC0000;
   border-radius: 50%; /* Makes the container circular */
   overflow: hidden; /* Ensures nothing spills outside the container */
 }
@@ -355,11 +355,12 @@
 }
 
 .profile-details {
-  margin-top: 100px;
+  margin-top: 120px;
   background-color: blanchedalmond;
   width: 1145px;
   position: absolute;
   left: 98px;
+  top: 330px;
 }
 
 
@@ -372,11 +373,36 @@
   margin-left: 10px;
 }
 
-.profile-actions {
+.profile-actions-edit {
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
+  position: absolute;
+  right: 25px;
 }
+.profile-actions-save {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  position: absolute;
+  right: 25px;
+  top: 340px;
+}
+.edit-btn, .save-btn {
+  /* Common styling for buttons */
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.edit-button img, .save-button img {
+  /* Styling for the icons */
+  width: 30px; /* Adjust size as needed */
+  height: auto;
+}
+
+
+
 .custom-file-upload {
 display: inline-block;
   padding: 6px 12px;

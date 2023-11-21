@@ -135,10 +135,16 @@
   </div>
 
   <!-- Profile Actions -->
-  <div class="profile-actions">
-      <button class="edit-btn"><img src="assets/button_editvalue.png" alt="Edit Icon"><span>EDIT</span></button>
-      <button class="save-btn">Save</button>
-  </div>
+  <div class="profile-actions-edit">
+    <button class="edit-btn" (click)="enableEditMode()">
+        <img src="assets/editsavebuttons/edit static.png" alt="Edit">
+    </button>
+</div>
+<div class="profile-actions-save">
+    <button class="save-btn" (click)="saveChanges()">
+        <img src="assets/editsavebuttons/save static.png" alt="Save">
+    </button>
+</div>
 
   <!-- <form (ngSubmit)="onSubmit()" #credentialsForm="ngForm">
     <div class="form-group">
