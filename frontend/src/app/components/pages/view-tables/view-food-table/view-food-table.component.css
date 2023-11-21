@@ -48,26 +48,13 @@
     margin-bottom: 10px;
   }
   
-  .icon-size {
-    height: 50px;
-  }
   
-  
-  
-  
+
   /* Add or modify CSS for button styling */
   .food-items-table .update-button,
-  .food-items-table .delete-button {
-    cursor: pointer;
-    border: none;
-    background: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  /* Add or modify CSS for button styling */
-  .food-items-table .update-button,
-  .food-items-table .delete-button {
+  .food-items-table .delete-button,
+  .food-items-table .save-button,
+  .food-items-table .cancel-button {
     cursor: pointer;
     border: none;
     background: none;
@@ -77,14 +64,11 @@
   
   /* Add hover effect to invert the color of the image */
   .food-items-table .update-button:hover,
-  .food-items-table .delete-button:hover {
+  .food-items-table .delete-button:hover,
+  .food-items-table .save-button:hover,
+  .food-items-table .cancel-button:hover,
+  .food-items-table .file-input-label:hover {
     filter: invert(100%); /* Invert the color of the image when hovered */
-  }
-  
-  /* Add or modify CSS for the icon size */
-  .icon-size {
-    width: 24px; /* Adjust the width as needed */
-    height: 24px; /* Adjust the height as needed */
   }
   
   /* Add styling for the update column */
@@ -109,7 +93,7 @@
     text-align: center;
     font-size: 18px; /* Adjust the font size as needed */
     color: darkred;
-    margin-top: 20px; /* Adjust the top margin as needed */
+    margin-top: 60px; /* Adjust the top margin as needed */
   }
   
   
@@ -148,11 +132,6 @@
   .edit-form h3 {
     text-align: center; /* Center the text */
     margin-bottom: 20px; /* Adjust the margin as needed */
-  }
-  
-  .icon-size {
-    height: 30px;
-    width: 30px;
   }
   
   
@@ -263,3 +242,103 @@
   .close-button:hover {
     color: red; /* Change to red on hover */
   }
+
+  /*SPRINT 4*/
+  /* Add or modify styles as needed */
+.common-table input,
+.common-table textarea {
+  width: 100%;
+}
+
+.common-table img {
+  max-width: 100px; /* Adjust the max-width as needed */
+}
+
+/* Additional styles for the image upload */
+.edit-image-container {
+  display: flex;
+  align-items: center;
+}
+
+
+/*SPRINT 4*/
+/* Add this to your CSS */
+.file-input {
+  display: none;
+}
+
+.edit-image-container {
+  position: relative;
+}
+
+.file-input-label {
+  cursor: pointer;
+}
+
+.image-preview {
+  max-width: 100px;
+  max-height: 100px;
+  margin-top: 8px;
+}
+
+/* ... (existing code) ... */
+
+.icon-size {
+  height: 30px;
+  width: 30px;
+}
+
+.upload-image-icon-size {
+  height: 30px;
+  width: 30px;
+  margin-left: 20px;
+}
+
+
+/*fixed tab and header*/
+/* Add or modify styles for fixed header and tabs */
+.container {
+  position: relative;
+}
+
+.category-tabs {
+  position: fixed;
+  top: 440px;
+  left: 105px;
+  right: 0;
+  width: 628px;
+  background-color: #ff7070;
+  z-index: 1; /* Set a higher z-index to keep it above other elements */
+}
+
+.food-items-table {
+  margin-top: 40px; /* Adjust the margin to leave space for the fixed tabs */
+}
+
+
+
+/*filtering and search bars*/
+/* Add this style for search bars */
+.search-bar0 {
+  position: fixed;
+  margin-top: -50px; /* Adjust top position as needed */
+  margin-left: 300px;
+}
+
+/* Add this style for sorting buttons */
+.sorting-buttons {
+  position: fixed;
+  margin-top: -50px; /* Adjust top position as needed */
+  margin-left: 475px;
+}
+
+/* Add this style for each sorting button */
+.sorting-button {
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+/* Add this style for the table to adjust its position */
+.common-table {
+  margin-top: 20px;
+}

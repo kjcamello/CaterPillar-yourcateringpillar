@@ -258,11 +258,20 @@ uploadExtraServiceImage(event: any) {
   }
 }
 
-  // EVENT METHODS SPRINT 4
+  // EXTRA SERVICE METHODS SPRINT 4
   saveExtraServiceItem() {
     if (this.extraserviceConfirmationPrompt()) {
       if (this.validateExtraServiceFields()) {
+        // Get the catererUid from the firestore document
+        const catererUid = this.authService.getCatererUid(); // Assuming you have a method to get catererUid
+  
+        // Generate a unique ID for the extra service item
+        const esID = this.firestore.createId();
+        this.esForm.reset();
+
         this.foodItemsService.saveExtraServiceItem({
+          catererUid: catererUid,
+          esID: esID,
           esName: this.esName,
           esDescription: this.esDescription,
           esImage: this.esImage,
@@ -270,12 +279,13 @@ uploadExtraServiceImage(event: any) {
           esMaxHours: this.esMaxHours,
           esPrice: this.esPrice,
         });
+  
         // Reset the form or perform other actions as needed
-        this.esForm.reset();
         this.showExtraServiceForm = false;
       }
     }
   }
+  
 
 // Validate extra service form fields
 private validateExtraServiceFields(): boolean {
@@ -341,13 +351,21 @@ private validateExtraServiceFields(): boolean {
   saveEventItem() {
     if (this.eventConfirmationPrompt()) {
       if (this.validateEventFields()) {
+        // Get the catererUid from the firestore document
+        const catererUid = this.authService.getCatererUid(); // Assuming you have a method to get catererUid
+  
+        // Generate a unique ID for the extra service item
+        const eventID = this.firestore.createId();
+        this.eventForm.reset();
+
         this.foodItemsService.saveEventItem({
+          catererUid: catererUid,
+          eventID: eventID,
           eventName: this.eventName,
           eventDescription: this.eventDescription,
-          // Add other fields as needed
         });
+  
         // Reset the form or perform other actions as needed
-        this.eventForm.reset();
         this.showEventForm = false;
       }
     }
@@ -397,6 +415,7 @@ private validateEventFields(): boolean {
 resetVoucherFields() {
   this.voucherName = ''; // If you have separate variables for these fields, reset them as well
   this.voucherDescription = '';
+  this.voucherImage = '';
   this.foodItem_itemQuantity = null;
   this.foodItem_grandTotal = null;
   this.foodItem_discount = null;
@@ -485,13 +504,22 @@ private isImageFile(file: File): boolean {
 saveVoucherItem() {
   if (this.voucherConfirmationPrompt()) {
     if (this.validateVoucherFields()) {
+
+              // Get the catererUid from the firestore document
+              const catererUid = this.authService.getCatererUid(); // Assuming you have a method to get catererUid
+  
+              // Generate a unique ID for the extra service item
+              const voucherID = this.firestore.createId();
       const voucherType = this.selectedVoucherType === 'foodItem' ? 'Food Item' : 'Extra Service';
       const itemQuantity = voucherType === 'Food Item' ? this.foodItem_itemQuantity : this.extraService_itemQuantity;
       const grandTotal = voucherType === 'Food Item' ? this.foodItem_grandTotal : this.extraService_grandTotal;
       const discount = voucherType === 'Food Item' ? this.foodItem_discount : this.extraService_discount;
       const amountDeduction = voucherType === 'Food Item' ? this.foodItem_amountDeduction : this.extraService_amountDeduction;
+      this.voucherForm.reset();
 
       this.foodItemsService.saveVoucherItem({
+        catererUid: catererUid,
+        voucherID: voucherID,
         voucherType: voucherType,
         voucherName: this.voucherName,
         voucherDescription: this.voucherDescription,
@@ -504,7 +532,6 @@ saveVoucherItem() {
       });
 
       // Reset the form or perform other actions as needed
-      this.voucherForm.reset();
       this.showVoucherForm = false;
     }
   }
@@ -571,7 +598,7 @@ private displayVoucherValidationError(
 // Voucher confirmation prompt
 private voucherConfirmationPrompt(): boolean {
   if (this.validateVoucherFields()) {
-    const confirm = window.confirm('Are you sure you want to add this voucher to your catering service?');
+    const confirm = window.confirm('Are you sure you want to add this voucher item to your catering service? NOTE: You can still update the item, but you cannot update the type anymore.');
     return confirm;
   }
   return false;

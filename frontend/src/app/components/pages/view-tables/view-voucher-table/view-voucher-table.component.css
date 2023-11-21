@@ -1,266 +1,298 @@
 /* Add or modify CSS as needed for table styling */
-/*
 .food-items-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: -15px;
-  }*/
-  
-  .food-items-table th {
-    background-color: #000; /* Set header background color to black */
-    color: #fff; /* Set header text color to white */
-  }
-  
-  /* Alternating row colors */
-  .food-items-table tr:nth-child(odd) {
-    background-color: yellow;
-    color: darkred;
-  }
-  
-  .food-items-table tr:nth-child(even) {
-    background-color: darkred;
-    color: yellow;
-  }
-  
-  
-  .table-image {
-    max-width: 175px;
-    height: auto;
-  }
-  
-  .image-preview {
-    max-width: 200px;
-    height: auto;
-    margin-bottom: 10px;
-  }
-  
-  .food-items-table th,
-  .food-items-table td {
-    border: 1px solid #000;
-    padding: 8px;
-    text-align: justify;
-    max-height: 100px; /* Set a fixed height for the cells */
-    overflow: auto; /* Enable vertical scrolling for overflowing content */
-  }
-  
-  /* Additional styling for the form, adjust as needed */
-  .table-form-container h2 {
-    color: white;
-    margin-bottom: 10px;
-  }
-  
-  .icon-size {
-    height: 50px;
-  }
-  
-  
-  
-  
-  /* Add or modify CSS for button styling */
-  .food-items-table .update-button,
-  .food-items-table .delete-button {
-    cursor: pointer;
-    border: none;
-    background: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  /* Add or modify CSS for button styling */
-  .food-items-table .update-button,
-  .food-items-table .delete-button {
-    cursor: pointer;
-    border: none;
-    background: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  /* Add hover effect to invert the color of the image */
-  .food-items-table .update-button:hover,
-  .food-items-table .delete-button:hover {
-    filter: invert(100%); /* Invert the color of the image when hovered */
-  }
-  
-  /* Add or modify CSS for the icon size */
-  .icon-size {
-    width: 24px; /* Adjust the width as needed */
-    height: 24px; /* Adjust the height as needed */
-  }
-  
-  /* Add styling for the update column */
-  .food-items-table .update-column {
-    background-color: blue; /* Set the background color for the update column */
-  }
-  
-  /* Add styling for the delete column */
-  .food-items-table .delete-column {
-    background-color: red; /* Set the background color for the delete column */
-  }
-  
-  /* Add styling for the Actions header cell */
-  .food-items-table th.actions-header {
-    background-color: black; /* Set the background color for the header cell */
-    color: white; /* Set the text color for the header cell */
-  }
-  
-  
-  /* Add or modify CSS for centering and styling */
-  .no-items-message {
-    text-align: center;
-    font-size: 18px; /* Adjust the font size as needed */
-    color: darkred;
-    margin-top: 20px; /* Adjust the top margin as needed */
-  }
-  
-  
-  /*EDIT FORM PORTION*/
-  
-  .edit-form input,
-  .edit-form textarea,
-  .edit-form select {
-    width: 100%; /* Allow the inputs and textareas to take 100% width */
-    padding: 5px; /* Reduce padding to save space */
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    margin-bottom: 5px; /* Reduce margin bottom for compact spacing */
-  }
-  
-  /* CSS for the fixed-size textarea */
-  .fixed-textarea {
-    width: 100%; /* Adjust the width as needed */
-    height: 75px; /* Adjust the height as needed */
-    resize: none; /* Disable textarea resizing */
-  }
-  
-  .edit-form input[type="file"] {
-    margin-bottom: 10px;
-  }
-  /*
-  .edit-form button {
-    background-color: #000;
-    color: #fff;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-  }*/
-  
-  /* Add styling for the heading */
-  .edit-form h3 {
-    text-align: center; /* Center the text */
-    margin-bottom: 20px; /* Adjust the margin as needed */
-  }
-  
-  .icon-size {
-    height: 30px;
-    width: 30px;
-  }
-  
-  
-  /*PRIORITY*/
-  /*textbox alignments*/
-  .image-preview-container {
-    display: flex;
-    justify-content: flex-end; /* Align content to the right */
-  }
-  
-  .image-preview{
-    max-width: 120px;/* Adjust the max width as needed */
-    max-height: 120px; /* Adjust the max height as needed */
-    margin-left: 10px; /* Add margin to separate image preview from other content */
-    margin-top: -10px; /* Add margin to separate image preview from other content */
-  }
-  
-  .form-group textarea {
-    height: 150px; /* Adjust the height as needed */
-  }
-  
-  .diy-package {
-    background-color: #6bbcff;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-    width: 100px;
-    height: 100px;
-    position: fixed;
-    top: 450px; /* Adjust the top position to leave space for the header */
-    left: 75px; /* Adjust the left position as needed */
-    z-index: 0; /* Use a lower z-index value to place it behind the side navbar */
-  }
-  
-  .form-row {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .form-group {
-    flex: 1;
-    margin-right: 10px; /* Adjust margin as needed */
-  }
-  
-  
-  
-  
-  /*update changes button */
-  .update-food-item-button {
-    position: fixed;
-    top: 745px; /* Adjust the top position as needed */
-    left: 75px; /* Adjust the left position as needed */
-    width: 375px; /* Set the width to match the .diy-package form */
-    background-color: blue;
-    color: #fff;
-    padding: 0px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.2s all;
-    font-size: 20px; /* Adjust the font size to your preferred size */
-  }
-  
-  .tab.selected {
-    background-color: black;
-    color: white;
-  }
-  
-  
-  /*category labels*/
-  /* Add or modify CSS for category tabs */
-  .category-tabs {
-    display: flex;
-    justify-content: space-around;
-    background-color: #ff7070;
-    padding: 10px;
-  }
-  
-  .tab {
-    cursor: pointer;
-    padding: 10px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease, color 0.3s ease; /* Add transition for smooth effect */
-  }
-  
-  .tab:hover {
-    background-color: darkred;
-    color: white;
-  }
-  
-  /* Add this style for the selected and hovered effect */
-  .category-tabs .tab.selected:hover {
-    background-color: darkred;
-    color: white;
-  }
-  
-  .close-button {
-    position: absolute;
-    top: 3px; /* Adjust the top distance as needed */
-    right: 3px; /* Adjust the right distance as needed */
-    cursor: pointer;
-    font-size: 10px; /* Adjust the font size as needed */
-    background: blue;
-    color: white; /* Adjust the color as needed */
-  }
-  
-  .close-button:hover {
-    color: red; /* Change to red on hover */
-  }
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: -15px;
+}
+
+.food-items-table th {
+  background-color: #000; /* Set header background color to black */
+  color: #fff; /* Set header text color to white */
+}
+
+/* Alternating row colors */
+.food-items-table tr:nth-child(odd) {
+  background-color: yellow;
+  color: darkred;
+}
+
+.food-items-table tr:nth-child(even) {
+  background-color: darkred;
+  color: yellow;
+}
+
+
+.table-image {
+  max-width: 175px;
+  height: auto;
+}
+
+.image-preview {
+  max-width: 200px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.food-items-table th,
+.food-items-table td {
+  border: 1px solid #000;
+  padding: 8px;
+  text-align: justify;
+  max-height: 100px; /* Set a fixed height for the cells */
+  overflow: auto; /* Enable vertical scrolling for overflowing content */
+}
+
+/* Additional styling for the form, adjust as needed */
+.table-form-container h2 {
+  color: white;
+  margin-bottom: 10px;
+}
+
+
+
+/* Add or modify CSS for button styling */
+.food-items-table .update-button,
+.food-items-table .delete-button,
+.food-items-table .save-button,
+.food-items-table .cancel-button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Add hover effect to invert the color of the image */
+.food-items-table .update-button:hover,
+.food-items-table .delete-button:hover,
+.food-items-table .save-button:hover,
+.food-items-table .cancel-button:hover,
+.food-items-table .file-input-label:hover {
+  filter: invert(100%); /* Invert the color of the image when hovered */
+}
+
+/* Add styling for the update column */
+.food-items-table .update-column {
+  background-color: blue; /* Set the background color for the update column */
+}
+
+/* Add styling for the delete column */
+.food-items-table .delete-column {
+  background-color: red; /* Set the background color for the delete column */
+}
+
+/* Add styling for the Actions header cell */
+.food-items-table th.actions-header {
+  background-color: black; /* Set the background color for the header cell */
+  color: white; /* Set the text color for the header cell */
+}
+
+
+/* Add or modify CSS for centering and styling */
+.no-items-message {
+  text-align: center;
+  font-size: 18px; /* Adjust the font size as needed */
+  color: darkred;
+  margin-top: 20px; /* Adjust the top margin as needed */
+}
+
+
+/*EDIT FORM PORTION*/
+
+.edit-form input,
+.edit-form textarea,
+.edit-form select {
+  width: 100%; /* Allow the inputs and textareas to take 100% width */
+  padding: 5px; /* Reduce padding to save space */
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 5px; /* Reduce margin bottom for compact spacing */
+}
+
+/* CSS for the fixed-size textarea */
+.fixed-textarea {
+  width: 100%; /* Adjust the width as needed */
+  height: 75px; /* Adjust the height as needed */
+  resize: none; /* Disable textarea resizing */
+}
+
+.edit-form input[type="file"] {
+  margin-bottom: 10px;
+}
+/*
+.edit-form button {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}*/
+
+/* Add styling for the heading */
+.edit-form h3 {
+  text-align: center; /* Center the text */
+  margin-bottom: 20px; /* Adjust the margin as needed */
+}
+
+
+/*PRIORITY*/
+/*textbox alignments*/
+.image-preview-container {
+  display: flex;
+  justify-content: flex-end; /* Align content to the right */
+}
+
+.image-preview{
+  max-width: 120px;/* Adjust the max width as needed */
+  max-height: 120px; /* Adjust the max height as needed */
+  margin-left: 10px; /* Add margin to separate image preview from other content */
+  margin-top: -10px; /* Add margin to separate image preview from other content */
+}
+
+.form-group textarea {
+  height: 150px; /* Adjust the height as needed */
+}
+
+.diy-package {
+  background-color: #6bbcff;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  width: 375px;
+  height: 325px;
+  position: fixed;
+  top: 450px; /* Adjust the top position to leave space for the header */
+  left: 75px; /* Adjust the left position as needed */
+  z-index: 0; /* Use a lower z-index value to place it behind the side navbar */
+}
+
+.form-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-group {
+  flex: 1;
+  margin-right: 10px; /* Adjust margin as needed */
+}
+
+
+
+
+/*update changes button */
+.update-food-item-button {
+  position: fixed;
+  top: 745px; /* Adjust the top position as needed */
+  left: 75px; /* Adjust the left position as needed */
+  width: 375px; /* Set the width to match the .diy-package form */
+  background-color: blue;
+  color: #fff;
+  padding: 0px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.2s all;
+  font-size: 20px; /* Adjust the font size to your preferred size */
+}
+
+.tab.selected {
+  background-color: black;
+  color: white;
+}
+
+
+/*category labels*/
+/* Add or modify CSS for category tabs */
+.category-tabs {
+  display: flex;
+  justify-content: space-around;
+  background-color: #ff7070;
+  padding: 10px;
+}
+
+.tab {
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Add transition for smooth effect */
+}
+
+.tab:hover {
+  background-color: darkred;
+  color: white;
+}
+
+/* Add this style for the selected and hovered effect */
+.category-tabs .tab.selected:hover {
+  background-color: darkred;
+  color: white;
+}
+
+.close-button {
+  position: absolute;
+  top: 3px; /* Adjust the top distance as needed */
+  right: 3px; /* Adjust the right distance as needed */
+  cursor: pointer;
+  font-size: 10px; /* Adjust the font size as needed */
+  background: blue;
+  color: white; /* Adjust the color as needed */
+}
+
+.close-button:hover {
+  color: red; /* Change to red on hover */
+}
+
+/*SPRINT 4*/
+/* Add or modify styles as needed */
+.common-table input,
+.common-table textarea {
+width: 100%;
+}
+
+.common-table img {
+max-width: 100px; /* Adjust the max-width as needed */
+}
+
+/* Additional styles for the image upload */
+.edit-image-container {
+display: flex;
+align-items: center;
+}
+
+
+/*SPRINT 4*/
+/* Add this to your CSS */
+.file-input {
+display: none;
+}
+
+.edit-image-container {
+position: relative;
+}
+
+.file-input-label {
+cursor: pointer;
+}
+
+.image-preview {
+max-width: 100px;
+max-height: 100px;
+margin-top: 8px;
+}
+
+/* ... (existing code) ... */
+
+.icon-size {
+height: 30px;
+width: 30px;
+}
+
+.upload-image-icon-size {
+height: 30px;
+width: 30px;
+margin-left: 20px;
+}
+
+
+/*sprint 4 actions*/

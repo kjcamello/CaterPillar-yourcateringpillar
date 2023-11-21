@@ -22,16 +22,6 @@ li {
   background-size: cover; /* Ensure the image covers the container */
 }
 
-.price-tag {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background-color: rgba(0, 0, 0, 0.7);
-  color: #fff;
-  padding: 5px;
-  font-size: 14px;
-  border-radius: 5px;
-}
 
 .min-pax {
   position: absolute;
@@ -243,4 +233,569 @@ border-radius: 5px;
 text-align: center;
 font-size: 1.5rem; /* Adjust the font size as needed */
 color: red; 
+}
+
+
+
+
+
+
+
+
+
+/* from view-food-table.component.css*/
+/* Add or modify CSS as needed for table styling */
+.food-items-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: -15px;
+}
+
+.food-items-table th {
+  background-color: #000; /* Set header background color to black */
+  color: #fff; /* Set header text color to white */
+}
+
+/* Alternating row colors */
+.food-items-table tr:nth-child(odd) {
+  background-color: yellow;
+  color: darkred;
+}
+
+.food-items-table tr:nth-child(even) {
+  background-color: darkred;
+  color: yellow;
+}
+
+
+.table-image {
+  max-width: 175px;
+  height: auto;
+}
+
+.image-preview {
+  max-width: 200px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.food-items-table th,
+.food-items-table td {
+  border: 1px solid #000;
+  padding: 8px;
+  text-align: justify;
+  max-height: 100px; /* Set a fixed height for the cells */
+  overflow: auto; /* Enable vertical scrolling for overflowing content */
+}
+
+/* Additional styling for the form, adjust as needed */
+.table-form-container h2 {
+  color: white;
+  margin-bottom: 10px;
+}
+
+
+
+/* Add or modify CSS for button styling */
+.food-items-table .update-button,
+.food-items-table .delete-button,
+.food-items-table .save-button,
+.food-items-table .cancel-button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Add hover effect to invert the color of the image */
+.food-items-table .update-button:hover,
+.food-items-table .delete-button:hover,
+.food-items-table .save-button:hover,
+.food-items-table .cancel-button:hover,
+.food-items-table .file-input-label:hover {
+  filter: invert(100%); /* Invert the color of the image when hovered */
+}
+
+/* Add styling for the update column */
+.food-items-table .update-column {
+  background-color: blue; /* Set the background color for the update column */
+}
+
+/* Add styling for the delete column */
+.food-items-table .delete-column {
+  background-color: red; /* Set the background color for the delete column */
+}
+
+/* Add styling for the Actions header cell */
+.food-items-table th.actions-header {
+  background-color: black; /* Set the background color for the header cell */
+  color: white; /* Set the text color for the header cell */
+}
+
+
+/* Add or modify CSS for centering and styling */
+.no-items-message {
+  text-align: center;
+  font-size: 18px; /* Adjust the font size as needed */
+  color: darkred;
+  margin-top: 60px; /* Adjust the top margin as needed */
+}
+
+
+/*EDIT FORM PORTION*/
+
+.edit-form input,
+.edit-form textarea,
+.edit-form select {
+  width: 100%; /* Allow the inputs and textareas to take 100% width */
+  padding: 5px; /* Reduce padding to save space */
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 5px; /* Reduce margin bottom for compact spacing */
+}
+
+/* CSS for the fixed-size textarea */
+.fixed-textarea {
+  width: 100%; /* Adjust the width as needed */
+  height: 75px; /* Adjust the height as needed */
+  resize: none; /* Disable textarea resizing */
+}
+
+.edit-form input[type="file"] {
+  margin-bottom: 10px;
+}
+/*
+.edit-form button {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}*/
+
+/* Add styling for the heading */
+.edit-form h3 {
+  text-align: center; /* Center the text */
+  margin-bottom: 20px; /* Adjust the margin as needed */
+}
+
+
+/*PRIORITY*/
+/*textbox alignments*/
+.image-preview-container {
+  display: flex;
+  justify-content: flex-end; /* Align content to the right */
+}
+
+.image-preview{
+  max-width: 120px;/* Adjust the max width as needed */
+  max-height: 120px; /* Adjust the max height as needed */
+  margin-left: 10px; /* Add margin to separate image preview from other content */
+  margin-top: -10px; /* Add margin to separate image preview from other content */
+}
+
+.form-group textarea {
+  height: 150px; /* Adjust the height as needed */
+}
+
+.diy-package {
+  background-color: #6bbcff;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  width: 375px;
+  height: 325px;
+  position: fixed;
+  top: 450px; /* Adjust the top position to leave space for the header */
+  left: 75px; /* Adjust the left position as needed */
+  z-index: 0; /* Use a lower z-index value to place it behind the side navbar */
+}
+
+.form-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-group {
+  flex: 1;
+  margin-right: 10px; /* Adjust margin as needed */
+}
+
+
+
+
+/*update changes button */
+.update-food-item-button {
+  position: fixed;
+  top: 745px; /* Adjust the top position as needed */
+  left: 75px; /* Adjust the left position as needed */
+  width: 375px; /* Set the width to match the .diy-package form */
+  background-color: blue;
+  color: #fff;
+  padding: 0px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.2s all;
+  font-size: 20px; /* Adjust the font size to your preferred size */
+}
+
+
+.close-button {
+  position: absolute;
+  top: 3px; /* Adjust the top distance as needed */
+  right: 3px; /* Adjust the right distance as needed */
+  cursor: pointer;
+  font-size: 10px; /* Adjust the font size as needed */
+  background: blue;
+  color: white; /* Adjust the color as needed */
+}
+
+.close-button:hover {
+  color: red; /* Change to red on hover */
+}
+
+/*SPRINT 4*/
+/* Add or modify styles as needed */
+.common-table input,
+.common-table textarea {
+width: 100%;
+}
+
+.common-table img {
+max-width: 100px; /* Adjust the max-width as needed */
+}
+
+/* Additional styles for the image upload */
+.edit-image-container {
+display: flex;
+align-items: center;
+}
+
+
+/*SPRINT 4*/
+/* Add this to your CSS */
+.file-input {
+display: none;
+}
+
+.edit-image-container {
+position: relative;
+}
+
+.file-input-label {
+cursor: pointer;
+}
+
+.image-preview {
+max-width: 100px;
+max-height: 100px;
+margin-top: 8px;
+}
+
+/* ... (existing code) ... */
+
+.icon-size {
+height: 30px;
+width: 30px;
+}
+
+.upload-image-icon-size {
+height: 30px;
+width: 30px;
+margin-left: 20px;
+}
+
+
+/*fixed tab and header*/
+/* Add or modify styles for fixed header and tabs */
+.container {
+position: relative;
+}
+
+.category-tabs {
+position: fixed;
+top: 110px;
+left: 0px;
+right: 0;
+width: 628px;
+background-color: #ff7070;
+z-index: 1; /* Set a higher z-index to keep it above other elements */
+}
+
+.food-items-table {
+margin-top: 40px; /* Adjust the margin to leave space for the fixed tabs */
+}
+
+
+
+/*filtering and search bars*/
+/* Add this style for search bars */
+.search-bar0 {
+position: fixed;
+margin-top: -50px; /* Adjust top position as needed */
+margin-left: 300px;
+}
+
+/* Add this style for sorting buttons */
+.sorting-buttons {
+position: fixed;
+margin-top: -50px; /* Adjust top position as needed */
+margin-left: 475px;
+}
+
+/* Add this style for each sorting button */
+.sorting-button {
+margin-left: 10px;
+cursor: pointer;
+}
+
+/* Add this style for the table to adjust its position */
+.common-table {
+margin-top: 20px;
+}
+
+
+
+
+
+/*food formity*/
+/*food items in table*/
+.food-form-container {
+  margin-left: -325px;
+  margin-top: -80px;
+  width: 1125px;
+}
+
+.saved-food-item-table {
+  flex: 1;
+  padding: 20px;
+  margin-top: 50px;
+  margin-left: 380px;
+}
+
+/*VIEW FOOD ITEM TABLE*/
+/* Style the container for the app-view-food-item-table as a form with an orange background */
+.food-table-form-container {
+  max-height: 266px; /* Adjust the height as needed */
+  overflow-y: auto; /* Enable vertical scrolling for overflowing content */
+  background-color: orange;
+  padding: 20px;
+  border-radius: 5px; /* Optional: Add rounded corners for a nicer look */
+  border: 1px solid #ddd;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Additional styling for the form, adjust as needed */
+.food-table-form-container h2 {
+  color: white; /* Set the text color to white or any other color that contrasts well with orange */
+  margin-bottom: 10px; /* Add some spacing below the heading */
+}
+
+
+
+
+/*tab selected*/
+.tab.selected {
+  background-color: black;
+  color: white;
+}
+
+
+/*category labels*/
+/* Add or modify CSS for category tabs */
+.category-tabs {
+  display: flex;
+  justify-content: space-around;
+  background-color: #ff7070;
+  padding: 10px;
+  width: 680px;
+}
+
+.tab {
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Add transition for smooth effect */
+}
+
+.tab:hover {
+  background-color: darkred;
+  color: white;
+}
+
+/* Add this style for the selected and hovered effect */
+.category-tabs .tab.selected:hover {
+  background-color: darkred;
+  color: white;
+}
+
+/* Rest of your existing styles */
+
+.price-tag {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  padding: 5px;
+  font-size: 14px;
+  border-radius: 5px;
+}
+
+.pax {
+  position: absolute;
+  bottom: 10px; /* Adjust the distance from the bottom as needed */
+  right: 10px; /* Adjust the distance from the right as needed */
+  background-color: rgba(0, 0, 0, 0.7); /* Add background color for better visibility */
+  color: white; /* Set the text color */
+  padding: 5px; /* Add some padding for spacing */
+  border-radius: 5px; /* Add rounded corners */
+}
+
+.food-image {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+/*header*/
+.header-position {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  margin-left: 0px; /* Adjust the negative margin as needed */
+  background-color: #fff; /* Add your desired background color */
+  box-shadow: 0 0px 0px rgba(0, 0, 0, 0.1); /* Add a box shadow for visual separation */
+  padding: 0px; /* Add padding as needed */
+}
+
+/* Rest of your styles */
+/*--------------------------------------*/
+/*food item*/
+/* Extra Service */
+.item-container {
+  max-width: 650px; /* Adjust as needed */
+  margin: 0 0 0 20px; /* Adjust the margin to create space between the list and the form */
+}
+
+.item-list {
+  list-style-type: none;
+  margin-right: 10px; /* Adjust the margin between two adjacent lists */
+  position: relative; /* Set position to relative for absolute positioning of the description container */
+}
+
+.list-item {
+  overflow-y: auto; /* Enable vertical scroll if the content overflows */
+  max-height: 300px; /* Adjust as needed, set a maximum height for scrollability */
+  width: 200px; /* Adjust the width of each list item */
+  padding: 5px; /* Add padding for spacing within the list item */
+  margin-bottom: 5px; /* Adjusted margin for a reduced gap between list items */
+  border: 1px solid #ccc; /* Add a border for visual separation */
+  position: relative; /* Set position to relative for absolute positioning of the description container */
+  left:10px;
+  top:10px;
+}
+
+.items-form {
+  max-width: 650px; /* Adjust as needed */
+  margin: 0 0 0 20px; /* Adjust the margin to create space between the list and the form */
+  margin-top: 200px;
+  position: relative; /* Set position to relative for absolute positioning of child elements */
+}
+/*--------------------------------------*/
+/*food item*/
+/* Extra Service */
+.extra-service-container {
+  max-width: 650px; /* Adjust as needed */
+  margin: 0 0 0 20px; /* Adjust the margin to create space between the list and the form */
+  position: absolute;
+  left: 750px; /* Adjust the left position as needed */
+  top: 150px; /* Adjust the top position as needed */
+}
+
+.extra-service-list {
+  list-style-type: none;
+  margin-right: 10px; /* Adjust the margin between two adjacent lists */
+  position: relative; /* Set position to relative for absolute positioning of the description container */
+}
+
+.list-extra-service {
+  overflow-y: auto; /* Enable vertical scroll if the content overflows */
+  max-height: 300px; /* Adjust as needed, set a maximum height for scrollability */
+  width: 200px; /* Adjust the width of each list item */
+  padding: 5px; /* Add padding for spacing within the list item */
+  margin-bottom: 5px; /* Adjusted margin for a reduced gap between list items */
+  border: 1px solid #ccc; /* Add a border for visual separation */
+  position: relative; /* Set position to relative for absolute positioning of the description container */
+}
+
+/*------------------------------------*/
+
+/* Rest of your styles */
+
+/* Events Form */
+.event-form {
+  position: fixed;
+  margin-top: -200px; /* Adjust the top position as needed */
+}
+
+/* Event */
+.event-container {
+  margin: 0 0 0 20px; /* Adjust the margin to create space between the list and the form */
+}
+
+.event-list {
+  list-style-type: none;
+  background-color: white;
+}
+
+.list-event {
+  overflow-y: auto; /* Enable vertical scroll if the content overflows */
+  max-height: 100px; /* Adjust as needed, set a maximum height for scrollability */
+  width: 200px; /* Adjust the width of each list item */
+  border: 1px solid #ccc; /* Add a border for visual separation */
+  background-color: yellow;
+}
+
+/* Header background color */
+.event-form h2 {
+  background-color: white;
+}
+
+
+/*------------------------------------*/
+
+/* Events Form */
+.voucher-form {
+  position: fixed;
+  margin-top: -750px; /* Adjust the top position as needed */
+  margin-left: 675px;
+}
+
+/* Event */
+.voucher-container {
+  margin: 0 0 0 20px; /* Adjust the margin to create space between the list and the form */
+}
+
+.voucher-list {
+  list-style-type: none;
+  background-color: white;
+}
+
+.list-voucher {
+  overflow-y: auto; /* Enable vertical scroll if the content overflows */
+  max-height: 75px; /* Adjust as needed, set a maximum height for scrollability */
+  width: 175px; /* Adjust the width of each list item */
+  border: 1px solid #ccc; /* Add a border for visual separation */
+  background-color: yellow;
+}
+
+/* Header background color */
+.voucher-form h2 {
+  background-color: white;
 }

@@ -65,7 +65,7 @@ export class FoodItemComponent {
   // Inside your FoodItemComponent class
 resetFoodItemFields() {
   this.foodItem = new FoodItem(); // Reset the food item to a new instance
-  this.foodItem.food_image = 'https://firebasestorage.googleapis.com/v0/b/caterpillar-hestia.appspot.com/o/_images%2Fdefault_no_image.png?alt=media&token=c8be7d38-a9e9-47a2-9cb8-5e6bdf3d4758';
+  this.foodItem.food_image = '';
 
     // Reset the file input field
   //  this.fileInput.nativeElement.value = '';

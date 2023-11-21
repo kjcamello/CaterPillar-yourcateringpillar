@@ -4,6 +4,8 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/comp
 import { FoodItem } from 'src/app/shared/models/food-item';
 import { AuthService } from './auth.service';
 
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+
 import { Observable, of } from 'rxjs';
 import { take, switchMap } from 'rxjs/operators';
 
@@ -93,18 +95,16 @@ export class FoodItemsService {
   }
   
   saveEventItem(eventItem: any): void {
-    // Use the AuthService to get the current logged-in caterer's UID
     const catererUid = this.authService.getCatererUid();
-
+  
     if (catererUid) {
-      // Add additional fields if needed
       const eventData = this.toEventObject(eventItem);
-
-      // Reference to the subcollection for events
       const eventSubcollectionRef = this.firestore.collection(`caterers/${catererUid}/eventItems`);
-
+  
       eventSubcollectionRef.add(eventData)
-        .then(() => {
+        .then((docRef) => {
+          // Update the firestoreID field with the generated document ID
+          docRef.update({ eventID: docRef.id });
           alert('Event item saved successfully.');
           // You can also reset the form or perform other actions here
         })
@@ -122,64 +122,66 @@ export class FoodItemsService {
       // Implement conversion logic based on your event item structure
       return {
         // Map event fields to Firestore fields
+        catererUid: eventItem.catererUid,  
+        eventID:  null, // Keep this line if esID is provided, otherwise remove it
         eventName: eventItem.eventName,
-        eventDescription: eventItem.eventDescription,
-        eventImage: eventItem.eventImage,     
+        eventDescription: eventItem.eventDescription,   
         // Add other fields as needed
       };
     }
 
-saveExtraServiceItem(extraserviceItem: any): void {
-  const catererUid = this.authService.getCatererUid();
-
-  if (catererUid) {
-    const extraserviceData = this.toExtraServiceObject(extraserviceItem);
-    const extraserviceSubcollectionRef = this.firestore.collection(`caterers/${catererUid}/extraserviceItems`);
-
-    extraserviceSubcollectionRef.add(extraserviceData)
-      .then(() => {
-        alert('Extra service saved successfully.');
-        // You can also reset the form or perform other actions here
-      })
-      .catch(error => {
-        alert('Error saving extra service item: ' + error);
-        // Handle the error, show a message, etc.
-      });
-  } else {
-    alert('No caterer UID available. Caterer is not logged in.');
-  }
-}
-
-  
-      // Convert event data to Firestore object
-      private toExtraServiceObject(extraserviceItem: any): any {
-        // Implement conversion logic based on your event item structure
-        return {
-          esName: extraserviceItem.esName,
-          esDescription: extraserviceItem.esDescription,
-          esImage: extraserviceItem.esImage,
-          esMinHours: extraserviceItem.esMinHours,
-          esMaxHours: extraserviceItem.esMaxHours,
-          esPrice: extraserviceItem.esPrice,
-          // Add other fields as needed
-        };
+    saveExtraServiceItem(extraserviceItem: any): void {
+      const catererUid = this.authService.getCatererUid();
+    
+      if (catererUid) {
+        const extraserviceData = this.toExtraServiceObject(extraserviceItem);
+        const extraserviceSubcollectionRef = this.firestore.collection(`caterers/${catererUid}/extraserviceItems`);
+    
+        extraserviceSubcollectionRef.add(extraserviceData)
+          .then((docRef) => {
+            // Update the firestoreID field with the generated document ID
+            docRef.update({ esID: docRef.id });
+            alert('Extra service saved successfully.');
+            // You can also reset the form or perform other actions here
+          })
+          .catch(error => {
+            alert('Error saving extra service item: ' + error);
+            // Handle the error, show a message, etc.
+          });
+      } else {
+        alert('No caterer UID available. Caterer is not logged in.');
       }
+    }
+
+      // Convert event data to Firestore object
+// Convert event data to Firestore object
+private toExtraServiceObject(extraserviceItem: any): any {
+  // Implement conversion logic based on your extra service item structure
+  return {
+    catererUid: extraserviceItem.catererUid,
+    esID: null, // Keep this line if esID is provided, otherwise remove it
+    esName: extraserviceItem.esName,
+    esDescription: extraserviceItem.esDescription,
+    esImage: extraserviceItem.esImage,
+    esMinHours: extraserviceItem.esMinHours,
+    esMaxHours: extraserviceItem.esMaxHours,
+    esPrice: extraserviceItem.esPrice,
+  };
+}
 
 
   // Method to save voucher item
   saveVoucherItem(voucherItem: any): void {
-    // Use the AuthService to get the current logged-in caterer's UID
     const catererUid = this.authService.getCatererUid();
-
+  
     if (catererUid) {
-      // Add additional fields if needed
       const voucherData = this.toVoucherObject(voucherItem);
-
-      // Reference to the subcollection for vouchers
       const voucherSubcollectionRef = this.firestore.collection(`caterers/${catererUid}/voucherItems`);
-
+  
       voucherSubcollectionRef.add(voucherData)
-        .then(() => {
+        .then((docRef) => {
+          // Update the firestoreID field with the generated document ID
+          docRef.update({ voucherID: docRef.id });
           alert('Voucher item saved successfully.');
           // You can also reset the form or perform other actions here
         })
@@ -197,6 +199,8 @@ saveExtraServiceItem(extraserviceItem: any): void {
     // Implement conversion logic based on your voucher item structure
     return {
       // Map voucher fields to Firestore fields
+      catererUid: voucherItem.catererUid,  
+      voucherID: null, 
       voucherType: voucherItem.voucherType,
       voucherName: voucherItem.voucherName,
       voucherDescription: voucherItem.voucherDescription,
