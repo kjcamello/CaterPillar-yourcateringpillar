@@ -361,8 +361,19 @@
   position: absolute;
   left: 98px;
   top: 330px;
+  padding: 20px; /* Add padding to ensure inner content doesn't touch the edges */
+    border-radius: 15px; /* Rounds the corners of the rectangle */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow for depth */
 }
-
+.primary-label{
+  font-style: normal;
+  font-family: system-ui;
+}
+.prilabel{
+  font-style: normal;
+  position: absolute;
+  left: 450px;
+}
 
 .detail-item {
   margin-bottom: 20px;
@@ -422,6 +433,38 @@ display: inline-block;
 
 input[type="file"] {
   display: none;
+}
+.primary-details {
+  border: 2px solid #AC0000;
+  border-radius: 15px;
+  padding: 20px;
+  margin: 20px 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #FFC100;
+  max-width: 75%;
+  box-sizing: border-box;
+  /* position: absolute; */
+  margin-left: 150px;
+  margin-top: 50px;
+}
+
+/* Retain your existing styles for individual items */
+.name-item, .email-item, .phonenumber-item, .address-item {
+  font-size: x-large;
+  margin-left: 150px;
+  margin-top: 20px; /* Adjusted for uniformity */
+}
+
+.email-item, .address-item {
+  margin-bottom: 20px; /* Adds space below each item */
+}
+
+/* Additional adjustments for input fields if needed */
+.primary-details input {
+  width: calc(100% - 300px); /* Adjust width considering the margin */
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 /* }
 .form-group {

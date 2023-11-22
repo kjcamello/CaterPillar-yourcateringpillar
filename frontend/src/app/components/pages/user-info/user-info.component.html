@@ -4,7 +4,10 @@
    
          <nav class="side_navbar">
            <ul class="ul2">
-         
+            <li><a routerLink="/dashboard-user">
+              <img src="assets/Caterer Menu.png" alt="" class="icon-size">
+              <span class="nav-item">DashBoard</span>
+            </a></li>
              <li><a routerLink="/user-info">
                <img src="assets/user-info.png" alt="" class="icon-size">
                <span class="nav-item">Profile</span>
@@ -61,29 +64,34 @@
 </div>
   <!-- User Profile Details -->
   <div class="profile-details">
-      <!-- Name -->
-      <div class="detail-item">
-          <label for="name">Name:</label>
-          <input type="text" id="name" value="John Doe">
+      <div class="primary-label">
+        <label class="prilabel"><h1>PRIMARY DETAILS</h1></label>
       </div>
+      <!-- Name -->
+      <div class="primary-details">
+        <div class="name-item">
+          <label for="name">User Name:</label>
+          <input type="text" id="name" value="John Doe">
+        </div>
 
       <!-- Email -->
-      <div class="detail-item">
+        <div class="email-item">
           <label for="email">Email:</label>
           <input type="email" id="email" value="user@example.com">
-      </div>
+        </div>
 
       <!-- Phone -->
-      <div class="detail-item">
+        <div class="phonenumber-item">
           <label for="phone">Phone:</label>
           <input type="tel" id="phone" value="+1234567890">
-      </div>
+        </div>
 
       <!-- Address -->
-      <div class="detail-item">
+        <div class="address-item">
           <label for="address">Address:</label>
           <input type="text" id="address">
-      </div>
+        </div>
+    </div>
 
       <!-- Gender -->
       <div class="detail-item">
