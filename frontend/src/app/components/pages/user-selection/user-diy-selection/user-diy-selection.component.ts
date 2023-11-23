@@ -7,6 +7,9 @@ import { AuthService } from 'src/app/services/auth.service';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
+import { EventSelectionService } from 'src/app/services/event-selection.service';
+
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-user-diy-selection',
@@ -34,20 +37,35 @@ extraServiceItems: Observable<any[]>;
 eventItems: Observable<any[]>;
 voucherItems: Observable<any[]>;
 
+//SPRINT 5 LOGIC
+selectedEvent: any;
+//SPRINT 5 LOGIC
+dateAndTimeForm: FormGroup;
+showReceipt: boolean = false; // Add this line for the showReceipt property
   constructor(
     private activatedRoute: ActivatedRoute,
-    private firestore: AngularFirestore
-  ) {}
+    private firestore: AngularFirestore,
+    private eventSelectionService: EventSelectionService,
+    private formBuilder: FormBuilder
+    ) {
+    // Initialize the form in the constructor
+    this.dateAndTimeForm = this.formBuilder.group({
+      selectedDate: [null, Validators.required],
+      selectedTime: [null, Validators.required],
+    });
+    }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
       this.catererUid = params['catererUid'];
       // Provide a default category or choose one based on your use case
       this.loadFoodItems('maincourseItems');
-      this.loadExtraServiceItems(); // Fetch extra service data
-      this.loadEventItems(); // Fetch event data
-      this.loadVoucherItems(); // Fetch voucher data
     });
+
+    this.eventSelectionService.selectedEvent$.subscribe((selectedEvent) => {
+      this.selectedEvent = selectedEvent;
+    });
+
   }
 
   loadFoodItems(category: string) {
@@ -59,21 +77,6 @@ voucherItems: Observable<any[]>;
     this.selectedItems = this.firestore
       .collection(collectionPath)
       .valueChanges();
-  }
-
-  loadExtraServiceItems() {
-    const collectionPath = `caterers/${this.catererUid}/extraserviceItems`; // Adjust the path accordingly
-    this.extraServiceItems = this.firestore.collection(collectionPath).valueChanges();
-  }
-
-  loadEventItems() {
-    const collectionPath = `caterers/${this.catererUid}/eventItems`; // Adjust the path accordingly
-    this.eventItems = this.firestore.collection(collectionPath).valueChanges();
-  }
-
-  loadVoucherItems() {
-    const collectionPath = `caterers/${this.catererUid}/voucherItems`; // Adjust the path accordingly
-    this.voucherItems = this.firestore.collection(collectionPath).valueChanges();
   }
 
   foodtoggleDescription(item: any): void {
@@ -91,4 +94,69 @@ voucherItems: Observable<any[]>;
   vouchertoggleDescription(voucherItem: any): void {
     voucherItem.showFullDescription = !voucherItem.showFullDescription;
   }
+
+  
+  toggleFoodSelection(item: any): void {
+    // Toggle the 'selected' property of the clicked item
+    item.selected = !item.selected;
+  
+    // If the item is selected, initialize selectedPax to minimum_pax
+    if (item.selected) {
+      item.selectedPax = item.minimum_pax;
+      this.selectedItems.forEach((otherItem) => {
+        if (otherItem !== item) {
+          // Ensure 'selected' property exists on the item before setting it to false
+          if ('selected' in otherItem) {
+            otherItem.selected = false;
+          }
+        }
+      });
+    }
+  }
+  /*
+  checkPaxRange(item: any, newValue: number): void {
+    // Check if the selectedPax is within the allowed range    if (newValue < item.minimum_pax || newValue > item.maximum_pax) {
+      item.selectedPaxError = `Selected pax should be between ${item.minimum_pax} and ${item.maximum_pax}.`;
+      item.selectedPax = item.minimum_pax; // Set to minimum pax value
+      alert(item.selectedPaxError);
+    } else {
+      item.selectedPaxError = null;
+    }
+  }*/
+  
+  checkAndAdjustPax(item: any): void {
+    const newValue = parseInt(item.selectedPax, 10);
+  
+    // Check if the selectedPax is within the allowed range
+    if (newValue < item.minimum_pax || newValue > item.maximum_pax) {
+      item.selectedPaxError = `Selected pax should be between ${item.minimum_pax} and ${item.maximum_pax}.`;
+      alert(item.selectedPaxError);
+      item.selectedPax = item.minimum_pax+1; // Set to minimum pax value
+    } else {
+      item.selectedPaxError = null;
+    }
+  }
+  
+  
+  
+
+  toggleReceipt() {
+    this.showReceipt = !this.showReceipt;
+  }
+
+  formatDate(selectedDate: string): string {
+    // Use Angular's DatePipe to format the date including the day of the week
+    const datePipe = new DatePipe('en-US');
+    const formattedDate = datePipe.transform(new Date(selectedDate), 'E, MMM d, y');
+    return formattedDate || selectedDate;
+  }
+
+  formatTime(selectedTime: string): string {
+    // Convert the time to 12-hour format with AM and PM
+    const [hours, minutes] = selectedTime.split(':');
+    const timePeriod = +hours >= 12 ? 'PM' : 'AM';
+    const formattedHours = +hours % 12 || 12;
+    return `${formattedHours}:${minutes} ${timePeriod}`;
+  }
+  
 }

@@ -1,0 +1,105 @@
+ul {
+    display: flex;
+    flex-wrap: wrap;
+    list-style-type: none;
+    justify-content: space-between; /* Add this to display 3 boxes per row */
+    padding: 0;
+    gap: 20px; /* Adjust the gap as needed between containers */
+  }
+  
+  li {
+    height: 25rem;
+    width: calc(33.33% - 20px); /* Adjust the width as needed with a gap */
+    border: 1px solid rgb(161, 23, 23);
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    color: #9a0000;
+    position: relative;
+    background-position: top center; /* Position the background image at the top center */
+    background-repeat: no-repeat;
+    background-size: cover; /* Ensure the image covers the container */
+  }
+
+  li:hover {
+    background-color:yellow;
+    cursor: pointer;
+  }
+  
+  .es-image {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+  }
+
+  .price-tag {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 5px;
+    font-size: 14px;
+    border-radius: 5px;
+  }
+  
+  .pax {
+    position: absolute;
+    bottom: 10px; /* Adjust the distance from the bottom as needed */
+    right: 10px; /* Adjust the distance from the right as needed */
+    background-color: rgba(0, 0, 0, 0.7); /* Add background color for better visibility */
+    color: white; /* Set the text color */
+    padding: 5px; /* Add some padding for spacing */
+    border-radius: 5px; /* Add rounded corners */
+  }
+
+/*--------------------------------------*/
+/* Extra Service */
+.es_name{
+    color: white;
+    background-color: darkred;
+  }
+
+  
+.extra-service-form {
+    max-height: 300px; /* Adjust the maximum height as needed */
+    overflow-y: auto; /* Enable vertical scrolling if the content overflows */
+    position: fixed;
+    top:300px;
+    left:735px;
+}
+
+.extra-service-container {
+    max-width: 650px; /* Adjust as needed */
+    margin: 0 0 0 20px; /* Adjust the margin to create space between the list and the form */
+    left: 750px; /* Adjust the left position as needed */
+    top: 300px; /* Adjust the top position as needed */
+}
+
+.extra-service-list {
+    list-style-type: none;
+    margin-right: 10px; /* Adjust the margin between two adjacent lists */
+    overflow-x: auto; /* Enable horizontal scrolling if the content overflows */
+}
+
+.list-extra-service {
+    overflow-y: auto; /* Enable vertical scroll if the content overflows */
+    max-height: 300px; /* Adjust as needed, set a maximum height for scrollability */
+    width: 200px; /* Adjust the width of each list item */
+    padding: 5px; /* Add padding for spacing within the list item */
+    margin-bottom: 5px; /* Adjusted margin for a reduced gap between list items */
+    border: 1px solid #ccc; /* Add a border for visual separation */
+}
+
+
+
+.see-more,
+.see-less{
+    color: blue;
+}
+
+.no_es_items {
+    margin-left: 200px;
+    position: fixed;
+  }

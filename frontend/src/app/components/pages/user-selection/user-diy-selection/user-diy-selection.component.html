@@ -2,7 +2,6 @@
 <app-header-user></app-header-user>
 </div>
 <app-search></app-search>
-
 <!-- user-diy-selection.component.html -->
 <div class="position">
 <div class="category-tabs">
@@ -14,22 +13,26 @@
   <div class="tab" [ngClass]="{ 'selected': selectedCategory === 'Drink' }" (click)="loadFoodItems('drinkItems')">Drink</div>
 </div>
 
-<div class="forms-container">
+<div>
 <form class="items-form">
-  <div class="items-container">
-    
-    <ul class="items-list">
-      <li class="list-item" *ngFor="let item of selectedItems | async">
-        <div>
-          <img [src]="item.food_image" alt="Food Image" class="food-image">
-        </div>
-        <div class="price-tag">
-          ₱{{ item.pax_price }}/pax
-        </div>
-        <div class="pax">
-          caters {{ item.minimum_pax }} to {{ item.maximum_pax }} pax
-        </div>
+  <div>
+    <!-- user-diy-selection.component.html -->
+
+<!-- ... (previous code) ... -->
+
+<div *ngIf="(selectedItems | async)?.length; else noFoodItems">
+  <ul class="items-list">
+    <li class="list-item" *ngFor="let item of selectedItems | async" (click)="toggleFoodSelection(item)" [ngClass]="{ 'selected': item.selected }">
       <div>
+        <img [src]="item.food_image" alt="Food Image" class="food-image">
+      </div>
+      <div class="price-tag">
+        ₱{{ item.pax_price }}/pax
+      </div>
+      <div class="pax">
+        caters {{ item.minimum_pax }} to {{ item.maximum_pax }} pax
+      </div>
+      <div class="food_name">
         <h2>{{ item.food_name }}</h2>
       </div>
       <div>
@@ -43,98 +46,105 @@
           <span class="see-more" *ngIf="item.showFullDescription" (click)="foodtoggleDescription(item)">See less</span>
         </ng-container>
       </div>
+        <!-- Display the selected_pax input when the item is selected -->
+<!-- Display the selected_pax input when the item is selected -->
+<div *ngIf="item.selected">
+  <label for="selectedPax">Preferred Pax:</label>
+  <input
+    type="number"
+    id="selectedPax"
+    [(ngModel)]="item.selectedPax"
+    (input)="checkAndAdjustPax(item)"
+    (click)="$event.stopPropagation()" 
+    name="selectedPax"
+    placeholder="Enter preferred pax"
+  />
+</div>
     </li>
   </ul>
 </div>
+
+<!-- ... (remaining code) ... -->
+
+<ng-template #noFoodItems>
+  <div class="no_food_items">
+  <h3>No food items added yet in this category.</h3>
+</div>
+</ng-template>
+</div>
 </form>
 
-<form class="extra-service-form">
-   <!-- <h2>Extra Services</h2> -->
-  <div class="extra-service-container">
-    <ul class="extra-service-list">
-      <li class="list-extra-service" *ngFor="let extraService of extraServiceItems | async">
-        <!-- Display extra service details here -->
-        <div>
-          <img [src]="extraService.esImage" alt="Event Image" class="food-image">
-        </div>
-        <div>
-          <h2>{{ extraService.esName }}</h2>
-        </div>
-        <div class="price-tag">
-          ₱{{ extraService.esPrice }}/hour
-        </div>
-        <div class="pax">
-          serves {{ extraService.esMinHours }} to {{ extraService.esMaxHours }} hours
-        </div>
-      <div>
-        <strong>Description:</strong>
-        <ng-container *ngIf="!extraService.showFullDescription && extraService.esDescription.length > 25">
-          {{ extraService.esDescription.slice(0, 25) }}...
-          <span class="see-more" (click)="estoggleDescription(extraService)">See more</span>
-        </ng-container>
-        <ng-container *ngIf="extraService.showFullDescription || extraService.esDescription.length <= 25">
-          {{ extraService.esDescription }}
-          <span class="see-more" *ngIf="extraService.showFullDescription" (click)="estoggleDescription(extraService)">See less</span>
-        </ng-container>
-      </div>
-      </li>
-    </ul>
-  </div>
-</form>
+<app-user-event-selection></app-user-event-selection>
 
-<form class="event-form">
-  <h2>Events</h2>
-  <div class="event-container">
-    <ul class="event-list">
-      <li class="list-event" *ngFor="let eventItem of eventItems | async">
-        <!-- Display event details here -->
-        <div>
-          <h3>{{ eventItem.eventName }}</h3>
-        </div>
-        <div>
-          <strong>Description:</strong>
-          <ng-container *ngIf="!eventItem.showFullDescription && eventItem.eventDescription.length > 25">
-            {{ eventItem.eventDescription.slice(0, 25) }}...
-            <span class="see-more" (click)="eventtoggleDescription(eventItem)">See more</span>
-          </ng-container>
-          <ng-container *ngIf="eventItem.showFullDescription || eventItem.eventDescription.length <= 25">
-            {{ eventItem.eventDescription }}
-            <span class="see-more" *ngIf="eventItem.showFullDescription" (click)="eventtoggleDescription(eventItem)">See less</span>
-          </ng-container>
-        </div>
-      </li>
-    </ul>
-  </div>
-</form>
+<app-user-voucher-selection></app-user-voucher-selection>
 
-<form class="voucher-form">
-  <h2>Vouchers</h2>
-  <div class="voucher-container">
-    <ul class="voucher-list">
-      <li class="list-voucher" *ngFor="let voucherItem of voucherItems | async">
-        <!-- Display voucher details here -->
-        <div>
-          <img [src]="voucherItem.voucherImage" alt="Voucher Image" class="voucher-image" style="max-width: 100px">
-        </div>
-         <div>
-          <p>{{ voucherItem.voucherName }}</p>
-        </div>
-        <div>
-          <strong>Description:</strong>
-          <ng-container *ngIf="!voucherItem.showFullDescription && voucherItem.voucherDescription.length > 25">
-            {{ voucherItem.voucherDescription.slice(0, 25) }}...
-            <span class="see-more" (click)="vouchertoggleDescription(voucherItem)">See more</span>
-          </ng-container>
-          <ng-container *ngIf="voucherItem.showFullDescription || voucherItem.voucherDescription.length <= 25">
-            {{ voucherItem.voucherDescription }}
-            <span class="see-more" *ngIf="voucherItem.showFullDescription" (click)="vouchertoggleDescription(voucherItem)">See less</span>
-          </ng-container>
-        </div>
-      </li>
-    </ul>
-  </div>
-</form>
+<app-user-extra-service-selection></app-user-extra-service-selection>
+
+<h2 class="food_items_name">Food Items</h2>
+
+<h2 class="extra_service_name">Extra Services</h2>
+
+<div class="wall1"> .</div>
+<div class="wall2"> .</div>
+<div class="wall3"> .</div>
+</div>
 
 </div>
 
+<!-- user-diy-selection.component.html -->
+
+<!-- Add this div to display selected event and date/time form -->
+<div class="selected-event-wrapper" *ngIf="selectedEvent">
+  <h3 class="event_name">{{ selectedEvent.eventName }}</h3>
+  <form [formGroup]="dateAndTimeForm" class="date-time-form">
+    <!-- Update formControlName to match the names in your form group -->
+    <label for="selectedDate">Event Date:</label>
+    <input type="date" id="selectedDate" formControlName="selectedDate">
+
+    <label for="selectedTime">Event Time:</label>
+    <input type="time" id="selectedTime" formControlName="selectedTime">
+  </form>
+</div>
+
+<button class="review-order-button" (click)="toggleReceipt()">Review Order</button>
+
+<!-- E-Receipt Content -->
+<div *ngIf="showReceipt" class="ereceipt-background"></div>
+<div *ngIf="showReceipt" class="ereceipt-content">
+  <h3>Your Order Details</h3>
+    <!-- Display selected food items -->
+    <div class="receipt-items">
+      <div class="receipt-item" *ngFor="let item of selectedItems | async">
+        <div class="item-details">
+          <div class="food-name">{{ item.food_name }}</div>
+          <div>
+            <strong>Preferred Pax:</strong> {{ item.selectedPax }}
+          </div>
+        </div>
+        <div class="right-align">{{ item.pax_price * item.selectedPax | currency: 'PHP':true }}</div>
+      </div>
+    </div>
+
+  <div class="receipt-items">
+    <!-- Display selected event details -->
+    <div class="receipt-item">
+      <div class="item-details">
+        <div class="food-name">Event: {{ selectedEvent?.eventName }}</div>
+        <div>
+          <strong>Selected Date and Time:</strong>
+          {{ formatDate(dateAndTimeForm.value.selectedDate) }} at {{ formatTime(dateAndTimeForm.value.selectedTime) }}
+        </div>
+      </div>
+      <!-- Adjust the price as needed -->
+      <div class="right-align">{{ selectedEvent?.pax_price | currency: 'PHP':true }}</div>
+    </div>
+    <!-- Add more receipt items for other selections if needed -->
+  </div>
+  <div class="total-section">
+    <div class="grand-total-label">Grand Total:</div>
+    <div class="grand-total-value">{{ calculateGrandTotal() | currency: 'PHP':true }}</div>
+
+
+    
+  </div>
 </div>
