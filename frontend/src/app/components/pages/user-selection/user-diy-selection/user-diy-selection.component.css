@@ -37,7 +37,7 @@ li {
 
 
 li:hover {
-  opacity: 0.7;
+  background-color:yellow;
   cursor: pointer;
 }
 
@@ -109,7 +109,7 @@ pointer-events: none;  Prevent interactions with the disabled element
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black */
-  z-index: 2; /* Ensure it's above other elements */
+  z-index: 249; /* Ensure it's above other elements */
 }
 
 /* Styles for the e-receipt content */
@@ -124,6 +124,7 @@ pointer-events: none;  Prevent interactions with the disabled element
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Optional: Add a shadow for the form */
   border-radius: 5px;
   max-width: 80%;
+  z-index: 250; /* Ensure it's above other elements */
 }
 
 /* Center align text in the e-receipt */
@@ -144,6 +145,7 @@ border: none;
 padding: 10px 20px;
 cursor: pointer;
 border-radius: 5px;
+z-index:251;
 }
 
 
@@ -226,6 +228,9 @@ border-radius: 5px;
 }
 
 
+
+
+
 /*Centering the no items added sprint 3*/
 
 /* Center the text */
@@ -240,100 +245,6 @@ color: red;
 
 
 
-
-
-
-/* from view-food-table.component.css*/
-/* Add or modify CSS as needed for table styling */
-.food-items-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: -15px;
-}
-
-.food-items-table th {
-  background-color: #000; /* Set header background color to black */
-  color: #fff; /* Set header text color to white */
-}
-
-/* Alternating row colors */
-.food-items-table tr:nth-child(odd) {
-  background-color: yellow;
-  color: darkred;
-}
-
-.food-items-table tr:nth-child(even) {
-  background-color: darkred;
-  color: yellow;
-}
-
-
-.table-image {
-  max-width: 175px;
-  height: auto;
-}
-
-.image-preview {
-  max-width: 200px;
-  height: auto;
-  margin-bottom: 10px;
-}
-
-.food-items-table th,
-.food-items-table td {
-  border: 1px solid #000;
-  padding: 8px;
-  text-align: justify;
-  max-height: 100px; /* Set a fixed height for the cells */
-  overflow: auto; /* Enable vertical scrolling for overflowing content */
-}
-
-/* Additional styling for the form, adjust as needed */
-.table-form-container h2 {
-  color: white;
-  margin-bottom: 10px;
-}
-
-
-
-/* Add or modify CSS for button styling */
-.food-items-table .update-button,
-.food-items-table .delete-button,
-.food-items-table .save-button,
-.food-items-table .cancel-button {
-  cursor: pointer;
-  border: none;
-  background: none;
-  padding: 0;
-  margin: 0;
-}
-
-/* Add hover effect to invert the color of the image */
-.food-items-table .update-button:hover,
-.food-items-table .delete-button:hover,
-.food-items-table .save-button:hover,
-.food-items-table .cancel-button:hover,
-.food-items-table .file-input-label:hover {
-  filter: invert(100%); /* Invert the color of the image when hovered */
-}
-
-/* Add styling for the update column */
-.food-items-table .update-column {
-  background-color: blue; /* Set the background color for the update column */
-}
-
-/* Add styling for the delete column */
-.food-items-table .delete-column {
-  background-color: red; /* Set the background color for the delete column */
-}
-
-/* Add styling for the Actions header cell */
-.food-items-table th.actions-header {
-  background-color: black; /* Set the background color for the header cell */
-  color: white; /* Set the text color for the header cell */
-}
-
-
 /* Add or modify CSS for centering and styling */
 .no-items-message {
   text-align: center;
@@ -345,25 +256,11 @@ color: red;
 
 /*EDIT FORM PORTION*/
 
-.edit-form input,
-.edit-form textarea,
-.edit-form select {
-  width: 100%; /* Allow the inputs and textareas to take 100% width */
-  padding: 5px; /* Reduce padding to save space */
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  margin-bottom: 5px; /* Reduce margin bottom for compact spacing */
-}
-
 /* CSS for the fixed-size textarea */
 .fixed-textarea {
   width: 100%; /* Adjust the width as needed */
   height: 75px; /* Adjust the height as needed */
   resize: none; /* Disable textarea resizing */
-}
-
-.edit-form input[type="file"] {
-  margin-bottom: 10px;
 }
 /*
 .edit-form button {
@@ -517,7 +414,7 @@ position: relative;
 
 .category-tabs {
 position: fixed;
-top: 110px;
+top: 285px;
 left: 0px;
 right: 0;
 width: 628px;
@@ -666,7 +563,7 @@ margin-top: 20px;
   position: fixed;
   left: 0;
   top: 0;
-  z-index: 100;
+  z-index: 300;
   width: 100%;
   margin-left: 0px; /* Adjust the negative margin as needed */
   background-color: #fff; /* Add your desired background color */
@@ -702,100 +599,115 @@ margin-top: 20px;
 }
 
 .items-form {
+  top: 355px;
   max-width: 650px; /* Adjust as needed */
   margin: 0 0 0 20px; /* Adjust the margin to create space between the list and the form */
-  margin-top: 200px;
   position: relative; /* Set position to relative for absolute positioning of child elements */
 }
-/*--------------------------------------*/
-/*food item*/
-/* Extra Service */
-.extra-service-container {
-  max-width: 650px; /* Adjust as needed */
-  margin: 0 0 0 20px; /* Adjust the margin to create space between the list and the form */
-  position: absolute;
-  left: 750px; /* Adjust the left position as needed */
-  top: 150px; /* Adjust the top position as needed */
-}
-
-.extra-service-list {
-  list-style-type: none;
-  margin-right: 10px; /* Adjust the margin between two adjacent lists */
-  position: relative; /* Set position to relative for absolute positioning of the description container */
-}
-
-.list-extra-service {
-  overflow-y: auto; /* Enable vertical scroll if the content overflows */
-  max-height: 300px; /* Adjust as needed, set a maximum height for scrollability */
-  width: 200px; /* Adjust the width of each list item */
-  padding: 5px; /* Add padding for spacing within the list item */
-  margin-bottom: 5px; /* Adjusted margin for a reduced gap between list items */
-  border: 1px solid #ccc; /* Add a border for visual separation */
-  position: relative; /* Set position to relative for absolute positioning of the description container */
-}
 
 /*------------------------------------*/
 
-/* Rest of your styles */
+.food_name{
+  color: white;
+  background-color: darkred;
+}
 
-/* Events Form */
-.event-form {
+.food_items_name {
   position: fixed;
-  margin-top: -200px; /* Adjust the top position as needed */
+  background-color: orange;
+  text-align: center;
+  top: 262px;
+  width: 680px;
+  z-index:200;
 }
 
-/* Event */
-.event-container {
-  margin: 0 0 0 20px; /* Adjust the margin to create space between the list and the form */
-}
-
-.event-list {
-  list-style-type: none;
-  background-color: white;
-}
-
-.list-event {
-  overflow-y: auto; /* Enable vertical scroll if the content overflows */
-  max-height: 100px; /* Adjust as needed, set a maximum height for scrollability */
-  width: 200px; /* Adjust the width of each list item */
-  border: 1px solid #ccc; /* Add a border for visual separation */
-  background-color: yellow;
-}
-
-/* Header background color */
-.event-form h2 {
-  background-color: white;
-}
-
-
-/*------------------------------------*/
-
-/* Events Form */
-.voucher-form {
+.extra_service_name {
   position: fixed;
-  margin-top: -750px; /* Adjust the top position as needed */
-  margin-left: 675px;
+  background-color: orange;
+  text-align: center;
+  top: 262px;
+  left: 755px;
+  width: 670px;
+  z-index:200;
 }
 
-/* Event */
-.voucher-container {
-  margin: 0 0 0 20px; /* Adjust the margin to create space between the list and the form */
+.wall1{
+  position: fixed;
+  background-color: #FFD2B3;
+  color: #FFD2B3;
+  text-align: center;
+  top: 100px;
+  left: 700px;
+  width: 35px;
+  height: 600px;
+  border: solid 1px rgb(182 0 0);
 }
 
-.voucher-list {
-  list-style-type: none;
-  background-color: white;
+.wall2{
+  position: fixed;
+  background-color: #FFD2B3;
+  color: #FFD2B3;
+  text-align: center;
+  top: 600px;
+  left: 700px;
+  width: 740px;
+  height: 183px;
+  border: solid 1px rgb(182 0 0);
 }
 
-.list-voucher {
-  overflow-y: auto; /* Enable vertical scroll if the content overflows */
-  max-height: 75px; /* Adjust as needed, set a maximum height for scrollability */
-  width: 175px; /* Adjust the width of each list item */
-  border: 1px solid #ccc; /* Add a border for visual separation */
-  background-color: yellow;
+.wall3{
+  position: fixed;
+  background-color: #FFD2B3;
+  color: #FFD2B3;
+  text-align: center;
+  top: 117px;
+  left: 701px;
+  width: 33px;
+  height: 485px;
+  z-index: 100;
 }
 
-/* Header background color */
-.voucher-form h2 {
-  background-color: white;
+.no_food_items {
+  margin-left: 135px;
+  position: fixed;
+}
+
+.see-more,
+.see-less{
+    color: blue;
+}
+
+/*DATE AND TIME FORM*/
+/* user-diy-selection.component.css */
+
+.selected-event-wrapper {
+  position: fixed;
+  
+  border: 1px solid #ccc;
+  background-color: #f5f5f5;
+  width:150px;
+
+  margin-left:710px;
+  margin-top:-30px;
+  z-index:100;
+}
+
+.event_name {
+  color: darkred;
+}
+
+
+.date-time-form label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+/* Add more styling as needed */
+
+.list-item.selected {
+  background-color: rgb(168, 242, 168);
+}
+
+.selected_pax_textbox {
+  z-index:500;
 }

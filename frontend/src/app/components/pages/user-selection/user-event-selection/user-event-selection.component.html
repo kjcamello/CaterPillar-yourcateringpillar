@@ -1,0 +1,33 @@
+<!-- Event Form -->
+<form class="event-form">
+    <h2>Events</h2>
+    <div class="event-container">
+        <ng-container *ngIf="(eventItems | async)?.length; else noItems">
+            <ul class="event-list">
+                <li class="list-event" *ngFor="let eventItem of eventItems | async" (click)="selectEvent(eventItem)" [ngClass]="{ 'selected': selectedEvent === eventItem }"
+              [class.selected]="eventItem.selected" (click)="toggleEventSelection(eventItem)">                   
+                    <!-- Display event details here -->
+                    <div class="event_name">
+                        <h3>{{ eventItem.eventName }}</h3>
+                    </div>
+                    <div>
+                        <strong>Description:</strong>
+                        <ng-container *ngIf="!eventItem.showFullDescription && eventItem.eventDescription.length > 25">
+                            {{ eventItem.eventDescription.slice(0, 25) }}...
+                            <span class="see-more" (click)="eventtoggleDescription(eventItem)">See more</span>
+                        </ng-container>
+                        <ng-container *ngIf="eventItem.showFullDescription || eventItem.eventDescription.length <= 25">
+                            {{ eventItem.eventDescription }}
+                            <span class="see-less" *ngIf="eventItem.showFullDescription" (click)="eventtoggleDescription(eventItem)">See less</span>
+                        </ng-container>
+                    </div>
+                </li>
+            </ul>
+        </ng-container>
+        <ng-template #noItems>
+            <div class="no_items">
+                <h3>No events added yet.</h3>
+            </div>
+        </ng-template>
+    </div>
+</form>

@@ -78,6 +78,9 @@ import { UserOrdersComponent } from './components/pages/user-orders/user-orders.
 import { UserHistoryComponent } from './components/pages/user-history/user-history.component';
 import { UserChangepasswordComponent } from './components/pages/user-changepassword/user-changepassword.component';
 import { UserInfoComponent } from './components/pages/user-info/user-info.component';
+import { UserVoucherSelectionComponent } from './components/pages/user-selection/user-voucher-selection/user-voucher-selection.component';
+import { UserEventSelectionComponent } from './components/pages/user-selection/user-event-selection/user-event-selection.component';
+import { UserExtraServiceSelectionComponent } from './components/pages/user-selection/user-extra-service-selection/user-extra-service-selection.component';
 
 //import { MatTabsModule } from '@angular/material/tabs';
 
@@ -158,6 +161,9 @@ const database = getDatabase(app);
     UserHistoryComponent,
     UserChangepasswordComponent,
     UserInfoComponent,
+    UserVoucherSelectionComponent,
+    UserEventSelectionComponent,
+    UserExtraServiceSelectionComponent,
 
   ],
   imports: [

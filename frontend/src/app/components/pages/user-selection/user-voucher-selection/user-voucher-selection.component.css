@@ -1,0 +1,73 @@
+li:hover {
+    background-color:yellow;
+    cursor: pointer;
+  }
+
+/*voucher form*/
+.voucher-form {
+    position: fixed;
+    top: 118px; /* Adjust the top position as needed */
+    left: 755px;
+    white-space: nowrap; /* Prevent wrapping to keep entries on the same line */
+    overflow-x: auto; /* Enable horizontal scrolling for the entire form */
+    overflow-y: hidden; /* Hide vertical scrollbar */
+    max-width: 670px; /* Adjust the maximum width to your preference */
+    width: 100%; /* Set a fixed width for the form */
+    max-height: 200px;
+    background-color: white; /* Set the background color to gray */
+    transition: max-width 0.5s; /* Add a smooth transition effect */
+}
+  
+/* Voucher */
+.voucher-container {
+    display: flex; /* Use flexbox for horizontal alignment */
+    white-space: nowrap; /* Prevent wrapping to keep entries on the same line */
+    overflow-x: auto; /* Enable horizontal scrolling for the container */
+}
+
+/* Adjust the width of each list item */
+.list-voucher {
+    display: inline-block; /* Display entries inline */
+    overflow-y: auto; /* Enable vertical scroll if the content overflows */
+    max-height: 75px; /* Adjust as needed, set a maximum height for scrollability */
+    width: 150px; /* Adjust the width of each list item */
+    margin-right: 10px; /* Add some spacing between entries */
+    border: 1px solid #ccc; /* Add a border for visual separation */
+    background-color: white;
+    color: darkred;
+}
+
+/* Adjust the width of the description */
+.list-voucher div {
+    max-width: 120px; /* Adjust the maximum width for the description */
+    white-space: normal; /* Allow description to wrap */
+}
+
+/* Clearfix to handle float and prevent container collapse */
+.voucher-form::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Header background color */
+.voucher-form h2 {
+    background-color: orange;
+    text-align: center;
+}
+
+.see-more,
+.see-less{
+    color: blue;
+}
+
+.voucher_name{
+    color: rgb(255, 255, 255);
+    background-color: darkred;
+}
+
+.no_items{
+    color: white;
+    margin-left: 225px;
+    padding:41px 0px 41px 0px;
+}

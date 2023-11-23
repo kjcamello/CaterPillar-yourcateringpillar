@@ -1,0 +1,40 @@
+<form class="extra-service-form">
+    <!-- <h2>Extra Services</h2> -->
+   <div class="extra-service-container">
+     <div *ngIf="(extraServiceItems | async)?.length; else noExtraService">
+     <ul class="extra-service-list">
+       <li class="list-extra-service" *ngFor="let extraService of extraServiceItems | async">
+         <!-- Display extra service details here -->
+         <div>
+           <img [src]="extraService.esImage" alt="Event Image" class="es-image">
+         </div>
+         <div class="es_name">
+           <h2>{{ extraService.esName }}</h2>
+         </div>
+         <div class="price-tag">
+           ₱{{ extraService.esPrice }}/hour
+         </div>
+         <div class="pax">
+           serves {{ extraService.esMinHours }} to {{ extraService.esMaxHours }} hours
+         </div>
+       <div>
+         <strong>Description:</strong>
+         <ng-container *ngIf="!extraService.showFullDescription && extraService.esDescription.length > 25">
+           {{ extraService.esDescription.slice(0, 25) }}...
+           <span class="see-more" (click)="estoggleDescription(extraService)">See more</span>
+         </ng-container>
+         <ng-container *ngIf="extraService.showFullDescription || extraService.esDescription.length <= 25">
+           {{ extraService.esDescription }}
+           <span class="see-less" *ngIf="extraService.showFullDescription" (click)="estoggleDescription(extraService)">See less</span>
+         </ng-container>
+       </div>
+       </li>
+     </ul>
+   </div>
+   <ng-template #noExtraService>
+     <div class="no_es_items">
+     <h3>No extra services added yet.</h3>
+     </div>
+   </ng-template>
+   </div>
+ </form>
