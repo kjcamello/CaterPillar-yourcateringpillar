@@ -399,17 +399,41 @@
   right: 25px;
   top: 340px;
 }
-.edit-btn, .save-btn {
+.save-btn {
   /* Common styling for buttons */
   border: none;
   background-color: transparent;
   cursor: pointer;
+  position: absolute;
+  right: 5px; 
+  top: 115px; 
+}
+.edit-btn{
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  position: absolute;
+  right: 5 px;
+  right: 5px;
+  bottom: 650px;
 }
 
 .edit-button img, .save-button img {
   /* Styling for the icons */
   width: 30px; /* Adjust size as needed */
   height: auto;
+}
+.Oth-detail-container{
+  margin-top: 120px;
+  background-color: rgb(243, 147, 3);
+  width: 1100px;
+  position: absolute;
+  left: 25px;
+  top: 330px;
+  padding: 20px;
+  border-radius: 15px;
+  /* max-width: 75%; */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 
@@ -429,6 +453,27 @@ display: inline-block;
   width: 50px;
   cursor: pointer;
 }
+.other-details{
+  margin-top: 20px;
+}
+.Gender-details{
+  margin-left: 25px;
+  font-size: x-large;
+  margin-top: 10px;
+  margin-left: 100px;
+}
+.malegenderradio{
+  margin-left: 100px; 
+}
+.femalegenderradio{
+  margin-left: 100px;
+}
+.othergenderradio{
+  margin-left: 100px;
+}
+/* .othergenderinput{
+  margin-left: 100px;
+} */
 
 
 input[type="file"] {
@@ -466,6 +511,22 @@ input[type="file"] {
   border: 1px solid #ccc;
   border-radius: 4px;
 }
+.dateBirth-detail{
+  margin-left: 100px;
+  margin-top: 10px;
+  font-size: x-large;
+  display: flex;
+}
+.monthdetail{
+  margin-left: 50px;
+}
+.datedetail{
+  margin-left: 50px;
+}
+.yeardetail{
+  margin-left: 50px;
+}
+
 /* }
 .form-group {
   margin-bottom: 15px;

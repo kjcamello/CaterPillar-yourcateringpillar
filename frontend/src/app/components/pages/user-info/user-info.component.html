@@ -92,41 +92,49 @@
           <input type="text" id="address">
         </div>
     </div>
-
+    
+<div class="Oth-detail-container">
       <!-- Gender -->
-      <div class="detail-item">
+      <div class="Gender-details">
           <label>Gender:</label>
-          <input type="radio" id="male" name="gender" value="male">
+          <input class="malegenderradio" type="radio" id="male" name="gender" value="male">
           <label for="male">Male</label>
           
-          <input type="radio" id="female" name="gender" value="female">
+          <input class="femalegenderradio" type="radio" id="female" name="gender" value="female">
           <label for="female">Female</label>
           
-          <input type="radio" id="others" name="gender" value="others">
+          <input class="othergenderradio" type="radio" id="others" name="gender" value="others">
           <label for="others">Others</label>
           
-          <input type="text" id="otherGender" placeholder="Specify your gender">
+          <input class="othergenderinput" type="text" id="otherGender" placeholder="Specify your gender">
       </div>
 
       <!-- Date of Birth -->
-      <div class="detail-item">
+      <div class="dateBirth-detail">
           <label>Date of Birth:</label>
+          <div class="monthdetail"></div>
+          <label for="month">Month</label>
           <select id="month" (change)="populateDateDropdown()">
               <option *ngFor="let month of months" [value]="month">{{ month }}</option>
           </select>
-          <label for="month">Month</label>
-
+          
+          
+          <div class="datedetail"></div>
+          <label for="date">Date</label>
           <select id="date">
               <option *ngFor="let day of days" [value]="day">{{ day }}</option>
           </select>
-          <label for="date">Date</label>
-
+         
+          <div class="yeardetail">
+          <label for="year">Year</label>
           <select id="year">
               <option *ngFor="let year of years" [value]="year">{{ year }}</option>
           </select>
-          <label for="year">Year</label>
+          </div>
+          </div>
+          </div>
       </div>
-
+</div> 
       <!-- Bio Message -->
       <div class="detail-item">
           <label for="bio">Bio:</label>
