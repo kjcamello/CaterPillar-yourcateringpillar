@@ -183,8 +183,8 @@
               <div class="inputGroup">
                 <select class="form-select" id="appetizerFI" formControlName="appetizerFI" required>
                   <option value="" disabled selected>Select Appetizer</option>
-                  <option *ngFor="let option of appetizerOptions" [value]="option">
-                    {{ option }}
+                  <option *ngFor="let foodName of appetizerOptions" [value]="foodName">
+                    {{ foodName }}
                   </option>
                 </select>
                 <label for="appetizerFI">Select Appetizer</label>
