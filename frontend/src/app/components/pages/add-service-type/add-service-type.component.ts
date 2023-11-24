@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ServiceType } from 'src/app/models/service-type';
 import { AuthService } from 'src/app/services/auth.service';
@@ -14,11 +15,13 @@ export class AddServiceTypeComponent implements OnInit {
   serviceTypeForm: FormGroup;
   serviceTypes: ServiceType[] = [];
   selectedServiceTypeId: string;
+  userId: string;
 
   constructor(
     private fb: FormBuilder,
     private serviceTypeService: ServiceTypeService,
-    private authService: AuthService
+    private authService: AuthService,
+    private afAuth: AngularFireAuth
   ) {
     this.serviceTypeForm = this.fb.group({
       eventType: ['', Validators.required],
@@ -31,8 +34,28 @@ export class AddServiceTypeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.serviceTypeService.getServiceTypes().subscribe(data => {
-      this.serviceTypes = data;
+    this.loadServiceType();
+    this.fetchUserId();
+  }
+
+  fetchUserId() {
+    this.afAuth.authState.subscribe(user => {
+      if (user) {
+        this.userId = user.uid;
+        this.loadServiceType();
+      }
+    });
+  }
+
+
+  loadServiceType(){
+    this.serviceTypeService.getServiceTypes(this.userId).subscribe(data => {
+      this.serviceTypes = data.map(a =>{
+        return{
+          id: a.payload.doc.id,
+          ...a.payload.doc.data() as ServiceType
+        };
+      });
     });
   }
 
@@ -43,7 +66,7 @@ export class AddServiceTypeComponent implements OnInit {
     }
 
     const serviceType = this.serviceTypeForm.value;
-    this.serviceTypeService.addServiceType(serviceType)
+    this.serviceTypeService.addServiceType(serviceType, this.userId)
       .then(() => {
         console.log('Service Type Added');
         this.serviceTypeForm.reset();
@@ -55,21 +78,24 @@ export class AddServiceTypeComponent implements OnInit {
       });
   }
 
-  updateServiceType(): void {
-    this.serviceTypeService.updateServiceType(this.selectedServiceTypeId, this.serviceTypeForm.value).then(() => {
+  updateServiceType(){
+
+    const updatedServiceType = this.serviceTypeForm.value;
+    this.serviceTypeService.updateServiceType(this.selectedServiceTypeId, updatedServiceType, this.userId).then(() => {
       alert('Service Type Updated!');
       this.resetForm();
     });
   }
 
-  editServiceType(serviceType: ServiceType): void {
+  editServiceType(serviceType: any){
     this.selectedServiceTypeId = serviceType.id;
     this.serviceTypeForm.patchValue(serviceType);
   }
 
-  deleteServiceType(serviceType: ServiceType): void {
+  deleteServiceType(id){
     if (confirm('Are you sure you want to delete this service type?')) {
-      this.serviceTypeService.deleteServiceType(serviceType.id).then(() => {
+      this.serviceTypeService.deleteServiceType(id, this.userId).then(() => {
+        this.loadServiceType();
         alert('Service Type Deleted!');
       });
     }

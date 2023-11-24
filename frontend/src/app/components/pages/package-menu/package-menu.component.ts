@@ -9,6 +9,7 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { finalize } from 'rxjs/operators';
 import { v4 as uuidv4 } from 'uuid';
 import { ShareDataService } from 'src/app/services/share-data.service';
+import { ServiceTypeService } from 'src/app/services/service-type.service';
 
 @Component({
   selector: 'app-package-menu',
@@ -35,11 +36,11 @@ export class PackageMenuComponent implements OnInit {
 
     // Create properties for select options
     eventOptions: string[] = [];
-    appetizerOptions: string[] = [];
-    soupOptions: string[] = [];
-    saladOptions: string[] = [];
-    mainCourseOptions: string[] = [];
-    dessertOptions: string[] = [];
+    appetizerOptions: any[] = [];
+    soupOptions: any[] = [];
+    saladOptions: any[] = [];
+    mainCourseOptions: any[] = [];
+    dessertOptions: any[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -48,9 +49,11 @@ export class PackageMenuComponent implements OnInit {
     private afAuth: AngularFireAuth,
     private firestore: AngularFirestore,
     private storage: AngularFireStorage,
-    private sharedDataService: ShareDataService
+    private sharedDataService: ShareDataService,
+    private serviceType: ServiceTypeService
   ) {
     this.packageMenuForm = fb.group({
+      eventType: [''],
       packageName: [''],
       numofPax: [''],
       typeEvent: [''],
@@ -62,10 +65,10 @@ export class PackageMenuComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.fetchUserId();
     this.loadPackages();
-
+    this.fetchFoodInclusions();
 
     const modalElement = document.getElementById('exampleModal');
     modalElement.addEventListener('hidden.bs.modal', () => {
@@ -79,13 +82,29 @@ export class PackageMenuComponent implements OnInit {
     this.packages.forEach(packages => {
       packages.selected = false;
     });
+  }
 
-    this.eventOptions = this.sharedDataService.eventTypes;
-    this.appetizerOptions = this.sharedDataService.appetizers;
-    this.soupOptions = this.sharedDataService.soups;
-    this.saladOptions = this.sharedDataService.salads;
-    this.mainCourseOptions = this.sharedDataService.mainCourses;
-    this.dessertOptions = this.sharedDataService.desserts;
+  fetchFoodInclusions(){
+    this.packageMenuService.getAppetizerItems(this.userId).subscribe(foodNames =>
+      {
+        this.appetizerOptions = foodNames;
+      });
+    this.packageMenuService.getSoupItems(this.userId).subscribe(foodNames =>
+      {
+        this.soupOptions = foodNames;
+      });
+    this.packageMenuService.getSaladItems(this.userId).subscribe(foodNames =>
+      {
+        this.saladOptions = foodNames;
+      });
+    this.packageMenuService.getMainCourseItems(this.userId).subscribe(foodNames =>
+      {
+        this.mainCourseOptions = foodNames;
+      });
+    this.packageMenuService.getDessertItems(this.userId).subscribe(foodNames =>
+      {
+        this.dessertOptions = foodNames;
+      });
   }
 
   onImageSelected(event: any) {
@@ -300,6 +319,7 @@ addPackage() {
       if (user) {
         this.userId = user.uid;
         this.loadPackages();
+        this.fetchFoodInclusions();
       }
     });
   }
