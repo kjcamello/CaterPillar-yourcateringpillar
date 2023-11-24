@@ -21,21 +21,23 @@
   </nav>
 </div>
 
+<div class="search-container">
+  <input [(ngModel)]="searchTerm" placeholder="Search">
+</div>
+
 <div class="table-container">
 
   <table class="styled-table">
     <thead>
       <tr>
-        <th>User ID</th>
-        <th>User Name</th>
-        <th>Status</th>
-        <th>Email</th>
+        <th (click)="sortBy('userName')">User Name</th>
+        <th (click)="sortBy('status')">Status</th>
+        <th (click)="sortBy('email')">Email</th>
         <th>Actions</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let customer of customers">
-        <td>{{ customer.uid }}</td>
+      <tr *ngFor="let customer of customers | filter: searchTerm | orderBy: { column: sortByColumn, order: sortOrder }">
         <td>{{ customer.userName }}</td>
         <td>{{ customer.status }}</td>
         <td>{{ customer.email }}</td>

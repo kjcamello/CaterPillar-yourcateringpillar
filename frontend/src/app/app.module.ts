@@ -47,7 +47,7 @@ import { ChangeCatererPasswordComponent } from './components/pages/change-catere
 import { DashboardUserComponent } from './components/pages/dashboard-user/dashboard-user.component';
 import { HeaderUserComponent } from './components/partials/header-user/header-user.component';
 
-import { SuperadminComponent } from './components/pages/superadmin/superadmin.component';
+import { FilterPipe, OrderByPipe, SuperadminComponent } from './components/pages/superadmin/superadmin.component';
 import { LoginSuperadminComponent } from './components/pages/superadmin/login-superadmin.component';
 import { AdminForgotPasswordComponent } from './components/pages/superadmin/forgotpass.component';
 
@@ -164,6 +164,8 @@ const database = getDatabase(app);
     UserVoucherSelectionComponent,
     UserEventSelectionComponent,
     UserExtraServiceSelectionComponent,
+    FilterPipe,
+    OrderByPipe
 
   ],
   imports: [
