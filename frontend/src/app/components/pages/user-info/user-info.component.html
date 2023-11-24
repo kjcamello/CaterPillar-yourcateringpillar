@@ -48,6 +48,12 @@
               <input type="file" (change)="onImageSelected($event)" accept="image/*" >
               <img src="assets/change_user_coverphoto.png" alt="Go Back" class="uploadCover"> 
           </label>
+
+          <div class="profile-credentials">
+            <div class="username-container">
+              <label class="username"
+            </div>
+          </div>
   </div>
 
   <!-- User Profile Picture with Change Button -->
@@ -147,26 +153,33 @@
       <div class="bio-label">
         <label for="bio">Bio:</label>
         <textarea class="bio-statement" id="bio"></textarea>
+        <label class="editbio-btn">
         <img src="assets/bioeditbtnwhite.png" alt="Edit Bio" class="bioedit-icon">
+        </label>
     </div>
 
       <!-- Food Likes -->
-      <div class="detail-item">
+      <div class="foodlikes">
           <label for="foodlikes">Food Likes:</label>
-          <textarea id="foodlikes"></textarea>
-          <img src="assets/button_editvalue.png" alt="Edit Food Likes" class="edit-icon">
+          <textarea class="foodliketxtbox" id="foodlikes"></textarea>
+          <label class="editfood-btn">
+            <img src="assets/bioeditbtnwhite.png" alt="Edit Bio" class="foodedit-icon">
+          </label>
       </div>
   </div>
 </div>
-<div class="profile-actions-edit">
-  <button class="edit-btn" (click)="enableEditMode()">
-      <img src="assets/editsavebuttons/edit static.png" alt="Edit">
-  </button>
-</div>
-<div class="profile-actions-save">
-  <button class="save-btn" (click)="saveChanges()">
-      <img src="assets/editsavebuttons/save static.png" alt="Save">
-  </button>
+<div class="profile-actions">
+  <div class="profile-actions-edit">
+    <button class="edit-btn" (click)="enableEditMode()">
+        <img src="assets/editsavebuttons/edit static.png" alt="Edit">
+    </button>
+  
+  <div class="profile-actions-save">
+    <button class="save-btn" (click)="saveChanges()">
+        <img src="assets/editsavebuttons/save static.png" alt="Save">
+    </button>
+  </div>
+  </div>
 </div>
 
   <!-- <form (ngSubmit)="onSubmit()" #credentialsForm="ngForm">
