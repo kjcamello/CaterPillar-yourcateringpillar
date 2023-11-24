@@ -62,8 +62,11 @@
         <img src="assets/change_user_coverphoto.png" alt="Change Profile Picture" class="change-profile-pic-icon">
     </label>
 </div>
+  <!-- Profile Actions -->
+ 
   <!-- User Profile Details -->
   <div class="profile-details">
+    
       <div class="primary-label">
         <label class="prilabel"><h1>PRIMARY DETAILS</h1></label>
       </div>
@@ -92,8 +95,11 @@
           <input type="text" id="address">
         </div>
     </div>
-    
+    <div class="other-label">
+      <label class="othlabel"><h1>OTHER DETAILS</h1></label>
+  </div>
 <div class="Oth-detail-container">
+       
       <!-- Gender -->
       <div class="Gender-details">
           <label>Gender:</label>
@@ -134,13 +140,15 @@
           </div>
           </div>
       </div>
+     
 </div> 
+<div class="profile-statements">
       <!-- Bio Message -->
-      <div class="detail-item">
-          <label for="bio">Bio:</label>
-          <textarea id="bio"></textarea>
-          <img src="assets/button_editvalue.png" alt="Edit Bio" class="edit-icon">
-      </div>
+      <div class="bio-label">
+        <label for="bio">Bio:</label>
+        <textarea class="bio-statement" id="bio"></textarea>
+        <img src="assets/bioeditbtnwhite.png" alt="Edit Bio" class="bioedit-icon">
+    </div>
 
       <!-- Food Likes -->
       <div class="detail-item">
@@ -149,17 +157,16 @@
           <img src="assets/button_editvalue.png" alt="Edit Food Likes" class="edit-icon">
       </div>
   </div>
-
-  <!-- Profile Actions -->
-  <div class="profile-actions-edit">
-    <button class="edit-btn" (click)="enableEditMode()">
-        <img src="assets/editsavebuttons/edit static.png" alt="Edit">
-    </button>
+</div>
+<div class="profile-actions-edit">
+  <button class="edit-btn" (click)="enableEditMode()">
+      <img src="assets/editsavebuttons/edit static.png" alt="Edit">
+  </button>
 </div>
 <div class="profile-actions-save">
-    <button class="save-btn" (click)="saveChanges()">
-        <img src="assets/editsavebuttons/save static.png" alt="Save">
-    </button>
+  <button class="save-btn" (click)="saveChanges()">
+      <img src="assets/editsavebuttons/save static.png" alt="Save">
+  </button>
 </div>
 
   <!-- <form (ngSubmit)="onSubmit()" #credentialsForm="ngForm">
