@@ -7,6 +7,17 @@
   position: relative;
 }
 
+th.asc::after {
+  content: ' ▲';
+}
+
+th.desc::after {
+  content: ' ▼';
+}
+
+.search-container {
+  margin-left: 7%;
+}
 .logo {
   text-decoration: none;
   color: inherit;
