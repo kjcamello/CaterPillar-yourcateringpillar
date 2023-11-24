@@ -18,33 +18,26 @@ export class ServiceTypeService {
     this.serviceTypes = this.serviceTypesCollection.valueChanges();
   }
 
-  getServiceTypes(): Observable<ServiceType[]> {
-    return this.serviceTypesCollection.snapshotChanges().pipe(
-      map(actions => actions.map(a => {
-        const data = a.payload.doc.data() as ServiceType;
-        const id = a.payload.doc.id;
-        return { id, ...data };
-      }))
-      
-    );
+  getServiceTypes(uid: string){
+    return this.afs.collection('caterers').doc(uid).collection('serviceTypes').snapshotChanges();
   }
 
-  addServiceType(serviceType: ServiceType): Promise<void> {
-    const id = this.afs.createId();
-    const serviceTypeWithId = { id, ...serviceType };
-    return this.serviceTypesCollection.doc(id).set(serviceTypeWithId);
+  addServiceType(serviceType: ServiceType, uid: string ) {
+    //const id = this.afs.createId();
+    //const serviceTypeWithId = { id, ...serviceType };
+    //return this.serviceTypesCollection.doc(id).set(serviceTypeWithId);
+    return this.afs.collection('caterers').doc(uid).collection('serviceTypes').add(serviceType);
   }
   
 
-  updateServiceType(id: string, serviceType: ServiceType): Promise<void> {
-    return this.serviceTypesCollection.doc(id).update(serviceType);
+  updateServiceType(id: string, serviceType: any, uid: string){
+    //return this.serviceTypesCollection.doc(id).update(serviceType);
+    return this.afs.collection('caterers').doc(uid).collection('serviceTypes').doc(id).update(serviceType);
   }
 
-  deleteServiceType(id: string): Promise<void> {
-    return this.serviceTypesCollection.doc(id).delete();
+  deleteServiceType(id: string, uid: string){
+    //return this.serviceTypesCollection.doc(id).delete();
+    return this.afs.collection('caterers').doc(uid).collection('serviceTypes').doc(id).delete();
   }
-
-  
-
   
 }
