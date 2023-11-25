@@ -49,6 +49,8 @@ import { CspProfileComponent } from './components/pages/csp-profile.component';
 
 import { AddServiceTypeComponent } from './components/pages/add-service-type/add-service-type.component';
 import { SuperadminCustomerComponent } from './components/pages/superadmin/superadmin-customer.component';
+import { ReportComponent } from './components/pages/superadmin/report.component';
+import { SendReportComponent } from './components/pages/send-reports/send-reports.component';
 
 const routes: Routes = [
   { path:'', component:HomeComponent },
@@ -107,7 +109,9 @@ const routes: Routes = [
 
   { path: 'csp-profile', component: CspProfileComponent},
   // ...other routes
-  {path: 'superadmin-customer', component: SuperadminCustomerComponent}
+  {path: 'superadmin-customer', component: SuperadminCustomerComponent},
+  {path: 'reportDetails', component: ReportComponent },
+  {path: 'send-report', component: SendReportComponent }
 ];
 
 @NgModule({

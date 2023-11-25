@@ -17,8 +17,16 @@
           <img src="assets/Add Service Type.png" alt="" class="icon-size">
           <span class="nav-item">Caterer</span>
         </a></li>
+        <li><a routerLink="/reportDetails">
+          <img src="assets/Add Service Type.png" alt="" class="icon-size">
+          <span class="nav-item">Reports</span>
+        </a></li>
       </ul>
     </nav>
+  </div>
+
+  <div class="search-container">
+    <input [(ngModel)]="searchTerm"  placeholder="Search">
   </div>
 <!-- Add a class to your table to apply styles -->
 <div class="table-container">
@@ -26,14 +34,14 @@
   <table class="styled-table">
     <thead>
       <tr>
-        <th>Status</th>
-        <th>Caterer Name</th>
-        <th>Email</th>
-        <th>Remarks</th>
+        <th (click)="sortBy('status')">Status</th>
+        <th (click)="sortBy('catererBasicInfo')">Caterer Name</th>
+        <th (click)="sortBy('catererEmail')">Email</th>
+        <th (click)="sortBy('remarks')">Remarks</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let caterer of caterers">
+      <tr *ngFor="let caterer of caterers | filter: searchTerm | orderBy: { column: sortByColumn, order: sortOrder }">
         <td>
             <select id="actionDropdown" [(ngModel)]="caterer.selectedAction" (change)="handleDropdownChange(caterer)" title="actionDropdown">
               <ng-container *ngIf="getAvailableActions(caterer.status).length > 0; else noActions">
@@ -46,7 +54,7 @@
             </select>
     
           </td>
-        <td>{{ caterer.catererBasicInfo.catererDisplayName}}</td>
+        <td>{{ caterer.catererBasicInfo.catererDisplayName }}</td>
         <td>{{ caterer.catererBasicInfo.catererEmail }}</td>
         <td>
             <!-- Add the remarks dropdown inside the same td -->
