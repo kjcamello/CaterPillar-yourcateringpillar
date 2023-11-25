@@ -102,11 +102,12 @@
                       <div class="FI">Food Inclusion</div>
                     </div>
                     
-                    <p>Appetizer: <span class="dynamic">{{ package.appetizerFI}}</span></p>
-                    <p>Soup: <span class="dynamic">{{ package.soupFI}}</span></p>
-                    <p>Salad: <span class="dynamic">{{ package.saladFI}}</span></p>
-                    <p>Main Course: <span class="dynamic">{{ package.mainCourseFI}}</span></p>
-                    <p>Dessert: <span class="dynamic">{{ package.dessertFI}}</span></p>
+                    <p>Appetizer: <span class="dynamic">{{ package.selectedAppetizers}} </span></p>
+                    <p>Soup: <span class="dynamic">{{ package.selectedSoups}} </span></p>
+                    <p>Salad: <span class="dynamic">{{ package.selectedSalads}} </span></p>
+                    <p>Main Course: <span class="dynamic">{{ package.selectedMainCourses}} </span></p>
+                    <p>Dessert: <span class="dynamic">{{ package.selectedDesserts}}</span></p>
+                    <p>Drinks: <span class="dynamic">{{ package.selectedDrinks}}</span></p>
                     
                     <!-- <p>Extra Service: You might want to bind data here if available</p> -->
                     <div class="card-actions">
@@ -129,114 +130,282 @@
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content modal_bg">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Enter Package Menu Information</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal_pkgHeader">
+          <h6 class="modal-title" id="exampleModalLabel">Enter Package Menu Information</h6>
+          <div class="btnClose_pos">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          
+        </div>
       </div>
       <div class="modal-body">
+        <div class="modal_pkgFields">
+          <form [formGroup]="packageMenuForm">
 
-        <form [formGroup]="packageMenuForm">
+            <!-- Package Name -->
+            <div class="row mt-3">
+              <div class="col">
+                <div class="inputGroup">
+                  <input type="text" required="" autocomplete="off" class="form-control" formControlName="packageName">
+                  <label for="name">Package Name</label>
+                </div>
+              </div>
+            </div>
+  
+            <!-- Number of Pax -->
+            <div class="row mt-3">
+              <div class="col">
+                <div class="inputGroup">
+                  <input type="number" required="" autocomplete="off" class="form-control" formControlName="numofPax">
+                  <label for="name">Number of Guest/Pax</label>
+                </div>
+              </div>
+            </div>
+  
+            <!-- Type of Event -->
+            <div class="row mt-3">
+              <div class="col">
+                <div class="inputGroup">
+                  <select class="form-select" id="typeEvent" formControlName="typeEvent" required>
+                    <option value="" disabled selected>Select Event Type</option>
+                    <option *ngFor="let eventName of eventOptions" [value]="eventName">
+                      {{ eventName }}
+                    </option>
+                  </select>
+                  <label for="name">Select Event Type</label>
+                </div>
+              </div>
+            </div>
 
-          <!-- Package Name -->
-          <div class="row mt-3">
-            <div class="col">
-              <div class="inputGroup">
-                <input type="text" required="" autocomplete="off" class="form-control" formControlName="packageName">
-                <label for="name">Package Name</label>
+  
+          </form>
+
+          <div class="disp_FoodInclusions">
+            <h6 class="typeOfEventTI">Food Inclusions</h6>
+            <nav>
+              <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <button class="nav-link active" id="nav-appetizer-tab" data-bs-toggle="tab" data-bs-target="#nav-appetizer" type="button" role="tab" aria-controls="nav-appetizer" aria-selected="true">Appetizer Items</button>
+                <button class="nav-link" id="nav-soup-tab" data-bs-toggle="tab" data-bs-target="#nav-soup" type="button" role="tab" aria-controls="nav-soup" aria-selected="false">Soup Items</button>
+                <button class="nav-link" id="nav-salad-tab" data-bs-toggle="tab" data-bs-target="#nav-salad" type="button" role="tab" aria-controls="nav-salad" aria-selected="false">Salad Items</button>
+                <button class="nav-link" id="nav-maincourse-tab" data-bs-toggle="tab" data-bs-target="#nav-maincourse" type="button" role="tab" aria-controls="nav-maincourse" aria-selected="false">Main Course Items</button>
+                <button class="nav-link" id="nav-dessert-tab" data-bs-toggle="tab" data-bs-target="#nav-dessert" type="button" role="tab" aria-controls="nav-dessert" aria-selected="false">Dessert Items</button>
+                <button class="nav-link" id="nav-drink-tab" data-bs-toggle="tab" data-bs-target="#nav-drink" type="button" role="tab" aria-controls="nav-drink" aria-selected="false">Drink Items</button>
+              </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+              <div class="tab-pane fade show active" id="nav-appetizer" role="tabpanel" aria-labelledby="nav-appetizer-tab" tabindex="0">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Select</th>
+                      <th>Item Name</th>
+                      <th>Description</th>
+                      <th>Minimum Pax</th>
+                      <th>Maximum Pax</th>
+                      <th>Pax Price</th>
+                      <!-- Add more columns as needed -->
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- Loop through your appetizer items -->
+                    <tr *ngFor="let item of appetizerOptions" (click)="onSelectAppetizer(item)">
+                      <td>
+                        <input type="checkbox" [(ngModel)]="item.selected">
+                      </td>
+                      <td>{{ item.food_name }}</td>
+                      <td>{{ item.food_description }}</td>
+                      <td>{{ item.minimum_pax }}</td>
+                      <td>{{ item.maximum_pax }}</td>
+                      <td>{{ item.pax_price }}</td>
+                      <!-- Add more columns as needed -->
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="tab-pane fade" id="nav-soup" role="tabpanel" aria-labelledby="nav-soup-tab" tabindex="0">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Select</th>
+                      <th>Item Name</th>
+                      <th>Description</th>
+                      <th>Minimum Pax</th>
+                      <th>Maximum Pax</th>
+                      <th>Pax Price</th>
+                      <!-- Add more columns as needed -->
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- Loop through your appetizer items -->
+                    <tr *ngFor="let item of soupOptions" (click)="onSelectSoup(item)">
+                      <td>
+                        <input type="checkbox" [(ngModel)]="item.selected">
+                      </td>
+                      <td>{{ item.food_name }}</td>
+                      <td>{{ item.food_description }}</td>
+                      <td>{{ item.minimum_pax }}</td>
+                      <td>{{ item.maximum_pax }}</td>
+                      <td>{{ item.pax_price }}</td>
+                      <!-- Add more columns as needed -->
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="tab-pane fade" id="nav-salad" role="tabpanel" aria-labelledby="nav-salad-tab" tabindex="0">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Select</th>
+                      <th>Item Name</th>
+                      <th>Description</th>
+                      <th>Minimum Pax</th>
+                      <th>Maximum Pax</th>
+                      <th>Pax Price</th>
+                      <!-- Add more columns as needed -->
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- Loop through your appetizer items -->
+                    <tr *ngFor="let item of saladOptions" (click)="onSelectSalad(item)">
+                      <td>
+                        <input type="checkbox" [(ngModel)]="item.selected">
+                      </td>
+                      <td>{{ item.food_name }}</td>
+                      <td>{{ item.food_description }}</td>
+                      <td>{{ item.minimum_pax }}</td>
+                      <td>{{ item.maximum_pax }}</td>
+                      <td>{{ item.pax_price }}</td>
+                      <!-- Add more columns as needed -->
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="tab-pane fade" id="nav-maincourse" role="tabpanel" aria-labelledby="nav-maincourse-tab" tabindex="0">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Select</th>
+                      <th>Item Name</th>
+                      <th>Description</th>
+                      <th>Minimum Pax</th>
+                      <th>Maximum Pax</th>
+                      <th>Pax Price</th>
+                      <!-- Add more columns as needed -->
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- Loop through your appetizer items -->
+                    <tr *ngFor="let item of mainCourseOptions" (click)="onSelectMainCourse(item)">
+                      <td>
+                        <input type="checkbox" [(ngModel)]="item.selected">
+                      </td>
+                      <td>{{ item.food_name }}</td>
+                      <td>{{ item.food_description }}</td>
+                      <td>{{ item.minimum_pax }}</td>
+                      <td>{{ item.maximum_pax }}</td>
+                      <td>{{ item.pax_price }}</td>
+                      <!-- Add more columns as needed -->
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="tab-pane fade" id="nav-dessert" role="tabpanel" aria-labelledby="nav-dessert-tab" tabindex="0">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Select</th>
+                      <th>Item Name</th>
+                      <th>Description</th>
+                      <th>Minimum Pax</th>
+                      <th>Maximum Pax</th>
+                      <th>Pax Price</th>
+                      <!-- Add more columns as needed -->
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- Loop through your appetizer items -->
+                    <tr *ngFor="let item of dessertOptions" (click)="onSelectDessert(item)">
+                      <td>
+                        <input type="checkbox" [(ngModel)]="item.selected">
+                      </td>
+                      <td>{{ item.food_name }}</td>
+                      <td>{{ item.food_description }}</td>
+                      <td>{{ item.minimum_pax }}</td>
+                      <td>{{ item.maximum_pax }}</td>
+                      <td>{{ item.pax_price }}</td>
+                      <!-- Add more columns as needed -->
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="tab-pane fade" id="nav-drink" role="tabpanel" aria-labelledby="nav-drink-tab" tabindex="0">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Select</th>
+                      <th>Item Name</th>
+                      <th>Description</th>
+                      <th>Minimum Pax</th>
+                      <th>Maximum Pax</th>
+                      <th>Pax Price</th>
+                      <!-- Add more columns as needed -->
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- Loop through your appetizer items -->
+                    <tr *ngFor="let item of drinkOptions" (click)="onSelectDrink(item)">
+                      <td>
+                        <input type="checkbox" [(ngModel)]="item.selected">
+                      </td>
+                      <td>{{ item.food_name }}</td>
+                      <td>{{ item.food_description }}</td>
+                      <td>{{ item.minimum_pax }}</td>
+                      <td>{{ item.maximum_pax }}</td>
+                      <td>{{ item.pax_price }}</td>
+                      <!-- Add more columns as needed -->
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+  
+            </div>
+  
+          </div>  
+          
+          <!-- Add this section somewhere in your HTML, outside the tabs -->
+
+
+        </div>
+        <div class="modal_pkgFieldsShow">
+          <div class="row grid-container" >
+            <div class="col mt-3">
+              <div class="custom-card">
+                
+                <div class="package-info">
+                  <h5>{{ packageMenuForm.get('packageName').value  }}</h5>
+                  <p>Type of Event: <span class="dynamic">{{ packageMenuForm.get('typeEvent').value }}</span></p>
+                  <p>Number of Guests/Pax: <span class="dynamic">{{ packageMenuForm.get('numofPax').value }}</span></p>
+              
+                  <div class="ficenter">
+                    <div class="FI">Food Inclusion</div>
+                  </div>
+                  
+                  <p>Appetizers: <span class="dynamic" *ngFor="let item of selectedAppetizers">{{ item.food_name }}, </span></p>
+                  <p>Soups: <span class="dynamic" *ngFor="let item of selectedSoups">{{ item.food_name }}, </span></p>
+                  <p>Salads: <span class="dynamic" *ngFor="let item of selectedSalads">{{ item.food_name }}, </span></p>
+                  <p>Main Courses: <span class="dynamic" *ngFor="let item of selectedMainCourses">{{ item.food_name }}, </span></p>
+                  <p>Desserts: <span class="dynamic" *ngFor="let item of selectedDesserts">{{ item.food_name }}, </span></p>
+                  <p>Drinks: <span class="dynamic" *ngFor="let item of selectedDrinks ">{{ item.food_name }}, </span></p>
+                
+                </div>
               </div>
             </div>
           </div>
-
-          <!-- Number of Pax -->
-          <div class="row mt-3">
-            <div class="col">
-              <div class="inputGroup">
-                <input type="number" required="" autocomplete="off" class="form-control" formControlName="numofPax">
-                <label for="name">Number of Guest/Pax</label>
-              </div>
-            </div>
-          </div>
-
-          <!-- Type of Event -->
-          <div class="row mt-3">
-            <div class="col">
-              <div class="inputGroup">
-                <select class="form-select" id="eventType" formControlName="eventType" required>
-                  <option value="" disabled selected>Select Event Type</option>
-                  <option *ngFor="let option of eventOptions" [value]="option">
-                    {{ option }}
-                  </option>
-                </select>
-                <label for="eventType">Select Event Type</label>
-              </div>
-            </div>
-          </div>
-
-          <!-- Food Inclusions -->
-          <div class="row mt-3">
-            <div class="col">
-              <h6 class="typeOfEventTI">Food Inclusions</h6>
-
-              <!-- Appetizer -->
-              <div class="inputGroup">
-                <select class="form-select" id="appetizerFI" formControlName="appetizerFI" required>
-                  <option value="" disabled selected>Select Appetizer</option>
-                  <option *ngFor="let foodName of appetizerOptions" [value]="foodName">
-                    {{ foodName }}
-                  </option>
-                </select>
-                <label for="appetizerFI">Select Appetizer</label>
-              </div>
-
-              <!-- Soup -->
-              <div class="inputGroup">
-                <select class="form-select" id="soupFI" formControlName="soupFI" required>
-                  <option value="" disabled selected>Select Soup</option>
-                  <option *ngFor="let option of soupOptions" [value]="option">
-                    {{ option }}
-                  </option>
-                </select>
-                <label for="soupFI">Select Soup</label>
-              </div>
-
-              <!-- Salad -->
-              <div class="inputGroup">
-                <select class="form-select" id="saladFI" formControlName="saladFI" required>
-                  <option value="" disabled selected>Select Salad</option>
-                  <option *ngFor="let option of saladOptions" [value]="option">
-                    {{ option }}
-                  </option>
-                </select>
-                <label for="saladFI">Select Salad</label>
-              </div>
-
-              <!-- Main Course -->
-              <div class="inputGroup">
-                <select class="form-select" id="mainCourseFI" formControlName="mainCourseFI" required>
-                  <option value="" disabled selected>Select Main Course</option>
-                  <option *ngFor="let option of mainCourseOptions" [value]="option">
-                    {{ option }}
-                  </option>
-                </select>
-                <label for="mainCourseFI">Select Main Course</label>
-              </div>
-
-              <!-- Dessert -->
-              <div class="inputGroup">
-                <select class="form-select" id="dessertFI" formControlName="dessertFI" required>
-                  <option value="" disabled selected>Select Dessert</option>
-                  <option *ngFor="let option of dessertOptions" [value]="option">
-                    {{ option }}
-                  </option>
-                </select>
-                <label for="dessertFI">Select Dessert</label>
-              </div>
-            </div>
-          </div>
-
-        </form>
+        </div>
+        
 
       </div>
       <div class="modal-footer">
