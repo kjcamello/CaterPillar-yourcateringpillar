@@ -471,6 +471,18 @@
   width: 717px;
   height: 104px;
 }
+.profile-credentials{
+  position: absolute;
+  left: 500px;
+}
+.username-container{
+  font-size: 45px;
+  margin-bottom: -16px;
+}
+.biostatement{
+  font-size: 27px;
+  font-family: cursive;
+}
 .profile-actions{
   margin-top: 120px;
   background-color: beige;

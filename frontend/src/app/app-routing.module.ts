@@ -45,6 +45,8 @@ import { UserHistoryComponent } from './components/pages/user-history/user-histo
 import { UserChangepasswordComponent } from './components/pages/user-changepassword/user-changepassword.component';   
 import { UserInfoComponent } from './components/pages/user-info/user-info.component';
 
+import { CspProfileComponent } from './components/pages/csp-profile.component';
+
 import { AddServiceTypeComponent } from './components/pages/add-service-type/add-service-type.component';
 import { SuperadminCustomerComponent } from './components/pages/superadmin/superadmin-customer.component';
 
@@ -102,6 +104,8 @@ const routes: Routes = [
   { path: 'user-history', component: UserHistoryComponent },
   { path: 'user-changepassword', component:  UserChangepasswordComponent },
   { path: 'user-info', component:  UserInfoComponent },
+
+  { path: 'csp-profile', component: CspProfileComponent},
   // ...other routes
   {path: 'superadmin-customer', component: SuperadminCustomerComponent}
 ];

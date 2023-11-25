@@ -81,6 +81,7 @@ import { UserInfoComponent } from './components/pages/user-info/user-info.compon
 import { UserVoucherSelectionComponent } from './components/pages/user-selection/user-voucher-selection/user-voucher-selection.component';
 import { UserEventSelectionComponent } from './components/pages/user-selection/user-event-selection/user-event-selection.component';
 import { UserExtraServiceSelectionComponent } from './components/pages/user-selection/user-extra-service-selection/user-extra-service-selection.component';
+import { CspProfileComponent } from './components/pages/csp-profile/csp-profile.component';
 
 //import { MatTabsModule } from '@angular/material/tabs';
 
@@ -164,6 +165,7 @@ const database = getDatabase(app);
     UserVoucherSelectionComponent,
     UserEventSelectionComponent,
     UserExtraServiceSelectionComponent,
+    CspProfileComponent,
 
   ],
   imports: [
