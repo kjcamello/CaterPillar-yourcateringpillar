@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PackagemenuService } from 'src/app/services/packagemenu.service';
 import * as bootstrap from 'bootstrap';
 import { AuthService } from 'src/app/services/auth.service';
@@ -25,7 +25,7 @@ export class PackageMenuComponent implements OnInit {
   selectedImage: File = null;
   imageDownloadUrl: string = null;
   selectedImageSrc: string = null;
-  filteredPackages = [];
+  filteredPackages: any[]= [];
   searchTerm = '';
   // eventOptions = ['Graduation', 'Wedding', 'Birthday', 'Despidida', 'Christening'];
   isUpdateMode: boolean = false;
@@ -35,12 +35,20 @@ export class PackageMenuComponent implements OnInit {
   sortingDirection: string = 'asc';
 
     // Create properties for select options
-    eventOptions: string[] = [];
+    eventOptions: any[] = [];
     appetizerOptions: any[] = [];
     soupOptions: any[] = [];
     saladOptions: any[] = [];
     mainCourseOptions: any[] = [];
     dessertOptions: any[] = [];
+    drinkOptions: any[] = [];
+
+    selectedAppetizers: any[] = [];
+    selectedSoups: any[] = [];
+    selectedSalads: any[] = [];
+    selectedMainCourses: any[] = [];
+    selectedDesserts: any[] = [];
+    selectedDrinks: any[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -52,23 +60,27 @@ export class PackageMenuComponent implements OnInit {
     private sharedDataService: ShareDataService,
     private serviceType: ServiceTypeService
   ) {
-    this.packageMenuForm = fb.group({
-      eventType: [''],
-      packageName: [''],
-      numofPax: [''],
-      typeEvent: [''],
-      appetizerFI: [''],
-      soupFI: [''],
-      saladFI: [''],
-      mainCourseFI: [''],
-      dessertFI: ['']
+    // Initialize your form group
+    this.packageMenuForm = this.fb.group({
+      packageName: ['', Validators.required],
+      numofPax: ['', Validators.required],
+      typeEvent: ['', Validators.required],
+      // ... other form controls ...
+
+      // Add form arrays for each category
+      // appetizers: this.fb.array([]),
+      // soups: this.fb.array([]),
+      // salads: this.fb.array([]),
+      // maincourses: this.fb.array([]),
+      // dessert: this.fb.array([])
+      // ... add more as needed
     });
   }
 
-  ngOnInit(): void {
+  ngOnInit(){
     this.fetchUserId();
-    this.loadPackages();
-    this.fetchFoodInclusions();
+    // this.fetchFoodInclusions();
+    
 
     const modalElement = document.getElementById('exampleModal');
     modalElement.addEventListener('hidden.bs.modal', () => {
@@ -77,6 +89,8 @@ export class PackageMenuComponent implements OnInit {
       this.selectedPackageId = null;
     });
 
+    
+
 
     this.selectedPackageIds = [];
     this.packages.forEach(packages => {
@@ -84,99 +98,149 @@ export class PackageMenuComponent implements OnInit {
     });
   }
 
-  fetchFoodInclusions(){
-    this.packageMenuService.getAppetizerItems(this.userId).subscribe(foodNames =>
-      {
-        this.appetizerOptions = foodNames;
-      });
-    this.packageMenuService.getSoupItems(this.userId).subscribe(foodNames =>
-      {
-        this.soupOptions = foodNames;
-      });
-    this.packageMenuService.getSaladItems(this.userId).subscribe(foodNames =>
-      {
-        this.saladOptions = foodNames;
-      });
-    this.packageMenuService.getMainCourseItems(this.userId).subscribe(foodNames =>
-      {
-        this.mainCourseOptions = foodNames;
-      });
-    this.packageMenuService.getDessertItems(this.userId).subscribe(foodNames =>
-      {
-        this.dessertOptions = foodNames;
-      });
-  }
+  
+  onSelectAppetizer(item: any) {
+    const isAlreadySelected = this.selectedAppetizers.includes(item);
 
-  onImageSelected(event: any) {
-    const file = event.target.files[0];
-    if (file) {
-      this.selectedImage = file;
+    // If the item is not in the array, add it; otherwise, remove it
+    if (!isAlreadySelected) {
+      this.selectedAppetizers.push(item);
+    } else {
+      this.selectedAppetizers = this.selectedAppetizers.filter(selectedItem => selectedItem !== item);
     }
-
-    const reader = new FileReader();
-    reader.onload = (e: any) => {
-      this.selectedImageSrc = e.target.result;
-    };
-    reader.readAsDataURL(file);
   }
 
-  uploadImage() {
-  if (this.selectedImage) {
-    const imageName = uuidv4();
-    const filePath = `package-menu-images/${imageName}`;
-    const fileRef = this.storage.ref(filePath);
-    const task = this.storage.upload(filePath, this.selectedImage);
+  onSelectSoup(item: any) {
+    const isAlreadySelected = this.selectedSoups.includes(item);
 
-    task.snapshotChanges()
-      .pipe(
-        finalize(() => {
-          fileRef.getDownloadURL().subscribe(downloadURL => {
-            this.imageDownloadUrl = downloadURL;
-            console.log('Image uploaded and URL:', this.imageDownloadUrl);
-            this.updateTilesWithImage();
-          });
-        })
-      )
-      .subscribe(
-        () => {
-          console.log('Image upload task completed successfully.');
-        },
-        error => {
-          console.error('Image upload error:', error);
-        }
-      );
-  } else {
-    console.error('No image selected for upload.');
+    // If the item is not in the array, add it; otherwise, remove it
+    if (!isAlreadySelected) {
+      this.selectedSoups.push(item);
+    } else {
+      this.selectedSoups = this.selectedSoups.filter(selectedItem => selectedItem !== item);
+    }
   }
-}
+
+  onSelectSalad(item: any) {
+    const isAlreadySelected = this.selectedSalads.includes(item);
+
+    // If the item is not in the array, add it; otherwise, remove it
+    if (!isAlreadySelected) {
+      this.selectedSalads.push(item);
+    } else {
+      this.selectedSalads = this.selectedSalads.filter(selectedItem => selectedItem !== item);
+    }  }
+
+  onSelectMainCourse(item: any) {
+    const isAlreadySelected = this.selectedMainCourses.includes(item);
+
+    // If the item is not in the array, add it; otherwise, remove it
+    if (!isAlreadySelected) {
+      this.selectedMainCourses.push(item);
+    } else {
+      this.selectedMainCourses = this.selectedMainCourses.filter(selectedItem => selectedItem !== item);
+    }  }
+
+  onSelectDessert(item: any) {
+    const isAlreadySelected = this.selectedDesserts.includes(item);
+
+    // If the item is not in the array, add it; otherwise, remove it
+    if (!isAlreadySelected) {
+      this.selectedDesserts.push(item);
+    } else {
+      this.selectedDesserts = this.selectedDesserts.filter(selectedItem => selectedItem !== item);
+    }  
+  }
+
+  onSelectDrink(item: any) {
+    const isAlreadySelected = this.selectedDrinks.includes(item);
+
+    // If the item is not in the array, add it; otherwise, remove it
+    if (!isAlreadySelected) {
+      this.selectedDrinks.push(item);
+    } else {
+      this.selectedDrinks = this.selectedDrinks.filter(selectedItem => selectedItem !== item);
+    }  
+  }
+
+  fetchFoodInclusions(){
+    this.packageMenuService.getAppetizerItems(this.userId).subscribe(items =>
+      {
+        this.appetizerOptions = items.map(item => ({ ...item, selected: false }));
+      });
+    this.packageMenuService.getSoupItems(this.userId).subscribe(items =>
+      {
+        this.soupOptions = items.map(item => ({ ...item, selected: false }));
+      });
+    this.packageMenuService.getSaladItems(this.userId).subscribe(items =>
+      {
+        this.saladOptions = items.map(item => ({ ...item, selected: false }));
+      });
+    this.packageMenuService.getMainCourseItems(this.userId).subscribe(items =>
+      {
+        this.mainCourseOptions = items.map(item => ({ ...item, selected: false }));
+      });
+    this.packageMenuService.getDessertItems(this.userId).subscribe(items =>
+      {
+        this.dessertOptions = items.map(item => ({ ...item, selected: false }));
+      });
+    this.packageMenuService.getDrinkItems(this.userId).subscribe(items =>
+      {
+        this.drinkOptions = items.map(item => ({ ...item, selected: false }));
+      });
+    this.packageMenuService.getEventItems(this.userId).subscribe(eventName =>
+      {
+        this.eventOptions = eventName;
+      });
+      
+  }
 
 addPackage() {
+  // Check if the form is valid before proceeding
   if (!this.packageMenuForm.valid) {
     alert('Please fill out all required fields correctly.');
     return;
   }
 
-  this.uploadImage(); // Upload the selected image
+  // Create a copy of the form value to avoid modifying the original form data
+  const packageData = { ...this.packageMenuForm.value };
 
-  // Once the image is uploaded, continue with adding the package to the database
-  const packageData = { ...this.packageMenuForm.value }; // Create a copy of the form data
-  if (this.imageDownloadUrl) {
-    packageData.imageUrl = this.imageDownloadUrl;
-  }
-  this.packageMenuService.addPackage(this.packageMenuForm.value, this.userId).then(() => {
-    this.packageMenuForm.reset();
-    // this.uploadImage().reset();
-  });
+  // Assuming `userId` is defined in your component
+  const userId = this.userId;
+
+  // Add selected food items to the packageData object
+  packageData.selectedAppetizers = this.selectedAppetizers.map(item => item.food_name);
+  packageData.selectedSoups = this.selectedSoups.map(item => item.food_name);
+  packageData.selectedSalads = this.selectedSalads.map(item => item.food_name);
+  packageData.selectedMainCourses = this.selectedMainCourses.map(item => item.food_name);
+  packageData.selectedDesserts = this.selectedDesserts.map(item => item.food_name);
+  packageData.selectedDrinks = this.selectedDrinks.map(item => item.food_name);
+  // Add other selected items as needed
+
+  // Call the service to add the package with the packageData and userId
+  this.packageMenuService.addPackage(packageData, userId)
+    .then(() => {
+      // Reset the form and clear selected items after successful addition
+      this.packageMenuForm.reset();
+      this.clearSelectedItems();
+    })
+    .catch((error) => {
+      // Handle errors here, such as displaying an alert or logging the error
+      console.error('Error adding package:', error);
+      alert('There was an error adding the package. Please try again later.');
+    });
 }
 
-  updateTilesWithImage() {
-    if (this.imageDownloadUrl) {
-      this.packages.forEach(pkg => {
-        pkg.imageUrl = this.imageDownloadUrl;
-      });
-    }
-  }
-
+// Helper method to clear selected items
+clearSelectedItems() {
+  this.selectedAppetizers = [];
+  this.selectedSoups = [];
+  this.selectedSalads = [];
+  this.selectedMainCourses = [];
+  this.selectedDesserts = [];
+  this.selectedDrinks = [];
+  // Clear other selected items as needed
+}
   loadPackages() {
     this.packageMenuService.getPackages(this.userId).subscribe(data => {
       this.packages = data.map(e => {
@@ -189,6 +253,27 @@ addPackage() {
       this.sortPackages();
     });
   }
+
+  // fetchPackages(){
+  //   // Assuming you have a method in your service to get packages
+  //   this.packageMenuService.getPackages(this.userId).subscribe((packages: any) => {
+  //     // Map the retrieved packages to the structure expected by your template
+  //     this.packages = packages.map(pkg => {
+  //       return {
+  //         packageName: pkg.packageName,
+  //         typeEvent: pkg.typeEvent,
+  //         numofPax: pkg.numofPax,
+  //         appetizerFI: pkg.selectedAppetizers.join(', '), // Join appetizers into a string
+  //         soupFI: pkg.selectedSoups.join(', '), // Join soups into a string
+  //         saladFI: pkg.selectedSalads.join(', '), // Join salads into a string
+  //         mainCourseFI: pkg.selectedMainCourses.join(', '), // Join main courses into a string
+  //         dessertFI: pkg.selectedDesserts.join(', '), // Join desserts into a string
+  //         // Add more fields as needed
+  //       };
+  //     });
+  //     this.filteredPackages = this.packages;
+  //   });
+  // }
 
   sortPackages() {
     this.filteredPackages = [...this.packages]; // Create a copy
@@ -246,7 +331,7 @@ addPackage() {
     this.packageMenuService.updatePackage(this.userId, this.selectedPackageId, updatedPackage).then(
       () => {
         // Refresh your table or list to reflect the updated data
-        this.loadPackages();
+        // this.loadPackages();
   
         alert('Package updated successfully!');
       },
@@ -268,6 +353,8 @@ addPackage() {
   }
 
   openPackageModal(packages: any) {
+    const modal = new bootstrap.Modal(document.getElementById('exampleModal'));
+    modal.show();
     this.isUpdateMode = true;
     this.selectedPackageId = packages.id;
   
@@ -276,23 +363,15 @@ addPackage() {
       packageName: packages.packageName,
       numofPax: packages.numofPax,
       typeEvent: packages.typeEvent,
-      appetizerFI: packages.appetizerFI,
-      soupFI: packages.soupFI,
-      saladFI: packages.saladFI,
-      mainCourseFI: packages.mainCourseFI,
-      dessertFI: packages.dessertFI
+      appetizerFI: packages.selectedAppetizers,
+      soupFI: packages.selectedSoups,
+      saladFI: packages.selectedSalads,
+      mainCourseFI: packages.selectedMainCourses,
+      dessertFI: packages.selectedDesserts
+
     });
   
-    // Set the selected image URL if available
-    if (packages.imageUrl) {
-      this.selectedImageSrc = packages.imageUrl;
-    } else {
-      // If imageUrl is not available, reset the selectedImageSrc to null
-      this.selectedImageSrc = null;
-    }
-  
-    const modal = new bootstrap.Modal(document.getElementById('exampleModal'));
-    modal.show();
+    
   }
   
 
@@ -319,6 +398,7 @@ addPackage() {
       if (user) {
         this.userId = user.uid;
         this.loadPackages();
+        // this.fetchPackages();
         this.fetchFoodInclusions();
       }
     });

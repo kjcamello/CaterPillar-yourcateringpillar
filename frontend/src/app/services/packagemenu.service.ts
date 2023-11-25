@@ -35,54 +35,38 @@ export class PackagemenuService {
     return this.firestore.collection('caterers').doc(uid).collection('packages').doc(id).delete();
   }
 
-  getAppetizerItems(uid: string): Observable<string[]> {
-    return this.firestore.collection('caterers').doc(uid).collection('appetizerItems').valueChanges().pipe(
-      map((items: any[]) => items.map(item => item.food_name)),
+  getEventItems(uid: string): Observable<string[]> {
+    return this.firestore.collection('caterers').doc(uid).collection('eventItems').valueChanges().pipe(
+      map((items: any[]) => items.map(item => item.eventName)),
       catchError(error => {
         console.error('Error getting appetizer items:', error);
         return [];
       })
     );
+  }
+
+  getAppetizerItems(uid: string): Observable<any[]> {
+    return this.firestore.collection('caterers').doc(uid).collection('appetizerItems').valueChanges();
   }
   
 
-  getSoupItems(uid: string) {
-    return this.firestore.collection('caterers').doc(uid).collection('soupItems').valueChanges().pipe(
-      map((items: any[]) => items.map(item => item.food_name)),
-      catchError(error => {
-        console.error('Error getting appetizer items:', error);
-        return [];
-      })
-    );
+  getSoupItems(uid: string): Observable<any[]> {
+    return this.firestore.collection('caterers').doc(uid).collection('soupItems').valueChanges();
   }
 
-  getSaladItems(uid: string) {
-    return this.firestore.collection('caterers').doc(uid).collection('saladItems').valueChanges().pipe(
-      map((items: any[]) => items.map(item => item.food_name)),
-      catchError(error => {
-        console.error('Error getting appetizer items:', error);
-        return [];
-      })
-    );
+  getSaladItems(uid: string): Observable<any[]> {
+    return this.firestore.collection('caterers').doc(uid).collection('saladItems').valueChanges();
   }
 
-  getMainCourseItems(uid: string) {
-    return this.firestore.collection('caterers').doc(uid).collection('maincourseItems').valueChanges().pipe(
-      map((items: any[]) => items.map(item => item.food_name)),
-      catchError(error => {
-        console.error('Error getting appetizer items:', error);
-        return [];
-      })
-    );
+  getMainCourseItems(uid: string): Observable<any[]> {
+    return this.firestore.collection('caterers').doc(uid).collection('maincourseItems').valueChanges();
   }
 
-  getDessertItems(uid: string) {
-    return this.firestore.collection('caterers').doc(uid).collection('dessertItems').valueChanges().pipe(
-      map((items: any[]) => items.map(item => item.food_name)),
-      catchError(error => {
-        console.error('Error getting appetizer items:', error);
-        return [];
-      })
-    );
+  getDessertItems(uid: string): Observable<any[]> {
+    return this.firestore.collection('caterers').doc(uid).collection('dessertItems').valueChanges();
+  }
+
+  getDrinkItems(uid: string): Observable<any[]> {
+    return this.firestore.collection('caterers').doc(uid).collection('drinkItems').valueChanges();
   }
 }
