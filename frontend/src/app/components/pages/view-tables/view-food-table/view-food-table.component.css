@@ -303,10 +303,11 @@
 
 .category-tabs {
   position: fixed;
-  top: 440px;
-  left: 105px;
+  top: 446px;
+  left: 115px;
   right: 0;
-  width: 628px;
+  width: 620px;
+  height:60px;
   background-color: #ff7070;
   z-index: 1; /* Set a higher z-index to keep it above other elements */
 }
