@@ -674,15 +674,16 @@ ul a{
 
 /*food items in table*/
 .food-form-container {
-  margin-left: -325px;
-  margin-top: -80px;
-  width: 1125px;
+  width: 697px;
+  position: fixed;
+  top:410px;
+  left:85px;
 }
 
 /*VIEW FOOD ITEM TABLE*/
 /* Style the container for the app-view-food-item-table as a form with an orange background */
 .food-table-form-container {
-  max-height: 266px; /* Adjust the height as needed */
+  max-height: 325px; /* Adjust the height as needed */
   overflow-y: auto; /* Enable vertical scrolling for overflowing content */
   background-color: orange;
   padding: 20px;
@@ -697,40 +698,27 @@ ul a{
   margin-bottom: 10px; /* Add some spacing below the heading */
 }
 
-.saved-food-item-table {
-  flex: 1;
-  padding: 20px;
-  margin-top: 50px;
-  margin-left: 380px;
-}
-
 /*--------------------------------------*/
 
 
 /*event items in table*/
 .es-form-container {
-  margin-left: -325px;
-  margin-top: 75px;
-  width: 1125px;
+  width: 697px;
+  position: fixed;
+  top:90px;
+  left:85px;
 }
 
 /*VIEW FOOD ITEM TABLE*/
 /* Style the container for the app-view-food-item-table as a form with an orange background */
 .es-table-form-container {
-  max-height: 266px; /* Adjust the height as needed */
+  max-height: 270px; /* Adjust the height as needed */
   overflow-y: auto; /* Enable vertical scrolling for overflowing content */
   background-color: orange;
   padding: 20px;
   border-radius: 5px; /* Optional: Add rounded corners for a nicer look */
   border: 1px solid #ddd;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-}
-
-.saved-es-item-table {
-  flex: 1;
-  padding: 20px;
-  margin-top: 50px;
-  margin-left: 380px;
 }
 
 /*--------------------------------------*/
@@ -738,55 +726,43 @@ ul a{
 
 /*voucher in table*/
 .voucher-form-container {
-  margin-left: 390px;
-  margin-top: -80px;
-  width: 1035px;
+  width: 625px;
+  position: fixed;
+  top:410px;
+  left:800px;
 }
 
 /*VIEW FOOD ITEM TABLE*/
 /* Style the container for the app-view-food-item-table as a form with an orange background */
 .voucher-table-form-container {
-  max-height: 266px; /* Adjust the height as needed */
+  max-height: 325px; /* Adjust the height as needed */
   overflow-y: auto; /* Enable vertical scrolling for overflowing content */
   background-color: orange;
   padding: 20px;
   border-radius: 5px; /* Optional: Add rounded corners for a nicer look */
   border: 1px solid #ddd;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-}
-
-.saved-voucher-item-table {
-  flex: 1;
-  padding: 20px;
-  margin-top: 50px;
-  margin-left: 380px;
 }
 
 /*--------------------------------------*/
 /*event in table*/
 .event-form-container {
-  margin-left: 390px;
-  margin-top: -703px;
-  width: 1035px;
+  width: 625px;
+  position: fixed;
+  top:90px;
+  left:800px;
 }
 
 /*VIEW FOOD ITEM TABLE*/
 /* Style the container for the app-view-food-item-table as a form with an orange background */
 .event-table-form-container {
-  max-height: 266px; /* Adjust the height as needed */
+  max-height: 270px; /* Adjust the height as needed */
   overflow-y: auto; /* Enable vertical scrolling for overflowing content */
   background-color: orange;
   padding: 20px;
   border-radius: 5px; /* Optional: Add rounded corners for a nicer look */
   border: 1px solid #ddd;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-}
-
-.saved-event-item-table {
-  flex: 1;
-  padding: 20px;
-  margin-top: 50px;
-  margin-left: 380px;
 }
 
 /*--------------------------------------*/

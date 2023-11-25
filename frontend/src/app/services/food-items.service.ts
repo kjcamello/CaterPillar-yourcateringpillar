@@ -6,13 +6,39 @@ import { AuthService } from './auth.service';
 
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 
-import { Observable, of } from 'rxjs';
 import { take, switchMap } from 'rxjs/operators';
+import { BehaviorSubject, Observable, of, tap} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FoodItemsService {
+  private selectedItemsSubject: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+  selectedItems$: Observable<any[]> = this.selectedItemsSubject.asObservable();
+
+
+  private selectedExtraServiceItemsSubject: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+  selectedExtraServiceItems$: Observable<any[]> = this.selectedExtraServiceItemsSubject.asObservable();
+
+  setSelectedItems(items: any[]): void {
+    this.selectedItemsSubject.next(items);
+  }
+
+  getExtraServiceItems(): Observable<any[]> {
+    // Replace 'your_collection_name' with the actual name of your Firestore collection
+    return this.firestore.collection('your_collection_name').valueChanges().pipe(
+      take(1),
+      tap((extraServiceItems: any[]) => {
+        // Notify subscribers about the change in selectedExtraServiceItems
+        this.selectedExtraServiceItemsSubject.next(extraServiceItems);
+      })
+    );
+  }
+
+  setSelectedExtraServiceItems(items: any[]): void {
+    this.selectedExtraServiceItemsSubject.next(items);
+  }
+
   constructor(
     private firestore: AngularFirestore,
     private authService: AuthService,
@@ -212,7 +238,5 @@ private toExtraServiceObject(extraserviceItem: any): any {
       // Add other fields as needed
     };
   }
-
-
 
 }

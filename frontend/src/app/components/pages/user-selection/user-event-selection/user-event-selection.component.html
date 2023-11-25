@@ -14,11 +14,11 @@
                         <strong>Description:</strong>
                         <ng-container *ngIf="!eventItem.showFullDescription && eventItem.eventDescription.length > 25">
                             {{ eventItem.eventDescription.slice(0, 25) }}...
-                            <span class="see-more" (click)="eventtoggleDescription(eventItem)">See more</span>
+                            <span class="see-more" (click)="$event.stopPropagation()" (click)="eventtoggleDescription(eventItem)">See more</span>
                         </ng-container>
                         <ng-container *ngIf="eventItem.showFullDescription || eventItem.eventDescription.length <= 25">
                             {{ eventItem.eventDescription }}
-                            <span class="see-less" *ngIf="eventItem.showFullDescription" (click)="eventtoggleDescription(eventItem)">See less</span>
+                            <span class="see-less" *ngIf="eventItem.showFullDescription" (click)="$event.stopPropagation()" (click)="eventtoggleDescription(eventItem)">See less</span>
                         </ng-container>
                     </div>
                 </li>

@@ -355,4 +355,10 @@ export class UserAuthService {
     return passwordPattern.test(password);
   }
 
+
+
+  getLoggedInName(): string | null {
+    const user = JSON.parse(localStorage.getItem('customers') || '{}');
+    return user ? user.displayName : null;
+  }
 }

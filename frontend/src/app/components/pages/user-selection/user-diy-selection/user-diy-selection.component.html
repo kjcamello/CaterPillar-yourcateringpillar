@@ -14,65 +14,65 @@
 </div>
 
 <div>
+
+<!-- user-diy-selection.component.html -->
+
 <form class="items-form">
   <div>
-    <!-- user-diy-selection.component.html -->
-
-<!-- ... (previous code) ... -->
-
-<div *ngIf="(selectedItems | async)?.length; else noFoodItems">
-  <ul class="items-list">
-    <li class="list-item" *ngFor="let item of selectedItems | async" (click)="toggleFoodSelection(item)" [ngClass]="{ 'selected': item.selected }">
-      <div>
-        <img [src]="item.food_image" alt="Food Image" class="food-image">
+    <div *ngIf="(selectedItems | async)?.length; else noFoodItems">
+<!-- Inside the form, replace your existing list item markup with this -->
+<ul class="items-list">
+  <li class="list-item" *ngFor="let item of selectedItems | async" (click)="toggleFoodSelection(item)" [ngClass]="{ 'selected': item.selected }">
+    <div>
+      <img [src]="item.food_image" alt="Food Image" class="food-image">
+    </div>
+    <div class="price-tag">
+      ₱{{ item.pax_price }}/pax
+    </div>
+    <div class="pax">
+      caters {{ item.minimum_pax }} to {{ item.maximum_pax }} pax
+    </div>
+    <div class="food_name">
+      <h2>{{ item.food_name }}</h2>
+    </div>
+    <div>
+      <strong>Description:</strong>
+      <ng-container *ngIf="!item.showFullDescription && item.food_description.length > 25">
+        {{ item.food_description.slice(0, 25) }}...
+        <span class="see-more" (click)="$event.stopPropagation()" (click)="foodtoggleDescription(item)">See more</span>
+      </ng-container>
+      <ng-container *ngIf="item.showFullDescription || item.food_description.length <= 25">
+        {{ item.food_description }}
+        <span class="see-less" *ngIf="item.showFullDescription" (click)="$event.stopPropagation()" (click)="foodtoggleDescription(item)">See less</span>
+      </ng-container>
+    </div>
+    <!-- Display the selected_pax input when the item is selected -->
+    <div *ngIf="item.selected">
+      <label for="selectedPax">Preferred Pax:</label>
+      <input
+        type="number"
+        id="selectedPax"
+        [(ngModel)]="item.selectedPax"
+        (input)="checkAndAdjustPax(item)"
+        (click)="$event.stopPropagation()" 
+        name="selectedPax"
+        placeholder="Enter preferred pax"
+      />
+    </div>
+  </li>
+</ul>
+    </div>
+    <ng-template #noFoodItems>
+      <div class="no_food_items">
+        <h3>No food items added yet in this category.</h3>
       </div>
-      <div class="price-tag">
-        ₱{{ item.pax_price }}/pax
-      </div>
-      <div class="pax">
-        caters {{ item.minimum_pax }} to {{ item.maximum_pax }} pax
-      </div>
-      <div class="food_name">
-        <h2>{{ item.food_name }}</h2>
-      </div>
-      <div>
-        <strong>Description:</strong>
-        <ng-container *ngIf="!item.showFullDescription && item.food_description.length > 25">
-          {{ item.food_description.slice(0, 25) }}...
-          <span class="see-more" (click)="foodtoggleDescription(item)">See more</span>
-        </ng-container>
-        <ng-container *ngIf="item.showFullDescription || item.food_description.length <= 25">
-          {{ item.food_description }}
-          <span class="see-more" *ngIf="item.showFullDescription" (click)="foodtoggleDescription(item)">See less</span>
-        </ng-container>
-      </div>
-        <!-- Display the selected_pax input when the item is selected -->
-<!-- Display the selected_pax input when the item is selected -->
-<div *ngIf="item.selected">
-  <label for="selectedPax">Preferred Pax:</label>
-  <input
-    type="number"
-    id="selectedPax"
-    [(ngModel)]="item.selectedPax"
-    (input)="checkAndAdjustPax(item)"
-    (click)="$event.stopPropagation()" 
-    name="selectedPax"
-    placeholder="Enter preferred pax"
-  />
-</div>
-    </li>
-  </ul>
-</div>
-
-<!-- ... (remaining code) ... -->
-
-<ng-template #noFoodItems>
-  <div class="no_food_items">
-  <h3>No food items added yet in this category.</h3>
-</div>
-</ng-template>
-</div>
+    </ng-template>
+  </div>
 </form>
+
+
+
+
 
 <app-user-event-selection></app-user-event-selection>
 
@@ -108,28 +108,38 @@
 
 <button class="review-order-button" (click)="toggleReceipt()">Review Order</button>
 
+<!--
+{{ selectedFoodItems | json }}
+
+<tr *ngFor="let item of selectedFoodItems">
+  <td>{{ item.food_name }}</td>
+  <td>{{ item.pax_price | currency: 'PHP':true }}</td>
+  <td>{{ item.selectedPax }}</td>
+  <td>{{ calculateSubtotal(item) | currency: 'PHP':true }}</td>
+</tr>
+
+
+{{ selectedExtraServices | json }}-->
+
+<!-- Loop through selectedExtraServices
+<tr *ngFor="let service of selectedExtraServices">
+  <td>{{ service.esName }}</td>
+  <td>{{ service.esPrice | currency: 'PHP':true }}/hour</td>
+  <td>{{ service.selectedHours }}</td>
+  <td>{{ calculateSubtotal(service) | currency: 'PHP':true }}</td>
+</tr>-->
+
+
 <!-- E-Receipt Content -->
 <div *ngIf="showReceipt" class="ereceipt-background"></div>
 <div *ngIf="showReceipt" class="ereceipt-content">
-  <h3>Your Order Details</h3>
-    <!-- Display selected food items -->
-    <div class="receipt-items">
-      <div class="receipt-item" *ngFor="let item of selectedItems | async">
-        <div class="item-details">
-          <div class="food-name">{{ item.food_name }}</div>
-          <div>
-            <strong>Preferred Pax:</strong> {{ item.selectedPax }}
-          </div>
-        </div>
-        <div class="right-align">{{ item.pax_price * item.selectedPax | currency: 'PHP':true }}</div>
-      </div>
-    </div>
+  <h3>{{ displayName }}'s Order Details</h3>
 
   <div class="receipt-items">
     <!-- Display selected event details -->
     <div class="receipt-item">
       <div class="item-details">
-        <div class="food-name">Event: {{ selectedEvent?.eventName }}</div>
+        <strong>Event:</strong> {{ selectedEvent?.eventName }}
         <div>
           <strong>Selected Date and Time:</strong>
           {{ formatDate(dateAndTimeForm.value.selectedDate) }} at {{ formatTime(dateAndTimeForm.value.selectedTime) }}
@@ -138,13 +148,86 @@
       <!-- Adjust the price as needed -->
       <div class="right-align">{{ selectedEvent?.pax_price | currency: 'PHP':true }}</div>
     </div>
-    <!-- Add more receipt items for other selections if needed -->
-  </div>
-  <div class="total-section">
-    <div class="grand-total-label">Grand Total:</div>
-    <div class="grand-total-value">{{ calculateGrandTotal() | currency: 'PHP':true }}</div>
 
-
-    
+<!-- Display selected food item details -->
+<div class="receipt-item" *ngIf="selectedFoodItems && selectedFoodItems.length > 0">
+  <div class="item-details">
+    <strong>Selected Food Item(s):</strong>
+    <table class="receipt-table">
+      <thead>
+        <tr>
+          <th>Food Name</th>
+          <th>Category</th>
+          <th>Pax</th>
+          <th>Price per Pax</th>
+          <th>Subtotal</th>
+          <!-- Add other table headers as needed -->
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Loop through selectedFoodItems instead of selectedItems -->
+        <tr *ngFor="let item of selectedFoodItems">
+          <!-- Display the selected item details here -->
+          <td>{{ item.food_name }}</td>
+          <td>{{ item.category }}</td>
+          <td>{{ item.selectedPax }}</td>
+          <td>{{ item.pax_price | currency: 'PHP':true }}/pax</td>
+          <td>{{ calculateSubtotal(item) | currency: 'PHP':true }}</td>
+          <!-- Add other table cells as needed -->
+        </tr>
+      </tbody>
+    </table>
+    <!-- Adjust the price as needed for food items -->
+    <div class="food-right-align">{{ calculateFoodItemTotal() | currency: 'PHP':true }}</div>
   </div>
 </div>
+
+<!-- ... (other template content) -->
+
+<!-- Display selected extra service details -->
+<div class="receipt-item" *ngIf="selectedExtraServices && selectedExtraServices.length > 0">
+  <div class="item-details">
+    <strong>Selected Extra Service(s):</strong>
+    <table class="receipt-table">
+      <thead>
+        <tr>
+          <th>Extra Service Name</th>
+          <th>Price per Hour</th>
+          <th>Selected Hours</th>
+          <th>Subtotal</th>
+          <!-- Add other table headers as needed -->
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Loop through selectedExtraServices -->
+        <tr *ngFor="let service of selectedExtraServices">
+          <!-- Display the selected extra service details here -->
+          <td>{{ service.esName }}</td>
+          <td>{{ service.esPrice | currency: 'PHP':true }}/hr</td>
+          <td>{{ service.selectedHours }}</td>
+          <td>{{ calculateExtraServiceSubtotal(service) | currency: 'PHP':true }}</td>
+          <!-- Add other table cells as needed -->
+        </tr>
+      </tbody>
+    </table>
+    <!-- Adjust the price as needed (replace with actual extra service price) -->
+    <div class="es-right-align">{{ calculateExtraServiceTotal() | currency: 'PHP':true }}</div>
+  </div>
+</div>
+
+<!-- ... (other template content) -->
+
+
+
+<!-- Display Grand Total -->
+<div class="grand-total" *ngIf="showReceipt && (selectedFoodItems.length > 0 || selectedExtraServices.length > 0)">
+  <strong>Grand Total:</strong>
+  <div class="right-align">{{ calculateGrandTotal() | currency: 'PHP':true }}</div>
+</div>
+
+
+
+<!--
+{{ selectedFoodItems | json }}
+{{ selectedExtraServices | json }}
+{{ showReceipt }} Add these logs to check the data -->
