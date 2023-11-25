@@ -51,6 +51,7 @@ import { AddServiceTypeComponent } from './components/pages/add-service-type/add
 import { SuperadminCustomerComponent } from './components/pages/superadmin/superadmin-customer.component';
 import { ReportComponent } from './components/pages/superadmin/report.component';
 import { SendReportComponent } from './components/pages/send-reports/send-reports.component';
+import { TempCatererProfComponent } from './components/pages/temp-caterer-prof/temp-caterer-prof.component';
 
 const routes: Routes = [
   { path:'', component:HomeComponent },
@@ -97,7 +98,7 @@ const routes: Routes = [
   { path: 'user-package-selection', component: UserPackageSelectionComponent },
   { path: 'user-diy-selection/:catererUid', component: UserDiySelectionComponent },
   
-  { path: 'temp-caterer-prof/:id', component: UserDiySelectionComponent },
+  { path: 'temp-caterer-prof/:id', component: TempCatererProfComponent },
 
 
 
