@@ -47,7 +47,7 @@ import { ChangeCatererPasswordComponent } from './components/pages/change-catere
 import { DashboardUserComponent } from './components/pages/dashboard-user/dashboard-user.component';
 import { HeaderUserComponent } from './components/partials/header-user/header-user.component';
 
-import { SuperadminComponent } from './components/pages/superadmin/superadmin.component';
+import { FilterPipe, OrderByPipe, SuperadminComponent } from './components/pages/superadmin/superadmin.component';
 import { LoginSuperadminComponent } from './components/pages/superadmin/login-superadmin.component';
 import { AdminForgotPasswordComponent } from './components/pages/superadmin/forgotpass.component';
 
@@ -81,6 +81,12 @@ import { UserInfoComponent } from './components/pages/user-info/user-info.compon
 import { UserVoucherSelectionComponent } from './components/pages/user-selection/user-voucher-selection/user-voucher-selection.component';
 import { UserEventSelectionComponent } from './components/pages/user-selection/user-event-selection/user-event-selection.component';
 import { UserExtraServiceSelectionComponent } from './components/pages/user-selection/user-extra-service-selection/user-extra-service-selection.component';
+<<<<<<< HEAD
+import { CspProfileComponent } from './components/pages/csp-profile/csp-profile.component';
+=======
+import { ReportComponent } from './components/pages/superadmin/report.component';
+import { SendReportComponent } from './components/pages/send-reports/send-reports.component';
+>>>>>>> 1b738aafa8cc267a1676ed20d0d3bb1a07f05ff8
 
 //import { MatTabsModule } from '@angular/material/tabs';
 
@@ -164,6 +170,14 @@ const database = getDatabase(app);
     UserVoucherSelectionComponent,
     UserEventSelectionComponent,
     UserExtraServiceSelectionComponent,
+<<<<<<< HEAD
+    CspProfileComponent,
+=======
+    ReportComponent,
+    SendReportComponent,
+    FilterPipe,
+    OrderByPipe
+>>>>>>> 1b738aafa8cc267a1676ed20d0d3bb1a07f05ff8
 
   ],
   imports: [

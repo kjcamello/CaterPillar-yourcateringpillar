@@ -1,131 +1,111 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormGroup } from '@angular/forms'; // Import FormGroup
+import { FormGroup } from '@angular/forms'; // Import FormGroup if you're using reactive forms
+// import { AngularFirestore } from '@angular/fire/firestore';
+// import { AngularFireAuth } from '@angular/fire/auth';
+
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-info.component.html',
   styleUrls: ['./user-info.component.css']
 })
-export class UserInfoComponent {
+export class UserInfoComponent  {
+  customer: any;
+
   months: string[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-  days: number[] = Array.from({ length: 31 }, (_, i) => i + 1); // Default to 31 days
-  years: number[] = Array.from({ length: 122 }, (_, i) => new Date().getFullYear() - i); // For example, from the current year to 1900
+  days: number[] = Array.from({ length: 31 }, (_, i) => i + 1);
+  years: number[] = Array.from({ length: 122 }, (_, i) => new Date().getFullYear() - i);
 
   selectedCoverImage: File = null;
   selectedCoverImageSrc: string = null;
   selectedProfileImage: File = null;
   selectedProfileImageSrc: string = null;
+  selectedImage: File = null;
+  selectedImageSrc: string = null;
 
-  selectedImage: File=null;
-  selectedImageSrc:  string = null;
-
-  userCredentials = {
-    username: '',
-    password: ''
-  };
+  userCredentials = { username: '', password: '' };
   editMode: boolean = false;
-  isFieldDisabled: boolean = true; // Assuming this is used for form field enabling/disabling
+  isFieldDisabled: boolean = true;
   myForm: FormGroup; // Declare this if using reactive forms
+
+  constructor(
+    private router: Router,
+    // private firestore: AngularFirestore, 
+    // private afAuth: AngularFireAuth
+  ) { }
+
+  // ngOnInit(): void {
+  //   this.fetchCustomerData();
+  // }
+
+  // fetchCustomerData() {
+  //   this.afAuth.authState.subscribe(user => {
+  //     if (user) {
+  //       const customerRef = this.firestore.collection('customers').doc(user.uid);
+  //       customerRef.valueChanges().subscribe(data => {
+  //         this.customer = data;
+  //       });
+  //     }
+  //   });
+  // }
 
   enableEditMode() {
     this.editMode = true;
     this.isFieldDisabled = false;
-
     if (this.myForm) {
-      this.myForm.enable(); // Enable all controls in the form group
+      this.myForm.enable();
     }
-
-    // Additional UI changes can be handled via Angular templates
   }
+
   saveChanges() {
     if (this.myForm) {
-      const formData = this.myForm.value; // Get form data from FormGroup
+      const formData = this.myForm.value;
       console.log('Saving changes...', formData);
-      // Send formData to the server...
-      this.myForm.reset(); // Reset the form after saving
+      this.myForm.reset();
     }
-
     this.editMode = false;
     this.isFieldDisabled = true;
-
-    // Additional UI updates can be handled via Angular templates
   }
-  someMethod() {
-  if (this.editMode) {
-    // Perform actions relevant to edit mode
-    // Example: Enable all input fields for editing
-    const inputFields = document.querySelectorAll('.editable-input');
-    inputFields.forEach(field => field.removeAttribute('disabled'));
 
-    // You can also change the UI to reflect that the user is in edit mode
-    // For example, changing the color of a header or showing additional instructions
-    const header = document.getElementById('header');
-    if (header) {
-      header.style.backgroundColor = 'lightblue'; // Example color change
-    }
-  } else {
-    // Perform actions for non-edit mode
-    // Example: Disable all input fields to prevent editing
-    const inputFields = document.querySelectorAll('.editable-input');
-    inputFields.forEach(field => field.setAttribute('disabled', 'true'));
-
-    // Revert any UI changes made during edit mode
-    const header = document.getElementById('header');
-    if (header) {
-      header.style.backgroundColor = ''; // Revert color change
-    }
-
-    // Additional logic for when the user exits edit mode
-    // For example, saving data, validating input, or updating the view
-  }
-}
   onSubmit() {
-    // Process login here
     console.log('User Credentials:', this.userCredentials);
   }
 
   onCoverImageSelected(event: any) {
-    const file = event.target.files[0];
-    if (file) {
-      this.selectedCoverImage = file;
-      const reader = new FileReader();
-      reader.onload = (e: any) => {
-        this.selectedCoverImageSrc = e.target.result;
-      };
-      reader.readAsDataURL(file);
-    }
+    this.handleImageSelection(event, 'cover');
   }
+
   onProfileImageSelected(event: any) {
+    this.handleImageSelection(event, 'profile');
+  }
+
+  onImageSelected(event: any) {
+    this.handleImageSelection(event, 'general');
+  }
+
+  handleImageSelection(event: any, type: string) {
     const file = event.target.files[0];
     if (file) {
-      this.selectedProfileImage = file;
       const reader = new FileReader();
       reader.onload = (e: any) => {
-        this.selectedProfileImageSrc = e.target.result;
+        switch (type) {
+          case 'cover':
+            this.selectedCoverImage = file;
+            this.selectedCoverImageSrc = e.target.result;
+            break;
+          case 'profile':
+            this.selectedProfileImage = file;
+            this.selectedProfileImageSrc = e.target.result;
+            break;
+          case 'general':
+            this.selectedImage = file;
+            this.selectedImageSrc = e.target.result;
+            break;
+        }
       };
       reader.readAsDataURL(file);
     }
   }
-
-  constructor(private router: Router) { }
-
-  goBack() {
-    this.router.navigate(['/dashboard-user']);
-  }
-  
-  onImageSelected(event: any) {
-    const file = event.target.files[0];
-    if (file) {
-      this.selectedImage = file;
-    }
-
-    const reader = new FileReader();
-    reader.onload = (e: any) => {
-      this.selectedImageSrc = e.target.result;
-    };
-    reader.readAsDataURL(file);
-  }
-
   populateDateDropdown() {
     const monthDropdown = document.getElementById('month') as HTMLSelectElement;
     const selectedMonth = monthDropdown.value;
@@ -139,10 +119,4 @@ export class UserInfoComponent {
       this.days = Array.from({ length: 31 }, (_, i) => i + 1); // Default to 31 days
     }
   }
-  
-  // logout() {
-  //   this.AuthSer.SignOut();
-  //   // Redirect or handle post-logout logic here
-  // }
 }
-

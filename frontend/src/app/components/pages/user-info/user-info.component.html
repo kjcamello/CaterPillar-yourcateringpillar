@@ -4,7 +4,10 @@
    
          <nav class="side_navbar">
            <ul class="ul2">
-         
+            <li><a routerLink="/dashboard-user">
+              <img src="assets/Caterer Menu.png" alt="" class="icon-size">
+              <span class="nav-item">DashBoard</span>
+            </a></li>
              <li><a routerLink="/user-info">
                <img src="assets/user-info.png" alt="" class="icon-size">
                <span class="nav-item">Profile</span>
@@ -45,6 +48,19 @@
               <input type="file" (change)="onImageSelected($event)" accept="image/*" >
               <img src="assets/change_user_coverphoto.png" alt="Go Back" class="uploadCover"> 
           </label>
+
+          <div class="profile-credentials">
+            <div class="username-container">
+<<<<<<< HEAD
+              <label class="Uname" for="username">Username</label>
+            </div>
+            <div class="biostatement">
+              <label class="BioState" for="biostatement">Input bio statement</label>
+=======
+              <label class="username"></label>
+>>>>>>> 1b738aafa8cc267a1676ed20d0d3bb1a07f05ff8
+            </div>
+          </div>
   </div>
 
   <!-- User Profile Picture with Change Button -->
@@ -59,91 +75,118 @@
         <img src="assets/change_user_coverphoto.png" alt="Change Profile Picture" class="change-profile-pic-icon">
     </label>
 </div>
+  <!-- Profile Actions -->
+ 
   <!-- User Profile Details -->
   <div class="profile-details">
-      <!-- Name -->
-      <div class="detail-item">
-          <label for="name">Name:</label>
-          <input type="text" id="name" value="John Doe">
+    
+      <div class="primary-label">
+        <label class="prilabel"><h1>PRIMARY DETAILS</h1></label>
       </div>
+      <!-- Name -->
+      <div class="primary-details">
+        <div class="name-item">
+          <label for="name">User Name:</label>
+          <input type="text" id="name" value="John Doe">
+        </div>
 
       <!-- Email -->
-      <div class="detail-item">
+        <div class="email-item">
           <label for="email">Email:</label>
           <input type="email" id="email" value="user@example.com">
-      </div>
+        </div>
 
       <!-- Phone -->
-      <div class="detail-item">
+        <div class="phonenumber-item">
           <label for="phone">Phone:</label>
           <input type="tel" id="phone" value="+1234567890">
-      </div>
+        </div>
 
       <!-- Address -->
-      <div class="detail-item">
+        <div class="address-item">
           <label for="address">Address:</label>
           <input type="text" id="address">
-      </div>
-
+        </div>
+    </div>
+    <div class="other-label">
+      <label class="othlabel"><h1>OTHER DETAILS</h1></label>
+  </div>
+<div class="Oth-detail-container">
+       
       <!-- Gender -->
-      <div class="detail-item">
+      <div class="Gender-details">
           <label>Gender:</label>
-          <input type="radio" id="male" name="gender" value="male">
+          <input class="malegenderradio" type="radio" id="male" name="gender" value="male">
           <label for="male">Male</label>
           
-          <input type="radio" id="female" name="gender" value="female">
+          <input class="femalegenderradio" type="radio" id="female" name="gender" value="female">
           <label for="female">Female</label>
           
-          <input type="radio" id="others" name="gender" value="others">
+          <input class="othergenderradio" type="radio" id="others" name="gender" value="others">
           <label for="others">Others</label>
           
-          <input type="text" id="otherGender" placeholder="Specify your gender">
+          <input class="othergenderinput" type="text" id="otherGender" placeholder="Specify your gender">
       </div>
 
       <!-- Date of Birth -->
-      <div class="detail-item">
+      <div class="dateBirth-detail">
           <label>Date of Birth:</label>
+          <div class="monthdetail"></div>
+          <label for="month">Month</label>
           <select id="month" (change)="populateDateDropdown()">
               <option *ngFor="let month of months" [value]="month">{{ month }}</option>
           </select>
-          <label for="month">Month</label>
-
+          
+          
+          <div class="datedetail"></div>
+          <label for="date">Date</label>
           <select id="date">
               <option *ngFor="let day of days" [value]="day">{{ day }}</option>
           </select>
-          <label for="date">Date</label>
-
+         
+          <div class="yeardetail">
+          <label for="year">Year</label>
           <select id="year">
               <option *ngFor="let year of years" [value]="year">{{ year }}</option>
           </select>
-          <label for="year">Year</label>
+          </div>
+          </div>
+          </div>
       </div>
-
+     
+</div> 
+<div class="profile-statements">
       <!-- Bio Message -->
-      <div class="detail-item">
-          <label for="bio">Bio:</label>
-          <textarea id="bio"></textarea>
-          <img src="assets/button_editvalue.png" alt="Edit Bio" class="edit-icon">
-      </div>
+      <div class="bio-label">
+        <label for="bio">Bio:</label>
+        <textarea class="bio-statement" id="bio"></textarea>
+        <label class="editbio-btn">
+        <img src="assets/bioeditbtnwhite.png" alt="Edit Bio" class="bioedit-icon">
+        </label>
+    </div>
 
       <!-- Food Likes -->
-      <div class="detail-item">
+      <div class="foodlikes">
           <label for="foodlikes">Food Likes:</label>
-          <textarea id="foodlikes"></textarea>
-          <img src="assets/button_editvalue.png" alt="Edit Food Likes" class="edit-icon">
+          <textarea class="foodliketxtbox" id="foodlikes"></textarea>
+          <label class="editfood-btn">
+            <img src="assets/bioeditbtnwhite.png" alt="Edit Bio" class="foodedit-icon">
+          </label>
       </div>
   </div>
-
-  <!-- Profile Actions -->
+</div>
+<div class="profile-actions">
   <div class="profile-actions-edit">
     <button class="edit-btn" (click)="enableEditMode()">
         <img src="assets/editsavebuttons/edit static.png" alt="Edit">
     </button>
-</div>
-<div class="profile-actions-save">
+  
+  <div class="profile-actions-save">
     <button class="save-btn" (click)="saveChanges()">
         <img src="assets/editsavebuttons/save static.png" alt="Save">
     </button>
+  </div>
+  </div>
 </div>
 
   <!-- <form (ngSubmit)="onSubmit()" #credentialsForm="ngForm">

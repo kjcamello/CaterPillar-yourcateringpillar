@@ -1,5 +1,6 @@
 
 /* Container for content below the DIY package form */
+
 .content-container {
     margin-top: 300px; /* Adjust the margin to match the height of your DIY package form */
   }
@@ -279,7 +280,7 @@
     background-color: #ffef22;
     border-radius: 35px;
     width: 1300px;
-    height: 776px;
+    height: 1630px;
     margin: 50px auto;
     padding: 20px;
     position: absolute;
@@ -358,11 +359,23 @@
   margin-top: 120px;
   background-color: blanchedalmond;
   width: 1145px;
+  height: 1155px;
   position: absolute;
   left: 98px;
   top: 330px;
+  padding: 20px; /* Add padding to ensure inner content doesn't touch the edges */
+    border-radius: 15px; /* Rounds the corners of the rectangle */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow for depth */
 }
-
+.primary-label{
+  font-style: normal;
+  font-family: system-ui;
+}
+.prilabel{
+  font-style: normal;
+  position: absolute;
+  left: 450px;
+}
 
 .detail-item {
   margin-bottom: 20px;
@@ -373,32 +386,143 @@
   margin-left: 10px;
 }
 
-.profile-actions-edit {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
-  position: absolute;
-  right: 25px;
-}
-.profile-actions-save {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
-  position: absolute;
-  right: 25px;
-  top: 340px;
-}
-.edit-btn, .save-btn {
-  /* Common styling for buttons */
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
-}
+
+
 
 .edit-button img, .save-button img {
   /* Styling for the icons */
   width: 30px; /* Adjust size as needed */
   height: auto;
+}
+.Oth-detail-container{
+  margin-top: 120px;
+  background-color: rgb(243, 147, 3);
+  width: 1100px;
+  position: absolute;
+  left: 25px;
+  top: 375px;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.other-label{
+  font-style: normal;
+  font-family: system-ui;
+}
+.othlabel{
+  font-style: normal;
+  position: absolute;
+  left: 450px; 
+}
+.bio-label{
+  margin-top: 10px;
+}
+
+.profile-statements{
+  margin-top: 120px;
+  background-color: khaki;
+  width: 1100px;
+  position: absolute;
+  left: 442px;
+  height: 358px;
+  top: 1123px;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.bio-label{
+  margin-top: 10px;
+  margin-left: 200px;
+  font-size: x-large;
+}
+.bio-statement{
+  margin-top: 10px;
+  position: absolute;
+  left: 218px;
+  top: 49px;
+  width: 717px;
+  height: 104px;
+}
+.editbio-btn{
+  margin-top: 50px;
+  position: absolute;
+  width: 50px;
+  left: 876px;
+  top: 57px;
+}
+.foodlikes{
+  margin-top: 113px;
+  font-size: x-large;
+  margin-left: 198px;
+}
+.editfood-btn{
+  margin-top: 171px;
+  position: absolute;
+  width: 50px;
+  left: 876px;
+  top: 100px;
+}
+.foodliketxtbox{
+  margin-top: 10px;
+  position: absolute;
+  left: 218px;
+  top: 213px;
+  width: 717px;
+  height: 104px;
+}
+.profile-credentials{
+  position: absolute;
+  left: 500px;
+}
+.username-container{
+  font-size: 45px;
+  margin-bottom: -16px;
+}
+.biostatement{
+  font-size: 27px;
+  font-family: cursive;
+}
+.profile-actions{
+  margin-top: 120px;
+  background-color: beige;
+  width: 1100px;
+  position: absolute;
+  left: 442px;
+  height: 95px;
+  top: 1494px;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.profile-actions-edit {
+  display: flex;
+  
+}
+.edit-btn{
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  margin-left: 254px;
+  
+}
+.edit-btn img {
+  width: 100px; /* Set the desired width for the edit icon */
+}
+
+.save-btn img {
+  width: 100px; /* Set the desired width for the save icon */
+}
+.profile-actions-save {
+  display: flex;
+}
+
+.save-btn {
+  /* Common styling for buttons */
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  margin-left: 389px; 
 }
 
 
@@ -418,11 +542,80 @@ display: inline-block;
   width: 50px;
   cursor: pointer;
 }
+.other-details{
+  margin-top: 20px;
+}
+.Gender-details{
+  margin-left: 25px;
+  font-size: x-large;
+  margin-top: 10px;
+  margin-left: 100px;
+}
+.malegenderradio{
+  margin-left: 100px; 
+}
+.femalegenderradio{
+  margin-left: 100px;
+}
+.othergenderradio{
+  margin-left: 100px;
+}
+/* .othergenderinput{
+  margin-left: 100px;
+} */
 
 
 input[type="file"] {
   display: none;
 }
+.primary-details {
+  border: 2px solid #AC0000;
+  border-radius: 15px;
+  padding: 20px;
+  margin: 20px 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #FFC100;
+  max-width: 75%;
+  box-sizing: border-box;
+  /* position: absolute; */
+  margin-left: 150px;
+  margin-top: 50px;
+}
+
+/* Retain your existing styles for individual items */
+.name-item, .email-item, .phonenumber-item, .address-item {
+  font-size: x-large;
+  margin-left: 150px;
+  margin-top: 20px; /* Adjusted for uniformity */
+}
+
+.email-item, .address-item {
+  margin-bottom: 20px; /* Adds space below each item */
+}
+
+/* Additional adjustments for input fields if needed */
+.primary-details input {
+  width: calc(100% - 300px); /* Adjust width considering the margin */
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.dateBirth-detail{
+  margin-left: 100px;
+  margin-top: 10px;
+  font-size: x-large;
+  display: flex;
+}
+.monthdetail{
+  margin-left: 50px;
+}
+.datedetail{
+  margin-left: 50px;
+}
+.yeardetail{
+  margin-left: 50px;
+}
+
 /* }
 .form-group {
   margin-bottom: 15px;
