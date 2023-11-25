@@ -1,0 +1,36 @@
+<div class="header">
+    <a routerLink="/login-superadmin" class="logo">
+      <img src="assets/caterpillar logo with shadow and lied.png" alt="Logo">
+    </a>
+    <div class="header-text">Report an Abuse</div>
+  </div>
+
+
+  <div class="send-report-container">
+    <h2>Select the User to Report</h2>
+    <select id="userTypeDropdown" [(ngModel)]="selectedUserType" title="User Category">
+      <option value="customer">Customer</option>
+      <option value="caterer">Caterer</option>
+    </select>
+  
+    <div *ngIf="selectedUserType === 'customer'">
+      <label for="customerName">Customer Name:</label>
+      <input type="text" id="customerName" [(ngModel)]="customerName">
+    </div>
+  
+    <div *ngIf="selectedUserType === 'caterer'">
+      <label for="catererName">Caterer Name:</label>
+      <input type="text" id="catererName" [(ngModel)]="catererName">
+    </div>
+  
+    <label for="reportDetails">Report Details:</label>
+    <textarea id="reportDetails" [(ngModel)]="reportDetails" (input)="limitWords($event)"></textarea>
+    <div class="wordCount">{{ wordCount }} / 100 words</div>
+    
+    
+    <label for="proof">Upload Proof:</label>
+    <input id="proof" type="file" (change)="onFileSelected($event)" multiple title="Proof">
+  
+    <button (click)="submitReport()">Submit Report</button>
+  </div>
+  

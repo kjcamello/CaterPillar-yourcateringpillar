@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable, from } from 'rxjs';
+import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
+import { Observable, from, map } from 'rxjs';
 import { UserAuthService } from 'src/app/services/userauth.service';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ChangeDetectorRef } from '@angular/core';
@@ -16,16 +16,72 @@ export interface Caterer {
   selectedRemark: string;// Add this property
 }
 
+@Pipe({
+  name: 'filter'
+})
+export class FilterPipe implements PipeTransform {
+  transform(items: any[], searchText: string): any[] {
+    if (!items || !searchText) {
+      return items;
+    }
+
+    searchText = searchText.toLowerCase();
+//unfixed on this part
+    return items.filter(item => {
+      return (
+        item.caterer.catererBasicInfo.catererDisplayName.toLowerCase().includes(searchText) ||
+        item.caterer.catererBasicInfo.catererEmail.toLowerCase().includes(searchText)
+      )
+    });
+  }
+}
+
+//Create the orderBy pipe
+@Pipe({
+  name: 'orderBy'
+})
+export class OrderByPipe implements PipeTransform {
+  transform(items: any[], config: any): any[] {
+    if (!config || !config.column) {
+      return items;
+    }
+
+    const column = config.column;
+    const order = config.order || 'asc';
+
+    return items.sort((A,B) => {
+      const aValue = A[column];
+      const bValue = B[column];
+
+      if (aValue === bValue) {
+        return 0;
+      }
+
+      if (order === 'asc') {
+        return aValue > bValue ? 1 : -1;
+      } else {
+        return aValue < bValue ? 1 : -1;
+      }
+    });
+  }
+}
+
 @Component({
   selector: 'app-superadmin-customer',
   templateUrl: './superadmin-customer.component.html',
-  styleUrls: ['./superadmin-customer.component.css']
+  styleUrls: ['./superadmin-customer.component.css'],
+  providers: [ FilterPipe, OrderByPipe] 
 })
 export class SuperadminCustomerComponent implements OnInit {
 
+  loggedInCustomers$: any[] = [];
   caterers: Caterer[] = [];
-
   displayedColumns: string[] = ['status', 'catererDisplayName', 'catererEmail'];
+  firestore: any;
+  afAuth: any;
+  searchTerm: string;
+  sortOrder: string = 'asc'; // 'asc' for ascending, 'desc' for descending
+  sortByColumn: string = 'catererDisplayName';
 
   constructor(public userauthService: UserAuthService, private afs: AngularFirestore, private changeDetectorRef: ChangeDetectorRef) {}
 
@@ -37,6 +93,34 @@ export class SuperadminCustomerComponent implements OnInit {
         return caterer;
       });
       console.log(this.caterers);
+    });
+  }
+
+  
+  sortBy(column: string): void {
+    if (this.sortByColumn === column) {
+      this.sortOrder = this.sortOrder === 'asc' ? 'desc' : 'asc';
+    } else {
+      this.sortOrder = 'asc';
+    }
+  
+    this.sortByColumn = column;
+  
+    if (this.sortByColumn === 'catererEmail') {
+      this.sortCaterers();
+    }
+  }
+
+  private sortCaterers(): void {
+    this.caterers.sort((a, b) => {
+      const aValue = a[this.sortByColumn].toLowerCase();
+      const bValue = b[this.sortByColumn].toLowerCase();
+  
+      if (this.sortOrder === 'asc') {
+        return aValue.localeCompare(bValue);
+      } else {
+        return bValue.localeCompare(aValue);
+      }
     });
   }
 
