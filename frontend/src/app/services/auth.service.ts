@@ -64,6 +64,7 @@ export class AuthService {
     const user = JSON.parse(localStorage.getItem('caterer') || '{}');
     return user ? user.email : null;
   }
+ 
 
   // SignUp Caterer with email and password and save extra data
   SignUpCaterer(catererData: any, email: string, password: string) {

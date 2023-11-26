@@ -13,6 +13,7 @@ export class HeaderUserComponent implements OnInit {
   searchTerm = '';
   loggedInUsername: string | null;
 
+
   constructor(
     activatedRoute: ActivatedRoute,
     private router: Router,
@@ -24,6 +25,7 @@ export class HeaderUserComponent implements OnInit {
 
     // Fetch the logged-in user's username
     this.loggedInUsername = authService.getLoggedInUsername();
+    
   }
 
   ngOnInit(): void {
