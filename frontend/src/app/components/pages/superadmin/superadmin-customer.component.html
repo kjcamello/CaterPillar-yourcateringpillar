@@ -26,7 +26,7 @@
   </div>
 
   <div class="search-container">
-    <input [(ngModel)]="searchTerm"  placeholder="Search">
+    <input [(ngModel)]="searchTerm"  placeholder="Search" (input)="applySearchFilter()">
   </div>
 <!-- Add a class to your table to apply styles -->
 <div class="table-container">
@@ -35,13 +35,13 @@
     <thead>
       <tr>
         <th (click)="sortBy('status')">Status</th>
-        <th (click)="sortBy('catererBasicInfo')">Caterer Name</th>
-        <th (click)="sortBy('catererEmail')">Email</th>
+        <th (click)="sortBy('catererBasicInfo.catererDisplayName')">Caterer Name</th>
+        <th (click)="sortBy('catererBasicInfo.catererEmail')">Email</th>
         <th (click)="sortBy('remarks')">Remarks</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let caterer of caterers | filter: searchTerm | orderBy: { column: sortByColumn, order: sortOrder }">
+      <tr *ngFor="let caterer of filteredCaterers | orderBy: { column: sortByColumn, order: sortOrder }">
         <td>
             <select id="actionDropdown" [(ngModel)]="caterer.selectedAction" (change)="handleDropdownChange(caterer)" title="actionDropdown">
               <ng-container *ngIf="getAvailableActions(caterer.status).length > 0; else noActions">

@@ -86,6 +86,7 @@ export class SendReportComponent implements OnInit {
       
   
       const reportData = {
+        userType: this.selectedUserType,
         reporter: reporterEmail,
         reportedUsername: this.selectedUserType === 'customer' ? this.customerName : this.catererName,
         reportDetails: this.reportDetails,
