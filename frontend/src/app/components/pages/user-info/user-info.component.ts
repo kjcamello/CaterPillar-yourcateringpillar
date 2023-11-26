@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { FormGroup } from '@angular/forms'; // Import FormGroup if you're using reactive forms
-// import { AngularFirestore } from '@angular/fire/firestore';
-// import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -10,7 +9,15 @@ import { FormGroup } from '@angular/forms'; // Import FormGroup if you're using 
   styleUrls: ['./user-info.component.css']
 })
 export class UserInfoComponent  {
-  customer: any;
+ 
+  customers: any;
+  selectedGender: string = ''; // Initialize it to an empty string
+  selectedMonth: string = ''; // Initialize it to an empty string
+  selectedDate: number = null; // Initialize it to null
+  selectedYear: number = null; // Initialize it to null
+  bioStatement: string = ''; // Initialize it to an empty string
+  foodLikes: string = ''; // Initialize it to an empty string
+  selectedDateOfBirth = null;
 
   months: string[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   days: number[] = Array.from({ length: 31 }, (_, i) => i + 1);
@@ -26,49 +33,60 @@ export class UserInfoComponent  {
   userCredentials = { username: '', password: '' };
   editMode: boolean = false;
   isFieldDisabled: boolean = true;
-  myForm: FormGroup; // Declare this if using reactive forms
 
   constructor(
-    private router: Router,
-    // private firestore: AngularFirestore, 
-    // private afAuth: AngularFireAuth
-  ) { }
+    private firestore: AngularFirestore, 
+    private authService: AuthService,
+    private afAuth: AngularFireAuth
+  ) {}
 
-  // ngOnInit(): void {
-  //   this.fetchCustomerData();
-  // }
+  ngOnInit(): void {
+    this.fetchCustomerData();
+  }
 
-  // fetchCustomerData() {
-  //   this.afAuth.authState.subscribe(user => {
-  //     if (user) {
-  //       const customerRef = this.firestore.collection('customers').doc(user.uid);
-  //       customerRef.valueChanges().subscribe(data => {
-  //         this.customer = data;
-  //       });
-  //     }
-  //   });
-  // }
+  saveUserProfile() {
+    // Check if a user is authenticated
+    this.afAuth.authState.subscribe(user => {
+      if (user) {
+        // Get a reference to the user's document in Firestore
+        const userRef = this.firestore.collection('customers').doc(user.uid);
+  
+        // Format the selected date values as a JavaScript Date object
+        const selectedDateOfBirth = new Date(this.selectedYear, this.months.indexOf(this.selectedMonth), this.selectedDate);
+  
+        // Update the Firestore document with the user's details
+        userRef.update({
+          gender: this.selectedGender,
+          dateOfBirth: selectedDateOfBirth, // Use the formatted Date object
+          bioStatement: this.bioStatement,
+          foodLikes: this.foodLikes
+        })
+          .then(() => {
+            console.log('User profile saved successfully.');
+          })
+          .catch(error => {
+            console.error('Error saving user profile:', error);
+          });
+      }
+    });
+  }
 
-  enableEditMode() {
-    this.editMode = true;
-    this.isFieldDisabled = false;
-    if (this.myForm) {
-      this.myForm.enable();
+  confirmSaveChanges() {
+    const confirmSave = confirm('Do you want to save your changes?');
+    if (confirmSave) {
+      this.saveUserProfile(); // Call the saveUserProfile function if confirmed
     }
   }
 
-  saveChanges() {
-    if (this.myForm) {
-      const formData = this.myForm.value;
-      console.log('Saving changes...', formData);
-      this.myForm.reset();
-    }
-    this.editMode = false;
-    this.isFieldDisabled = true;
-  }
-
-  onSubmit() {
-    console.log('User Credentials:', this.userCredentials);
+  fetchCustomerData() {
+    this.afAuth.authState.subscribe(user => {
+      if (user) {
+        const catererRef = this.firestore.collection('customers').doc(user.uid);
+        catererRef.valueChanges().subscribe(data => {
+          this.customers = data;
+        });
+      }
+    });
   }
 
   onCoverImageSelected(event: any) {
@@ -106,17 +124,49 @@ export class UserInfoComponent  {
       reader.readAsDataURL(file);
     }
   }
-  populateDateDropdown() {
-    const monthDropdown = document.getElementById('month') as HTMLSelectElement;
-    const selectedMonth = monthDropdown.value;
 
-    if (selectedMonth === 'February') {
-      this.days = Array.from({ length: 28 }, (_, i) => i + 1); // Typically February has 28 days
-      // Add logic for leap year if needed
-    } else if (['April', 'June', 'September', 'November'].includes(selectedMonth)) {
-      this.days = Array.from({ length: 30 }, (_, i) => i + 1); // These months have 30 days
+  populateDateDropdown() {
+    // Get references to the dropdown elements
+    const monthDropdown = document.getElementById('month') as HTMLSelectElement;
+    const selectedDayDropdown = document.getElementById('date') as HTMLSelectElement;
+    const selectedYearDropdown = document.getElementById('year') as HTMLSelectElement;
+  
+    // Retrieve the selected values from the dropdowns
+    const selectedMonth = monthDropdown.value;
+    const selectedDay = parseInt(selectedDayDropdown.value, 10); // Parse to integer
+    const selectedYear = parseInt(selectedYearDropdown.value, 10); // Parse to integer
+  
+    // Find the index of the selected month in the months array
+    const monthIndex = this.months.findIndex(month => month === selectedMonth);
+  
+    // Initialize the number of days based on the selected month
+    let numberOfDays: number;
+  
+    switch (selectedMonth) {
+      case 'February':
+        numberOfDays = 28; // Typically February has 28 days
+        // Add logic for leap year if needed
+        break;
+      case 'April':
+      case 'June':
+      case 'September':
+      case 'November':
+        numberOfDays = 30; // These months have 30 days
+        break;
+      default:
+        numberOfDays = 31; // Default to 31 days for other months
+        break;
+    }
+  
+    // Update the 'days' array with the correct number of days
+    this.days = Array.from({ length: numberOfDays }, (_, i) => i + 1);
+  
+    // If all fields are selected and valid, create the Date of Birth
+    if (!isNaN(selectedDay) && !isNaN(selectedYear) && monthIndex !== -1) {
+      const month = monthIndex + 1; // Months are 1-based in JavaScript Date objects
+      this.selectedDateOfBirth = new Date(selectedYear, month - 1, selectedDay); // Subtract 1 from month
     } else {
-      this.days = Array.from({ length: 31 }, (_, i) => i + 1); // Default to 31 days
+      this.selectedDateOfBirth = null; // Reset the Date of Birth if any field is empty
     }
   }
 }
