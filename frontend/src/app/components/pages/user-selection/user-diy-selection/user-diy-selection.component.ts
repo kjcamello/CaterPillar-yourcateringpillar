@@ -1,21 +1,38 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CateringService } from 'src/app/services/catering.service';
-import { Catering } from 'src/app/shared/models/Catering';
-import { FoodItem } from 'src/app/shared/models/food-item';
-import { AuthService } from 'src/app/services/auth.service';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
+import { FoodItemsService } from 'src/app/services/food-items.service';
 import { EventSelectionService } from 'src/app/services/event-selection.service';
 
+
 import { DatePipe } from '@angular/common';
+import { AuthService } from 'src/app/services/auth.service';
+
+// Create an interface for the item structure
+interface FoodItem {
+  foodItemId?: string; // Add this line
+  category: string;
+  food_name: string;
+  selected?: boolean;
+  // Define the properties based on your actual data structure
+  food_image: string;
+  pax_price: number;
+  // ... other properties
+  minimum_pax?: number;
+  selectedPax?: number;
+  selectedPaxError?: string;
+  showFullDescription?: boolean;
+}
+
 
 @Component({
   selector: 'app-user-diy-selection',
   templateUrl: './user-diy-selection.component.html',
   styleUrls: ['./user-diy-selection.component.css']
 })
+
 export class UserDiySelectionComponent implements OnInit {
   catererUid: string;
   mainCourseItems: Observable<any[]>;
@@ -26,11 +43,13 @@ export class UserDiySelectionComponent implements OnInit {
   drinkItems: Observable<any[]>;
 
 
-  selectedItems: Observable<any[]>;
+  selectedItems: Observable<FoodItem[]>; // Maintain as Observable<FoodItem[]>
+  selectedFoodItems: FoodItem[] = []; // Array to track selected items
+
   selectedCategory: string;
 
     // Declare a variable to store the selected item
-selectedItem: any;
+//selectedItem: any;
 
 
 extraServiceItems: Observable<any[]>;
@@ -42,40 +61,71 @@ selectedEvent: any;
 //SPRINT 5 LOGIC
 dateAndTimeForm: FormGroup;
 showReceipt: boolean = false; // Add this line for the showReceipt property
-  constructor(
+  
+// Declare a variable to store the selected item
+selectedItem: FoodItem | null = null;  // Initialize to null
+selectedExtraServices: any[] = []; // Array to store selected extra services
+
+displayName: string | null;
+constructor(
     private activatedRoute: ActivatedRoute,
     private firestore: AngularFirestore,
     private eventSelectionService: EventSelectionService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private selectedItemsService: FoodItemsService,
+    private authService: AuthService
     ) {
     // Initialize the form in the constructor
     this.dateAndTimeForm = this.formBuilder.group({
       selectedDate: [null, Validators.required],
       selectedTime: [null, Validators.required],
     });
+
+    this.displayName = authService.getLoggedInUsername();
     }
 
-  ngOnInit(): void {
-    this.activatedRoute.params.subscribe(params => {
-      this.catererUid = params['catererUid'];
-      // Provide a default category or choose one based on your use case
-      this.loadFoodItems('maincourseItems');
+    ngOnInit(): void {
+      this.activatedRoute.params.subscribe(params => {
+        this.catererUid = params['catererUid'];
+        // Provide a default category or choose one based on your use case
+        this.loadFoodItems('maincourseItems');
+      });
+  
+      this.eventSelectionService.selectedEvent$.subscribe((selectedEvent) => {
+        this.selectedEvent = selectedEvent;
+      });
+  
+      // Subscribe to the selectedExtraService$ observable to get updates
+      this.eventSelectionService.selectedExtraServices$.subscribe((selectedExtraServices) => {
+        this.selectedExtraServices = selectedExtraServices;
+        this.updateEReceipt(); // Call the method to update the e-receipt whenever the selection changes
+      });
+    }
+
+
+  // Method to update the e-receipt based on selectedExtraServices
+  updateEReceipt(): void {
+    // Implement your logic to update the e-receipt using this.selectedExtraServices
+    console.log('Selected Extra Services:', this.selectedExtraServices);
+
+    // Example: Display selected extra services in the console
+    this.selectedExtraServices.forEach((extraService) => {
+      console.log(`Extra Service: ${extraService.esName}, Hours: ${extraService.selectedHours}`);
     });
 
-    this.eventSelectionService.selectedEvent$.subscribe((selectedEvent) => {
-      this.selectedEvent = selectedEvent;
-    });
-
+    // Add your logic to update the e-receipt UI based on the selected extra services
   }
+
 
   loadFoodItems(category: string) {
     this.selectedCategory = category;
-
+  
     // Construct the correct collection path based on the category
     const collectionPath = `caterers/${this.catererUid}/${category}`;
-
+  
+    // Specify the type of data expected (FoodItem[])
     this.selectedItems = this.firestore
-      .collection(collectionPath)
+      .collection<FoodItem>(collectionPath)
       .valueChanges();
   }
 
@@ -95,34 +145,45 @@ showReceipt: boolean = false; // Add this line for the showReceipt property
     voucherItem.showFullDescription = !voucherItem.showFullDescription;
   }
 
+  toggleFoodSelection(item: FoodItem): void {
+    console.log('Toggling selection for item:', item);
   
-  toggleFoodSelection(item: any): void {
+    // Check if the item is already selected in the current category
+    const isItemSelected = this.selectedFoodItems.some(selectedItem => selectedItem.foodItemId === item.foodItemId);
+  
+    // If the item is not selected, set it as the selected item
+    // Otherwise, clear the selected item
+    this.selectedItem = isItemSelected ? null : item;
+  
     // Toggle the 'selected' property of the clicked item
-    item.selected = !item.selected;
+    item.selected = !isItemSelected;
   
     // If the item is selected, initialize selectedPax to minimum_pax
     if (item.selected) {
       item.selectedPax = item.minimum_pax;
-      this.selectedItems.forEach((otherItem) => {
-        if (otherItem !== item) {
-          // Ensure 'selected' property exists on the item before setting it to false
-          if ('selected' in otherItem) {
-            otherItem.selected = false;
-          }
-        }
-      });
     }
+  
+    // If the item is selected and not in the array, add it to the array
+    if (item.selected && !isItemSelected) {
+      this.selectedFoodItems.push(item);
+    } else if (!item.selected && isItemSelected) {
+      // If the item is deselected and in the array, remove it from the array
+      this.selectedFoodItems = this.selectedFoodItems.filter(selectedItem => selectedItem.foodItemId !== item.foodItemId);
+    }
+  
+    // Ensure other items are not selected
+    this.selectedFoodItems = this.selectedFoodItems.map(otherItem => {
+      if (otherItem !== item) {
+        return { ...otherItem, selected: false }; // Set 'selected' to false for other items
+      }
+      return item;
+    });
+  
+    // Save selected items to the service
+    this.selectedItemsService.setSelectedItems(this.selectedFoodItems);
   }
-  /*
-  checkPaxRange(item: any, newValue: number): void {
-    // Check if the selectedPax is within the allowed range    if (newValue < item.minimum_pax || newValue > item.maximum_pax) {
-      item.selectedPaxError = `Selected pax should be between ${item.minimum_pax} and ${item.maximum_pax}.`;
-      item.selectedPax = item.minimum_pax; // Set to minimum pax value
-      alert(item.selectedPaxError);
-    } else {
-      item.selectedPaxError = null;
-    }
-  }*/
+  
+  
   
   checkAndAdjustPax(item: any): void {
     const newValue = parseInt(item.selectedPax, 10);
@@ -136,13 +197,30 @@ showReceipt: boolean = false; // Add this line for the showReceipt property
       item.selectedPaxError = null;
     }
   }
-  
-  
-  
 
   toggleReceipt() {
+    // Check if there are selected food items
+    if (this.selectedFoodItems.length === 0) {
+      alert('Please select at least one food item before reviewing the order.');
+      return; // Exit the method if there are no selected food items
+    }
+  
+  // Check if the event is selected
+  if (!this.selectedEvent) {
+    alert('Please select an event before reviewing the order.');
+    return; // Exit the method if the event is not selected
+  }
+
+  // Check if the date and time are set
+  if (!this.dateAndTimeForm.valid) {
+    alert('Please set the event date and time before reviewing the order.');
+    return; // Exit the method if date and time are not set
+  }
+  
+    // If all conditions are met, toggle the receipt display
     this.showReceipt = !this.showReceipt;
   }
+  
 
   formatDate(selectedDate: string): string {
     // Use Angular's DatePipe to format the date including the day of the week
@@ -157,6 +235,36 @@ showReceipt: boolean = false; // Add this line for the showReceipt property
     const timePeriod = +hours >= 12 ? 'PM' : 'AM';
     const formattedHours = +hours % 12 || 12;
     return `${formattedHours}:${minutes} ${timePeriod}`;
+  }
+  
+  calculateSubtotal(item: FoodItem): number {
+    return item.selectedPax * item.pax_price;
+  }
+
+  calculateGrandTotal(): number {
+    const foodItemTotal = this.calculateFoodItemTotal();
+    const extraServiceTotal = this.calculateExtraServiceTotal();
+    return foodItemTotal + extraServiceTotal;
+  }
+
+  calculateExtraServiceSubtotal(extraService: any): number {
+    return extraService.selectedHours * extraService.esPrice;
+  }
+  
+  calculateFoodItemTotal(): number {
+    let total = 0;
+    for (const item of this.selectedFoodItems) {
+      total += this.calculateSubtotal(item);
+    }
+    return total;
+  }
+
+  calculateExtraServiceTotal(): number {
+    let total = 0;
+    for (const service of this.selectedExtraServices) {
+      total += this.calculateExtraServiceSubtotal(service);
+    }
+    return total;
   }
   
 }

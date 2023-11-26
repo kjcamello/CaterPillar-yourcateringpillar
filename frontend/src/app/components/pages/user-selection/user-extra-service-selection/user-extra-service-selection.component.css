@@ -22,10 +22,18 @@ ul {
     background-size: cover; /* Ensure the image covers the container */
   }
 
-  li:hover {
-    background-color:yellow;
-    cursor: pointer;
-  }
+/* Update the styles for the selected class to increase specificity */
+li.selected:hover {
+  background-color: lightgreen;
+  /* Add more styles as needed */
+}
+
+/* Hover effect */
+li:hover {
+  background-color: yellow;
+  cursor: pointer;
+}
+
   
   .es-image {
     max-width: 100%;
@@ -103,3 +111,9 @@ ul {
     margin-left: 200px;
     position: fixed;
   }
+
+  /* Add styles for the selected class to change background color */
+.selected {
+  background-color: lightgreen;
+  /* Add more styles as needed */
+}
