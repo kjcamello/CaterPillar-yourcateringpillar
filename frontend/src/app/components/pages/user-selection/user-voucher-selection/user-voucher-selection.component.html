@@ -1,34 +1,36 @@
 <form class="voucher-form">
     <h2>Vouchers</h2>
     <div class="voucher-container">
-      <ng-container *ngIf="(voucherItems | async)?.length; else noItems">
-      <ul class="voucher-list">
-        <li class="list-voucher" *ngFor="let voucherItem of voucherItems | async">
-          <!-- Display voucher details here -->
-          <div>
-            <img [src]="voucherItem.voucherImage" alt="Voucher Image" class="voucher-image" style="max-width: 100px">
-          </div>
-          <div class="voucher_name">
-            <p>{{ voucherItem.voucherName }}</p>
-          </div>
-          <div>
-            <strong>Description:</strong>
-            <ng-container *ngIf="!voucherItem.showFullDescription && voucherItem.voucherDescription.length > 25">
-              {{ voucherItem.voucherDescription.slice(0, 25) }}...
-              <span class="see-more" (click)="vouchertoggleDescription(voucherItem)">See more</span>
-            </ng-container>
-            <ng-container *ngIf="voucherItem.showFullDescription || voucherItem.voucherDescription.length <= 25">
-              {{ voucherItem.voucherDescription }}
-              <span class="see-less" *ngIf="voucherItem.showFullDescription" (click)="vouchertoggleDescription(voucherItem)">See less</span>
-            </ng-container>
-          </div>
-        </li>
-      </ul>
-    </ng-container>
-    <ng-template #noItems>
-        <div class="no_items">
-            <h3>No vouchers added yet.</h3>
-        </div>
-    </ng-template>      
+        <ng-container *ngIf="(voucherItems | async)?.length; else noItems">
+            <ul class="voucher-list">
+                <li class="list-voucher" *ngFor="let voucherItem of voucherItems | async" 
+                    [ngClass]="{'selected-voucher': voucherItem.selected}" 
+                    (click)="toggleVoucherSelection(voucherItem)">
+                    <!-- Display voucher details here -->
+                    <div>
+                      <img [src]="voucherItem.voucherImage" alt="Voucher Image" class="voucher-image" style="max-width: 100px">
+                    </div>
+                    <div class="voucher_name">
+                      <p>{{ voucherItem.voucherName }}</p>
+                    </div>
+                    <div>
+                      <strong>Description:</strong>
+                      <ng-container *ngIf="!voucherItem.showFullDescription && voucherItem.voucherDescription.length > 25">
+                        {{ voucherItem.voucherDescription.slice(0, 25) }}...
+                        <span class="see-more" (click)="vouchertoggleDescription(voucherItem)">See more</span>
+                      </ng-container>
+                      <ng-container *ngIf="voucherItem.showFullDescription || voucherItem.voucherDescription.length <= 25">
+                        {{ voucherItem.voucherDescription }}
+                        <span class="see-less" *ngIf="voucherItem.showFullDescription" (click)="vouchertoggleDescription(voucherItem)">See less</span>
+                      </ng-container>
+                    </div>
+                </li>
+            </ul>
+        </ng-container>
+        <ng-template #noItems>
+            <div class="no_items">
+                <h3>No vouchers added yet.</h3>
+            </div>
+        </ng-template>
     </div>
-  </form>
+</form>

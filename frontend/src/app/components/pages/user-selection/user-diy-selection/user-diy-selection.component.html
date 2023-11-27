@@ -106,6 +106,19 @@
   </form>
 </div>
 
+<div class="fixed-bottom">
+<!-- Debug section for new grand food item total -->
+<div *ngIf="selectedVoucher && selectedVoucher.selected">
+  <h3>New Grand Food Item Total (Debug):</h3>
+  <pre>{{ calculateNewGrandFoodItemTotal() | currency: 'PHP': true }}</pre>
+</div>
+  <!-- Debug section for selected voucher items -->
+  <div *ngIf="selectedVoucherItems && selectedVoucherItems.length > 0">
+    <h3>Selected Voucher Items (Debug):</h3>
+    <pre>{{ selectedVoucherItems | json }}</pre>
+  </div>
+</div>
+
 <button class="review-order-button" (click)="toggleReceipt()">Review Order</button>
 
 <!--
@@ -178,7 +191,12 @@
       </tbody>
     </table>
     <!-- Adjust the price as needed for food items -->
-    <div class="food-right-align">{{ calculateFoodItemTotal() | currency: 'PHP':true }}</div>
+<!-- Display Original Grand Food Item Total -->
+<div class="receipt-row">
+  <div class="receipt-label">Original Grand Food Item Total:</div>
+  <div class="receipt-value">{{ calculateFoodItemTotal() | currency: 'PHP': true }}</div>
+</div>
+
   </div>
 </div>
 
@@ -224,8 +242,6 @@
   <strong>Grand Total:</strong>
   <div class="right-align">{{ calculateGrandTotal() | currency: 'PHP':true }}</div>
 </div>
-
-
 
 <!--
 {{ selectedFoodItems | json }}

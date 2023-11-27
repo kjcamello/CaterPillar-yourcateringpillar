@@ -727,3 +727,18 @@ margin-top: 20px;
 .right-align {
   text-align: right;
 }
+
+
+
+/*debugging*/
+.fixed-bottom {
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  background-color: white;
+  padding: 10px;
+  border: 1px solid #ccc;
+  max-height: 200px;
+  max-width:500px;
+  overflow-y: auto;
+}

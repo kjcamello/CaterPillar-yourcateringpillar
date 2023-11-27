@@ -67,6 +67,13 @@ selectedItem: FoodItem | null = null;  // Initialize to null
 selectedExtraServices: any[] = []; // Array to store selected extra services
 
 displayName: string | null;
+
+
+selectedVoucherItems: any[] = []; // Array to store selected voucher items
+selectedVoucher: any; // Variable to store the selected voucher
+
+// Add this property to store the adjusted grand food item total
+adjustedGrandFoodItemTotal: number = 0;
 constructor(
     private activatedRoute: ActivatedRoute,
     private firestore: AngularFirestore,
@@ -100,6 +107,11 @@ constructor(
         this.selectedExtraServices = selectedExtraServices;
         this.updateEReceipt(); // Call the method to update the e-receipt whenever the selection changes
       });
+
+    // Subscribe to the selectedVoucherItems$ observable to get updates
+    this.eventSelectionService.selectedVoucherItems$.subscribe((selectedVoucherItems) => {
+      this.selectedVoucherItems = selectedVoucherItems;
+    });
     }
 
 
@@ -221,7 +233,7 @@ constructor(
     this.showReceipt = !this.showReceipt;
   }
   
-
+/*event*/
   formatDate(selectedDate: string): string {
     // Use Angular's DatePipe to format the date including the day of the week
     const datePipe = new DatePipe('en-US');
@@ -236,27 +248,41 @@ constructor(
     const formattedHours = +hours % 12 || 12;
     return `${formattedHours}:${minutes} ${timePeriod}`;
   }
-  
+
+
+  /*computation prices*/
+  /*food items*/
   calculateSubtotal(item: FoodItem): number {
     return item.selectedPax * item.pax_price;
   }
 
-  calculateGrandTotal(): number {
-    const foodItemTotal = this.calculateFoodItemTotal();
-    const extraServiceTotal = this.calculateExtraServiceTotal();
-    return foodItemTotal + extraServiceTotal;
-  }
-
-  calculateExtraServiceSubtotal(extraService: any): number {
-    return extraService.selectedHours * extraService.esPrice;
-  }
-  
   calculateFoodItemTotal(): number {
     let total = 0;
     for (const item of this.selectedFoodItems) {
       total += this.calculateSubtotal(item);
     }
     return total;
+  }
+
+calculateNewGrandFoodItemTotal(): number {
+  // Original grand food item total
+  const originalGrandFoodItemTotal = this.calculateFoodItemTotal();
+
+  // Check if a voucher is selected and valid
+  if (this.selectedVoucher && this.selectedVoucher.selected) {
+    // Deduct the amount specified by the voucher (amountDeduction)
+    this.adjustedGrandFoodItemTotal = originalGrandFoodItemTotal - this.selectedVoucher.amountDeduction;
+    return this.adjustedGrandFoodItemTotal;
+  }
+
+  // If no voucher is selected or valid, return the original grand food item total
+  return originalGrandFoodItemTotal;
+}
+
+
+  /*extra service*/
+  calculateExtraServiceSubtotal(extraService: any): number {
+    return extraService.selectedHours * extraService.esPrice;
   }
 
   calculateExtraServiceTotal(): number {
@@ -267,4 +293,13 @@ constructor(
     return total;
   }
   
+
+  calculateGrandTotal(): number {
+    const foodItemTotal = this.calculateFoodItemTotal();
+    const extraServiceTotal = this.calculateExtraServiceTotal();
+    return foodItemTotal + extraServiceTotal;
+  }
+
+
+
 }
