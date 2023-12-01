@@ -2,6 +2,7 @@ import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
 import { UserAuthService } from 'src/app/services/userauth.service';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ChangeDetectorRef } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 // import * as _ from 'lodash-es'
 
 
@@ -33,7 +34,7 @@ export class SuperadminCustomerComponent implements OnInit {
   sortOrder: string = 'asc'; // 'asc' for ascending, 'desc' for descending
   sortByColumn: string = 'catererDisplayName';
 
-  constructor(public userauthService: UserAuthService, private afs: AngularFirestore, private changeDetectorRef: ChangeDetectorRef) {}
+  constructor(public userauthService: UserAuthService, private afs: AngularFirestore, private changeDetectorRef: ChangeDetectorRef, private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.userauthService.getCaterers().subscribe((loggedInCustomers) => {
@@ -45,6 +46,16 @@ export class SuperadminCustomerComponent implements OnInit {
       this.applySearchFilter();
       console.log(this.caterers);
     });
+
+    this.route.queryParams.subscribe((params) => {
+      const reportedUsername = params['reportedUsername'];
+      if (reportedUsername) {
+        this.searchTerm = reportedUsername; // Set searchTerm to reportedUsername
+        this.applySearchFilter(); // Apply the search filter
+      }
+    });
+
+   
   }
 
   sortBy(column: string): void {

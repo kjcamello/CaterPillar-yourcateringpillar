@@ -2,6 +2,7 @@ import { Component, OnInit, Pipe, PipeTransform} from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { UserAuthService } from 'src/app/services/userauth.service';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { ActivatedRoute } from '@angular/router';
 
 export interface Caterer {
   id: string;
@@ -20,62 +21,12 @@ export interface Customer {
   status: string;
 }
 
-@Pipe({
-  name: 'filter'
-})
-export class FilterPipe implements PipeTransform {
-  transform(items: any[], searchText: string): any[] {
-    if (!items || !searchText) {
-      return items;
-    }
-
-    searchText = searchText.toLowerCase();
-
-    return items.filter(item => {
-      return (
-        item.userName.toLowerCase().includes(searchText) ||
-        item.email.toLowerCase().includes(searchText)
-      )
-    });
-  }
-}
-
-// Create the orderBy pipe
-@Pipe({
-  name: 'orderBy'
-})
-export class OrderByPipe implements PipeTransform {
-  transform(items: any[], config: any): any[] {
-    if (!config || !config.column) {
-      return items;
-    }
-
-    const column = config.column;
-    const order = config.order || 'asc';
-
-    return items.sort((A,B) => {
-      const aValue = A[column];
-      const bValue = B[column];
-
-      if (aValue === bValue) {
-        return 0;
-      }
-
-      if (order === 'asc') {
-        return aValue > bValue ? 1 : -1;
-      } else {
-        return aValue < bValue ? 1 : -1;
-      }
-    });
-  }
-}
 
 
 @Component({
   selector: 'app-superadmin',
   templateUrl: './superadmin.component.html',
   styleUrls: ['./superadmin.component.css'],
-  providers: [FilterPipe, OrderByPipe]
 })
 
 export class SuperadminComponent implements OnInit {
@@ -91,12 +42,21 @@ export class SuperadminComponent implements OnInit {
   
   constructor(
     public userauthService: UserAuthService,
-    private afs: AngularFirestore    
+    private afs: AngularFirestore,
+    private route : ActivatedRoute    
     ) {}
 
   ngOnInit() {
     this.userauthService.getUsers().subscribe((loggedInCustomers) => {
-      this.customers = loggedInCustomers;
+      this.loggedInCustomers$ = loggedInCustomers;
+      this.applySearchFilter(); 
+    });
+    this.route.queryParams.subscribe((params) => {
+      const reportedUsername = params['reportedUsername'];
+      if (reportedUsername) {
+        this.searchTerm = reportedUsername; // Set searchTerm to reportedUsername
+        this.applySearchFilter(); // Apply the search filter
+      }
     });
   }
 
@@ -106,9 +66,21 @@ export class SuperadminComponent implements OnInit {
     } else {
       this.sortOrder = 'asc';
     }
-
+  
     this.sortByColumn = column;
+  
+    this.customers.sort((a, b) => {
+      const aValue = a[column].toLowerCase();
+      const bValue = b[column].toLowerCase();
+  
+      if (this.sortOrder === 'asc') {
+        return aValue.localeCompare(bValue);
+      } else {
+        return bValue.localeCompare(aValue);
+      }
+    });
   }
+
   getUsers() {
     this.userauthService.getUsers().subscribe((loggedInCustomers) => {
       this.loggedInCustomers$ = loggedInCustomers;
@@ -194,4 +166,23 @@ export class SuperadminComponent implements OnInit {
   login(email: string, password: string): void {
     this.userauthService.login(email, password);
   }
+
+  // Inside SuperadminComponent
+
+// Function to filter users
+applySearchFilter(): void {
+  if (!this.searchTerm.trim()) {
+    this.customers = this.loggedInCustomers$;
+    return;
+  }
+
+  const searchStr = this.searchTerm.toLowerCase().trim();
+  this.customers = this.loggedInCustomers$.filter((customer) =>
+    customer.userName.toLowerCase().includes(searchStr) ||
+    customer.email.toLowerCase().includes(searchStr)
+  );
+}
+
+
+
 }
