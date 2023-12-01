@@ -32,7 +32,7 @@
 /* user-browse-catering-service.component.css */
 
 .background-container {
-  background-image: url('../assets/user_home_background.png'); /* Adjust the path accordingly */
+  /* background-image: url('../assets/user_home_background.png');  */
   background-size: cover; /* Adjust as needed */
   background-repeat: no-repeat;
   height: 100vh; /* Ensure the container takes up the full height of the viewport */

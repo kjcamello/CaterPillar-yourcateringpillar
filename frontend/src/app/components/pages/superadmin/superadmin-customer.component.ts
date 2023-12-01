@@ -2,7 +2,7 @@ import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
 import { UserAuthService } from 'src/app/services/userauth.service';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ChangeDetectorRef } from '@angular/core';
-import * as _ from 'lodash-es'
+// import * as _ from 'lodash-es'
 
 
 
@@ -57,7 +57,7 @@ export class SuperadminCustomerComponent implements OnInit {
     this.sortByColumn = column;
   
     // Use Lodash for sorting
-    this.caterers = _.orderBy(this.caterers, [column], [this.sortOrder]);
+    // this.caterers = orderBy(this.caterers, [column], [this.sortOrder]);
     this.filteredCaterers = this.sortOrder === 'asc'
       ? this.filteredCaterers.sort((a, b) => {
           const valA = this.getPropertyValue(a, column);
