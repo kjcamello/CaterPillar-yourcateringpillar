@@ -126,29 +126,29 @@
 
       <!-- Date of Birth -->
       <div class="dateBirth-detail">
-          <label>Date of Birth:</label>
-          <div class="monthdetail"></div>
-          <label for="month">Month</label>
-          <select id="month" (change)="populateDateDropdown()">
-              <option *ngFor="let month of months" [value]="month">{{ month }}</option>
-          </select>
-          
-          
-          <div class="datedetail"></div>
-          <label for="date">Date</label>
-          <select id="date">
-              <option *ngFor="let day of days" [value]="day">{{ day }}</option>
-          </select>
-         
-          <div class="yeardetail">
-          <label for="year">Year</label>
-          <select id="year">
-              <option *ngFor="let year of years" [value]="year">{{ year }}</option>
-          </select>
-          </div>
-          </div>
-          </div>
-      </div>
+        <label>Date of Birth:</label>
+        <div class="monthdetail">
+            <label for="month">Month</label>
+            <select id="month" [(ngModel)]="selectedMonth" (change)="populateDateDropdown()">
+                <option *ngFor="let month of months" [value]="month">{{ month }}</option>
+            </select>
+        </div>
+        
+        <div class="datedetail">
+            <label for="date">Date</label>
+            <select id="date" [(ngModel)]="selectedDate">
+                <option *ngFor="let day of days" [value]="day">{{ day }}</option>
+            </select>
+        </div>
+        
+        <div class="yeardetail">
+            <label for="year">Year</label>
+            <select id="year" [(ngModel)]="selectedYear">
+                <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+            </select>
+        </div>
+    </div>
+    
      
 </div> 
 <div class="profile-statements">
@@ -156,26 +156,20 @@
       <div class="bio-label">
         <label for="bio">Bio:</label>
         <textarea [(ngModel)]="bioStatement" class="bio-statement" id="bio"></textarea>
-        <label class="editbio-btn">
-        <img src="assets/bioeditbtnwhite.png" alt="Edit Bio" class="bioedit-icon">
-        </label>
     </div>
 
       <!-- Food Likes -->
       <div class="foodlikes">
           <label for="foodlikes">Food Likes:</label>
           <textarea [(ngModel)]="foodLikes" class="foodliketxtbox" id="foodlikes"></textarea>
-          <label class="editfood-btn">
-            <img src="assets/bioeditbtnwhite.png" alt="Edit Bio" class="foodedit-icon">
-          </label>
       </div>
   </div>
 </div>
 <div class="profile-actions">
   <div class="profile-actions-edit">
-    <!-- <button class="edit-btn" (click)="enableEditMode()"> -->
+     <button class="edit-btn" (click)="enableEditMode()"> 
         <img src="assets/editsavebuttons/edit static.png" alt="Edit">
-    <!-- </button> -->
+     </button> 
   
   <div class="profile-actions-save">
     <button class="save-btn"  (click)="confirmSaveChanges()">

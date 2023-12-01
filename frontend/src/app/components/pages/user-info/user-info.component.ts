@@ -17,7 +17,7 @@ export class UserInfoComponent  {
   selectedYear: number = null; // Initialize it to null
   bioStatement: string = ''; // Initialize it to an empty string
   foodLikes: string = ''; // Initialize it to an empty string
-  selectedDateOfBirth = null;
+
 
   months: string[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   days: number[] = Array.from({ length: 31 }, (_, i) => i + 1);
@@ -50,26 +50,38 @@ export class UserInfoComponent  {
       if (user) {
         // Get a reference to the user's document in Firestore
         const userRef = this.firestore.collection('customers').doc(user.uid);
-  
-        // Format the selected date values as a JavaScript Date object
-        const selectedDateOfBirth = new Date(this.selectedYear, this.months.indexOf(this.selectedMonth), this.selectedDate);
-  
-        // Update the Firestore document with the user's details
-        userRef.update({
+
+        // Prepare the data to be saved
+        const userData = {
+          userName: this.customers.userName, // Assuming this is bound to an input field
+          email: this.customers.email, // Assuming this is bound to an input field
+          phone: this.customers.phone, // Assuming this is bound to an input field
+          address: this.customers.address, // Assuming this is bound to an input field
           gender: this.selectedGender,
-          dateOfBirth: selectedDateOfBirth, // Use the formatted Date object
+          dateOfBirth: {
+            month: this.months.indexOf(this.selectedMonth) + 1,
+            date: this.selectedDate,
+            year: this.selectedYear
+          },
           bioStatement: this.bioStatement,
           foodLikes: this.foodLikes
-        })
+          // Add any other fields you need to save
+        };
+
+        // Update the Firestore document with the user's details
+        userRef.update(userData)
           .then(() => {
             console.log('User profile saved successfully.');
+            // Handle successful save, e.g., show a success message
           })
           .catch(error => {
             console.error('Error saving user profile:', error);
+            // Handle errors, e.g., show an error message
           });
       }
     });
   }
+  
 
   confirmSaveChanges() {
     const confirmSave = confirm('Do you want to save your changes?');
@@ -126,47 +138,30 @@ export class UserInfoComponent  {
   }
 
   populateDateDropdown() {
-    // Get references to the dropdown elements
-    const monthDropdown = document.getElementById('month') as HTMLSelectElement;
-    const selectedDayDropdown = document.getElementById('date') as HTMLSelectElement;
-    const selectedYearDropdown = document.getElementById('year') as HTMLSelectElement;
-  
-    // Retrieve the selected values from the dropdowns
-    const selectedMonth = monthDropdown.value;
-    const selectedDay = parseInt(selectedDayDropdown.value, 10); // Parse to integer
-    const selectedYear = parseInt(selectedYearDropdown.value, 10); // Parse to integer
-  
     // Find the index of the selected month in the months array
-    const monthIndex = this.months.findIndex(month => month === selectedMonth);
+    const monthIndex = this.months.indexOf(this.selectedMonth);
   
     // Initialize the number of days based on the selected month
     let numberOfDays: number;
   
-    switch (selectedMonth) {
+    switch (this.selectedMonth) {
       case 'February':
-        numberOfDays = 28; // Typically February has 28 days
-        // Add logic for leap year if needed
+        // Check for leap year
+        const isLeapYear = this.selectedYear % 4 === 0 && (this.selectedYear % 100 !== 0 || this.selectedYear % 400 === 0);
+        numberOfDays = isLeapYear ? 29 : 28;
         break;
       case 'April':
       case 'June':
       case 'September':
       case 'November':
-        numberOfDays = 30; // These months have 30 days
+        numberOfDays = 30;
         break;
       default:
-        numberOfDays = 31; // Default to 31 days for other months
+        numberOfDays = 31;
         break;
     }
   
     // Update the 'days' array with the correct number of days
     this.days = Array.from({ length: numberOfDays }, (_, i) => i + 1);
-  
-    // If all fields are selected and valid, create the Date of Birth
-    if (!isNaN(selectedDay) && !isNaN(selectedYear) && monthIndex !== -1) {
-      const month = monthIndex + 1; // Months are 1-based in JavaScript Date objects
-      this.selectedDateOfBirth = new Date(selectedYear, month - 1, selectedDay); // Subtract 1 from month
-    } else {
-      this.selectedDateOfBirth = null; // Reset the Date of Birth if any field is empty
-    }
   }
 }
