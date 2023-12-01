@@ -88,32 +88,34 @@ export class AdminAuthService {
     return superAdminEmails.includes(email);
   }
 
-  markReportAsSettled(reportId: string) {
+  async markReportAsSettled(reportId: string) {
     const reportRef = this.firestore.collection('reports').doc(reportId).ref;
     const settledReportRef = this.firestore.collection('settledReports').doc(reportId).ref;
   
-    return this.firestore.firestore.runTransaction((transaction) => {
-      return transaction.get(reportRef).then((doc) => {
-        if (!doc.exists) {
-          throw new Error('Report does not exist.');
-        }
-  
-        const reportData = doc.data();
-        if (reportData) {
-          reportData['settled'] = true; // Update the 'settled' property
-  
-          // Move the report to the settledReports collection
-          transaction.set(settledReportRef, reportData);
-          transaction.delete(reportRef); // Remove the report from the original collection
-        } else {
-          throw new Error('No data found in the report.');
-        }
+    try {
+      await this.firestore.firestore.runTransaction((transaction) => {
+        return transaction.get(reportRef).then((doc) => {
+          if (!doc.exists) {
+            throw new Error('Report does not exist.');
+          }
+
+          const reportData = doc.data();
+          if (reportData) {
+            reportData['settled'] = true; // Update the 'settled' property
+
+
+            // Move the report to the settledReports collection
+            transaction.set(settledReportRef, reportData);
+            transaction.delete(reportRef); // Remove the report from the original collection
+          } else {
+            throw new Error('No data found in the report.');
+          }
+        });
       });
-    }).then(() => {
       console.log('Report marked as settled and moved.');
-    }).catch((error) => {
+    } catch (error) {
       console.error('Error marking report as settled:', error);
-    });
+    }
   }
 
   getCustomerReports(): Observable<any[]> {

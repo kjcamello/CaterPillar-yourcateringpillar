@@ -38,4 +38,8 @@ export class ReportComponent implements OnInit {
       this.router.navigate(['/superadmin'], { queryParams }); // Navigate to the Superadmin route with queryParams
     }
   }
+
+  toggleRow(report: any): void {
+    report.expanded = !report.expanded;
+}
 }
