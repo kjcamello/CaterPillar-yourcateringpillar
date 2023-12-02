@@ -71,3 +71,11 @@ li:hover {
     margin-left: 225px;
     padding:41px 0px 41px 0px;
 }
+
+/* Add a new class for selected vouchers */
+.selected-voucher {
+    background-color: lightgreen;
+}
+
+/* Keep your existing styles for list items and other elements */
+

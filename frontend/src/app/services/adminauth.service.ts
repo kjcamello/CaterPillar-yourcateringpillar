@@ -2,6 +2,7 @@ import { Injectable, NgZone } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -86,6 +87,15 @@ export class AdminAuthService {
     , 'norbz.vergara.27@gmail.com', 'baniladjimkenn2301@gmail.com', 'kentjustine.camello@gmail.com', 'chanzyongco@gmail.com'];
     return superAdminEmails.includes(email);
   }
+
+  getCustomerReports(): Observable<any[]> {
+    return this.firestore.collection('reports').doc('customer').collection('details').valueChanges();
+  }
+
+  getCatererReports(): Observable<any[]> {
+    return this.firestore.collection('reports').doc('caterer').collection('details').valueChanges();
+  }
+  
   
 }
 

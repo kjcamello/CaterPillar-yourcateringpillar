@@ -21,4 +21,7 @@
     font-family: 'Langar';
     src: url('./assets/Font/Langar-Regular.ttf') format('truetype');
   }
+
+  @import '@angular/material/prebuilt-themes/indigo-pink.css';
+
   

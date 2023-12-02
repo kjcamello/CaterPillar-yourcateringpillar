@@ -24,21 +24,9 @@ export class DashboardUserComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private firestore: AngularFirestore, // Angular Firestore injection
     private router: Router
-  ) {
-    // Your existing code to fetch catering data
-    this.activatedRoute.params.subscribe((params) => {
-      if (params.searchTerm) {
-        this.catering = this.cateringservice.getAllCateringbySearchTerm(params.searchTerm);
-      } else if (params.tag) {
-        this.catering = this.cateringservice.getAllCateringByTag(params.tag);
-      } else {
-        this.catering = cateringservice.getAll();
-      }
-    });
-  }
+  ) {}
 
   ngOnInit(): void {
-    this.caterers = this.firestore.collection('caterers').valueChanges();
     /*
      Fetch the foodItems based on the specific catererUid
     const catererUid = 'your-caterer-uid'; // Replace with the actual caterer's UID
@@ -70,3 +58,5 @@ export class DashboardUserComponent implements OnInit {
       });
   }*/
 }
+
+

@@ -1,243 +1,42 @@
-li a{
-  height: 22.5rem;
-  width: 20rem;
-  border: 1px solid rgb(161, 23, 23);
-  border-radius: 1rem;
-  margin: 0.5rem;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  color: #9a0000;
+/* dashboard-user.component.css */
+
+.dashboard-container {
+  position: relative;
+  background-color: rgba(191, 29, 29, 0.692); /* Dark red with 75% transparency */
+  color: white; /* Text color */
+  padding: 20px;
+  top:250px;
 }
 
-li a:hover{
-  opacity: 0.7;
-  cursor: pointer;
+.welcome-message {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 
-li a img{
-  object-fit: cover;
-  height: 100px;
-  /* width: 20rem; */
+.description {
+  font-size: 16px;
+  margin-bottom: 20px;
 }
 
-.button-container {
-display: flex;
-justify-content: space-between;
-margin-top: 1rem;
-}
-
-ul {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  margin: 0.5rem;
-}
-
-.caterer-card {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%; /* Ensure the card takes full height */
-  color: #9a0000;
-
-  /* Add additional styles for the card if needed */
-}
-
-.button-container {
-  position: absolute; /* Position the buttons absolutely within the container */
-  bottom: 0; /* Place the buttons at the bottom of the container */
-  width: 100%; /* Make the buttons stretch the full width of the container */
-
-  /* Add some spacing and background color to the buttons container */
-  padding: 0.5rem;
-  background-color: #fff;
-  z-index: 1; /* Ensure the buttons are on top of other content */
-}
-
-.left-button,
-.right-button {
-  text-align: center;
-  padding: 0.25rem 0.5rem; /* Adjust the padding as needed */
-  background-color: #007BFF;
-  color: #fff;
+.browse-button {
+  background-color: #fff; /* White background */
+  color: rgba(139, 0, 0, 0.75); /* Dark red text color */
+  padding: 10px 20px;
+  font-size: 18px;
   text-decoration: none;
-  border: 1px solid #007BFF;
-  border-radius: 0.25rem;
-  max-width: 100px; /* Adjust the max-width as needed */
-  height: 30px; /* Adjust the height as needed */
-  line-height: 30px; /* Adjust the line-height to match the height */
-  max-height: 25px; /* Adjust the max-width as needed */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 0.3s;
-}
-
-.left-button {
-  background-color: orange;
-  color: darkred !important;
-}
-
-.right-button {
-  background-color: darkred;
-  color: yellow !important;
-}
-
-.left-button:hover,
-.right-button:hover {
-  background-color: #0056b3;
-  transition: background-color 0.3s;
-}
-
-
-
-.content{
-  margin-top: 0.3rem;
-  padding: 0.5rem 1rem;
-  position: relative;
-  height: 7rem;
-}
-
-.favorite{
-  position: relative;
-  bottom: 64px;
-  left: 210px;
-  /* top: 100px; */
-  /* right: 1000px; */
-  font-size: 1.2rem;
-}
-
-.favorite.not{
-  color: grey;
-}
-
-.stars{
-  margin-bottom: 0.2rem;
-}
-
-
-
-
-.origins{
-flex: 9;
-}
-
-.origins span{
-border-radius: 2rem;
-background-color: whitesmoke;
-display: inline-block;
-font-size: 0.8rem;
-color: grey;
-margin-right: 0.3rem;
-padding: 0 0.5rem;
-margin-top: 0.2rem;
-}
-
-.location{
-  font-size: 0.9rem;
-  flex: 3;
-  /* text-align: right; */
-}
-
-.cateringPacks{
-/* position: absolute; */
-bottom: 0;
-left: 0.9rem;
-background: white;
-/* padding: 0.3rem 100% 0 0; */
-color: #414141;
-margin-top: 0.7rem;
-font-size: 1.1rem;
-}
-
-
-
-
-/*registered caterers*/
-/* Style the list */
-/* Style the list */
-.caterer-list {
-  list-style-type: none;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-/* Style each list item */
-.caterer-item {
-  margin: 0.5rem;
-  display: flex;
-  flex-direction: column;
-  border: 1px solid rgb(161, 23, 23);
-  border-radius: 1rem;
-  width: 20rem;
-  height: 22.5rem;
-  overflow: hidden;
-  color: #9a0000;
-
-  position: relative; /* Create a positioning context for the buttons */
-  border: 1px solid #ddd; /* Add a border for better visualization */
-
-  /* Adjust the container's padding and margin as needed */
-  padding: 1rem;
-  margin: 1rem;
-}
-
-
-
-
-/*dashboard*/
-
-/*Styles for the entire caterer card
-.caterer-card {
-  display: flex;
-  justify-content: space-between;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  margin: 10px;
-  padding: 10px;
-}
-
-/* Styles for the caterer's image */
-.caterer-image {
-  width: 150px;
-  height: 100px;
-  object-fit: cover;
+  display: inline-block;
   border-radius: 5px;
 }
 
-/* Styles for the caterer information */
-.caterer-info {
-  flex: 1;
-  padding: 0 10px;
-}
+/* user-browse-catering-service.component.css */
 
-/* Styles for the caterer's name */
-h2 {
-  font-size: 1rem;
-  color: #9a0000;
+.background-container {
+  /* background-image: url('../assets/user_home_background.png');  */
+  background-size: cover; /* Adjust as needed */
+  background-repeat: no-repeat;
+  height: 100vh; /* Ensure the container takes up the full height of the viewport */
   margin: 0;
-}
-
-/* Styles for the caterer's address */
-.caterer-address {
-  font-size: 0.9rem;
-  color: #777;
-  margin: 5px 0;
-}
-
-/* Styles for the caterer's email and contact */
-.caterer-email, .caterer-contact {
-  font-size: 0.9rem;
-  color: #333;
-  margin: 5px 0;
+  font-family: 'Langar', sans-serif; /* Apply the custom Langar font */
+  /* Add any additional styles specific to this component */
 }

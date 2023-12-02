@@ -53,6 +53,16 @@ export class SendReportComponent implements OnInit {
   }
 
   async submitReport() {
+    
+    const reportedUsername = this.selectedUserType === 'customer' ? this.customerName : this.catererName;
+  const userExists = await this.checkUserExistence(reportedUsername, this.selectedUserType);
+
+  if (!userExists) {
+    window.alert( reportedUsername +' does not exist or is not a ' + this.selectedUserType);
+    return;
+  }
+  else{
+try{
     if (!this.selectedUserType || !(this.customerName || this.catererName) || !this.reportDetails) {
       window.alert('Please fill in all necessary information.');
       return;
@@ -86,6 +96,7 @@ export class SendReportComponent implements OnInit {
       
   
       const reportData = {
+        userType: this.selectedUserType,
         reporter: reporterEmail,
         reportedUsername: this.selectedUserType === 'customer' ? this.customerName : this.catererName,
         reportDetails: this.reportDetails,
@@ -106,9 +117,8 @@ export class SendReportComponent implements OnInit {
           this.afs.collection('reports').doc(this.selectedUserType).collection('details').add(reportData)
             .then(() => {
               console.log('Report submitted successfully.');
-              this.resetForm();
               window.alert('Report submitted successfully. \nRest assured we will do our best to provide you with the best catering experience');
-              // ...
+              location.reload();
             })
             .catch((error) => {
               console.error('Error submitting report:', error);
@@ -121,12 +131,31 @@ export class SendReportComponent implements OnInit {
       window.alert('Error submitting report:' + error.message);
     }
   }
-  
-  resetForm() {
-    this.selectedUserType = 'customer';
-    this.customerName = '';
-    this.catererName = '';
-    this.reportDetails = '';
-    this.wordCount = 0;
+  catch(error){
+    console.error('Error submitting report:', error);
+    window.alert('Error submitting report:' + error.message);
   }
+}
+  }
+  
+ 
+
+  async checkUserExistence(userName: string, userType: string): Promise<boolean> {
+    try {
+      let querySnapshot;
+      if (userType === 'customer') {
+        querySnapshot = await this.afs.collection('customers', ref => ref.where('userName', '==', userName)).get().toPromise();
+      } else {
+        querySnapshot = await this.afs.collection('caterers', ref => ref.where('catererBasicInfo.catererDisplayName', '==', userName)).get().toPromise();
+      }
+  
+      return !querySnapshot.empty; // Check if the query results are empty
+    } catch (error) {
+      console.error('Error checking user existence:', error);
+      return false;
+    }
+  }
+  
+  
+  
 }

@@ -51,6 +51,12 @@ import { AddServiceTypeComponent } from './components/pages/add-service-type/add
 import { SuperadminCustomerComponent } from './components/pages/superadmin/superadmin-customer.component';
 import { ReportComponent } from './components/pages/superadmin/report.component';
 import { SendReportComponent } from './components/pages/send-reports/send-reports.component';
+
+
+//Sprint 5 - user browse catering service
+import { UserBrowseCateringServiceComponent } from './components/pages/user-browse-catering-service/user-browse-catering-service.component';
+
+
 import { TempCatererProfComponent } from './components/pages/temp-caterer-prof/temp-caterer-prof.component';
 
 const routes: Routes = [
@@ -100,6 +106,8 @@ const routes: Routes = [
   
   { path: 'temp-caterer-prof/:id', component: TempCatererProfComponent },
 
+  //user browse catering SPRINT 5 LOPEZ
+  { path: 'user-browse-catering-service', component: UserBrowseCateringServiceComponent },
 
 
   { path: 'user-profile', component: UserProfileComponent },  // <-- This is the last route, so no comma after this

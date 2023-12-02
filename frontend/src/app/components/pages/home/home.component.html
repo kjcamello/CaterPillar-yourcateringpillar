@@ -1,38 +1,14 @@
-<app-header></app-header>
-<app-search></app-search>
+<div class="background-container">
+  <app-header></app-header>
+  <app-search></app-search>
+    <!-- dashboard-user.component.html -->
 
-<ul>
-    <li *ngFor="let caterings of catering">
-        <a routerLink="/caterings/{{caterings.id}}">
-            <img [src]="caterings.imageUrl" alt="caterings.name"/>
-        <div class="content">
-            {{caterings.name}}
-        </div>
-        <span class="favorite {{caterings.favorite?'':'not'}}">
-            ❤
-        </span>
-        <div class="stars">
-            <app-star-rating [stars]="caterings.stars"></app-star-rating>
-        </div>
-        <div>
-            <div class="catering_service-item-footer">
-                <div class="origins">
-                    <span *ngFor="let origin of caterings.origins">
-                        {{origin}}
-                    </span>
-                </div>
-    
-                <div class="location">
-                    <span>📍</span>
-                    {{caterings.location}}
-                </div>
-            </div>
-            <div class="cateringPacks">
-                <span *ngFor="let cateringPacks of caterings.cateringPacks">
-                    {{cateringPacks}}
-                </span>
-            </div>
-        </div>
-        </a>
-    </li>
-</ul>
+    <div class="dashboard-container">
+      <div class="welcome-message">Welcome to Caterpillar Catering!</div>
+      <div class="description">
+        Explore a variety of catering services to make your events memorable.
+      </div>
+      <a routerLink="/login" class="browse-button">Browse Catering Service</a>
+    </div>
+
+</div>

@@ -5,6 +5,8 @@ import { FormsModule}   from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatButtonModule} from '@angular/material/button';
 
 // Firebase services + environment module
 import { AngularFireModule } from '@angular/fire/compat';
@@ -47,7 +49,7 @@ import { ChangeCatererPasswordComponent } from './components/pages/change-catere
 import { DashboardUserComponent } from './components/pages/dashboard-user/dashboard-user.component';
 import { HeaderUserComponent } from './components/partials/header-user/header-user.component';
 
-import { FilterPipe, OrderByPipe, SuperadminComponent } from './components/pages/superadmin/superadmin.component';
+import { SuperadminComponent } from './components/pages/superadmin/superadmin.component';
 import { LoginSuperadminComponent } from './components/pages/superadmin/login-superadmin.component';
 import { AdminForgotPasswordComponent } from './components/pages/superadmin/forgotpass.component';
 
@@ -84,6 +86,7 @@ import { UserExtraServiceSelectionComponent } from './components/pages/user-sele
 // import { CspProfileComponent } from './components/pages/csp-profile/csp-profile.component';
 import { ReportComponent } from './components/pages/superadmin/report.component';
 import { SendReportComponent } from './components/pages/send-reports/send-reports.component';
+import { UserBrowseCateringServiceComponent } from './components/pages/user-browse-catering-service/user-browse-catering-service.component';
 
 //import { MatTabsModule } from '@angular/material/tabs';
 
@@ -148,14 +151,12 @@ const database = getDatabase(app);
     UserProfileComponent,
     DiyPackageComponent,
     FoodItemComponent,   
-
     EventItemComponent,
     AddServiceTypeComponent,
     ViewFoodItemComponent,
     ViewFoodItemTableComponent,
     SuperadminCustomerComponent,
     ViewCaterersListComponent,
-
     ViewEventTableComponent,
     ViewExtraServiceTableComponent,
     ViewVoucherTableComponent,
@@ -169,8 +170,7 @@ const database = getDatabase(app);
     UserExtraServiceSelectionComponent,
     ReportComponent,
     SendReportComponent,
-    FilterPipe,
-    OrderByPipe
+    UserBrowseCateringServiceComponent
   ],
   imports: [
     CommonModule,
@@ -191,7 +191,9 @@ const database = getDatabase(app);
     AngularFirestoreModule,
     AngularFireStorageModule,
     AngularFireDatabaseModule, 
-    HttpClientModule
+    HttpClientModule,
+    MatButtonModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]
