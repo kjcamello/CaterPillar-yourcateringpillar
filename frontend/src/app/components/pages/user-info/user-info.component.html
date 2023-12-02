@@ -41,7 +41,7 @@
             <div class="cover-photo-container">
             <div class="coverSize">
                   <div class="coverphoto" *ngIf="selectedImage">
-                  <img [src]="selectedImageSrc" alt="Selected Image" class="cover_photo">
+                    <img [src]="selectedImageSrc || 'assets/user_cover_pic.jpg'" alt="Selected Image" class="cover_photo">
           </div>
       </div>
           <label class="custom-file-upload">
@@ -83,25 +83,25 @@
       <div class="primary-details">
         <div class="name-item">
           <label for="name">User Name:</label>
-          <input type="text" id="name" value="{{ customers.userName}}">
+          <input type="text" id="name" value="{{ customers.userName}}" [disabled]="!isEditable">
         </div>
 
       <!-- Email -->
         <div class="email-item">
           <label for="email">Email:</label>
-          <input type="email" id="email" value="{{ customers.email}}">
+          <input type="email" id="email" value="{{ customers.email}}" [disabled]="!isEditable">
         </div>
 
       <!-- Phone -->
         <div class="phonenumber-item">
           <label for="phone">Phone:</label>
-          <input type="tel" id="phone" value="{{customers.phone}}">
+          <input type="tel" id="phone" value="{{customers.phone}}" [disabled]="!isEditable">
         </div>
 
       <!-- Address -->
         <div class="address-item">
           <label for="address">Address:</label>
-          <input type="text" id="address" value="{{customers.address}}">
+          <input type="text" id="address" value="{{customers.address}}" [disabled]="!isEditable">
         </div>
     </div>
     <div class="other-label">
@@ -111,39 +111,41 @@
        
       <!-- Gender -->
       <div class="Gender-details">
-          <label>Gender:</label>
-          <input class="malegenderradio" type="radio" id="male" name="gender" value="male" [(ngModel)]="selectedGender">
-          <label for="male">Male</label>
-          
-          <input class="femalegenderradio" type="radio" id="female" name="gender" value="female" [(ngModel)]="selectedGender">
-          <label for="female">Female</label>
-          
-          <input class="othergenderradio" type="radio" id="others" name="gender" value="others">
-          <label for="others">Others</label>
-          
-          <input class="othergenderinput" type="text" id="otherGender" placeholder="Specify your gender">
+        <label>Gender:</label>
+      
+        <input class="malegenderradio" type="radio" id="male" name="gender" value="male" [(ngModel)]="selectedGender" [disabled]="!isEditable">
+        <label for="male">Male</label>
+      
+        <input class="femalegenderradio" type="radio" id="female" name="gender" value="female" [(ngModel)]="selectedGender" [disabled]="!isEditable">
+        <label for="female">Female</label>
+      
+        <input class="othergenderradio" type="radio" id="others" name="gender" value="others" [disabled]="!isEditable" (change)="onGenderChange()">
+        <label for="others">Others</label>
+      
+        <div class="otherGen">
+          <input type="text" id="otherGender" [(ngModel)]="otherGenderInput" placeholder="Please input gender" [disabled]="!isEditable">
+        </div>
       </div>
-
       <!-- Date of Birth -->
       <div class="dateBirth-detail">
         <label>Date of Birth:</label>
         <div class="monthdetail">
             <label for="month">Month</label>
-            <select id="month" [(ngModel)]="selectedMonth" (change)="populateDateDropdown()">
+            <select id="month" [(ngModel)]="selectedMonth" (change)="populateDateDropdown()" [disabled]="!isEditable">
                 <option *ngFor="let month of months" [value]="month">{{ month }}</option>
             </select>
         </div>
         
         <div class="datedetail">
             <label for="date">Date</label>
-            <select id="date" [(ngModel)]="selectedDate">
+            <select id="date" [(ngModel)]="selectedDate" [disabled]="!isEditable">
                 <option *ngFor="let day of days" [value]="day">{{ day }}</option>
             </select>
         </div>
         
         <div class="yeardetail">
             <label for="year">Year</label>
-            <select id="year" [(ngModel)]="selectedYear">
+            <select id="year" [(ngModel)]="selectedYear" [disabled]="!isEditable">
                 <option *ngFor="let year of years" [value]="year">{{ year }}</option>
             </select>
         </div>
@@ -155,27 +157,29 @@
       <!-- Bio Message -->
       <div class="bio-label">
         <label for="bio">Bio:</label>
-        <textarea [(ngModel)]="bioStatement" class="bio-statement" id="bio"></textarea>
+        <textarea [(ngModel)]="bioStatement" class="bio-statement" id="bio" [disabled]="!isEditable"></textarea>
     </div>
 
       <!-- Food Likes -->
       <div class="foodlikes">
           <label for="foodlikes">Food Likes:</label>
-          <textarea [(ngModel)]="foodLikes" class="foodliketxtbox" id="foodlikes"></textarea>
+          <textarea [(ngModel)]="foodLikes" class="foodliketxtbox" id="foodlikes" [disabled]="!isEditable"></textarea>
       </div>
   </div>
 </div>
 <div class="profile-actions">
   <div class="profile-actions-edit">
-     <button class="edit-btn" (click)="enableEditMode()"> 
-        <img src="assets/editsavebuttons/edit static.png" alt="Edit">
-     </button> 
-  
-  <div class="profile-actions-save">
-    <button class="save-btn"  (click)="confirmSaveChanges()">
+    <!-- Use Angular's (click) event binding -->
+    <button class="edit-btn" (click)="onEditClicked()"> 
+      <img src="assets/editsavebuttons/edit static.png" alt="Edit">
+    </button>
+    
+    <div class="profile-actions-save">
+      <!-- Save Button -->
+      <button class="save-btn" (click)="onSaveClicked()">
         <img src="assets/editsavebuttons/save static.png" alt="Save">
-     </button> 
-  </div>
+      </button>
+    </div>
   </div>
 </div>
 

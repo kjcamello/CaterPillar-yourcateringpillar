@@ -394,6 +394,10 @@
   width: 30px; /* Adjust size as needed */
   height: auto;
 }
+.otherGen{
+  margin-left: 629px;
+  margin-top: -38px;
+}
 .Oth-detail-container{
   margin-top: 136px;
   background-color: rgb(243, 147, 3);
@@ -494,11 +498,12 @@
   display: flex;
   
 }
+
 .edit-btn{
   border: none;
   background-color: transparent;
   cursor: pointer;
-  margin-left: 254px;
+  margin-left: 481px;
   
 }
 .edit-btn img {
@@ -518,6 +523,7 @@
   background-color: transparent;
   cursor: pointer;
   margin-left: 389px; 
+  visibility: hidden;
 }
 
 

@@ -9,8 +9,9 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./user-info.component.css']
 })
 export class UserInfoComponent  {
- 
+  
   customers: any;
+  otherGenderInput: string = ''; // This will hold the input for 'other' gender
   selectedGender: string = ''; // Initialize it to an empty string
   selectedMonth: string = ''; // Initialize it to an empty string
   selectedDate: number = null; // Initialize it to null
@@ -18,6 +19,9 @@ export class UserInfoComponent  {
   bioStatement: string = ''; // Initialize it to an empty string
   foodLikes: string = ''; // Initialize it to an empty string
 
+  isEditable: boolean = false;
+
+  defaultCoverPhotoUrl: string = 'assets/user_cover_pic.jpg';
 
   months: string[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   days: number[] = Array.from({ length: 31 }, (_, i) => i + 1);
@@ -34,6 +38,7 @@ export class UserInfoComponent  {
   editMode: boolean = false;
   isFieldDisabled: boolean = true;
 
+
   constructor(
     private firestore: AngularFirestore, 
     private authService: AuthService,
@@ -43,7 +48,9 @@ export class UserInfoComponent  {
   ngOnInit(): void {
     this.fetchCustomerData();
   }
-
+  enableEditMode() {
+    this.isEditable = !this.isEditable;
+  }
   saveUserProfile() {
     // Check if a user is authenticated
     this.afAuth.authState.subscribe(user => {
@@ -81,8 +88,6 @@ export class UserInfoComponent  {
       }
     });
   }
-  
-
   confirmSaveChanges() {
     const confirmSave = confirm('Do you want to save your changes?');
     if (confirmSave) {
@@ -93,12 +98,31 @@ export class UserInfoComponent  {
   fetchCustomerData() {
     this.afAuth.authState.subscribe(user => {
       if (user) {
-        const catererRef = this.firestore.collection('customers').doc(user.uid);
-        catererRef.valueChanges().subscribe(data => {
+        const userRef = this.firestore.collection('customers').doc(user.uid);
+        userRef.valueChanges().subscribe(data => {
           this.customers = data;
+          this.setFormValues(data); // Set form values based on fetched data
         });
       }
     });
+  }
+  setFormValues(data: any) {
+    if (data) {
+      // Set gender
+      this.selectedGender = data.gender;
+
+      // Set date of birth if available
+      if (data.dateOfBirth) {
+        this.selectedMonth = this.months[data.dateOfBirth.month - 1];
+        this.selectedDate = data.dateOfBirth.date;
+        this.selectedYear = data.dateOfBirth.year;
+      }
+
+      // Set other fields like bioStatement, foodLikes, etc.
+      this.bioStatement = data.bioStatement;
+      this.foodLikes = data.foodLikes;
+      // ... set other fields as needed ...
+    }
   }
 
   onCoverImageSelected(event: any) {
@@ -163,5 +187,33 @@ export class UserInfoComponent  {
   
     // Update the 'days' array with the correct number of days
     this.days = Array.from({ length: numberOfDays }, (_, i) => i + 1);
+  }
+  onEditClicked(): void {
+    const editButton = document.querySelector('.edit-btn') as HTMLElement;
+    const saveButton = document.querySelector('.save-btn') as HTMLElement;
+
+    if (editButton && saveButton) {
+      editButton.style.marginLeft = '254px';
+      saveButton.style.visibility = 'visible';
+    }
+    this.isEditable = true;
+  }
+  onSaveClicked(): void {
+    const editButton = document.querySelector('.edit-btn') as HTMLElement;
+    const saveButton = document.querySelector('.save-btn') as HTMLElement;
+
+    if (editButton && saveButton) {
+      editButton.style.marginLeft = '481px';
+      saveButton.style.visibility = 'hidden';
+    }
+    this.isEditable = false;
+    this.confirmSaveChanges();
+  }
+  onGenderChange(): void {
+    const otherRadio = document.getElementById('others');
+    const genderInput = document.getElementById('otherGender');
+    if (this.selectedGender === 'otherRadio') {
+      genderInput.style.visibility = 'visible';
+    } 
   }
 }
