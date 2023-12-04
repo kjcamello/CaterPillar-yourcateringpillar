@@ -55,9 +55,10 @@ export class SuperadminCustomerComponent implements OnInit {
     }
   
     this.sortByColumn = column;
-  
+  /*
     // Use Lodash for sorting
     this.caterers = _.orderBy(this.caterers, [column], [this.sortOrder]);
+    */
     this.filteredCaterers = this.sortOrder === 'asc'
       ? this.filteredCaterers.sort((a, b) => {
           const valA = this.getPropertyValue(a, column);

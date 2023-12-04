@@ -365,7 +365,7 @@ div{
   top: 0;
   left: 0;
   right: 0;
-  background-color: #FFD2B3;
+  background-color: #FFD5B2;
   border-bottom: solid 1px rgb(182 0 0);
   /* transform: translateZ(0); */
   /* z-index: 100; */
@@ -766,3 +766,28 @@ ul a{
 }
 
 /*--------------------------------------*/
+/*description and textbox adjustment align*/
+/* You can further customize the styles to match your design */
+
+/* CSS for the fixed-size textarea */
+.fixed-event-textarea {
+  width: 100%; /* Adjust the width as needed */
+  height: 250px; /* Adjust the height as needed */
+  resize: none; /* Disable textarea resizing */
+}
+
+.fixed-es-textarea {
+  width: 100%; /* Adjust the width as needed */
+  height: 150px; /* Adjust the height as needed */
+  resize: none; /* Disable textarea resizing */
+}
+
+.fixed-voucher-textarea {
+  width: 100%; /* Adjust the width as needed */
+  height: 175px; /* Adjust the height as needed */
+  resize: none; /* Disable textarea resizing */
+}
+
+.form-group textarea {
+  height: 125px; /* Adjust the height as needed */
+}

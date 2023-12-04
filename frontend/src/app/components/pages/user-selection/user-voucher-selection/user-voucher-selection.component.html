@@ -8,7 +8,7 @@
                     (click)="toggleVoucherSelection(voucherItem)">
                     <!-- Display voucher details here -->
                     <div>
-                      <img [src]="voucherItem.voucherImage" alt="Voucher Image" class="voucher-image" style="max-width: 100px">
+                      <img [src]="voucherItem.voucherImage || 'https://firebasestorage.googleapis.com/v0/b/caterpillar-hestia.appspot.com/o/_images%2Fdefault_no_image.png?alt=media&token=c8be7d38-a9e9-47a2-9cb8-5e6bdf3d4758'" alt="Image not available" class="voucher-image" style="max-width: 100px"/>
                     </div>
                     <div class="voucher_name">
                       <p>{{ voucherItem.voucherName }}</p>

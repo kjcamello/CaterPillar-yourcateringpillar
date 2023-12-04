@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { FoodItem } from 'src/app/shared/models/food-item';
+
+import { UserAuthService } from 'src/app/services/userauth.service';
 import { AuthService } from './auth.service';
 
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
@@ -42,7 +44,8 @@ export class FoodItemsService {
   constructor(
     private firestore: AngularFirestore,
     private authService: AuthService,
-    private storage: AngularFireStorage
+    private storage: AngularFireStorage,
+    private userauthService: UserAuthService
   ) {
   }
 
@@ -237,6 +240,34 @@ private toExtraServiceObject(extraserviceItem: any): any {
       amountDeduction: voucherItem.amountDeduction,     
       // Add other fields as needed
     };
+  }
+
+  saveToCart(selectedPackage: any, userUid: string, packageName: string): void {
+    // Use the Firestore-generated ID as packageUid
+    const packageUid = this.firestore.createId();
+  
+    const cartData = {
+      selectedPackage,
+      packageName,
+      packageUid,
+      // Add any other data you want to save to the cart
+    };
+  
+    const cartSubcollectionRef = this.firestore.collection(`customers/${userUid}/addToCartDIYPackage`);
+  
+    // Add the data to the cart subcollection
+    cartSubcollectionRef.add(cartData)
+      .then(docRef => {
+        alert('This D-I-Y Package has been added to cart successfully.');
+        console.log('This D-I-Y Package has been added to cart successfully.');
+        console.log('Package UID:', docRef.id); // Use the Firestore-generated ID
+        // You can also show a confirmation message or update UI as needed
+      })
+      .catch(error => {
+        alert('Error adding package to cart:');
+        console.error('Error adding package to cart:', error);
+        // Handle the error, show a message, etc.
+      });
   }
 
 }

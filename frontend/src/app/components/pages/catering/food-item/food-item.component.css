@@ -116,7 +116,7 @@ button:hover {
 /* CSS for the fixed-size textarea */
 .fixed-textarea {
   width: 100%; /* Adjust the width as needed */
-  height: 75px; /* Adjust the height as needed */
+  height: 175px; /* Adjust the height as needed */
   resize: none; /* Disable textarea resizing */
 }
 
@@ -132,10 +132,6 @@ button:hover {
   max-width: 120px; /* Adjust the max width as needed */
   max-height: 120px; /* Adjust the max height as needed */
   margin-left: 10px; /* Add margin to separate image preview from other content */
-}
-
-.form-group textarea {
-  height: 175px; /* Adjust the height as needed */
 }
 
 .diy-package {

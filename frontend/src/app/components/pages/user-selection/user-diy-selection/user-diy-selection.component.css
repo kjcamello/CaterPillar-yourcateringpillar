@@ -95,6 +95,10 @@ pointer-events: none;  Prevent interactions with the disabled element
 
 
 /* CSS E-RECEIPT */
+.receipt-row{
+  text-align:right;
+}
+
 .disabled-input {
   cursor: not-allowed;
   background-color: lightgray;
@@ -221,20 +225,6 @@ z-index:251;
   text-align: right;
 }
 
-.grand-total-label {
-  font-weight: bold;
-  font-size: 18px;
-}
-
-.grand-total-value {
-  font-weight: bold;
-  font-size: 18px;
-}
-
-
-
-
-
 /*Centering the no items added sprint 3*/
 
 /* Center the text */
@@ -263,41 +253,8 @@ color: red;
 /* CSS for the fixed-size textarea */
 .fixed-textarea {
   width: 100%; /* Adjust the width as needed */
-  height: 75px; /* Adjust the height as needed */
+  height: 95px; /* Adjust the height as needed */
   resize: none; /* Disable textarea resizing */
-}
-/*
-.edit-form button {
-  background-color: #000;
-  color: #fff;
-  border: none;
-  padding: 10px;
-  cursor: pointer;
-}*/
-
-/* Add styling for the heading */
-.edit-form h3 {
-  text-align: center; /* Center the text */
-  margin-bottom: 20px; /* Adjust the margin as needed */
-}
-
-
-/*PRIORITY*/
-/*textbox alignments*/
-.image-preview-container {
-  display: flex;
-  justify-content: flex-end; /* Align content to the right */
-}
-
-.image-preview{
-  max-width: 120px;/* Adjust the max width as needed */
-  max-height: 120px; /* Adjust the max height as needed */
-  margin-left: 10px; /* Add margin to separate image preview from other content */
-  margin-top: -10px; /* Add margin to separate image preview from other content */
-}
-
-.form-group textarea {
-  height: 150px; /* Adjust the height as needed */
 }
 
 .diy-package {
@@ -318,97 +275,6 @@ color: red;
   display: flex;
   justify-content: space-between;
 }
-
-.form-group {
-  flex: 1;
-  margin-right: 10px; /* Adjust margin as needed */
-}
-
-
-
-
-/*update changes button */
-.update-food-item-button {
-  position: fixed;
-  top: 745px; /* Adjust the top position as needed */
-  left: 75px; /* Adjust the left position as needed */
-  width: 375px; /* Set the width to match the .diy-package form */
-  background-color: blue;
-  color: #fff;
-  padding: 0px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: 0.2s all;
-  font-size: 20px; /* Adjust the font size to your preferred size */
-}
-
-
-.close-button {
-  position: absolute;
-  top: 3px; /* Adjust the top distance as needed */
-  right: 3px; /* Adjust the right distance as needed */
-  cursor: pointer;
-  font-size: 10px; /* Adjust the font size as needed */
-  background: blue;
-  color: white; /* Adjust the color as needed */
-}
-
-.close-button:hover {
-  color: red; /* Change to red on hover */
-}
-
-/*SPRINT 4*/
-/* Add or modify styles as needed */
-.common-table input,
-.common-table textarea {
-width: 100%;
-}
-
-.common-table img {
-max-width: 100px; /* Adjust the max-width as needed */
-}
-
-/* Additional styles for the image upload */
-.edit-image-container {
-display: flex;
-align-items: center;
-}
-
-
-/*SPRINT 4*/
-/* Add this to your CSS */
-.file-input {
-display: none;
-}
-
-.edit-image-container {
-position: relative;
-}
-
-.file-input-label {
-cursor: pointer;
-}
-
-.image-preview {
-max-width: 100px;
-max-height: 100px;
-margin-top: 8px;
-}
-
-/* ... (existing code) ... */
-
-.icon-size {
-height: 30px;
-width: 30px;
-}
-
-.upload-image-icon-size {
-height: 30px;
-width: 30px;
-margin-left: 20px;
-}
-
 
 /*fixed tab and header*/
 /* Add or modify styles for fixed header and tabs */
@@ -457,44 +323,6 @@ cursor: pointer;
 .common-table {
 margin-top: 20px;
 }
-
-
-
-
-
-/*food formity*/
-/*food items in table*/
-.food-form-container {
-  margin-left: -325px;
-  margin-top: -80px;
-  width: 1125px;
-}
-
-.saved-food-item-table {
-  flex: 1;
-  padding: 20px;
-  margin-top: 50px;
-  margin-left: 380px;
-}
-
-/*VIEW FOOD ITEM TABLE*/
-/* Style the container for the app-view-food-item-table as a form with an orange background */
-.food-table-form-container {
-  max-height: 266px; /* Adjust the height as needed */
-  overflow-y: auto; /* Enable vertical scrolling for overflowing content */
-  background-color: orange;
-  padding: 20px;
-  border-radius: 5px; /* Optional: Add rounded corners for a nicer look */
-  border: 1px solid #ddd;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-}
-
-/* Additional styling for the form, adjust as needed */
-.food-table-form-container h2 {
-  color: white; /* Set the text color to white or any other color that contrasts well with orange */
-  margin-bottom: 10px; /* Add some spacing below the heading */
-}
-
 
 
 
@@ -607,6 +435,7 @@ margin-top: 20px;
   max-width: 650px; /* Adjust as needed */
   margin: 0 0 0 20px; /* Adjust the margin to create space between the list and the form */
   position: relative; /* Set position to relative for absolute positioning of child elements */
+  z-index: -2;
 }
 
 /*------------------------------------*/
@@ -635,11 +464,27 @@ margin-top: 20px;
   z-index:200;
 }
 
+.whitewallrow1{
+  position: fixed;
+  background-color: white;
+  color: white;
+  text-align: left;
+  top: 100px;
+  left: 0px;
+  width: 2000px;
+  height: 165px;
+  z-index: -1;
+}
+
+.items-front{
+  z-index: 2;
+}
+
 .wall1{
   position: fixed;
   background-color: #FFD2B3;
   color: #FFD2B3;
-  text-align: center;
+  text-align: left;
   top: 100px;
   left: 700px;
   width: 35px;
@@ -651,7 +496,7 @@ margin-top: 20px;
   position: fixed;
   background-color: #FFD2B3;
   color: #FFD2B3;
-  text-align: center;
+  text-align: left;
   top: 600px;
   left: 700px;
   width: 740px;
@@ -663,12 +508,28 @@ margin-top: 20px;
   position: fixed;
   background-color: #FFD2B3;
   color: #FFD2B3;
-  text-align: center;
+  text-align: left;
   top: 117px;
   left: 701px;
   width: 33px;
   height: 485px;
   z-index: 100;
+}
+
+.wall4{
+  position: fixed;
+  background-color: #FFD2B3;
+  color: #FFD2B3;
+  text-align: left;
+  top: 117px;
+  left: 300px;
+  width: 405px;
+  height: 145px;
+  border: solid 1px rgb(182 0 0);
+}
+
+.dot{
+  visibility: hidden;
 }
 
 .no_food_items {
@@ -688,16 +549,18 @@ margin-top: 20px;
   position: fixed;
   
   border: 1px solid #ccc;
-  background-color: #f5f5f5;
-  width:150px;
-
-  top:615px;
-  left:715px;
+  background-color: darkred;
+  color: white;
+  width:420px;
+  height:133px;
+  top:123px;
+  left:308px;
   z-index:100;
 }
 
 .event_name {
-  color: darkred;
+  color: orange;
+  text-align: center;
 }
 
 
@@ -741,4 +604,44 @@ margin-top: 20px;
   max-height: 200px;
   max-width:500px;
   overflow-y: auto;
+}
+
+.form-row {
+  display: flex;
+  justify-content: space-between;
+  padding-inline: 5px;
+}
+
+
+.date-form-control {
+  width: 175px;
+  height: 20px;
+  font-size: 1rem;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.time-form{
+  margin-top:-43px;
+  padding-left:5px;
+}
+
+.time-form-control {
+  width: 175px;
+  height: 20px;
+  font-size: 1rem;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.locland{
+  margin-left: 6px;
 }
