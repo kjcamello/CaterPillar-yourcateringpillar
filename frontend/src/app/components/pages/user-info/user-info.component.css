@@ -394,8 +394,12 @@
   width: 30px; /* Adjust size as needed */
   height: auto;
 }
+.otherGen{
+  margin-left: 629px;
+  margin-top: -38px;
+}
 .Oth-detail-container{
-  margin-top: 120px;
+  margin-top: 136px;
   background-color: rgb(243, 147, 3);
   width: 1100px;
   position: absolute;
@@ -420,7 +424,8 @@
 }
 
 .profile-statements{
-  margin-top: 120px;
+  margin-top: -448px;
+  margin-left: -413px;
   background-color: khaki;
   width: 1100px;
   position: absolute;
@@ -456,13 +461,6 @@
   font-size: x-large;
   margin-left: 198px;
 }
-.editfood-btn{
-  margin-top: 171px;
-  position: absolute;
-  width: 50px;
-  left: 876px;
-  top: 100px;
-}
 .foodliketxtbox{
   margin-top: 10px;
   position: absolute;
@@ -484,7 +482,8 @@
   font-family: cursive;
 }
 .profile-actions{
-  margin-top: 120px;
+  margin-top: 5px;
+  margin-left: -312px;
   background-color: beige;
   width: 1100px;
   position: absolute;
@@ -499,11 +498,12 @@
   display: flex;
   
 }
+
 .edit-btn{
   border: none;
   background-color: transparent;
   cursor: pointer;
-  margin-left: 254px;
+  margin-left: 481px;
   
 }
 .edit-btn img {
@@ -523,6 +523,7 @@
   background-color: transparent;
   cursor: pointer;
   margin-left: 389px; 
+  visibility: hidden;
 }
 
 
