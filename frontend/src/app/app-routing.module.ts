@@ -55,7 +55,7 @@ import { SendReportComponent } from './components/pages/send-reports/send-report
 
 //Sprint 5 - user browse catering service
 import { UserBrowseCateringServiceComponent } from './components/pages/user-browse-catering-service/user-browse-catering-service.component';
-
+import { ViewPackagesComponent } from './components/pages/view-packages/view-packages.component';
 
 import { TempCatererProfComponent } from './components/pages/temp-caterer-prof/temp-caterer-prof.component';
 
@@ -109,6 +109,8 @@ const routes: Routes = [
   //user browse catering SPRINT 5 LOPEZ
   { path: 'user-browse-catering-service', component: UserBrowseCateringServiceComponent },
 
+  //View Packages
+  { path: 'view-packages/:catererUid', component: ViewPackagesComponent},
 
   { path: 'user-profile', component: UserProfileComponent },  // <-- This is the last route, so no comma after this
   { path: 'user-orders', component: UserOrdersComponent },

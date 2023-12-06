@@ -86,6 +86,8 @@ import { UserExtraServiceSelectionComponent } from './components/pages/user-sele
 import { ReportComponent } from './components/pages/superadmin/report.component';
 import { SendReportComponent } from './components/pages/send-reports/send-reports.component';
 import { UserBrowseCateringServiceComponent } from './components/pages/user-browse-catering-service/user-browse-catering-service.component';
+import { ViewPackagesComponent } from './components/pages/view-packages/view-packages.component';
+
 
 //import { MatTabsModule } from '@angular/material/tabs';
 
@@ -169,7 +171,9 @@ const database = getDatabase(app);
     UserExtraServiceSelectionComponent,
     ReportComponent,
     SendReportComponent,
-    UserBrowseCateringServiceComponent
+    UserBrowseCateringServiceComponent,
+    ViewPackagesComponent,
+  
   ],
   imports: [
     CommonModule,
