@@ -22,6 +22,7 @@ export class UserInfoComponent  {
   isEditable: boolean = false;
 
   defaultCoverPhotoUrl: string = 'assets/user_cover_pic.jpg';
+  defaultProfilePhotoUrl: string = 'assets/default_profilepic.png';
 
   months: string[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   days: number[] = Array.from({ length: 31 }, (_, i) => i + 1);
@@ -33,6 +34,7 @@ export class UserInfoComponent  {
   selectedProfileImageSrc: string = null;
   selectedImage: File = null;
   selectedImageSrc: string = null;
+  
 
   userCredentials = { username: '', password: '' };
   editMode: boolean = false;
@@ -47,6 +49,7 @@ export class UserInfoComponent  {
 
   ngOnInit(): void {
     this.fetchCustomerData();
+   
   }
   enableEditMode() {
     this.isEditable = !this.isEditable;

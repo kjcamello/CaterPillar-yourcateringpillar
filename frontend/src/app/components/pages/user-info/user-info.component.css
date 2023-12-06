@@ -292,11 +292,12 @@
 
 
 } */
+
 .profile-pic-container {
   position: absolute;
   bottom: 20px;
-  left: 250px;
-  top: 170px;
+  left: 656px;
+  top: 315px;
   margin: 20px 0;
 }
 
@@ -361,8 +362,8 @@
   width: 1145px;
   height: 1155px;
   position: absolute;
-  left: 98px;
-  top: 330px;
+  left: 389px;
+  top: 479px;
   padding: 20px; /* Add padding to ensure inner content doesn't touch the edges */
     border-radius: 15px; /* Rounds the corners of the rectangle */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow for depth */
@@ -471,7 +472,7 @@
 }
 .profile-credentials{
   position: absolute;
-  left: 500px;
+  left: 554px;
 }
 .username-container{
   font-size: 45px;
@@ -487,9 +488,9 @@
   background-color: beige;
   width: 1100px;
   position: absolute;
-  left: 442px;
+  left: 726px;
   height: 95px;
-  top: 1494px;
+  top: 1641px;
   padding: 20px;
   border-radius: 15px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
