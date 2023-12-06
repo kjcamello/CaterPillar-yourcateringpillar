@@ -67,10 +67,13 @@
                 {{ caterer.catererInfo.catererRegisteredAddress }}
               </div>
             </div>
-            <div>
+            <div class="Viewpkg">
               <button class="diy-package-button" [routerLink]="['/user-diy-selection', caterer.catererBasicInfo.catererUid]">
                 DIY Package
               </button>
+              <button>
+                View Packages 
+              </button>  
             </div>
           </a>
         </li>
@@ -81,4 +84,4 @@
   
 
 <!-- Display the caterer information in a table -->
-<app-view-caterers-list></app-view-caterers-list>
+<!-- <app-view-caterers-list></app-view-caterers-list> -->
