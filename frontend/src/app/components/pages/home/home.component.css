@@ -32,11 +32,10 @@
 /* user-browse-catering-service.component.css */
 
 .background-container {
-  /* background-image: url('../assets/user_home_background.png');  */
-  background-size: cover; /* Adjust as needed */
+  background-image: url('https://firebasestorage.googleapis.com/v0/b/caterpillar-hestia.appspot.com/o/_images%2Fuser_home_background.png?alt=media&token=1dc85c53-1626-4244-bb74-24e07ec4492d');
+  background-size: cover;
   background-repeat: no-repeat;
-  height: 100vh; /* Ensure the container takes up the full height of the viewport */
-  margin: 0;
-  font-family: 'Langar', sans-serif; /* Apply the custom Langar font */
+  height: 100vh; 
+  font-family: 'Langar', sans-serif; 
   /* Add any additional styles specific to this component */
 }

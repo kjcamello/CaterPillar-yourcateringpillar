@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EventEmitter, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
@@ -21,6 +22,7 @@ export class UserVoucherSelectionComponent {
   selectedFoodItemsCount: number = 0; // Counter for selected food items
   isVoucherEnabled: boolean = false; // Flag to determine if the voucher is enabled
 
+  @Output() voucherSelectionChanged: EventEmitter<any[]> = new EventEmitter();
   constructor(
     private activatedRoute: ActivatedRoute,
     private firestore: AngularFirestore,
@@ -50,7 +52,22 @@ export class UserVoucherSelectionComponent {
       this.selectedFoodItemsCount = selectedFoodItems.length;
       this.checkVoucherAvailability();
     });
-  }
+
+    // Subscribe to the selectedVoucher$ observable to get updates
+this.eventSelectionService.selectedVoucher$.subscribe((selectedVoucher) => {
+  console.log("Selected Voucher:", selectedVoucher);
+  this.selectedVoucher = selectedVoucher;
+  this.checkVoucherAvailability();
+});
+
+  // Subscribe to the selectedVoucher$ observable to get updates
+  this.eventSelectionService.selectedVoucher$.subscribe((selectedVoucher) => {
+    console.log('Selected Voucher in DIY Component:', selectedVoucher);
+    this.selectedVoucher = selectedVoucher;
+    this.checkVoucherAvailability();
+  });
+  // ... (existing code)
+}
 
   loadVoucherItems() {
     const collectionPath = `caterers/${this.catererUid}/voucherItems`; // Adjust the path accordingly
@@ -62,18 +79,27 @@ export class UserVoucherSelectionComponent {
   }
 
   toggleVoucherSelection(voucherItem: any): void {
+    // Toggle the selected status of the voucher item
     voucherItem.selected = !voucherItem.selected;
 
     // Check if the voucher item is selected and add/remove it from the array
     if (voucherItem.selected) {
-      this.selectedVoucherItems.push(voucherItem);
+      // Check if the voucher is already in the array to avoid duplicates
+      if (!this.selectedVoucherItems.some((item) => item.voucherID === voucherItem.voucherID)) {
+        this.selectedVoucherItems.push(voucherItem);
+      }
     } else {
-      this.selectedVoucherItems = this.selectedVoucherItems.filter((item) => item !== voucherItem);
+      // Remove the voucher from the array
+      this.selectedVoucherItems = this.selectedVoucherItems.filter((item) => item.voucherID !== voucherItem.voucherID);
     }
 
-    // Save selected voucher items to the service
-    this.eventSelectionService.setSelectedVoucherItems(this.selectedVoucherItems);
+    // Emit the updated selected voucher items
+    this.voucherSelectionChanged.emit(this.selectedVoucherItems);
   }
+  
+  
+  
+  
 
   // Method to check if the voucher should be enabled
   checkVoucherAvailability(): void {

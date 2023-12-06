@@ -11,7 +11,7 @@ li:hover {
     white-space: nowrap; /* Prevent wrapping to keep entries on the same line */
     overflow-x: auto; /* Enable horizontal scrolling for the entire form */
     overflow-y: hidden; /* Hide vertical scrollbar */
-    max-width: 680px; /* Adjust the maximum width to your preference */
+    max-width: 300px; /* Adjust the maximum width to your preference */
     width: 100%; /* Set a fixed width for the form */
     max-height: 200px;
     background-color: white; /* Set the background color to gray */
@@ -67,8 +67,8 @@ li:hover {
 }
 
 .no_items{
-    color: white;
-    margin-left: 250px;
+    color: black;
+    margin-left: 65px;
     padding:41px 0px 41px 0px;
 }
 

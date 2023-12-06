@@ -2,13 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Observable } from 'rxjs';
+import {  Observable } from 'rxjs';
+
 import { FoodItemsService } from 'src/app/services/food-items.service';
 import { EventSelectionService } from 'src/app/services/event-selection.service';
-
+import { UserAuthService } from 'src/app/services/userauth.service';
 
 import { DatePipe } from '@angular/common';
 import { AuthService } from 'src/app/services/auth.service';
+import { AbstractControl } from '@angular/forms'; // Add this line
+
 
 // Create an interface for the item structure
 interface FoodItem {
@@ -57,7 +60,7 @@ eventItems: Observable<any[]>;
 voucherItems: Observable<any[]>;
 
 //SPRINT 5 LOGIC
-selectedEvent: any;
+selectedEvent: any;//final integration
 //SPRINT 5 LOGIC
 dateAndTimeForm: FormGroup;
 showReceipt: boolean = false; // Add this line for the showReceipt property
@@ -70,27 +73,53 @@ displayName: string | null;
 
 
 selectedVoucherItems: any[] = []; // Array to store selected voucher items
-selectedVoucher: any; // Variable to store the selected voucher
+selectedVoucher: any = null;
 
 // Add this property to store the adjusted grand food item total
 adjustedGrandFoodItemTotal: number = 0;
-constructor(
+grandTotal: number = 0;
+
+originalTotal: number = 0;
+
+  // Add these properties to store original and new grand totals
+  originalGrandTotal: number = 0;
+  newGrandTotal: number = 0;
+
+
+  //modal package name when add-to-cart button is pressed
+  showPackageNamePrompt: boolean = false;
+packageName: string = '';
+
+    get locationLandmarkControl(): AbstractControl | null {
+    return this.dateAndTimeForm.get('locationLandmark');
+  }
+
+
+  //package in add-to-cart
+  selectedPackage: any = {}; // Assuming you have a property to store the selected package
+
+  userUid: string = '';  // Declare userUid property
+  constructor(
     private activatedRoute: ActivatedRoute,
     private firestore: AngularFirestore,
+    private foodItemsService: FoodItemsService,
     private eventSelectionService: EventSelectionService,
     private formBuilder: FormBuilder,
     private selectedItemsService: FoodItemsService,
-    private authService: AuthService
+    private authService: AuthService,
+    private userauthService: UserAuthService
     ) {
     // Initialize the form in the constructor
     this.dateAndTimeForm = this.formBuilder.group({
       selectedDate: [null, Validators.required],
       selectedTime: [null, Validators.required],
+      locationLandmark: [null, Validators.required],
     });
 
     this.displayName = authService.getLoggedInUsername();
     }
 
+    //loader of all loads
     ngOnInit(): void {
       this.activatedRoute.params.subscribe(params => {
         this.catererUid = params['catererUid'];
@@ -112,8 +141,21 @@ constructor(
     this.eventSelectionService.selectedVoucherItems$.subscribe((selectedVoucherItems) => {
       this.selectedVoucherItems = selectedVoucherItems;
     });
-    }
 
+    this.userUid = this.userauthService.getUserUid();
+  }
+  
+    loadFoodItems(category: string) {
+      this.selectedCategory = category;
+    
+      // Construct the correct collection path based on the category
+      const collectionPath = `caterers/${this.catererUid}/${category}`;
+    
+      // Specify the type of data expected (FoodItem[])
+      this.selectedItems = this.firestore
+        .collection<FoodItem>(collectionPath)
+        .valueChanges();
+    }
 
   // Method to update the e-receipt based on selectedExtraServices
   updateEReceipt(): void {
@@ -126,19 +168,6 @@ constructor(
     });
 
     // Add your logic to update the e-receipt UI based on the selected extra services
-  }
-
-
-  loadFoodItems(category: string) {
-    this.selectedCategory = category;
-  
-    // Construct the correct collection path based on the category
-    const collectionPath = `caterers/${this.catererUid}/${category}`;
-  
-    // Specify the type of data expected (FoodItem[])
-    this.selectedItems = this.firestore
-      .collection<FoodItem>(collectionPath)
-      .valueChanges();
   }
 
   foodtoggleDescription(item: any): void {
@@ -217,21 +246,33 @@ constructor(
       return; // Exit the method if there are no selected food items
     }
   
-  // Check if the event is selected
-  if (!this.selectedEvent) {
-    alert('Please select an event before reviewing the order.');
-    return; // Exit the method if the event is not selected
-  }
-
-  // Check if the date and time are set
-  if (!this.dateAndTimeForm.valid) {
-    alert('Please set the event date and time before reviewing the order.');
-    return; // Exit the method if date and time are not set
-  }
+    // Check if the event is selected
+    if (!this.selectedEvent) {
+      alert('Please select an event before reviewing the order.');
+      return; // Exit the method if the event is not selected
+    }
+  
+    // Check if the date and time are set
+    if (!this.dateAndTimeForm.get('selectedDate').value) {
+      alert('Please set the event date before reviewing the order.');
+      return; // Exit the method if the date is not set
+    }
+  
+    if (!this.dateAndTimeForm.get('selectedTime').value) {
+      alert('Please set the event time before reviewing the order.');
+      return; // Exit the method if the time is not set
+    }
+  
+    // Check if the location is set
+    if (!this.dateAndTimeForm.get('locationLandmark').value) {
+      alert('Please set the event location before reviewing the order.');
+      return; // Exit the method if the location is not set
+    }
   
     // If all conditions are met, toggle the receipt display
     this.showReceipt = !this.showReceipt;
   }
+  
   
 /*event*/
   formatDate(selectedDate: string): string {
@@ -249,7 +290,6 @@ constructor(
     return `${formattedHours}:${minutes} ${timePeriod}`;
   }
 
-
   /*computation prices*/
   /*food items*/
   calculateSubtotal(item: FoodItem): number {
@@ -264,21 +304,54 @@ constructor(
     return total;
   }
 
-calculateNewGrandFoodItemTotal(): number {
-  // Original grand food item total
-  const originalGrandFoodItemTotal = this.calculateFoodItemTotal();
-
-  // Check if a voucher is selected and valid
-  if (this.selectedVoucher && this.selectedVoucher.selected) {
-    // Deduct the amount specified by the voucher (amountDeduction)
-    this.adjustedGrandFoodItemTotal = originalGrandFoodItemTotal - this.selectedVoucher.amountDeduction;
-    return this.adjustedGrandFoodItemTotal;
+  calculateNewGrandFoodItemTotal(): number {
+    // Get the original grand total
+    let originalGrandFoodItemTotal = this.calculateFoodItemTotal();
+  
+    // Log selected voucher items for debugging
+    console.log('Selected Voucher Items:', this.selectedVoucherItems);
+  
+    // Check if any vouchers are selected
+    if (this.selectedVoucherItems && this.selectedVoucherItems.length > 0) {
+      // Loop through selected vouchers and apply the deduction if selected is true
+      this.selectedVoucherItems.forEach((voucherItem) => {
+        console.log('Processing Voucher:', voucherItem);
+  
+        if (voucherItem.selected) {
+          // Check if the voucher is food items
+          if (voucherItem.voucherType === 'Food Item') {
+            // Check if the selected food items meet the voucher item quantity requirement
+            if (this.selectedFoodItems.length >= voucherItem.itemQuantity && voucherItem.grandTotal <= originalGrandFoodItemTotal) {
+              if (voucherItem.discount !== null) {
+                // Apply percentage discount
+                const discountPercentage = voucherItem.discount / 100;
+                const discountAmount = originalGrandFoodItemTotal * discountPercentage;
+                originalGrandFoodItemTotal -= discountAmount;
+              } else if (voucherItem.amountDeduction !== null) {
+                // Apply fixed amount deduction
+                originalGrandFoodItemTotal -= voucherItem.amountDeduction;
+              }
+            }
+            else {
+              console.log(`Selected food items do not meet the voucher quantity requirement for ${voucherItem.voucherName}.`);
+            }
+          }
+        }
+      });
+    }
+  
+    return originalGrandFoodItemTotal;
   }
+  
+  
+  onVoucherSelectionChanged(selectedVoucherItems: any[]): void {
+    this.selectedVoucherItems = selectedVoucherItems;
 
-  // If no voucher is selected or valid, return the original grand food item total
-  return originalGrandFoodItemTotal;
-}
+    // Recalculate the grand total when voucher selection changes
+    this.calculateNewGrandFoodItemTotal();
 
+    this.calculateNewGrandExtraServiceTotal();
+  }
 
   /*extra service*/
   calculateExtraServiceSubtotal(extraService: any): number {
@@ -294,12 +367,124 @@ calculateNewGrandFoodItemTotal(): number {
   }
   
 
-  calculateGrandTotal(): number {
-    const foodItemTotal = this.calculateFoodItemTotal();
-    const extraServiceTotal = this.calculateExtraServiceTotal();
-    return foodItemTotal + extraServiceTotal;
+  calculateNewGrandExtraServiceTotal(): number {
+    // Get the original grand total
+    let originalGrandExtraServiceTotal = this.calculateExtraServiceTotal();
+  
+    // Log selected voucher items for debugging
+    console.log('Selected Voucher Items:', this.selectedVoucherItems);
+  
+    // Check if any vouchers are selected
+    if (this.selectedVoucherItems && this.selectedVoucherItems.length > 0) {
+      // Loop through selected vouchers and apply the deduction if selected is true
+      this.selectedVoucherItems.forEach((voucherItem) => {
+        console.log('Processing Voucher:', voucherItem);
+  
+        if (voucherItem.selected) {
+          // Check if the voucher is extra service
+          if (voucherItem.voucherType === 'Extra Service') {
+            // Check if the selected extra services meet the voucher item quantity requirement
+            if (this.selectedExtraServices.length >= voucherItem.itemQuantity && voucherItem.grandTotal <= originalGrandExtraServiceTotal) {
+              if (voucherItem.discount !== null) {
+                // Apply percentage discount
+                const discountPercentage = voucherItem.discount / 100;
+                const discountAmount = originalGrandExtraServiceTotal * discountPercentage;
+                originalGrandExtraServiceTotal -= discountAmount;
+              } else if (voucherItem.amountDeduction !== null) {
+                // Apply fixed amount deduction
+                originalGrandExtraServiceTotal -= voucherItem.amountDeduction;
+              }
+              else {
+                console.log(`Selected extra services do not meet the voucher quantity requirement for ${voucherItem.voucherName}.`);
+              }
+            }
+          }
+        }
+      });
+    }
+    
+  
+    return originalGrandExtraServiceTotal;
   }
 
+  // Update the method to calculate the original grand total
+  calculateOriginalGrandTotal(): number {
+    // Calculate the original grand total by adding the original grand food item total and original grand extra service total
+    const originalGrandFoodItemTotal = this.calculateFoodItemTotal();
+    const originalGrandExtraServiceTotal = this.calculateExtraServiceTotal();
+    this.originalGrandTotal = originalGrandFoodItemTotal + originalGrandExtraServiceTotal;
+
+    // Log for debugging
+    console.log('Original Grand Food Item Total:', originalGrandFoodItemTotal);
+    console.log('Original Grand Extra Service Total:', originalGrandExtraServiceTotal);
+    console.log('Original Grand Total:', this.originalGrandTotal);
+
+    return this.originalGrandTotal;
+  }
+
+  // Update the method to calculate the new grand total
+  calculateNewGrandTotal(): number {
+    // Calculate the new grand total by adding the new grand food item total and new grand extra service total
+    const newGrandFoodItemTotal = this.calculateNewGrandFoodItemTotal();
+    const newGrandExtraServiceTotal = this.calculateNewGrandExtraServiceTotal();
+    this.newGrandTotal = newGrandFoodItemTotal + newGrandExtraServiceTotal;
+
+    // Log for debugging
+    console.log('New Grand Food Item Total:', newGrandFoodItemTotal);
+    console.log('New Grand Extra Service Total:', newGrandExtraServiceTotal);
+    console.log('New Grand Total:', this.newGrandTotal);
+
+    return this.newGrandTotal;
+  }
+
+
+//Add-to-Cart Methods
+promptForPackageName(): void {
+  this.showPackageNamePrompt = true;
+}
+
+cancelAddToCart(): void {
+  this.showPackageNamePrompt = false;
+  // Additional logic if needed
+}
+
+confirmAddToCart(): void {
+  // Show a prompt to enter the package name
+  const packageName = prompt('Enter the package name:');
+
+  if (packageName !== null) {
+    // Package name is entered
+
+    // Show a confirmation prompt
+    const isConfirmed = window.confirm('Are you sure you want to add-to-cart this package for now?');
+
+    if (isConfirmed) {
+      // Perform the logic to add to cart with the entered package name
+      console.log('Added to Cart with Package Name:', packageName);
+
+      // Save to cart
+      this.foodItemsService.saveToCart(this.selectedPackage, this.userUid, packageName);
+
+      // Reset values
+      this.showPackageNamePrompt = false;
+      this.packageName = '';
+    }
+  } else {
+    // Package name is not entered
+    alert('Package name is required.');
+  }
+}
+
+addToCart(): void {
+  const userUid = this.userauthService.getUserUid();
+  const packageName = this.packageName;  // Make sure packageName is properly set
+
+  if (this.selectedPackage && userUid && packageName) {
+    this.foodItemsService.saveToCart(this.selectedPackage, userUid, packageName);
+  } else {
+    console.error('Missing required data for adding to cart.');
+  }
+}
 
 
 }

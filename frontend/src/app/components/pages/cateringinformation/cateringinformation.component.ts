@@ -74,66 +74,71 @@ export class CateringinformationComponent implements OnInit{
 
   async saveInformation() {
     const caterer = await this.afAuth.currentUser;
-
+  
+    if (!caterer) {
+      console.error('Caterer not authenticated');
+      return;
+    }
+  
+    const catererUid = caterer.uid;
+    const catererRef = this.firestore.collection('caterers').doc(catererUid);
+  
     if (!this.catererInfo.catererRegisteredName || !this.catererInfo.catererRegisteredAddress || !this.catererInfo.hasTIN) {
       alert('Please fill all the fields in Caterers Information.');
       return;
     }
-    
+  
     if (this.catererInfo.hasTIN === 'Yes' && !this.catererInfo.tinFileURL) {
       alert('Please upload the TIN proof.');
       return;
     }
-
-    if (caterer) {
-        const catererUid = caterer.uid; 
-        const catererRef = this.firestore.collection('caterers').doc(catererUid);
-
-        if (this.tinFile) {
-            // Construct a file path e.g., 'tins/userID_filename'
-            const filePath = `tins/${catererUid}_${this.tinFile.name}`;
-            const fileRef = this.storage.ref(filePath);
-
-            // Upload the file to Firebase Storage
-            this.storage.upload(filePath, this.tinFile).snapshotChanges().pipe(
-                finalize(() => {
-                    // Get the download URL after the file is uploaded successfully
-                    fileRef.getDownloadURL().subscribe((url) => {
-                        // Update catererInfo to include the file URL
-                        this.catererInfo.tinFileURL = url;
-
-                        // Save the updated catererInfo and cateringInfo to Firestore
-                        catererRef.set({
-                            catererInfo: this.catererInfo,
-                            cateringInfo: this.cateringInfo
-                        }, { merge: true }).then(() => {
-                          
-                            console.log('Information saved successfully!');
-                            this.router.navigate(['dashboard-caterer']);
-                            
-                        }).catch(error => {
-                            console.error('Error saving information:', error);
-                        });
-                    });
-                })
-            ).subscribe();
-        } else {
-            // Handle saving information without TIN file
+  
+    if (this.tinFile) {
+      // Construct a file path e.g., 'tins/userID_filename'
+      const filePath = `tins/${catererUid}_${this.tinFile.name}`;
+      const fileRef = this.storage.ref(filePath);
+  
+      // Upload the file to Firebase Storage
+      this.storage.upload(filePath, this.tinFile).snapshotChanges().pipe(
+        finalize(() => {
+          // Get the download URL after the file is uploaded successfully
+          fileRef.getDownloadURL().subscribe((url) => {
+            // Update catererInfo to include the file URL
+            this.catererInfo.tinFileURL = url;
+  
+            // Save the updated catererInfo and cateringInfo to Firestore
             catererRef.set({
-                catererInfo: this.catererInfo,
-                cateringInfo: this.cateringInfo
+              catererBasicInfo: {
+                catererUid: catererUid
+              },
+              catererInfo: this.catererInfo,
+              cateringInfo: this.cateringInfo
             }, { merge: true }).then(() => {
-                console.log('Information saved successfully!');
-                this.router.navigate(['dashboard-caterer']);
-                // this.router.navigate(['/some-success-route']); 
+              console.log('Information saved successfully!');
+              this.router.navigate(['dashboard-caterer']);
             }).catch(error => {
-                console.error('Error saving information:', error);
+              console.error('Error saving information:', error);
             });
-        }
+          });
+        })
+      ).subscribe();
     } else {
-        console.error('Caterer not authenticated');
+      // Handle saving information without TIN file
+      catererRef.set({
+        catererBasicInfo: {
+          catererUid: catererUid
+        },
+        catererInfo: this.catererInfo,
+        cateringInfo: this.cateringInfo
+      }, { merge: true }).then(() => {
+        console.log('Information saved successfully!');
+        this.router.navigate(['dashboard-caterer']);
+      }).catch(error => {
+        console.error('Error saving information:', error);
+      });
     }
-}
+  }
+  
   onTINFileChange(event: any) {
     if (event.target.files.length > 0) {
         this.tinFile = event.target.files[0];

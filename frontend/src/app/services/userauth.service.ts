@@ -356,9 +356,14 @@ export class UserAuthService {
   }
 
 
+  getUserUid(): string | null {
+    const user = JSON.parse(localStorage.getItem('customer') || '{}');
+    return user ? user.uid : null;
+  }
 
+/*
   getLoggedInName(): string | null {
     const user = JSON.parse(localStorage.getItem('customers') || '{}');
     return user ? user.displayName : null;
-  }
+  }*/
 }

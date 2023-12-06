@@ -241,3 +241,53 @@ li a{
     color: #333;
     margin: 5px 0;
   }
+
+  /* ------------------------------------------------------------------------ */
+
+  .Viewpkg{
+    display: flex;
+    justify-content: space-around;
+    margin: 3px;
+  }
+
+  .Viewpkg button {
+    --color: #AC0000;
+    font-family: inherit;
+    display: inline-block;
+    width: 100px;
+    height: 2.6em;
+    line-height: 2.5em;
+    overflow: hidden;
+    /* margin: 20px; */
+    font-size: 12px;
+    z-index: 1;
+    color: var(--color);
+    border: 2px solid var(--color);
+    border-radius: 6px;
+    position: relative;
+  }
+  
+  .Viewpkg button::before {
+    position: absolute;
+    content: "";
+    background: var(--color);
+    width: 150px;
+    height: 200px;
+    z-index: -1;
+    border-radius: 50%;
+  }
+  
+  .Viewpkg button:hover {
+    color: white;
+  }
+  
+  .Viewpkg button:before {
+    top: 100%;
+    left: 100%;
+    transition: .3s all;
+  }
+  
+  .Viewpkg button:hover::before {
+    top: -30px;
+    left: -30px;
+  }

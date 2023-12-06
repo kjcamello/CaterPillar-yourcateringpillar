@@ -97,13 +97,13 @@
   <div class="event-form">
     <!-- Event Form Fields -->
     <div class="form-group">
-      <label for="eventName">Name</label>
-      <input type="text" class="form-control" id="eventName" name="eventName" [(ngModel)]="eventName">
+      <label for="eventName">Name</label><small class="text-muted"> ({{eventName.length}}/100 chars)</small>
+      <input type="text" class="form-control" id="eventName" name="eventName" [(ngModel)]="eventName" maxlength="100">
     </div>
 
     <div class="form-group">
-      <label for="eventDescription">Description</label>
-      <textarea class="form-control" id="eventDescription" name="eventDescription" [(ngModel)]="eventDescription"></textarea>
+      <label for="eventDescription">Description</label><small class="text-muted">({{eventDescription.length}}/1000 chars)</small>
+      <textarea class="form-control fixed-event-textarea" id="eventDescription" name="eventDescription" [(ngModel)]="eventDescription" maxlength="1000"></textarea>
     </div>
 
     <!-- Additional event fields go here -->
@@ -121,13 +121,16 @@
   <div class="extraservice-form">
     <!-- Event Form Fields -->
     <div class="form-group">
-      <label for="esName">Name</label>
-      <input type="text" class="form-control" id="esName" name="esName" [(ngModel)]="esName">
+      <label for="esName">Name</label><small class="text-muted">({{esName.length}}/100 chars)</small>
+      <input type="text" class="form-control" id="esName" name="esName" [(ngModel)]="esName" maxlength="100">
     </div>
 
+  <!-- Second Row -->
+  <div class="form-row">
     <div class="form-group">
       <label for="esDescription">Description</label>
-      <textarea class="form-control" id="esDescription" name="esDescription" [(ngModel)]="esDescription"></textarea>
+      <div><small class="text-muted">({{esDescription.length}}/1000 chars)</small></div>
+      <textarea class="form-control fixed-es-textarea" id="esDescription" name="esDescription" [(ngModel)]="esDescription" maxlength="1000"></textarea>
     </div>
 
     <!-- Image not yet done revising -->
@@ -138,24 +141,28 @@
         <img [src]="esImage" alt="Extra Service Image Preview" class="es-image-preview">
       </div>
     </div>
+  </div>
 
+  <!-- Third Row -->
+  <div class="form-row">
         <!-- Min -->
     <div class="form-group">
-      <label for="esMinHours">Minimum Hours</label>
+      <label for="esMinHours">Min. Hours</label>
       <input type="number" class="form-control" id="esMinHours" name="esMinHours" [(ngModel)]="esMinHours">
     </div>
 
         <!-- Max -->
     <div class="form-group">
-      <label for="esMaxHours">Maximum Hours</label>
+      <label for="esMaxHours">Max. Hours</label>
       <input type="number" class="form-control" id="esMaxHours" name="esMaxHours" [(ngModel)]="esMaxHours">
     </div>
 
         <!-- Price -->
     <div class="form-group">
-      <label for="esPrice">Price Per Hour</label>
+      <label for="esPrice">Price Per Hr.</label>
       <input type="number" class="form-control" id="esPrice" name="esPrice" [(ngModel)]="esPrice">
     </div>
+  </div>
 
     <!-- Save Event Button -->
     <button class="save-es-button" (click)="saveExtraServiceItem()">Save Extra Service</button>
@@ -171,13 +178,16 @@
   <div class="voucher-form">
     <!-- Voucher Form Fields -->
     <div class="form-group">
-      <label for="voucherName">Name</label>
-      <input type="text" class="form-control" id="voucherName" name="voucherName" [(ngModel)]="voucherName">
+      <label for="voucherName">Name</label><small class="text-muted">({{voucherName.length}}/100 chars)</small>
+      <input type="text" class="form-control" id="voucherName" name="voucherName" [(ngModel)]="voucherName" maxlength="100">
     </div>
 
+  <!-- Second Row -->
+  <div class="form-row">
     <div class="form-group">
       <label for="voucherDescription">Description</label>
-      <textarea class="form-control" id="voucherDescription" name="voucherDescription" [(ngModel)]="voucherDescription"></textarea>
+      <div><small class="text-muted">({{voucherDescription.length}}/1000 chars)</small></div>
+      <textarea class="form-control fixed-voucher-textarea" id="voucherDescription" name="voucherDescription" [(ngModel)]="voucherDescription" maxlength="1000"></textarea>
     </div>
 
     <div class="form-group">
@@ -187,6 +197,7 @@
         <img [src]="voucherImage" alt="Voucher Image Preview" class="image-preview">
       </div>
     </div>
+  </div>
 
     <label>Type</label>
     <div class="form-group">
@@ -202,47 +213,55 @@
 
     <div *ngIf="selectedVoucherType === 'foodItem'">
       <!-- Fields for Food Item -->
-      <div class="form-group">
-        <label for="foodItem_itemQuantity">Item Quantity</label>
-        <input type="number" class="form-control" id="foodItem_itemQuantity" name="foodItem_itemQuantity" [(ngModel)]="foodItem_itemQuantity">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="foodItem_itemQuantity">Item Quantity</label>
+          <input type="number" class="form-control" id="foodItem_itemQuantity" name="foodItem_itemQuantity" [(ngModel)]="foodItem_itemQuantity">
+        </div>
+
+        <div class="form-group">
+          <label for="foodItem_grandTotal">Grand Total</label>
+          <input type="number" class="form-control" id="foodItem_grandTotal" name="foodItem_grandTotal" [(ngModel)]="foodItem_grandTotal">
+        </div>
       </div>
 
-      <div class="form-group">
-        <label for="foodItem_grandTotal">Grand Total</label>
-        <input type="number" class="form-control" id="foodItem_grandTotal" name="foodItem_grandTotal" [(ngModel)]="foodItem_grandTotal">
-      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="foodItem_discount">Discount</label>
+          <input type="number" class="form-control" id="foodItem_discount" name="foodItem_discount" [(ngModel)]="foodItem_discount">
+        </div>
 
-      <div class="form-group">
-        <label for="foodItem_discount">Discount</label>
-        <input type="number" class="form-control" id="foodItem_discount" name="foodItem_discount" [(ngModel)]="foodItem_discount">
-      </div>
-
-      <div class="form-group">
-        <label for="foodItem_amountDeduction">Amount Deduction</label>
-        <input type="number" class="form-control" id="foodItem_amountDeduction" name="foodItem_amountDeduction" [(ngModel)]="foodItem_amountDeduction">
+        <div class="form-group">
+          <label for="foodItem_amountDeduction">Amount Deduction</label>
+          <input type="number" class="form-control" id="foodItem_amountDeduction" name="foodItem_amountDeduction" [(ngModel)]="foodItem_amountDeduction">
+        </div>
       </div>
     </div>
 
     <div *ngIf="selectedVoucherType === 'extraService'">
       <!-- Fields for Extra Service -->
-      <div class="form-group">
-        <label for="extraService_itemQuantity">Item Quantity</label>
-        <input type="number" class="form-control" id="extraService_itemQuantity" name="extraService_itemQuantity" [(ngModel)]="extraService_itemQuantity">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="extraService_itemQuantity">Item Quantity</label>
+          <input type="number" class="form-control" id="extraService_itemQuantity" name="extraService_itemQuantity" [(ngModel)]="extraService_itemQuantity">
+        </div>
+
+        <div class="form-group">
+          <label for="extraService_grandTotal">Grand Total</label>
+          <input type="number" class="form-control" id="extraService_grandTotal" name="extraService_grandTotal" [(ngModel)]="extraService_grandTotal">
+        </div>
       </div>
 
-      <div class="form-group">
-        <label for="extraService_grandTotal">Grand Total</label>
-        <input type="number" class="form-control" id="extraService_grandTotal" name="extraService_grandTotal" [(ngModel)]="extraService_grandTotal">
-      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="extraService_discount">Discount</label>
+          <input type="number" class="form-control" id="extraService_discount" name="extraService_discount" [(ngModel)]="extraService_discount">
+        </div>
 
-      <div class="form-group">
-        <label for="extraService_discount">Discount</label>
-        <input type="number" class="form-control" id="extraService_discount" name="extraService_discount" [(ngModel)]="extraService_discount">
-      </div>
-
-      <div class="form-group">
-        <label for="extraService_amountDeduction">Amount Deduction</label>
-        <input type="number" class="form-control" id="extraService_amountDeduction" name="extraService_amountDeduction" [(ngModel)]="extraService_amountDeduction">
+        <div class="form-group">
+          <label for="extraService_amountDeduction">Amount Deduction</label>
+          <input type="number" class="form-control" id="extraService_amountDeduction" name="extraService_amountDeduction" [(ngModel)]="extraService_amountDeduction">
+        </div>
       </div>
     </div>
 
