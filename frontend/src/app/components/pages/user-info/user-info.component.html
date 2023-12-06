@@ -38,16 +38,18 @@
   <img src="assets/BG.png" alt="" class="cover-size">
       <div class="user-profile">
       <!-- User Cover Photo with Change Button -->
-            <div class="cover-photo-container">
-            <div class="coverSize">
-                  <div class="coverphoto" *ngIf="selectedImage">
-                    <img [src]="selectedImageSrc || 'assets/user_cover_pic.jpg'" alt="Selected Image" class="cover_photo">
-          </div>
-      </div>
-          <label class="custom-file-upload">
-              <input type="file" (change)="onImageSelected($event)" accept="image/*" >
-              <img src="assets/change_user_coverphoto.png" alt="Go Back" class="uploadCover"> 
-          </label>
+      <div class="cover-photo-container">
+        <div class="coverSize">
+            <!-- Always display the div, but change the image source based on selectedImage -->
+            <div class="coverphoto">
+                <img [src]="selectedImage ? selectedImageSrc : defaultCoverPhotoUrl" alt="Cover Photo" class="cover_photo">
+            </div>
+        </div>
+        <label class="custom-file-upload">
+            <input type="file" (change)="onImageSelected($event)" accept="image/*">
+            <img src="assets/change_user_coverphoto.png" alt="Change Cover Photo" class="uploadCover"> 
+        </label>
+    </div>
 
           <div class="profile-credentials">
             <div class="username-container">
@@ -62,13 +64,14 @@
   <!-- User Profile Picture with Change Button -->
   <div class="profile-pic-container">
     <div class="profilepicSize">
-        <div class="profilephoto" *ngIf="selectedProfileImage">
-            <img [src]="selectedProfileImageSrc" alt="Profile Picture" class="profile_photo">
+        <div class="profilephoto">
+            <!-- Display the selected profile image or fallback to the default profile image -->
+            <img [src]="selectedProfileImageSrc || defaultProfilePhotoUrl" alt="Profile Photo" class="profile_photo">
         </div>
-    </div>  
+    </div>
     <label class="change-profile-pic-button">
         <input type="file" (change)="onProfileImageSelected($event)" accept="image/*" style="display: none;">
-        <img src="assets/change_user_coverphoto.png" alt="Change Profile Picture" class="change-profile-pic-icon">
+        <img src="assets/change_profile_photo.png" alt="Change Profile Picture" class="change-profile-pic-icon">
     </label>
 </div>
   <!-- Profile Actions -->
