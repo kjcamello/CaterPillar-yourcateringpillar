@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import {AngularFirestore} from '@angular/fire/compat/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { finalize } from 'rxjs/operators';
+import { count, finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-send-reports',
@@ -102,41 +102,88 @@ try{
         reportDetails: this.reportDetails,
         date: new Date().toLocaleString('en-PH', options),
         fileUrl: '', // Will be updated with the file URL after upload
+        count: 1,
       };
-  
-      const filename = `${reportData.reportedUsername}_report_proof`;
-      const filePath = `reports/${this.selectedUserType}/${filename}`;
-      const fileRef = this.storage.ref(filePath);
-      const task = this.storage.upload(filePath, this.selectedFile);
-  
-      task.snapshotChanges().pipe(
-        finalize(async () => {
-          const downloadURL = await fileRef.getDownloadURL().toPromise();
-          reportData.fileUrl = downloadURL;
-  
-          this.afs.collection('reports').doc(this.selectedUserType).collection('details').add(reportData)
-            .then(() => {
-              console.log('Report submitted successfully.');
-              window.alert('Report submitted successfully. \nRest assured we will do our best to provide you with the best catering experience');
-              location.reload();
-            })
-            .catch((error) => {
-              console.error('Error submitting report:', error);
-              window.alert('Error submitting report:' + error.message);
-            });
-        })
-      ).subscribe();
-    } catch (error) {
+
+      const reportRef = this.afs.collection('reports').doc(this.selectedUserType).collection('details');
+      const settledreportRef = this.afs.collection('settled').doc(this.selectedUserType).collection('details');
+      
+      try {
+        const [existingReportsSnapshot, existingSettledReportsSnapshot] = await Promise.all([
+          reportRef.get().toPromise(),
+          settledreportRef.get().toPromise()
+        ]);
+      
+        const collectionsToCheck = [existingReportsSnapshot, existingSettledReportsSnapshot];
+        let updatedCount = reportData.count;
+        for (const snapshot of collectionsToCheck) {
+          snapshot.docs.forEach(async (doc) => {
+            if (doc.data().reportedUsername === reportedUsername) {
+              const currentCount = doc.data().count || 0;
+              updatedCount = currentCount + 1;
+              await doc.ref.update({ count: updatedCount });
+            }
+          });
+        }
+        reportData.count = updatedCount;
+        console.log('Report counts updated successfully.');
+      } catch (error) {
+        console.error('Error updating report counts:', error);
+      }
+     
+      try {
+        if (this.selectedFile) {
+            const filename = `${reportData.reportedUsername}_report_proof`;
+            const filePath = `reports/${this.selectedUserType}/${filename}`;
+            const fileRef = this.storage.ref(filePath);
+    
+            const task = this.storage.upload(filePath, this.selectedFile);
+    
+            task.snapshotChanges().pipe(
+                finalize(async () => {
+                    const downloadURL = await fileRef.getDownloadURL().toPromise();
+    
+                    reportData.fileUrl = downloadURL;
+    
+                    this.afs.collection('reports').doc(this.selectedUserType).collection('details').add(reportData)
+                        .then(() => {
+                            console.log('Report submitted successfully.');
+                            window.alert('Report submitted successfully. \nRest assured we will do our best to provide you with the best catering experience');
+                            location.reload();
+                        })
+                        .catch((error) => {
+                            console.error('Error submitting report:', error);
+                            window.alert('Error submitting report:' + error.message);
+                        });
+                })
+            ).subscribe();
+        } else {
+            // No file uploaded, set fileUrl to an empty string
+            reportData.fileUrl = '';
+    
+            this.afs.collection('reports').doc(this.selectedUserType).collection('details').add(reportData)
+                .then(() => {
+                    console.log('Report submitted successfully.');
+                    window.alert('Report submitted successfully. \nRest assured we will do our best to provide you with the best catering experience');
+                    location.reload();
+                })
+                .catch((error) => {
+                    console.error('Error submitting report:', error);
+                    window.alert('Error submitting report:' + error.message);
+                });
+        }}catch (error) {
+        console.error('Error submitting report:', error);
+        window.alert('Error submitting report:' + error.message);
+    }
+    
+  }
+  catch (error) {
+    console.error('Error submitting report:', error);
+    window.alert('Error submitting report:' + error.message);}}
+    catch (error) {
       console.error('Error submitting report:', error);
       window.alert('Error submitting report:' + error.message);
-    }
-  }
-  catch(error){
-    console.error('Error submitting report:', error);
-    window.alert('Error submitting report:' + error.message);
-  }
-}
-  }
+  }}}
   
  
 

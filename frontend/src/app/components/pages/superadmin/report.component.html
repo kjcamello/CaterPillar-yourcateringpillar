@@ -27,16 +27,21 @@
 <div>
     <ul class="nav nav-tabs">
         <li class="nav-item">
-            <a class="nav-link" (click)="showCustomerReports = true; showCatererReports = false;" [class.active]="showCustomerReports">Customer Reports</a>
+            <a class="nav-link" (click)="showCustomerReports = true; showCatererReports = false; showSettledReports = false;" [class.active]="showCustomerReports">Customer Reports</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" (click)="showCatererReports = true; showCustomerReports = false;" [class.active]="showCatererReports">Caterer Reports</a>
+            <a class="nav-link" (click)="showCatererReports = true; showCustomerReports = false; showSettledReports = false" [class.active]="showCatererReports">Caterer Reports</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" (click)="showCatererReports = false; showCustomerReports = false; showSettledReports = true" [class.active]="showSettledReports">Settled Reports</a>
         </li>
     </ul>
-
+    
     <div class="tab-content">
         <div id="customerReports" class="container tab-pane" [class.active]="showCustomerReports">
-            <h3>Customer Reports</h3>
+         <h3>Customer Reports</h3>
+
+           
             <table class="table">
                 <thead>
                     <tr>
@@ -57,13 +62,19 @@
                         <td>{{ report.userType}}</td>
                         <td>{{ report.reporter }}</td>
                         <td>
-                            <!-- Display proof as a hyperlink -->
                             <div style="display: flex; align-items: center;">
-                              <a [href]="report.fileUrl" target="_blank" style="margin-right: 5px;">View Proof</a>
+                                <ng-container *ngIf="report.fileUrl === ''; else showLink">
+                                    <span>No proof provided</span>
+                                </ng-container>
+                                <ng-template #showLink>
+                                    <a *ngIf="report.fileUrl !== ''" [href]="report.fileUrl" target="_blank" style="margin-right: 5px;">View Proof</a>
+                                </ng-template>
                             </div>
+                        </td>
+                        
+                        <td style="white-space: pre-line; /* or any other CSS class or style definition */">
+                            {{ report.reportDetails }}
                           </td>
-                        <td>{{ report.reportDetails }}</td>
-
                         <td>
                             <!-- Kebab menu -->
                             <div [matMenuTriggerFor]="optionsMenu" style="display: flex; align-items: center; cursor: pointer;">
@@ -104,12 +115,23 @@
                         <td>{{ report.userType}}</td>
                         <td>{{ report.reporter }}</td>
                         <td>
-                            <!-- Display proof as a hyperlink -->
+                            <!-- Display proof as a hyperlink or text -->
                             <div style="display: flex; align-items: center;">
-                              <a [href]="report.fileUrl" target="_blank" style="margin-right: 5px;">View Proof</a>
+                                <ng-container *ngIf="report.fileUrl === ''">
+                                    <span>No proof provided</span>
+                                </ng-container>
+                                <ng-container *ngIf="report.fileUrl !== ''; else showLink">
+                                    <a [href]="report.fileUrl" target="_blank" style="margin-right: 5px;">View Proof</a>
+                                </ng-container>
+                                <ng-template #showLink>
+                                    <a [href]="report.fileUrl" target="_blank" style="margin-right: 5px;">View Proof</a>
+                                </ng-template>
                             </div>
+                        </td>
+                        
+                        <td style="white-space: pre-line; /* or any other CSS class or style definition */">
+                            {{ report.reportDetails }}
                           </td>
-                        <td>{{ report.reportDetails }} </td>
                         <td>
                             <!-- Kebab menu -->
                             <div [matMenuTriggerFor]="optionsMenu" style="display: flex; align-items: center; cursor: pointer;">
@@ -124,7 +146,32 @@
                           </td>
                           
                           
-                        
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+          
+        <div id="settledReports" class="container tab-pane" [class.active]="showSettledReports">
+            <h3>Settled Reports</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Reported User</th>
+                        <th>User Type</th>
+                        <th>Details</th>
+                        <th>Times Reported</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Loop through caterer reports -->
+                    <tr *ngFor="let report of settledReports">
+                        <td>{{ report.reportedUsername }}</td>
+                        <td>{{ report.userType}}</td>
+                        <td style="white-space: pre-line; /* or any other CSS class or style definition */">
+                            {{ report.reportDetails }}
+                          </td>
+                          
+                        <td>{{ report.count }}</td>
                     </tr>
                 </tbody>
             </table>
