@@ -1,0 +1,216 @@
+    
+    .BreadCrumbPath{
+        padding: 20px 20px 0px 20px;
+    }
+    
+    .BreadCrumbPath ol{
+        /* padding: 20px 20px 0px 20px; */
+        margin: 0;
+    }
+
+    .breadcrumb a{
+        color: #AC0000;
+    }
+
+    .breadcrumb-item.active {
+        color: #FFD0B1; /* Replace this with your desired hex code */
+        /* Other styles for active breadcrumb items... */
+    }
+    
+
+/* ----------------------------------------------------------------------- */
+
+    .CatererBasicInfo{
+        /* display: flex; */
+        padding: 20px;
+    }
+
+/* -------------------------- Caterer Info ------------------------------ */
+
+    .card-body{
+        display: flex;
+        justify-content: center;
+    }
+    .CateringName{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        padding: 0px 0px 0px 15px;
+    }
+    
+    .ViewShop button {
+        font-family: inherit;
+        font-size: 12px;
+        background: #FFD0B1;
+        color: black;
+        fill: rgb(155, 153, 153);
+        padding: 10px;
+        padding-left: 0.9em;
+        display: flex;
+        align-items: center;
+        border: none;
+        border-radius: 15px;
+        /* font-weight: 1000; */
+    }
+      
+    .ViewShop button span {
+        display: block;
+        margin-left: 0.5em;
+        transition: all 0.3s ease-in-out;
+    }
+      
+    .ViewShop button svg {
+        display: block;
+        transform-origin: center center;
+        transition: transform 0.3s ease-in-out;
+    }
+      
+    .ViewShopbutton:hover {
+        background: #000;
+        /* bor */
+    }
+      
+    .ViewShop button:hover .svg-wrapper {
+        transform: scale(1.25);
+        transition: .5s linear;
+    }
+      
+    .ViewShop button:hover svg {
+        transform: translateX(2.6em) scale(1.1);
+        fill: black;
+    }
+      
+    .ViewShop button:hover span {
+        opacity: 0;
+        transition: .5s linear;
+    }
+      
+    .ViewShop button:active {
+        transform: scale(0.95);
+    }
+
+    .CatererPP_CN{
+        display: flex;
+    }
+
+/* ----------------------------------------------------------------------- */
+
+.CatererLoc{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border-left: solid 1px #d2d2d2;
+    border-right: solid 1px #d2d2d2;
+    margin-left: 20px;
+    padding: 0 10px 0 10px;
+}
+
+.divcaterer{
+    height: 10px;
+}
+
+.DivCatereLoc_lbl{
+    display: flex;
+    max-width: 250px;
+    text-align: center;
+}
+
+.loader {
+    width: 44.8px;
+    height: 44.8px;
+    position: relative;
+    transform: rotate(45deg);
+  }
+  
+  .loader:before,
+  .loader:after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50% 50% 0 50%;
+    background: #0000;
+    background-image: radial-gradient(circle 11.2px at 50% 50%,#0000 94%, #Ac0000);
+  }
+  
+  .loader:after {
+    animation: pulse-ytk0dhmd 1s infinite;
+    transform: perspective(336px) translateZ(0px);
+  }
+  
+  @keyframes pulse-ytk0dhmd {
+    to {
+      transform: perspective(336px) translateZ(70px);
+      opacity: 0;
+    }
+  }
+
+  .CatererBasicDet{
+    padding: 20px;
+  }
+    
+/* =----------------------------------------------- */
+.packages .package-card {
+    margin: 1em;
+    background: #ffefba; /* light yellow background */
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .packages .package-card-header {
+    background-color: #AC0000; /* orange header background */
+    color: white;
+    padding: 10px 15px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+  }
+  
+  .packages .package-card-title {
+    margin: 0;
+  }
+  
+  .packages .package-card-text {
+    margin: 5px 0;
+  }
+  
+  .packages .package-card-body {
+    padding: 15px;
+    background-color: #fffced; /* light cream background */
+    font-size: 0.95em;
+  }
+  
+  .packages .package-card-body ul {
+    padding-left: 20px;
+  }
+  
+  .packages .package-card-body li {
+    list-style-type: disc;
+  }
+  
+  .packages .package-card-footer {
+    background-color: #AC0000; /* orange footer background */
+    padding: 10px 15px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    text-align: right;
+  }
+  
+  .packages .btn-edit, .packages .btn-delete {
+    background: #ffeead; /* light button background */
+    border: none;
+    padding: 5px 10px;
+    margin-left: 5px;
+    cursor: pointer;
+  }
+  
+  .packages .btn-edit:hover, .packages .btn-delete:hover {
+    background: #ffd369; /* darker background on hover */
+  }
+  
+  
+      
+      
+      
+      
+      

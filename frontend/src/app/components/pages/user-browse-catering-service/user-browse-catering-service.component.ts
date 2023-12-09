@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
   templateUrl: './user-browse-catering-service.component.html',
   styleUrls: ['./user-browse-catering-service.component.css']
 })
-export class UserBrowseCateringServiceComponent {
+export class UserBrowseCateringServiceComponent implements OnInit {
   caterers: Observable<any[]>; // Use the appropriate data type for your caterer documents
 
   catering: Catering[] = [];
