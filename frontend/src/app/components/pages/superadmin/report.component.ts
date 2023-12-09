@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 
+
 @Component({
   selector: 'app-report',
   templateUrl: './report.component.html',
@@ -12,10 +13,12 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 export class ReportComponent implements OnInit {
   customerReports: any[] = []; // Define an array to hold customer reports
   catererReports: any[] = []; // Define an array to hold caterer reports
-
+  settledReports: any[] = [];
   showCustomerReports = true;
   showCatererReports = false;
-
+  showSettledReports = false;
+  searchTerm: string = '';
+  filteredReports: Report[] = [];
   constructor(private adminauthservice: AdminAuthService, private router:Router, private afs:AngularFirestore) {}
 
   ngOnInit() {
@@ -28,6 +31,12 @@ export class ReportComponent implements OnInit {
     this.adminauthservice.getCatererReports().subscribe((reports) => {
       this.catererReports = reports;
     });
+
+    this.adminauthservice.getSettledReports().subscribe((reports)=> {
+      this.settledReports = reports;
+    });
+
+    
 
   }
 
@@ -62,6 +71,8 @@ export class ReportComponent implements OnInit {
     });
   }
 
+  
+
   markAsSettled(reportedUsername: string, userType: string) {
     this.getReportId(reportedUsername, userType).then((reportId) => {
       if (reportId) {
@@ -76,14 +87,40 @@ export class ReportComponent implements OnInit {
           if (doc.exists) {
             const data = doc.data();
             if (data) {
-              settledCollectionRef.add(data).then(() => {
-                reportRef.delete().then(() => {
-                  console.log('Report marked as settled successfully.');
-                }).catch((error) => {
-                  console.error('Error removing report:', error);
-                });
-              }).catch((error) => {
-                console.error('Error adding to settled collection:', error);
+              settledCollectionRef.doc(reportedUsername).get().subscribe((settledDoc) => {
+                if (settledDoc.exists) {
+                  const settledData = settledDoc.data();
+                  if (settledData) {
+                    const currentDetails = settledData.reportDetails || '';
+                    const newDetails = `${currentDetails}\n- ${data.reportDetails}`;
+                    settledDoc.ref.update({ reportDetails: newDetails }).then(() => {
+                      reportRef.delete().then(() => {
+                        console.log('Report marked as settled successfully.');
+                      }).catch((error) => {
+                        console.error('Error removing report:', error);
+                      });
+                    }).catch((error) => {
+                      console.error('Error updating settled report:', error);
+                    });
+                  } else {
+                    console.error('Settled document data is undefined.');
+                  }
+                } else {
+                  settledCollectionRef.doc(reportedUsername).set({
+                    reportedUsername: data.reportedUsername,
+                    reportDetails: data.reportDetails,
+                    count: data.count, // Assuming this is the initial count for new reports
+                    userType: data.userType
+                  }).then(() => {
+                    reportRef.delete().then(() => {
+                      console.log('Report marked as settled successfully.');
+                    }).catch((error) => {
+                      console.error('Error removing report:', error);
+                    });
+                  }).catch((error) => {
+                    console.error('Error adding to settled collection:', error);
+                  });
+                }
               });
             } else {
               console.error('Document data is undefined.');
@@ -97,7 +134,6 @@ export class ReportComponent implements OnInit {
       }
     });
   }
-  
   
 }
   

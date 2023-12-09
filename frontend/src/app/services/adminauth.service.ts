@@ -2,7 +2,7 @@ import { Injectable, NgZone } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, combineLatest, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -95,6 +95,41 @@ export class AdminAuthService {
   getCatererReports(): Observable<any[]> {
     return this.firestore.collection('reports').doc('caterer').collection('details').valueChanges();
   }
+
+  getSettledReports(): Observable<any[]> {
+    const catererSettled$ = this.firestore.collection('settled').doc('caterer').collection('details').valueChanges();
+    const customerSettled$ = this.firestore.collection('settled').doc('customer').collection('details').valueChanges();
+  
+    return combineLatest([catererSettled$, customerSettled$]).pipe(
+      map(([catererSettled, customerSettled]) => [...catererSettled, ...customerSettled])
+    );
+  }
+
+  countUserReports(username: string) {
+    const settledCaterer$ = this.firestore.collection('settled').doc('caterer').collection('details').valueChanges();
+    const settledCustomer$ = this.firestore.collection('settled').doc('customer').collection('details').valueChanges();
+    const reportsCustomer$ = this.firestore.collection('reports').doc('customer').collection('details').valueChanges();
+    const reportsCaterer$ = this.firestore.collection('reports').doc('caterer').collection('details').valueChanges();
+  
+    // Combine all observables into a single observable
+    combineLatest([settledCaterer$, settledCustomer$, reportsCustomer$, reportsCaterer$]).pipe(
+      map(([settledCaterer, settledCustomer, reportsCustomer, reportsCaterer]) => {
+        // Merge data from all collections into one array
+        const allReports = [...settledCaterer, ...settledCustomer, ...reportsCustomer, ...reportsCaterer];
+  
+        // Filter and count occurrences of the username in the merged data
+        const userReports = allReports.filter(report => report.reportedUsername === username);
+        const count = userReports.length;
+        
+        return count;
+      })
+    ).subscribe(count => {
+      // Use the count here or emit it to another part of your application
+      console.log(`User ${username} was reported ${count} times.`);
+      // You can perform further actions with the count here
+    });
+  }
+  
   
   
 }

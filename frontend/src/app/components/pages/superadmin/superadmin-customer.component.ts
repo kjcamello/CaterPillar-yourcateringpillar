@@ -57,6 +57,7 @@ export class SuperadminCustomerComponent implements OnInit {
 
    
   }
+  
 
   sortBy(column: string): void {
     if (this.sortByColumn === column) {
