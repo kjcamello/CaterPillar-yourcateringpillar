@@ -158,6 +158,16 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
   
+  .packages .package-card:hover,
+.packages .package-card:focus {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.packages .package-card.selected {
+  border: 2px solid #FF6A00;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
   .packages .package-card-header {
     background-color: #AC0000; /* orange header background */
     color: white;
@@ -207,8 +217,8 @@
   .packages .btn-edit:hover, .packages .btn-delete:hover {
     background: #ffd369; /* darker background on hover */
   }
-  
-  
+
+  /* -------------------------------------------------------------------- */
       
       
       

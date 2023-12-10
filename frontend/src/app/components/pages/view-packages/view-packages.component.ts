@@ -19,6 +19,9 @@ export class ViewPackagesComponent implements OnInit {
   catererUidToFetch: string | null = null; 
   catererData: any;
 
+  selectedPackage: any;
+
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -56,6 +59,20 @@ export class ViewPackagesComponent implements OnInit {
     this.packages.subscribe(fetchedPackages => {
       console.log('Fetched Packages:', fetchedPackages);
     });
+  }
+
+  onPackageSelect(selectedPackage: any) {
+    // Deselect the previously selected package (if any)
+    if (this.selectedPackage === selectedPackage) {
+      this.selectedPackage = null;
+      // console.log('Package deselected:', selectedPackage);
+    } else {
+      // Select the clicked package
+      this.selectedPackage = selectedPackage;
+      // console.log('Package selected:', selectedPackage);
+    }
+    
+    // You can perform additional actions based on the selected package
   }
 
   fetchCatererData(): void {

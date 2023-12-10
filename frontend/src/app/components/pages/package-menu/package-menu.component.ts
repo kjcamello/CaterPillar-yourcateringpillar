@@ -202,6 +202,9 @@ addPackage() {
     return;
   }
 
+  // Calculate the overall total price
+  const overallTotalPrice = this.calculateOverallTotalPrice();
+
   // Create a copy of the form value to avoid modifying the original form data
   const packageData = { ...this.packageMenuForm.value };
 
@@ -215,6 +218,7 @@ addPackage() {
   packageData.selectedMainCourses = this.selectedMainCourses.map(item => item.food_name);
   packageData.selectedDesserts = this.selectedDesserts.map(item => item.food_name);
   packageData.selectedDrinks = this.selectedDrinks.map(item => item.food_name);
+  packageData.totalPrice = overallTotalPrice;
   // Add other selected items as needed
 
   // Call the service to add the package with the packageData and userId
@@ -424,6 +428,23 @@ clearSelectedItems() {
     packages.hovered = false;
   }
 
+  calculateTotalPriceForCategory(selectedItems: any[], numofPax: number): number {
+    return selectedItems.reduce((total, item) => total + item.pax_price * numofPax, 0);
+  }
+
+  calculateOverallTotalPrice(): number {
+    const appetizerTotal = this.calculateTotalPriceForCategory(this.selectedAppetizers, this.packageMenuForm.get('numofPax').value);
+    const soupTotal = this.calculateTotalPriceForCategory(this.selectedSoups, this.packageMenuForm.get('numofPax').value);
+    const saladTotal = this.calculateTotalPriceForCategory(this.selectedSalads, this.packageMenuForm.get('numofPax').value);
+    const mainCourseTotal = this.calculateTotalPriceForCategory(this.selectedMainCourses, this.packageMenuForm.get('numofPax').value);
+    const dessertTotal = this.calculateTotalPriceForCategory(this.selectedDesserts, this.packageMenuForm.get('numofPax').value);
+    const drinkTotal = this.calculateTotalPriceForCategory(this.selectedDrinks, this.packageMenuForm.get('numofPax').value);
+  
+    // Sum up the totals for all food categories
+    return appetizerTotal + soupTotal + saladTotal + mainCourseTotal + dessertTotal + drinkTotal;
+  }
+  
+  
   logout() {
     this.authService.SignOutCaterer();
     // Redirect or handle post-logout logic here

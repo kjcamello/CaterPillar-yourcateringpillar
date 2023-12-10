@@ -112,6 +112,10 @@
                     <p>Main Course: <span class="dynamic">{{ package.selectedMainCourses}} </span></p>
                     <p>Dessert: <span class="dynamic">{{ package.selectedDesserts}}</span></p>
                     <p>Drinks: <span class="dynamic">{{ package.selectedDrinks}}</span></p>
+
+                    <p>Total Price: ${{ package.totalPrice }}</p>
+
+                    
                     
                     <!-- <p>Extra Service: You might want to bind data here if available</p> -->
                     <div class="card-actions">
@@ -370,9 +374,11 @@
                       <!-- <td>{{ item.maximum_pax }}</td> -->
                       <td>{{ item.pax_price }}</td>
                       <!-- Add more columns as needed -->
+                      <!-- <td>{{ calculateTotalPrice(numofPax, item.pax_price) }}</td> -->
                     </tr>
                   </tbody>
                 </table>
+                
               </div>
   
             </div>
@@ -403,7 +409,11 @@
                   <p>Main Courses: <span class="dynamic" *ngFor="let item of selectedMainCourses">{{ item.food_name }}, </span></p>
                   <p>Desserts: <span class="dynamic" *ngFor="let item of selectedDesserts">{{ item.food_name }}, </span></p>
                   <p>Drinks: <span class="dynamic" *ngFor="let item of selectedDrinks ">{{ item.food_name }}, </span></p>
-                
+                  
+                  <!-- Display the total price -->
+                  <p>Total Price: ${{ calculateOverallTotalPrice() }}</p>
+                  
+
                 </div>
               </div>
             </div>

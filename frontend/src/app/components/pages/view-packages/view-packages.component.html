@@ -99,7 +99,7 @@
          <div class="packages">
             <div class="row">
               <div *ngFor="let package of packages | async" class="col-md-4">
-                <div class="package-card">
+                <div class="package-card" (click)="onPackageSelect(package)" [class.selected]="selectedPackage === package">
                   <div class="package-card-header">
                     <h5 class="package-card-title">{{ package.packageName }}</h5>
                   </div>
@@ -149,6 +149,11 @@
                       </ul>
                     </div>
                   </div>
+                  <div *ngIf="package.totalPrice">
+                    <p class="package-card-text">Total Price: ${{ package.totalPrice }}</p>
+                  </div>
+
+                  
                   <div class="package-card-footer">
                     <!-- <button class="btn-edit">Edit</button> -->
                     <!-- <button class="btn-delete">Delete</button> -->
@@ -157,13 +162,6 @@
               </div>
             </div>
           </div>
-          
-         
-          
-          
-          
-          
-         
       </div>
     </div>
 </div>
