@@ -107,51 +107,64 @@
                     <p class="package-card-text">Type of Event: {{ package.typeEvent }}</p>
                     <p class="package-card-text">Number of Pax: {{ package.numofPax }}</p>
           
-                    <div *ngIf="package.selectedAppetizers && package.selectedAppetizers.length">
-                      <p class="package-card-text">Appetizers:</p>
-                      <ul>
-                        <li *ngFor="let appetizer of package.selectedAppetizers">{{ appetizer }}</li>
+          
+                     <div *ngIf="package.selectedAppetizers.length">
+                      <p class="package-card-text">Appetizers: </p>
+                      <ul class="UL_Disp">
+                        <li *ngFor="let item of package.selectedAppetizers"><span class="dynamic" >{{ item.name }}     
+                          <svg version="1.0" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 64 64" enable-background="new 0 0 64 64" xml:space="preserve"> <g><polygon fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" points="52,62.999 52,0.999 26,0.999 12,14.999 12,63 16,61 20,63 24,61 28,63 32,61 36,63 40,61 44,63 48,61 	"/><polyline fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" points="12,14.999 26,14.999 26,0.999 	"/></g><line fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" x1="24" y1="48" x2="24" y2="20"/><path fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" d="M24,21h6c0,0,10.018-0.703,10.018,8S30,37,30,37h-6"/><line fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" x1="20" y1="27" x2="44" y2="27"/><line fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" x1="20" y1="31" x2="44" y2="31"/>
+                          </svg>
+                          {{ item.price }}</span></li>
                       </ul>
                     </div>
-          
-                    <div *ngIf="package.selectedSoups && package.selectedSoups.length">
+                    <div *ngIf="package.selectedSoups.length">
                       <p class="package-card-text">Soups:</p>
-                      <ul>
-                        <li *ngFor="let soup of package.selectedSoups">{{ soup }}</li>
-                      </ul>
+                      <ul class="UL_Disp">
+                        <li *ngFor="let item of package.selectedSoups"><span class="dynamic" >{{ item.name }}     
+                        <svg version="1.0" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 64 64" enable-background="new 0 0 64 64" xml:space="preserve"> <g><polygon fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" points="52,62.999 52,0.999 26,0.999 12,14.999 12,63 16,61 20,63 24,61 28,63 32,61 36,63 40,61 44,63 48,61 	"/><polyline fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" points="12,14.999 26,14.999 26,0.999 	"/></g><line fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" x1="24" y1="48" x2="24" y2="20"/><path fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" d="M24,21h6c0,0,10.018-0.703,10.018,8S30,37,30,37h-6"/><line fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" x1="20" y1="27" x2="44" y2="27"/><line fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" x1="20" y1="31" x2="44" y2="31"/>
+                        </svg>  
+                        {{ item.price }} </span></li>
+                    </ul>
                     </div>
-          
-                    <div *ngIf="package.selectedSalads && package.selectedSalads.length">
+                    <div *ngIf="package.selectedSalads.length">
                       <p class="package-card-text">Salads:</p>
-                      <ul>
-                        <li *ngFor="let salad of package.selectedSalads">{{ salad }}</li>
-                      </ul>
+                      <ul class="UL_Disp">
+                        <li *ngFor="let item of package.selectedSalads"><span class="dynamic" >{{ item.name }}     
+                        <svg version="1.0" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 64 64" enable-background="new 0 0 64 64" xml:space="preserve"> <g><polygon fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" points="52,62.999 52,0.999 26,0.999 12,14.999 12,63 16,61 20,63 24,61 28,63 32,61 36,63 40,61 44,63 48,61 	"/><polyline fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" points="12,14.999 26,14.999 26,0.999 	"/></g><line fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" x1="24" y1="48" x2="24" y2="20"/><path fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" d="M24,21h6c0,0,10.018-0.703,10.018,8S30,37,30,37h-6"/><line fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" x1="20" y1="27" x2="44" y2="27"/><line fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" x1="20" y1="31" x2="44" y2="31"/>
+                        </svg>  
+                        {{ item.price }} </span></li>
+                    </ul>
                     </div>
-          
-                    <div *ngIf="package.selectedMainCourses && package.selectedMainCourses.length">
+                    <div *ngIf="package.selectedMainCourses.length">
                       <p class="package-card-text">Main Courses:</p>
-                      <ul>
-                        <li *ngFor="let mainCourse of package.selectedMainCourses">{{ mainCourse }}</li>
-                      </ul>
+                      <ul class="UL_Disp">
+                        <li *ngFor="let item of package.selectedMainCourses"><span class="dynamic" >{{ item.name }}     
+                        <svg version="1.0" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 64 64" enable-background="new 0 0 64 64" xml:space="preserve"> <g><polygon fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" points="52,62.999 52,0.999 26,0.999 12,14.999 12,63 16,61 20,63 24,61 28,63 32,61 36,63 40,61 44,63 48,61 	"/><polyline fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" points="12,14.999 26,14.999 26,0.999 	"/></g><line fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" x1="24" y1="48" x2="24" y2="20"/><path fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" d="M24,21h6c0,0,10.018-0.703,10.018,8S30,37,30,37h-6"/><line fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" x1="20" y1="27" x2="44" y2="27"/><line fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" x1="20" y1="31" x2="44" y2="31"/>
+                        </svg>
+                        {{ item.price }} </span></li>
+                    </ul>
                     </div>
-          
-                    <div *ngIf="package.selectedDesserts && package.selectedDesserts.length">
+                    <div *ngIf="package.selectedDesserts.length">
                       <p class="package-card-text">Desserts:</p>
-                      <ul>
-                        <li *ngFor="let dessert of package.selectedDesserts">{{ dessert }}</li>
-                      </ul>
+                      <ul class="UL_Disp">
+                        <li *ngFor="let item of package.selectedDesserts"><span class="dynamic" >{{ item.name }}     
+                        <svg version="1.0" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 64 64" enable-background="new 0 0 64 64" xml:space="preserve"> <g><polygon fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" points="52,62.999 52,0.999 26,0.999 12,14.999 12,63 16,61 20,63 24,61 28,63 32,61 36,63 40,61 44,63 48,61 	"/><polyline fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" points="12,14.999 26,14.999 26,0.999 	"/></g><line fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" x1="24" y1="48" x2="24" y2="20"/><path fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" d="M24,21h6c0,0,10.018-0.703,10.018,8S30,37,30,37h-6"/><line fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" x1="20" y1="27" x2="44" y2="27"/><line fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" x1="20" y1="31" x2="44" y2="31"/>
+                        </svg>
+                        {{ item.price }} </span></li>
+                    </ul>
                     </div>
-          
-                    <div *ngIf="package.selectedDrinks && package.selectedDrinks.length">
+                    <div *ngIf="package.selectedDrinks.length">
                       <p class="package-card-text">Drinks:</p>
-                      <ul>
-                        <li *ngFor="let drink of package.selectedDrinks">{{ drink }}</li>
-                      </ul>
+                      <ul class="UL_Disp">
+                        <li *ngFor="let item of package.selectedDrinks "><span class="dynamic" >{{ item.name }}     
+                        <svg version="1.0" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 64 64" enable-background="new 0 0 64 64" xml:space="preserve"> <g><polygon fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" points="52,62.999 52,0.999 26,0.999 12,14.999 12,63 16,61 20,63 24,61 28,63 32,61 36,63 40,61 44,63 48,61 	"/><polyline fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" points="12,14.999 26,14.999 26,0.999 	"/></g><line fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" x1="24" y1="48" x2="24" y2="20"/><path fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" d="M24,21h6c0,0,10.018-0.703,10.018,8S30,37,30,37h-6"/><line fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" x1="20" y1="27" x2="44" y2="27"/><line fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" x1="20" y1="31" x2="44" y2="31"/>
+                        </svg>
+                        {{ item.price }} </span></li>
+                    </ul>
                     </div>
-                  </div>
-                  <div *ngIf="package.totalPrice">
-                    <p class="package-card-text">Total Price: ${{ package.totalPrice }}</p>
-                  </div>
+                    <!-- Display the total price -->
+                    <p class="package-card-text">Total Price: <svg version="1.0" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 64 64" enable-background="new 0 0 64 64" xml:space="preserve"> <g><polygon fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" points="52,62.999 52,0.999 26,0.999 12,14.999 12,63 16,61 20,63 24,61 28,63 32,61 36,63 40,61 44,63 48,61 	"/><polyline fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" points="12,14.999 26,14.999 26,0.999 	"/></g><line fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" x1="24" y1="48" x2="24" y2="20"/><path fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" d="M24,21h6c0,0,10.018-0.703,10.018,8S30,37,30,37h-6"/><line fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" x1="20" y1="27" x2="44" y2="27"/><line fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" x1="20" y1="31" x2="44" y2="31"/>
+                    </svg>{{ package.totalPrice }}</p>
 
                   
                   <div class="package-card-footer">

@@ -100,7 +100,9 @@ export class PackageMenuComponent implements OnInit {
 
   
   onSelectAppetizer(item: any) {
+    
     const isAlreadySelected = this.selectedAppetizers.includes(item);
+
 
     // If the item is not in the array, add it; otherwise, remove it
     if (!isAlreadySelected) {
@@ -212,12 +214,12 @@ addPackage() {
   const userId = this.userId;
 
   // Add selected food items to the packageData object
-  packageData.selectedAppetizers = this.selectedAppetizers.map(item => item.food_name);
-  packageData.selectedSoups = this.selectedSoups.map(item => item.food_name);
-  packageData.selectedSalads = this.selectedSalads.map(item => item.food_name);
-  packageData.selectedMainCourses = this.selectedMainCourses.map(item => item.food_name);
-  packageData.selectedDesserts = this.selectedDesserts.map(item => item.food_name);
-  packageData.selectedDrinks = this.selectedDrinks.map(item => item.food_name);
+  packageData.selectedAppetizers = this.selectedAppetizers.map(item => ({name: item.food_name, price: item.pax_price}));
+  packageData.selectedSoups = this.selectedSoups.map(item => ({name: item.food_name, price: item.pax_price}));
+  packageData.selectedSalads = this.selectedSalads.map(item => ({name: item.food_name, price: item.pax_price}));
+  packageData.selectedMainCourses = this.selectedMainCourses.map(item => ({name: item.food_name, price: item.pax_price}));
+  packageData.selectedDesserts = this.selectedDesserts.map(item => ({name: item.food_name, price: item.pax_price}));
+  packageData.selectedDrinks = this.selectedDrinks.map(item => ({name: item.food_name, price: item.pax_price}));
   packageData.totalPrice = overallTotalPrice;
   // Add other selected items as needed
 
