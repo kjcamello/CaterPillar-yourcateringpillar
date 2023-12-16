@@ -66,11 +66,6 @@
 }
 
 /* ---------------------------- MODDAL ------------------------------------- */
-.modal-content {
-/* background-color: #fff016; Background color for the modal content */
-/* border-radius: 10px; Rounded corners for the modal */
-}
-
 .modal_bg {
 background-color: #fff016;
 border-radius: 10px; 
@@ -616,4 +611,14 @@ height: 210px;
 
 .PKGMENU{
 margin-left: 60px;
+}
+
+/* ----------------------------------- */
+
+.UL_Disp{
+
+}
+
+.selected-row {
+  background-color: #AC0000; /* Change to your desired highlight color */
 }

@@ -106,16 +106,63 @@
                       <div class="FI">Food Inclusion</div>
                     </div>
                     
-                    <p>Appetizer: <span class="dynamic">{{ package.selectedAppetizers}} </span></p>
-                    <p>Soup: <span class="dynamic">{{ package.selectedSoups}} </span></p>
-                    <p>Salad: <span class="dynamic">{{ package.selectedSalads}} </span></p>
-                    <p>Main Course: <span class="dynamic">{{ package.selectedMainCourses}} </span></p>
-                    <p>Dessert: <span class="dynamic">{{ package.selectedDesserts}}</span></p>
-                    <p>Drinks: <span class="dynamic">{{ package.selectedDrinks}}</span></p>
-
-                    <p>Total Price: ${{ package.totalPrice }}</p>
-
-                    
+                    <div *ngIf="package.selectedAppetizers.length">
+                      <p>Appetizers: </p>
+                      <ul class="UL_Disp">
+                        <li *ngFor="let item of package.selectedAppetizers"><span class="dynamic" >{{ item.name }}     
+                          <svg version="1.0" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 64 64" enable-background="new 0 0 64 64" xml:space="preserve"> <g><polygon fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" points="52,62.999 52,0.999 26,0.999 12,14.999 12,63 16,61 20,63 24,61 28,63 32,61 36,63 40,61 44,63 48,61 	"/><polyline fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" points="12,14.999 26,14.999 26,0.999 	"/></g><line fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" x1="24" y1="48" x2="24" y2="20"/><path fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" d="M24,21h6c0,0,10.018-0.703,10.018,8S30,37,30,37h-6"/><line fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" x1="20" y1="27" x2="44" y2="27"/><line fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" x1="20" y1="31" x2="44" y2="31"/>
+                          </svg>
+                          {{ item.price }}</span></li>
+                      </ul>
+                    </div>
+                    <div *ngIf="package.selectedSoups.length">
+                      <p>Soups:</p>
+                      <ul class="UL_Disp">
+                        <li *ngFor="let item of package.selectedSoups"><span class="dynamic" >{{ item.name }}     
+                        <svg version="1.0" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 64 64" enable-background="new 0 0 64 64" xml:space="preserve"> <g><polygon fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" points="52,62.999 52,0.999 26,0.999 12,14.999 12,63 16,61 20,63 24,61 28,63 32,61 36,63 40,61 44,63 48,61 	"/><polyline fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" points="12,14.999 26,14.999 26,0.999 	"/></g><line fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" x1="24" y1="48" x2="24" y2="20"/><path fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" d="M24,21h6c0,0,10.018-0.703,10.018,8S30,37,30,37h-6"/><line fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" x1="20" y1="27" x2="44" y2="27"/><line fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" x1="20" y1="31" x2="44" y2="31"/>
+                        </svg>  
+                        {{ item.price }} </span></li>
+                    </ul>
+                    </div>
+                    <div *ngIf="package.selectedSalads.length">
+                      <p>Salads:</p>
+                      <ul class="UL_Disp">
+                        <li *ngFor="let item of package.selectedSalads"><span class="dynamic" >{{ item.name }}     
+                        <svg version="1.0" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 64 64" enable-background="new 0 0 64 64" xml:space="preserve"> <g><polygon fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" points="52,62.999 52,0.999 26,0.999 12,14.999 12,63 16,61 20,63 24,61 28,63 32,61 36,63 40,61 44,63 48,61 	"/><polyline fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" points="12,14.999 26,14.999 26,0.999 	"/></g><line fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" x1="24" y1="48" x2="24" y2="20"/><path fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" d="M24,21h6c0,0,10.018-0.703,10.018,8S30,37,30,37h-6"/><line fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" x1="20" y1="27" x2="44" y2="27"/><line fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" x1="20" y1="31" x2="44" y2="31"/>
+                        </svg>  
+                        {{ item.price }} </span></li>
+                    </ul>
+                    </div>
+                    <div *ngIf="package.selectedMainCourses.length">
+                      <p>Main Courses:</p>
+                      <ul class="UL_Disp">
+                        <li *ngFor="let item of package.selectedMainCourses"><span class="dynamic" >{{ item.name }}     
+                        <svg version="1.0" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 64 64" enable-background="new 0 0 64 64" xml:space="preserve"> <g><polygon fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" points="52,62.999 52,0.999 26,0.999 12,14.999 12,63 16,61 20,63 24,61 28,63 32,61 36,63 40,61 44,63 48,61 	"/><polyline fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" points="12,14.999 26,14.999 26,0.999 	"/></g><line fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" x1="24" y1="48" x2="24" y2="20"/><path fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" d="M24,21h6c0,0,10.018-0.703,10.018,8S30,37,30,37h-6"/><line fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" x1="20" y1="27" x2="44" y2="27"/><line fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" x1="20" y1="31" x2="44" y2="31"/>
+                        </svg>
+                        {{ item.price }} </span></li>
+                    </ul>
+                    </div>
+                    <div *ngIf="package.selectedDesserts.length">
+                      <p>Desserts:</p>
+                      <ul class="UL_Disp">
+                        <li *ngFor="let item of package.selectedDesserts"><span class="dynamic" >{{ item.name }}     
+                        <svg version="1.0" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 64 64" enable-background="new 0 0 64 64" xml:space="preserve"> <g><polygon fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" points="52,62.999 52,0.999 26,0.999 12,14.999 12,63 16,61 20,63 24,61 28,63 32,61 36,63 40,61 44,63 48,61 	"/><polyline fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" points="12,14.999 26,14.999 26,0.999 	"/></g><line fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" x1="24" y1="48" x2="24" y2="20"/><path fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" d="M24,21h6c0,0,10.018-0.703,10.018,8S30,37,30,37h-6"/><line fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" x1="20" y1="27" x2="44" y2="27"/><line fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" x1="20" y1="31" x2="44" y2="31"/>
+                        </svg>
+                        {{ item.price }} </span></li>
+                    </ul>
+                    </div>
+                    <div *ngIf="package.selectedDrinks.length">
+                      <p>Drinks:</p>
+                      <ul class="UL_Disp">
+                        <li *ngFor="let item of package.selectedDrinks "><span class="dynamic" >{{ item.name }}     
+                        <svg version="1.0" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 64 64" enable-background="new 0 0 64 64" xml:space="preserve"> <g><polygon fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" points="52,62.999 52,0.999 26,0.999 12,14.999 12,63 16,61 20,63 24,61 28,63 32,61 36,63 40,61 44,63 48,61 	"/><polyline fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" points="12,14.999 26,14.999 26,0.999 	"/></g><line fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" x1="24" y1="48" x2="24" y2="20"/><path fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" d="M24,21h6c0,0,10.018-0.703,10.018,8S30,37,30,37h-6"/><line fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" x1="20" y1="27" x2="44" y2="27"/><line fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" x1="20" y1="31" x2="44" y2="31"/>
+                        </svg>
+                        {{ item.price }} </span></li>
+                    </ul>
+                    </div>
+                    <!-- Display the total price -->
+                    <p>Total Price: <svg version="1.0" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 64 64" enable-background="new 0 0 64 64" xml:space="preserve"> <g><polygon fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" points="52,62.999 52,0.999 26,0.999 12,14.999 12,63 16,61 20,63 24,61 28,63 32,61 36,63 40,61 44,63 48,61 	"/><polyline fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" points="12,14.999 26,14.999 26,0.999 	"/></g><line fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" x1="24" y1="48" x2="24" y2="20"/><path fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" d="M24,21h6c0,0,10.018-0.703,10.018,8S30,37,30,37h-6"/><line fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" x1="20" y1="27" x2="44" y2="27"/><line fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" x1="20" y1="31" x2="44" y2="31"/>
+                    </svg>{{ package.totalPrice }}</p>
                     
                     <!-- <p>Extra Service: You might want to bind data here if available</p> -->
                     <div class="card-actions">
@@ -208,7 +255,7 @@
                 <table class="table">
                   <thead>
                     <tr>
-                      <th>Select</th>
+                     
                       <th>Item Name</th>
                       <th>Description</th>
                       <!-- <th>Minimum Pax</th> -->
@@ -220,9 +267,7 @@
                   <tbody>
                     <!-- Loop through your appetizer items -->
                     <tr *ngFor="let item of appetizerOptions" (click)="onSelectAppetizer(item)">
-                      <td>
-                        <input type="checkbox" [(ngModel)]="item.selected">
-                      </td>
+                    
                       <td>{{ item.food_name }}</td>
                       <td>{{ item.food_description }}</td>
                       <!-- <td>{{ item.minimum_pax }}</td> -->
@@ -237,7 +282,7 @@
                 <table class="table">
                   <thead>
                     <tr>
-                      <th>Select</th>
+                    
                       <th>Item Name</th>
                       <th>Description</th>
                       <!-- <th>Minimum Pax</th> -->
@@ -249,9 +294,7 @@
                   <tbody>
                     <!-- Loop through your appetizer items -->
                     <tr *ngFor="let item of soupOptions" (click)="onSelectSoup(item)">
-                      <td>
-                        <input type="checkbox" [(ngModel)]="item.selected">
-                      </td>
+                      
                       <td>{{ item.food_name }}</td>
                       <td>{{ item.food_description }}</td>
                       <!-- <td>{{ item.minimum_pax }}</td> -->
@@ -266,7 +309,7 @@
                 <table class="table">
                   <thead>
                     <tr>
-                      <th>Select</th>
+                      
                       <th>Item Name</th>
                       <th>Description</th>
                       <!-- <th>Minimum Pax</th> -->
@@ -278,9 +321,7 @@
                   <tbody>
                     <!-- Loop through your appetizer items -->
                     <tr *ngFor="let item of saladOptions" (click)="onSelectSalad(item)">
-                      <td>
-                        <input type="checkbox" [(ngModel)]="item.selected">
-                      </td>
+                    
                       <td>{{ item.food_name }}</td>
                       <td>{{ item.food_description }}</td>
                       <!-- <td>{{ item.minimum_pax }}</td> -->
@@ -295,7 +336,7 @@
                 <table class="table">
                   <thead>
                     <tr>
-                      <th>Select</th>
+                     
                       <th>Item Name</th>
                       <th>Description</th>
                       <!-- <th>Minimum Pax</th> -->
@@ -307,9 +348,7 @@
                   <tbody>
                     <!-- Loop through your appetizer items -->
                     <tr *ngFor="let item of mainCourseOptions" (click)="onSelectMainCourse(item)">
-                      <td>
-                        <input type="checkbox" [(ngModel)]="item.selected">
-                      </td>
+                      
                       <td>{{ item.food_name }}</td>
                       <td>{{ item.food_description }}</td>
                       <!-- <td>{{ item.minimum_pax }}</td> -->
@@ -324,7 +363,7 @@
                 <table class="table">
                   <thead>
                     <tr>
-                      <th>Select</th>
+                    
                       <th>Item Name</th>
                       <th>Description</th>
                       <!-- <th>Minimum Pax</th> -->
@@ -336,9 +375,7 @@
                   <tbody>
                     <!-- Loop through your appetizer items -->
                     <tr *ngFor="let item of dessertOptions" (click)="onSelectDessert(item)">
-                      <td>
-                        <input type="checkbox" [(ngModel)]="item.selected">
-                      </td>
+                      
                       <td>{{ item.food_name }}</td>
                       <td>{{ item.food_description }}</td>
                       <!-- <td>{{ item.minimum_pax }}</td> -->
@@ -353,7 +390,7 @@
                 <table class="table">
                   <thead>
                     <tr>
-                      <th>Select</th>
+                   
                       <th>Item Name</th>
                       <th>Description</th>
                       <!-- <th>Minimum Pax</th> -->
@@ -365,9 +402,7 @@
                   <tbody>
                     <!-- Loop through your appetizer items -->
                     <tr *ngFor="let item of drinkOptions" (click)="onSelectDrink(item)">
-                      <td>
-                        <input type="checkbox" [(ngModel)]="item.selected">
-                      </td>
+                      
                       <td>{{ item.food_name }}</td>
                       <td>{{ item.food_description }}</td>
                       <!-- <td>{{ item.minimum_pax }}</td> -->
@@ -403,13 +438,48 @@
                     <div class="FI">Food Inclusion</div>
                   </div>
                   
-                  <p>Appetizers: <span class="dynamic" *ngFor="let item of selectedAppetizers">{{ item.food_name }}, </span></p>
-                  <p>Soups: <span class="dynamic" *ngFor="let item of selectedSoups">{{ item.food_name }}, </span></p>
-                  <p>Salads: <span class="dynamic" *ngFor="let item of selectedSalads">{{ item.food_name }}, </span></p>
-                  <p>Main Courses: <span class="dynamic" *ngFor="let item of selectedMainCourses">{{ item.food_name }}, </span></p>
-                  <p>Desserts: <span class="dynamic" *ngFor="let item of selectedDesserts">{{ item.food_name }}, </span></p>
-                  <p>Drinks: <span class="dynamic" *ngFor="let item of selectedDrinks ">{{ item.food_name }}, </span></p>
-                  
+                  <p>Appetizers: </p>
+                  <ul class="UL_Disp">
+                    <li *ngFor="let item of selectedAppetizers"><span class="dynamic" >{{ item.food_name }}     
+                      <svg version="1.0" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 64 64" enable-background="new 0 0 64 64" xml:space="preserve"> <g><polygon fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" points="52,62.999 52,0.999 26,0.999 12,14.999 12,63 16,61 20,63 24,61 28,63 32,61 36,63 40,61 44,63 48,61 	"/><polyline fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" points="12,14.999 26,14.999 26,0.999 	"/></g><line fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" x1="24" y1="48" x2="24" y2="20"/><path fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" d="M24,21h6c0,0,10.018-0.703,10.018,8S30,37,30,37h-6"/><line fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" x1="20" y1="27" x2="44" y2="27"/><line fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" x1="20" y1="31" x2="44" y2="31"/>
+                      </svg>
+                      {{ item.pax_price }}</span></li>
+                  </ul>
+                  <p>Soups:</p>
+                  <ul class="UL_Disp">
+                    <li *ngFor="let item of selectedSoups"><span class="dynamic" >{{ item.food_name }}     
+                      <svg version="1.0" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 64 64" enable-background="new 0 0 64 64" xml:space="preserve"> <g><polygon fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" points="52,62.999 52,0.999 26,0.999 12,14.999 12,63 16,61 20,63 24,61 28,63 32,61 36,63 40,61 44,63 48,61 	"/><polyline fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" points="12,14.999 26,14.999 26,0.999 	"/></g><line fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" x1="24" y1="48" x2="24" y2="20"/><path fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" d="M24,21h6c0,0,10.018-0.703,10.018,8S30,37,30,37h-6"/><line fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" x1="20" y1="27" x2="44" y2="27"/><line fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" x1="20" y1="31" x2="44" y2="31"/>
+                      </svg>  
+                      {{ item.pax_price }} </span></li>
+                  </ul>
+                  <p>Salads:</p>
+                  <ul class="UL_Disp">
+                    <li *ngFor="let item of selectedSalads"><span class="dynamic" >{{ item.food_name }}     
+                      <svg version="1.0" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 64 64" enable-background="new 0 0 64 64" xml:space="preserve"> <g><polygon fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" points="52,62.999 52,0.999 26,0.999 12,14.999 12,63 16,61 20,63 24,61 28,63 32,61 36,63 40,61 44,63 48,61 	"/><polyline fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" points="12,14.999 26,14.999 26,0.999 	"/></g><line fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" x1="24" y1="48" x2="24" y2="20"/><path fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" d="M24,21h6c0,0,10.018-0.703,10.018,8S30,37,30,37h-6"/><line fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" x1="20" y1="27" x2="44" y2="27"/><line fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" x1="20" y1="31" x2="44" y2="31"/>
+                      </svg>  
+                      {{ item.pax_price }} </span></li>
+                  </ul>
+                  <p>Main Courses:</p>
+                  <ul class="UL_Disp">
+                    <li *ngFor="let item of selectedMainCourses"><span class="dynamic" >{{ item.food_name }}     
+                      <svg version="1.0" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 64 64" enable-background="new 0 0 64 64" xml:space="preserve"> <g><polygon fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" points="52,62.999 52,0.999 26,0.999 12,14.999 12,63 16,61 20,63 24,61 28,63 32,61 36,63 40,61 44,63 48,61 	"/><polyline fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" points="12,14.999 26,14.999 26,0.999 	"/></g><line fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" x1="24" y1="48" x2="24" y2="20"/><path fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" d="M24,21h6c0,0,10.018-0.703,10.018,8S30,37,30,37h-6"/><line fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" x1="20" y1="27" x2="44" y2="27"/><line fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" x1="20" y1="31" x2="44" y2="31"/>
+                      </svg>
+                      {{ item.pax_price }} </span></li>
+                  </ul>
+                  <p>Desserts:</p>
+                  <ul class="UL_Disp">
+                    <li *ngFor="let item of selectedDesserts"><span class="dynamic" >{{ item.food_name }}     
+                      <svg version="1.0" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 64 64" enable-background="new 0 0 64 64" xml:space="preserve"> <g><polygon fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" points="52,62.999 52,0.999 26,0.999 12,14.999 12,63 16,61 20,63 24,61 28,63 32,61 36,63 40,61 44,63 48,61 	"/><polyline fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" points="12,14.999 26,14.999 26,0.999 	"/></g><line fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" x1="24" y1="48" x2="24" y2="20"/><path fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" d="M24,21h6c0,0,10.018-0.703,10.018,8S30,37,30,37h-6"/><line fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" x1="20" y1="27" x2="44" y2="27"/><line fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" x1="20" y1="31" x2="44" y2="31"/>
+                      </svg>
+                      {{ item.pax_price }} </span></li>
+                  </ul>
+                  <p>Drinks:</p>
+                  <ul class="UL_Disp">
+                    <li *ngFor="let item of selectedDrinks "><span class="dynamic" >{{ item.food_name }}     
+                      <svg version="1.0" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 64 64" enable-background="new 0 0 64 64" xml:space="preserve"> <g><polygon fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" points="52,62.999 52,0.999 26,0.999 12,14.999 12,63 16,61 20,63 24,61 28,63 32,61 36,63 40,61 44,63 48,61 	"/><polyline fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" points="12,14.999 26,14.999 26,0.999 	"/></g><line fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" x1="24" y1="48" x2="24" y2="20"/><path fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" d="M24,21h6c0,0,10.018-0.703,10.018,8S30,37,30,37h-6"/><line fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" x1="20" y1="27" x2="44" y2="27"/><line fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" x1="20" y1="31" x2="44" y2="31"/>
+                      </svg>
+                      {{ item.pax_price }} </span></li>
+                  </ul>
                   <!-- Display the total price -->
                   <p>Total Price: ${{ calculateOverallTotalPrice() }}</p>
                   
