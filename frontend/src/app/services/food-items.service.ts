@@ -22,6 +22,8 @@ export class FoodItemsService {
   private selectedExtraServiceItemsSubject: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
   selectedExtraServiceItems$: Observable<any[]> = this.selectedExtraServiceItemsSubject.asObservable();
 
+  selectedPackage: any; // Adjust the type based on your data structure
+
   setSelectedItems(items: any[]): void {
     this.selectedItemsSubject.next(items);
   }
@@ -241,15 +243,31 @@ private toExtraServiceObject(extraserviceItem: any): any {
       // Add other fields as needed
     };
   }
-
-  saveToCart(selectedPackage: any, userUid: string, packageName: string): void {
-    // Use the Firestore-generated ID as packageUid
-    const packageUid = this.firestore.createId();
+  
+  saveToCart(
+    selectedPackage: any,
+    userUid: string,
+    packageName: string,
+    selectedDate: string,
+    selectedTime: string,
+    locationLandmark: string,
+    newGrandFoodItemTotal: number,
+    newGrandExtraServiceTotal: number,
+    newGrandTotal: number,
+  ): void {
+    // Format the date and time
+    //const formattedDate = this.formatDateWithDay(selectedDate);
+    //const formattedTime = this.formatTime(selectedTime);
   
     const cartData = {
       selectedPackage,
       packageName,
-      packageUid,
+      selectedDate,
+      selectedTime,
+      locationLandmark,
+      newGrandFoodItemTotal,
+      newGrandExtraServiceTotal,
+      newGrandTotal
       // Add any other data you want to save to the cart
     };
   
@@ -258,16 +276,28 @@ private toExtraServiceObject(extraserviceItem: any): any {
     // Add the data to the cart subcollection
     cartSubcollectionRef.add(cartData)
       .then(docRef => {
-        alert('This D-I-Y Package has been added to cart successfully.');
-        console.log('This D-I-Y Package has been added to cart successfully.');
-        console.log('Package UID:', docRef.id); // Use the Firestore-generated ID
-        // You can also show a confirmation message or update UI as needed
+        // Use the Firestore-generated ID as packageUid
+        const packageUid = docRef.id;
+  
+        // Update the existing document with the correct packageUid
+        docRef.update({ packageUid })
+          .then(() => {
+            alert('This D-I-Y Package has been saved successfully.');
+            console.log('This D-I-Y Package has been saved successfully.');
+            console.log('Document UID:', docRef.id);
+            console.log('Package UID:', packageUid); // Use the Firestore-generated ID
+            // You can also show a confirmation message or update UI as needed
+          })
+          .catch(error => {
+            alert('Error updating packageUid:');
+            console.error('Error updating packageUid:', error);
+          });
       })
       .catch(error => {
         alert('Error adding package to cart:');
-        console.error('Error adding package to cart:', error);
+        console.error('Error saving D-I-Y Package:', error);
         // Handle the error, show a message, etc.
       });
-  }
+  }  
 
 }

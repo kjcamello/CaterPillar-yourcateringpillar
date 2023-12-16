@@ -130,28 +130,6 @@
 
 <button class="review-order-button" (click)="toggleReceipt()">Review Order</button>
 
-<!--
-{{ selectedFoodItems | json }}
-
-<tr *ngFor="let item of selectedFoodItems">
-  <td>{{ item.food_name }}</td>
-  <td>{{ item.pax_price | currency: 'PHP':true }}</td>
-  <td>{{ item.selectedPax }}</td>
-  <td>{{ calculateSubtotal(item) | currency: 'PHP':true }}</td>
-</tr>
-
-
-{{ selectedExtraServices | json }}-->
-
-<!-- Loop through selectedExtraServices
-<tr *ngFor="let service of selectedExtraServices">
-  <td>{{ service.esName }}</td>
-  <td>{{ service.esPrice | currency: 'PHP':true }}/hour</td>
-  <td>{{ service.selectedHours }}</td>
-  <td>{{ calculateSubtotal(service) | currency: 'PHP':true }}</td>
-</tr>-->
-
-
 <!-- E-Receipt Content -->
 <div *ngIf="showReceipt" class="ereceipt-background"></div>
 <div *ngIf="showReceipt" class="ereceipt-content">
@@ -269,8 +247,7 @@
 
 <!-- Add to Cart Button -->
 <div class="receipt-buttons">
-  <button class="add-to-cart-button" (click)="promptForPackageName()">Add to Cart</button>
-  <button class="order-now-button" (click)="orderNow()">Order Now</button>
+  <button class="add-to-cart-button" (click)="promptForPackageName()">Proceed</button>
 </div>
 
 <!-- Modal for Package Name Input -->
@@ -286,9 +263,27 @@
     ></textarea>
   </div>
   <button (click)="cancelAddToCart()">Cancel</button>
-  <button (click)="confirmAddToCart()">Add to Cart</button>
-</div>
+  <button (click)="confirmAddToCart()">Save</button>
+
+
+
 <!--
 {{ selectedFoodItems | json }}
-{{ selectedExtraServices | json }}
-{{ showReceipt }} Add these logs to check the data -->
+
+<tr *ngFor="let item of selectedFoodItems">
+  <td>{{ item.food_name }}</td>
+  <td>{{ item.pax_price | currency: 'PHP':true }}</td>
+  <td>{{ item.selectedPax }}</td>
+  <td>{{ calculateSubtotal(item) | currency: 'PHP':true }}</td>
+</tr>
+
+
+{{ selectedExtraServices | json }}-->
+
+<!-- Loop through selectedExtraServices
+<tr *ngFor="let service of selectedExtraServices">
+  <td>{{ service.esName }}</td>
+  <td>{{ service.esPrice | currency: 'PHP':true }}/hour</td>
+  <td>{{ service.selectedHours }}</td>
+  <td>{{ calculateSubtotal(service) | currency: 'PHP':true }}</td>
+</tr>-->

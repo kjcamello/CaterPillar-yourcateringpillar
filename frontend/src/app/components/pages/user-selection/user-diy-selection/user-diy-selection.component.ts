@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import {  Observable } from 'rxjs';
+import { Observable, combineLatest } from 'rxjs';
+import { switchMap, map } from 'rxjs/operators';
 
+import { DiyPackageService } from 'src/app/services/diy-package.service';
 import { FoodItemsService } from 'src/app/services/food-items.service';
 import { EventSelectionService } from 'src/app/services/event-selection.service';
 import { UserAuthService } from 'src/app/services/userauth.service';
@@ -90,6 +92,18 @@ originalTotal: number = 0;
   showPackageNamePrompt: boolean = false;
 packageName: string = '';
 
+//arrayed list of selected item
+packageDetails: any;
+foodItemIds: string[] = [];
+extraServiceIds: string[] = [];
+
+foodItemDetails: any[] = [];
+extraServiceDetails: any[] = [];
+
+//this is what i mean
+selectedExtraServiceDetails: any[] = [];
+selectedEventDetails: any[] = [];
+
     get locationLandmarkControl(): AbstractControl | null {
     return this.dateAndTimeForm.get('locationLandmark');
   }
@@ -107,7 +121,8 @@ packageName: string = '';
     private formBuilder: FormBuilder,
     private selectedItemsService: FoodItemsService,
     private authService: AuthService,
-    private userauthService: UserAuthService
+    private userauthService: UserAuthService,
+    private diypackageService: DiyPackageService
     ) {
     // Initialize the form in the constructor
     this.dateAndTimeForm = this.formBuilder.group({
@@ -141,6 +156,40 @@ packageName: string = '';
     this.eventSelectionService.selectedVoucherItems$.subscribe((selectedVoucherItems) => {
       this.selectedVoucherItems = selectedVoucherItems;
     });
+
+    this.activatedRoute.params.pipe(
+      switchMap(params => this.diypackageService.getPackageDetails(params.packageUid))
+    ).subscribe(packageDetails => {
+      this.packageDetails = packageDetails;
+      // Extract food item IDs and extra service IDs
+      const foodItemIds = packageDetails.foodItems || [];
+      const extraServiceIds = packageDetails.extraServices || [];
+    
+      // Retrieve food item details
+      this.diypackageService.getFoodItemsDetails(foodItemIds).subscribe(foodItems => {
+        this.foodItemDetails = foodItems;
+      });
+    
+      // Retrieve extra service details
+      this.diypackageService.getExtraServicesDetails(extraServiceIds).subscribe(extraServices => {
+        this.extraServiceDetails = extraServices;
+      });
+    });
+
+    //just trying
+    this.activatedRoute.params.pipe(
+      switchMap(params => this.diypackageService.getPackageDetails(params.packageUid))
+    ).subscribe(packageDetails => {
+      this.packageDetails = packageDetails;
+      // Extract extra service IDs
+      const extraServiceIds = packageDetails.extraServiceIds || [];
+    
+      // Retrieve extra service details
+      this.diypackageService.getExtraServicesDetails(extraServiceIds).subscribe(extraServices => {
+        this.selectedExtraServiceDetails = extraServices;
+      });
+    });
+
 
     this.userUid = this.userauthService.getUserUid();
   }
@@ -422,20 +471,16 @@ packageName: string = '';
     return this.originalGrandTotal;
   }
 
-  // Update the method to calculate the new grand total
-  calculateNewGrandTotal(): number {
-    // Calculate the new grand total by adding the new grand food item total and new grand extra service total
-    const newGrandFoodItemTotal = this.calculateNewGrandFoodItemTotal();
-    const newGrandExtraServiceTotal = this.calculateNewGrandExtraServiceTotal();
-    this.newGrandTotal = newGrandFoodItemTotal + newGrandExtraServiceTotal;
+// Add this method to calculate the new grand total
+calculateNewGrandTotal(): number {
+  const newGrandFoodItemTotal = this.calculateNewGrandFoodItemTotal();
+  const newGrandExtraServiceTotal = this.calculateNewGrandExtraServiceTotal();
 
-    // Log for debugging
-    console.log('New Grand Food Item Total:', newGrandFoodItemTotal);
-    console.log('New Grand Extra Service Total:', newGrandExtraServiceTotal);
-    console.log('New Grand Total:', this.newGrandTotal);
+  // Calculate the sum of new grand food item total and new grand extra service total
+  const newGrandTotal = newGrandFoodItemTotal + newGrandExtraServiceTotal;
 
-    return this.newGrandTotal;
-  }
+  return newGrandTotal;
+}
 
 
 //Add-to-Cart Methods
@@ -448,6 +493,46 @@ cancelAddToCart(): void {
   // Additional logic if needed
 }
 
+// Inside a method where you fetch the details (e.g., ngOnInit or whenever you get the selected package)
+fetchDetailsForSelectedPackage(): void {
+  // Assuming this.selectedPackage contains the necessary information
+  // Replace this with your actual logic to fetch foodItemIds and extraServiceIds
+
+  // Example for fetching foodItemIds
+  this.selectedPackage.foodItems.forEach((foodItem: any) => {
+    // Assuming foodItems collection has a field 'foodItemID'
+    const foodItemId = foodItem.foodItemID;
+
+    // Fetch the actual document from caterers collection
+    this.firestore.doc(`caterers/${this.selectedPackage.catererUid}/maincourseItems/${foodItemId}`)
+      .valueChanges()
+      .subscribe((foodItemData: any) => {
+        // Assuming 'foodItemID' field is available in foodItemData
+        const actualFoodItemId = foodItemData.foodItemID;
+
+        // Push the actual ID to foodItemIds array
+        this.foodItemIds.push(actualFoodItemId);
+      });
+  });
+
+  // Example for fetching extraServiceIds
+  this.selectedPackage.extraServices.forEach((extraService: any) => {
+    // Assuming extraServices collection has a field 'esID'
+    const extraServiceId = extraService.esID;
+
+    // Fetch the actual document from caterers collection
+    this.firestore.doc(`caterers/${this.selectedPackage.catererUid}/extraServices/${extraServiceId}`)
+      .valueChanges()
+      .subscribe((extraServiceData: any) => {
+        // Assuming 'esID' field is available in extraServiceData
+        const actualExtraServiceId = extraServiceData.esID;
+
+        // Push the actual ID to extraServiceIds array
+        this.extraServiceIds.push(actualExtraServiceId);
+      });
+  });
+}
+
 confirmAddToCart(): void {
   // Show a prompt to enter the package name
   const packageName = prompt('Enter the package name:');
@@ -455,15 +540,28 @@ confirmAddToCart(): void {
   if (packageName !== null) {
     // Package name is entered
 
+    // Fetch the event name from selectedEvent (modify as per your actual structure)
+    const eventName = this.selectedEvent ? this.selectedEvent.name : null;
+
     // Show a confirmation prompt
-    const isConfirmed = window.confirm('Are you sure you want to add-to-cart this package for now?');
+    const isConfirmed = window.confirm('Are you sure you want to proceed?');
 
     if (isConfirmed) {
       // Perform the logic to add to cart with the entered package name
       console.log('Added to Cart with Package Name:', packageName);
 
       // Save to cart
-      this.foodItemsService.saveToCart(this.selectedPackage, this.userUid, packageName);
+      this.foodItemsService.saveToCart(
+        this.selectedPackage,
+        this.userUid,
+        packageName,
+        this.dateAndTimeForm.get('selectedDate').value,
+        this.dateAndTimeForm.get('selectedTime').value,
+        this.dateAndTimeForm.get('locationLandmark').value,
+        this.calculateNewGrandFoodItemTotal(),
+        this.calculateNewGrandExtraServiceTotal(),
+        this.calculateNewGrandTotal(),
+      );
 
       // Reset values
       this.showPackageNamePrompt = false;
@@ -472,17 +570,6 @@ confirmAddToCart(): void {
   } else {
     // Package name is not entered
     alert('Package name is required.');
-  }
-}
-
-addToCart(): void {
-  const userUid = this.userauthService.getUserUid();
-  const packageName = this.packageName;  // Make sure packageName is properly set
-
-  if (this.selectedPackage && userUid && packageName) {
-    this.foodItemsService.saveToCart(this.selectedPackage, userUid, packageName);
-  } else {
-    console.error('Missing required data for adding to cart.');
   }
 }
 
