@@ -1,0 +1,137 @@
+ <!-- HEADER -->
+ <app-signup-header></app-signup-header>
+ <div class="STcontainer">
+     <nav class="side_navbar">
+       <ul class="ul2">
+     
+         <li><a routerLink="/dashboard-caterer">
+           <img src="assets/Caterer Menu.png" alt="" class="icon-size">
+           <span class="nav-item">DashBoard</span>
+         </a></li>
+         <li><a routerLink="/csp-profile">
+           <img src="assets/Caterer Profile Icon.png" alt="" class="icon-size">
+           <span class="nav-item">Caterer Profile</span>
+         </a></li>
+         <!-- <li><a routerLink="/add-service-type">
+           <img src="assets/Add Service Type.png" alt="" class="icon-size">
+           <span class="nav-item">Add Service Type</span>
+         </a></li> -->
+         <li><a href="/package-menu">
+           <img src="assets/Add Package Menu.png" alt="" class="icon-size">
+           <span class="nav-item">Add Package Menu</span>
+         </a></li>
+         
+         <li><a routerLink="/diy-package">
+           <img src="assets/Add DIY Package.png" alt="" class="icon-size">
+           <span class="nav-item">Add DIY Package</span>
+         </a></li>
+         <li><a routerLink="/change-caterer-password">
+           <img src="assets/Caterer Settings.png" alt="" class="icon-size">
+           <span class="nav-item">Change Password</span>
+         </a></li>
+         <div class="side_navbar_separator"></div>
+         <!-- <li><a (click)="logout()">
+           <img src="assets/Caterer Logout.png" alt="" class="icon-size">
+           <span class="nav-item">Logout</span>
+         </a></li> -->
+       </ul>
+     </nav>
+</div>
+<div class="cover-container">
+    <img src="assets/BG.png" alt="" class="cover-size">
+        <div class="caterer-profile">
+        <!-- User Cover Photo with Change Button -->
+        <div class="cover-photo-container">
+          <div class="coverSize">
+              <!-- Always display the div, but change the image source based on selectedImage -->
+              <div class="coverphoto">
+                  <!-- <img [src]="selectedImage ? selectedImageSrc : defaultCoverPhotoUrl" alt="Cover Photo" class="cover_photo"> -->
+              </div>
+          </div>
+          <label class="custom-file-upload">
+              <!-- <input type="file" (change)="onImageSelected($event)" accept="image/*"> -->
+              <img src="assets/change_user_coverphoto.png" alt="Change Cover Photo" class="uploadCover"> 
+          </label>
+      </div>
+  
+            <div class="profile-credentials">
+              <div class="username-container">
+                <label class="Uname" for="username">Username</label>
+              </div>
+              <div class="biostatement">
+                <label class="BioState" for="biostatement">Input bio statement</label>
+              </div>
+            </div>
+    </div>
+  
+    <!-- User Profile Picture with Change Button -->
+    <div class="profile-pic-container">
+      <div class="profilepicSize">
+          <div class="profilephoto">
+              <!-- Display the selected profile image or fallback to the default profile image -->
+              <!-- <img [src]="userProfileImageUrl || defaultProfilePhotoUrl" alt="Profile Photo" class="profile_photo"> -->
+          </div>
+      </div>
+      <label class="change-profile-pic-button">
+          <!-- <input type="file" (change)="onProfileImageSelected($event)" accept="image/*" style="display: none;"> -->
+          <img src="assets/change_user_coverphoto.png" alt="Change Profile Picture" class="change-profile-pic-icon">
+      </label>
+  </div>
+
+  <div class="navForms">
+    <div class="navigationBar">
+        <button class="CatBasicInfo" (click)="showBasicInfo()">Basic Info</button>
+        <button class="CateringInfo" (click)="showCateringInfo()">Catering Info</button>
+    </div>
+    <div class="basicinfo-cat" id="basicinfo" *ngIf="showBasicInfoSection">
+        <div class="rectangle"></div>
+        <div class="basicinfo-mainContainer">
+            <div class="name-item">
+                <label for="name">Display Name:</label>
+                <input type="text" id="name" value="{{ caterer.catererDisplayName}}" class="nameBox">
+              </div>
+      
+            <!-- Email -->
+              <div class="email-item">
+                <label for="email">Email:</label>
+                <input type="email" id="email" value="{{ caterer.email}}" class="emailBox">
+              </div>
+      
+            <!-- Phone -->
+              <div class="phonenumber-item">
+                <label for="phone">Email Verified:</label>
+                    <div class="EmailRadioChoices">
+                        <input type="radio" id="emailVerifiedYes" name="emailVerified" value="Yes" [(ngModel)]="caterer.catererEmailVerified">
+                        <label for="emailVerifiedYes">Yes</label>
+                            <input type="radio" id="emailVerifiedNo" name="emailVerified" value="No" [(ngModel)]="caterer.catererEmailVerified">
+                            <label for="emailVerifiedNo">No</label>
+            </div>
+            </div>
+      
+            <!-- Address -->
+            <div class="address-item">
+                <label for="address">Registered Address:</label>
+                <input type="text" id="address" value="{{caterer.catererRegisteredAddress }}" class="address_Box">
+            </div>
+            <div class="nameTIN-item">
+                <label for="registeredName">Registered Name:</label>
+                <input type="text" id="registeredName" value="{{caterer.catererRegisteredName }}" class="nameTIN_Box">
+            </div>
+              <div class="tin-item">
+              <label>TIN:</label>
+                <div class="tinChoices">
+                     <input type="radio" id="tinYes" name="tin" value="Yes" [(ngModel)]="caterer.catererTIN">
+                     <label for="tinYes">Yes</label>
+                        <input type="radio" id="tinNo" name="tin" value="No" [(ngModel)]="caterer.catererTIN">
+                        <label for="tinNo">No</label>
+                    </div>
+            </div>
+            
+        </div>
+    </div>
+    <div class="catering-info" id="cateringinfo" *ngIf="showCateringInfoSection">
+        <div class="rectangle1"></div>
+    </div>
+</div>
+
+    

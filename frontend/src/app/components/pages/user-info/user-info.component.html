@@ -21,15 +21,15 @@
                <span class="nav-item">Order History</span>
              </a></li>
             
-             <li><a routerLink="/user-changepassword">
+             <li><a routerLink="/change-user-password">
                <img src="assets/Caterer Settings.png" alt="" class="icon-size">
                <span class="nav-item">Change Password</span>
              </a></li>
              <div class="side_navbar_separator"></div>
-              <!-- <li><a (click)="logout()">
+              <li><a (click)="logout()">
                <img src="assets/Caterer Logout.png" alt="" class="icon-size">
                <span class="nav-item">Logout</span>
-             </a></li>   -->
+             </a></li>  
            </ul>
          </nav>
    
@@ -66,7 +66,7 @@
     <div class="profilepicSize">
         <div class="profilephoto">
             <!-- Display the selected profile image or fallback to the default profile image -->
-            <img [src]="selectedProfileImageSrc || defaultProfilePhotoUrl" alt="Profile Photo" class="profile_photo">
+            <img [src]="userProfileImageUrl || defaultProfilePhotoUrl" alt="Profile Photo" class="profile_photo">
         </div>
     </div>
     <label class="change-profile-pic-button">

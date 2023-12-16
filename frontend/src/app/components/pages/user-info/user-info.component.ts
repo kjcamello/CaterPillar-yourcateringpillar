@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AuthService } from 'src/app/services/auth.service';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-user-profile',
@@ -10,45 +12,47 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class UserInfoComponent  {
   
-  customers: any;
-  otherGenderInput: string = ''; // This will hold the input for 'other' gender
-  selectedGender: string = ''; // Initialize it to an empty string
-  selectedMonth: string = ''; // Initialize it to an empty string
-  selectedDate: number = null; // Initialize it to null
-  selectedYear: number = null; // Initialize it to null
-  bioStatement: string = ''; // Initialize it to an empty string
-  foodLikes: string = ''; // Initialize it to an empty string
+  customers: any; // Holds customer data
+  otherGenderInput: string = ''; // Holds the input for 'other' gender
+  selectedGender: string = ''; // Holds the selected gender
+  selectedMonth: string = ''; // Holds the selected month
+  selectedDate: number = null; // Holds the selected date
+  selectedYear: number = null; // Holds the selected year
+  bioStatement: string = ''; // Holds the bio statement
+  foodLikes: string = ''; // Holds the food likes
 
-  isEditable: boolean = false;
+  isEditable: boolean = false; // Flag for edit mode
 
-  defaultCoverPhotoUrl: string = 'assets/user_cover_pic.jpg';
-  defaultProfilePhotoUrl: string = 'assets/default_profilepic.png';
+  defaultCoverPhotoUrl: string = 'assets/user_cover_pic.jpg'; // Default cover photo URL
+  defaultProfilePhotoUrl: string = 'assets/default_profilepic.png'; // Default profile photo URL
 
   months: string[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   days: number[] = Array.from({ length: 31 }, (_, i) => i + 1);
   years: number[] = Array.from({ length: 122 }, (_, i) => new Date().getFullYear() - i);
 
-  selectedCoverImage: File = null;
-  selectedCoverImageSrc: string = null;
-  selectedProfileImage: File = null;
-  selectedProfileImageSrc: string = null;
-  selectedImage: File = null;
-  selectedImageSrc: string = null;
-  
+  selectedCoverImage: File = null; // Holds the selected cover image file
+  selectedCoverImageSrc: string = null; // Holds the source for the selected cover image
+  selectedProfileImage: File = null; // Holds the selected profile image file
+  selectedProfileImageSrc: string = null; // Holds the source for the selected profile image
+  selectedImage: File = null; // Holds the selected general image file
+  selectedImageSrc: string = null; // Holds the source for the selected general image
 
-  userCredentials = { username: '', password: '' };
-  editMode: boolean = false;
-  isFieldDisabled: boolean = true;
+  userProfileImageUrl: string = this.defaultProfilePhotoUrl; // Holds the URL of the user's profile image
 
-
+  userCredentials = { username: '', password: '' }; // User credentials
+  editMode: boolean = false; // Flag for edit mode
+  isFieldDisabled: boolean = true; 
   constructor(
     private firestore: AngularFirestore, 
     private authService: AuthService,
-    private afAuth: AngularFireAuth
+    private afAuth: AngularFireAuth,
+    private storage: AngularFireStorage
+    
   ) {}
 
   ngOnInit(): void {
     this.fetchCustomerData();
+    // this.fetchUserProfileImage();
    
   }
   enableEditMode() {
@@ -153,6 +157,7 @@ export class UserInfoComponent  {
           case 'profile':
             this.selectedProfileImage = file;
             this.selectedProfileImageSrc = e.target.result;
+            this.uploadProfileImage(file);
             break;
           case 'general':
             this.selectedImage = file;
@@ -163,6 +168,44 @@ export class UserInfoComponent  {
       reader.readAsDataURL(file);
     }
   }
+  uploadProfileImage(file: File) {
+    const filePath = `profile_images/${file.name}`;
+    const fileRef = this.storage.ref(filePath);
+    const task = this.storage.upload(filePath, file);
+
+    task.snapshotChanges().pipe(
+      finalize(() => {
+        fileRef.getDownloadURL().subscribe(url => {
+          this.updateUserProfileImage(url); // Update Firestore with the URL
+        });
+      })
+    ).subscribe();
+  }
+
+  updateUserProfileImage(url: string) {
+    this.afAuth.authState.subscribe(user => {
+      if (user) {
+        const userRef = this.firestore.collection('customers').doc(user.uid);
+        userRef.update({ profileImageUrl: url })
+          .then(() => console.log('Profile image updated successfully.'))
+          .catch(error => console.error('Error updating profile image:', error));
+      }
+    });
+  }
+  // fetchUserProfileImage() {
+  //   this.afAuth.authState.subscribe(user => {
+  //     if (user) {
+  //       const userRef = this.firestore.collection('customers').doc(user.uid);
+  //       userRef.valueChanges().subscribe(userData => {
+  //         if (userData && userData.profileImageUrl) { // Ensure this field name matches Firestore
+  //           this.userProfileImageUrl = userData.profileImageUrl;
+  //         } else {
+  //           this.userProfileImageUrl = this.defaultProfilePhotoUrl; // Fallback to default image
+  //         }
+  //       });
+  //     }
+  //   });
+  // }
 
   populateDateDropdown() {
     // Find the index of the selected month in the months array
@@ -218,5 +261,16 @@ export class UserInfoComponent  {
     if (this.selectedGender === 'otherRadio') {
       genderInput.style.visibility = 'visible';
     } 
+  }
+  logout() {
+    this.afAuth.signOut().then(() => {
+      console.log('User logged out successfully');
+      // Redirect the user to the login page or home page after logout
+      // You can use Router for navigation
+      // this.router.navigate(['/login']); // Uncomment and use as needed
+    }).catch(error => {
+      console.error('Error during logout:', error);
+      // Handle any errors that occur during logout
+    });
   }
 }
